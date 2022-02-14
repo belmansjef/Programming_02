@@ -6,6 +6,7 @@
 Game::Game( const Window& window ) 
 	:m_Window{ window }
 	,m_pLogo{new Texture("Resources/DAE.png")}
+	,m_pText{ new Texture("Hello World!", "Resources/Gameplay.ttf", 24, Color4f(1.0f, 1.0f, 0.0f, 1.0f)) }
 {
 	Initialize( );
 }
@@ -31,6 +32,9 @@ void Game::Cleanup( )
 		m_pBalls[i] = nullptr;
 	}
 
+	delete m_pText;
+	m_pText = nullptr;
+
 	delete m_pLogo;
 	m_pLogo = nullptr;
 }
@@ -51,7 +55,11 @@ void Game::Draw( ) const
 		m_pBalls[i]->Draw();
 	}
 
-	m_pLogo->Draw(Point2f(10.0f, 10.0f));
+	for (int i = 0; i < 3; i++)
+	{
+		m_pLogo->Draw(Point2f((m_pLogo->GetWidth() + 20.0f) * i + 20.0f, m_Window.height / 2.0f - m_pLogo->GetHeight() / 2.0f));
+		m_pText->Draw(Point2f((m_pLogo->GetWidth() + 20.0f) * i + 20.0f, m_Window.height / 2.0f - m_pLogo->GetHeight() / 2.0f - m_pText->GetHeight()));
+	}
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )

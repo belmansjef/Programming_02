@@ -36,4 +36,5 @@ private:
 	Ball* m_pBalls[m_BallSize]{};
 
 	Texture* m_pLogo{};
+	Texture* m_pText{};
 };
