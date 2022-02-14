@@ -1,5 +1,8 @@
 #pragma once
 
+class Ball;
+class Texture;
+
 class Game final
 {
 public:
@@ -28,4 +31,9 @@ private:
 	void Initialize( );
 	void Cleanup( );
 	void ClearBackground( ) const;
+
+	static const int m_BallSize{ 2 };
+	Ball* m_pBalls[m_BallSize]{};
+
+	Texture* m_pLogo{};
 };

@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "Game.h"
+#include "Ball.h"
+#include "Texture.h"
 
 Game::Game( const Window& window ) 
 	:m_Window{ window }
+	,m_pLogo{new Texture("Resources/DAE.png")}
 {
 	Initialize( );
 }
@@ -14,30 +17,41 @@ Game::~Game( )
 
 void Game::Initialize( )
 {
-	
+	for (int i = 0; i < m_BallSize; i++)
+	{
+		m_pBalls[i] = new Ball(Point2f(float(rand() % 300 + 20), 100.0f), Vector2f(80.0f, 80.0f), Color4f(0.0f, 1.0f, 0.0f, 1.0f), 50.0f);
+	}
 }
 
 void Game::Cleanup( )
 {
+	for (int i = 0; i < m_BallSize; i++)
+	{
+		delete m_pBalls[i];
+		m_pBalls[i] = nullptr;
+	}
+
+	delete m_pLogo;
+	m_pLogo = nullptr;
 }
 
 void Game::Update( float elapsedSec )
 {
-	// Check keyboard state
-	//const Uint8 *pStates = SDL_GetKeyboardState( nullptr );
-	//if ( pStates[SDL_SCANCODE_RIGHT] )
-	//{
-	//	std::cout << "Right arrow key is down\n";
-	//}
-	//if ( pStates[SDL_SCANCODE_LEFT] && pStates[SDL_SCANCODE_UP])
-	//{
-	//	std::cout << "Left and up arrow keys are down\n";
-	//}
+	for (int i = 0; i < m_BallSize; i++)
+	{
+		m_pBalls[i]->Update(elapsedSec,Rectf(0.0f, 0.0f, m_Window.width, m_Window.height));
+	}
 }
 
 void Game::Draw( ) const
 {
 	ClearBackground( );
+	for (int i = 0; i < m_BallSize; i++)
+	{
+		m_pBalls[i]->Draw();
+	}
+
+	m_pLogo->Draw(Point2f(10.0f, 10.0f));
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
