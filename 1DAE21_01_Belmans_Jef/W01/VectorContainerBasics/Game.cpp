@@ -170,13 +170,6 @@ void Game::ShuffleElements(vector<Card*>& cards)
 	{
 		int j = rand() % (i + 1);
 
-		Swap(cards[i], cards[j]);
+		std::swap(cards[i], cards[j]);
 	}
-}
-
-void Game::Swap(Card* a, Card* b)
-{
-	Card* temp = a;
-	a = b;
-	b = temp;
 }

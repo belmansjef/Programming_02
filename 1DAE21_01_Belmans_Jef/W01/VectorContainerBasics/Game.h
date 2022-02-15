@@ -39,6 +39,4 @@ private:
 	void PrintElements(const vector<int> numbers);
 	void IncrementElements(vector<int>& numbers, bool doNegativeIncrement);
 	void ShuffleElements(vector<Card*>& cards);
-
-	void Swap(Card* a, Card* b);
 };
