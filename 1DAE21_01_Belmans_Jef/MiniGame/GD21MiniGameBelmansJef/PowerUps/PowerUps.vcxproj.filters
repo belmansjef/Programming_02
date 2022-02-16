@@ -18,9 +18,6 @@
     <ClCompile Include="Core.cpp">
       <Filter>Framework Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Framework Files</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix2x3.cpp">
       <Filter>Framework Files</Filter>
     </ClCompile>
@@ -49,6 +46,12 @@
       <Filter>Framework Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,6 +87,9 @@
       <Filter>Framework Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.h">
       <Filter>Game Files</Filter>
     </ClInclude>
   </ItemGroup>

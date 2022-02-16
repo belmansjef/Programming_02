@@ -1,6 +1,5 @@
 #pragma once
 #include "PowerUp.h"
-
 class Game final
 {
 public:

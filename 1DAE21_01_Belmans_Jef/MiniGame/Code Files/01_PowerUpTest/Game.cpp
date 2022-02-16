@@ -3,7 +3,6 @@
 #include "utils.h"
 #include <iostream>
 #include "Texture.h"
-
 Game::Game( const Window& window ) 
 	:m_Window{ window }
 	, m_MousePos{}
@@ -59,8 +58,8 @@ void Game::ProcessKeyUpEvent( const SDL_KeyboardEvent& e )
 
 void Game::ProcessMouseMotionEvent( const SDL_MouseMotionEvent& e )
 {
-	m_MousePos.x = float(e.x);
-	m_MousePos.y = float(e.y);
+	m_MousePos.x = float( e.x );
+	m_MousePos.y = m_Window.height - e.y;
 }
 
 void Game::ProcessMouseDownEvent( const SDL_MouseButtonEvent& e )
