@@ -14,20 +14,20 @@ class TrafficLight
 public:
 	TrafficLight(const Point2f& pos);
 	void Update(float elapsedSec);
-	void DoHitTest(const Point2f& point) const;
+	void Draw();
+	void DoHitTest(const Point2f& point);
 	float GetWidth() const;
 	float GetHeight() const;
-
-	static float m_AccumulatedSec;
 
 private:
 	State m_State{};
 	const Point2f m_Position{};
+	float m_AccumulatedSec;
 
 	// Graphics
-	const Circlef m_RedLight;
-	const Circlef m_OrangeLight;
-	const Circlef m_GreenLight;
-	const Rectf m_Armature;
+	const Circlef* m_pRedLight;
+	const Circlef* m_pOrangeLight;
+	const Circlef* m_pGreenLight;
+	const Rectf* m_pArmature;
 };
 
