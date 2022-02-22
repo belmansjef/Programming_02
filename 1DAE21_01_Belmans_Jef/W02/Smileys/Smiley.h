@@ -9,11 +9,11 @@ public:
 	Smiley( const Point2f& position );
 	~Smiley( );
 
-	void Draw( );
+	void Draw( ) const;
 	void Update( float elapsedSec, const Rectf& boundingRect, const Rectf& safeRect );
 	void HitTest( const Point2f& pos );
-	bool IsSleeping( );
-	Point2f GetPosition( );
+	bool IsSleeping( ) const;
+	Point2f GetPosition( ) const;
 	void SetHighest( bool isHighest );
 	void IncreaseSpeed( );
 	void DecreaseSpeed( );
@@ -21,6 +21,7 @@ public:
 private:
 	// DATA MEMBERS
 	static Texture* m_pSmileyTexture;
+	static float m_SmileyDiameter;
 	static int m_InstanceCounter;
 
 	Point2f m_Position;
@@ -30,7 +31,7 @@ private:
 	bool m_IsInSafeArea;
 
 	// FUNCTIONS
-	bool IsInSafeArea( const Rectf& safeRect );
+	bool IsInSafeArea( const Rectf& safeRect ) const;
 };
 
 

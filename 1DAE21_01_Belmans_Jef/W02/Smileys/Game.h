@@ -34,7 +34,18 @@ private:
 	static const int m_NrSmileys{ 10 };
 	static Smiley* m_pSmileys[m_NrSmileys];
 
+	Rectf m_SafeRect{};
+	Rectf m_BoundingRect{};
+
 	// CUSTOM FUNCTIONS
+	void InitializeRects();
 	void CreateSmileys();
 	void DeleteSmileys();
+	void DrawSmileys() const;
+	void UpdateSmileys(float elapsedSec);
+	void HitTestSmileys(const Point2f& hitPos) const;
+	void DetermineHighestSmiley() const;
+	void IncreaseSmileysSpeed() const;
+	void DecreaseSmileysSpeed() const;
+	void DeleteSleepers();
 };
