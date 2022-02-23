@@ -16,6 +16,7 @@ public:
 	bool IsOverlapping(const Rectf& rect ) const;
 
 private:
+
 	const Type m_Type;
 	Circlef m_Shape;
 	const Texture* m_pTexture;

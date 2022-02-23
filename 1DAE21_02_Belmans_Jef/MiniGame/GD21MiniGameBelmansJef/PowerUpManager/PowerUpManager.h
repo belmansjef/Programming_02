@@ -21,7 +21,7 @@ public:
 	bool HitItem( const Rectf& rect ) ;
 
 private:
-	std::vector<PowerUp*> m_pItems;
 
-	// Your helper functions
+	std::vector<PowerUp*> m_pItems;
+	void DeletePowerUp(const PowerUp* powerup);
 };

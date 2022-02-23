@@ -33,10 +33,10 @@ void Game::Initialize( )
 
 	// TODO: 1. Uncomment next call of TestWithoutDrawing
 	// It tests the constructor, AddItem, Size and destructor 
-	//TestWithoutDrawing( );
+	TestWithoutDrawing( );
 
 	// TODO: 2. Uncomment next call of InitTestWithDrawing
-	//InitTestWithDrawing( );
+	InitTestWithDrawing( );
 }
 
 void Game::Cleanup( )
