@@ -201,6 +201,8 @@ void Game::DeleteSleepers()
 {
 	for (Smiley* smiley : m_pSmileys)
 	{
+		if (!smiley) continue;
+
 		if (smiley->IsSleeping())
 		{
 			delete smiley;
