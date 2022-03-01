@@ -32,5 +32,9 @@ private:
 	float m_MaxTransformSec{ 1.0f };
 	int m_Power{ 0 };
 
+	void UpdateWaitingState();
+	void UpdateMovingState(float elapsedSec, const Level& level);
+	void UpdateTransformingState(float elapsedSec);
+
 };
 

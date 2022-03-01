@@ -9,8 +9,8 @@ Level::Level()
 		Point2f(340.0f, 190.0f),
 		Point2f(408.0f, 124.0f),
 		Point2f(560.0f, 124.0f),
-		Point2f(660.0f, 224.0f),
-		Point2f(846.0f, 224.0f),
+		Point2f(660.0f, 222.0f),
+		Point2f(846.0f, 222.0f),
 		Point2f(846.0f, 0.0f),
 		Point2f(0.0f, 0.0f)
 	}}
@@ -60,7 +60,7 @@ void Level::HandleCollision(Rectf& actorShape, Vector2f& actorVelocity) const
 bool Level::IsOnGround(const Rectf& actorShape) const
 {
 	const Point2f startPos{ actorShape.left + actorShape.width / 2.0f, actorShape.bottom + actorShape.height };
-	const Point2f endPos{ startPos.x, startPos.y - (actorShape.height + 1) };
+	const Point2f endPos{ startPos.x, startPos.y - (actorShape.height + 1.0f) };
 
 	utils::HitInfo hitInfo;
 	return utils::Raycast(m_Verticies, startPos, endPos, hitInfo);
