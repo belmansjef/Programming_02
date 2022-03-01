@@ -3,10 +3,7 @@
 #include "utils.h"
 
 DaeEllipse::DaeEllipse( const Point2f& center, float width, float height, const Color4f& color, bool isFilled )
-: m_Center{ center }
-, m_Width{width}
-, m_Height{height}
-, m_Color{ color }
+: DaeShape::DaeShape(center, width, height, color)
 , m_IsFilled{ isFilled }
 {
 }
@@ -22,9 +19,4 @@ void DaeEllipse::Draw( ) const
 	{
 		utils::DrawEllipse( m_Center, m_Width / 2, m_Height / 2 );
 	}
-}
-
-void DaeEllipse::Translate( const Vector2f& tr )
-{
-	m_Center += tr;
 }

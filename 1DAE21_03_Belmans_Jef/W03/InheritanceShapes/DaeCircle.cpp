@@ -3,16 +3,14 @@
 #include "utils.h"
 
 DaeCircle::DaeCircle( const Point2f &center, float diameter, const Color4f &color, bool isFilled )
-: m_Center{ center }
+: DaeEllipse::DaeEllipse(center, 0.0f, 0.0f, color, isFilled)
 , m_Diameter{ diameter }
-, m_Color{ color }
-, m_IsFilled{ isFilled }
 {
 }
 
 void DaeCircle::Draw() const
 {
-	utils::SetColor( m_Color );
+	utils::SetColor( DaeEllipse::m_Color );
 	if ( m_IsFilled )
 	{
 		utils::FillEllipse( m_Center, m_Diameter / 2, m_Diameter / 2 );
@@ -21,11 +19,6 @@ void DaeCircle::Draw() const
 	{
 		utils::DrawEllipse( m_Center, m_Diameter / 2, m_Diameter / 2 );
 	}
-}
-
-void DaeCircle::Translate( const Vector2f& tr )
-{
-	m_Center += tr;
 }
 
 

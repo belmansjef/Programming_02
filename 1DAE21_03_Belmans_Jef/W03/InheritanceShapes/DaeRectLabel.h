@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector2f.h"
 #include "Texture.h"
+#include "DaeRectangle.h"
 
 class DaeRectLabel : public DaeRectangle
 {
@@ -9,13 +10,8 @@ public:
 	~DaeRectLabel( );
 
 	void Draw( ) const;
-	void Translate( const Vector2f& tr );
 
 private: 
-	Point2f m_Center;
-	float m_Width;
-	float m_Height;
-	Color4f m_Color;
 	Texture* m_pLabelText;
 	float m_MarginX;
 	float m_MarginY;
