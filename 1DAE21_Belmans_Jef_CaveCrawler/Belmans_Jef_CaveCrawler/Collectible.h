@@ -21,5 +21,3 @@ private:
 	Rectf m_Shape;
 	const Texture* m_pTexture;
 };
-
-

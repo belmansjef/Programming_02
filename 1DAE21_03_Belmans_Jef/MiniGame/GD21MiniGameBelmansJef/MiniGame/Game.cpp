@@ -1,10 +1,10 @@
-#include "pch.h"
 #include <iostream>
+#include "pch.h"
 #include "Game.h"
-#include "utils.h"
 
 Game::Game( const Window& window )
 	:m_Window{ window }
+	,m_Camera{ window.width, window.height }
 {	 
 	Initialize( );
 }
@@ -18,6 +18,7 @@ void Game::Initialize( )
 {
 	ShowTestMessage( );
 	AddPowerUps( );
+	m_Camera.SetLevelBoundaries(m_Level.GetBoundaries());
 }
 
 void Game::Cleanup( )
@@ -38,10 +39,13 @@ void Game::Draw( ) const
 {
 	ClearBackground( );
 
-	m_Level.DrawBackground( );
-	m_PowerUpManager.Draw( );
-	m_Avatar.Draw( );
-	m_Level.DrawForeground( );
+	glPushMatrix();
+		m_Camera.Transform(m_Avatar.GetShape());
+		m_Level.DrawBackground( );
+		m_PowerUpManager.Draw( );
+		m_Avatar.Draw( );
+		m_Level.DrawForeground( );
+	glPopMatrix();
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )

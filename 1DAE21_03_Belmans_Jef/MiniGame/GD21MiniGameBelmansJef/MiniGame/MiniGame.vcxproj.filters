@@ -63,6 +63,9 @@
     <ClCompile Include="Avatar.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -108,6 +111,9 @@
       <Filter>Game Files</Filter>
     </ClInclude>
     <ClInclude Include="Avatar.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
       <Filter>Game Files</Filter>
     </ClInclude>
   </ItemGroup>

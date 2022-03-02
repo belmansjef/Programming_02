@@ -3,23 +3,14 @@
 #include "Texture.h"
 
 Level::Level()
-	: m_Verticies { std::vector<Point2f>
-	{
-		Point2f(0.0f, 0.0f),
-		Point2f(0.0f, 190.0f),
-		Point2f(340.0f, 190.0f),
-		Point2f(408.0f, 124.0f),
-		Point2f(560.0f, 124.0f),
-		Point2f(660.0f, 222.0f),
-		Point2f(846.0f, 222.0f),
-		Point2f(846.0f, 0.0f),
-		Point2f(0.0f, 0.0f)
+	: m_Verticies { std::vector<Point2f>{
+		Point2f(0.0f, 100.0f),
+		Point2f(1280.0f, 100.0f)
 	}}
 	, m_pBackgroundTexture { new Texture("./Resources/Images/background.png")}
 	, m_pFenceTexture { new Texture("./Resources/Images/Fence.png")}
 	, m_FenceBottomLeft{ Point2f(200.0f, 190.0f) }
 {
-	m_Boundaries = Rectf{ 0.0f, 0.0f, m_pBackgroundTexture->GetWidth(), m_pBackgroundTexture->GetHeight() };
 }
 
 Level::~Level()
@@ -66,11 +57,6 @@ bool Level::IsOnGround(const Rectf& actorShape) const
 
 	utils::HitInfo hitInfo;
 	return utils::Raycast(m_Verticies, startPos, endPos, hitInfo);
-}
-
-Rectf Level::GetBoundaries()
-{
-	return m_Boundaries;
 }
 
 void Level::DrawVector(const Vector2f& v, const Point2f& startPos) const
