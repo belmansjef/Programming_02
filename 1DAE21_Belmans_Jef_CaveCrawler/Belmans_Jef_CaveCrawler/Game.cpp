@@ -3,7 +3,7 @@
 
 Game::Game( const Window& window ) 
 	:m_Window{ window }
-	,m_Camera{window.width, window.height}
+	, m_Camera{ window.width, window.height }
 {
 	Initialize( );
 }
@@ -34,7 +34,7 @@ void Game::Draw( ) const
 
 	glPushMatrix();
 		m_Camera.Transform(m_PlayerAvater.GetShape());
-		// m_Level.DrawBackground();
+		m_Level.DrawBackground();
 		m_PlayerAvater.Draw();
 	glPopMatrix();
 }

@@ -15,9 +15,8 @@ public:
 	Rectf GetBoundaries() const;
 
 private:
-	std::vector<Point2f> m_Verticies{};
+	std::vector<std::vector<Point2f>> m_Verticies{};
 	Texture* m_pBackgroundTexture{};
-
 	Rectf m_Boundaries;
 
 	void DrawVector(const Vector2f& v, const Point2f& startPos) const;

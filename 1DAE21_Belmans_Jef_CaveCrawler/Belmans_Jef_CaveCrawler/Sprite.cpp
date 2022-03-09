@@ -57,6 +57,8 @@ void Sprite::SetType(const SpriteType& type)
 
 void Sprite::SetAnimation(const std::string animName)
 {
+	if (animName == m_pCurrentAnimation->m_AnimName) return;
+
 	for (Animation* ptr : m_Animations)
 	{
 		if (ptr->m_AnimName == animName)
@@ -93,8 +95,8 @@ void Sprite::UpdateSprite()
 
 		m_Animations.push_back(new Animation("idle", 4, 5, 1, 4, 0, 0)); // Idle animation
 		m_Animations.push_back(new Animation("run", 4, 10, 1, 4, 1, 0)); // Run animation
-		m_Animations.push_back(new Animation("jumpup", 1, 10, 1, 1, 0, 4)); // Jump up animation
-		m_Animations.push_back(new Animation("jumpdown", 1, 10, 1, 1, 1, 4)); // Jump down animation
+		m_Animations.push_back(new Animation("jump_up", 1, 10, 1, 1, 0, 4)); // Jump up animation
+		m_Animations.push_back(new Animation("jump_down", 1, 10, 1, 1, 1, 4)); // Jump down animation
 		m_pCurrentAnimation = m_Animations[0]; // Set current animation to idle
 		break;
 	default:

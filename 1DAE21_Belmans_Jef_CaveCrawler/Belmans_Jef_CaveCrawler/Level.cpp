@@ -1,14 +1,13 @@
 #include "pch.h"
 #include "Level.h"
 #include "Texture.h"
+#include "SVGParser.h"
 
 Level::Level()
-	: m_Verticies { std::vector<Point2f>{
-		Point2f(0.0f, 100.0f),
-		Point2f(1280.0f, 100.0f)
-	}}
+	:m_pBackgroundTexture{ new Texture("Resources/Images/Level_Test.png") }
 {
-	m_Boundaries = Rectf{ 0.0f, 0.0f, 1280.0f, 800.0f };
+	m_Boundaries = Rectf{ 0.0f, 0.0f, m_pBackgroundTexture->GetWidth(), m_pBackgroundTexture->GetHeight()};
+	SVGParser::GetVerticesFromSvgFile("Resources/Images/Level_Test.svg", m_Verticies);
 }
 
 Level::~Level()
@@ -32,7 +31,7 @@ void Level::HandleCollision(Rectf& actorShape, Vector2f& actorVelocity) const
 	const Point2f endPos{ startPos.x, startPos.y - actorShape.height };
 
 	utils::HitInfo hitInfo{};
-	if (utils::Raycast(m_Verticies, startPos, endPos, hitInfo))
+	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo))
 	{
 		actorShape.bottom = hitInfo.intersectPoint.y;
 	}
@@ -44,7 +43,7 @@ bool Level::IsOnGround(const Rectf& actorShape) const
 	const Point2f endPos{ startPos.x, startPos.y - (actorShape.height + 1.0f) };
 
 	utils::HitInfo hitInfo;
-	return utils::Raycast(m_Verticies, startPos, endPos, hitInfo);
+	return utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo);
 }
 
 Rectf Level::GetBoundaries() const

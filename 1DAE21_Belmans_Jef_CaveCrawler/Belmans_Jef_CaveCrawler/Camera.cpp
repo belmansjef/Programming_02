@@ -17,7 +17,6 @@ void Camera::Transform(const Rectf& target) const
 {
 	Point2f cameraPos{ Track(target) };
 	Clamp(cameraPos);
-
 	glTranslatef(-cameraPos.x, -cameraPos.y, 0);
 }
 
