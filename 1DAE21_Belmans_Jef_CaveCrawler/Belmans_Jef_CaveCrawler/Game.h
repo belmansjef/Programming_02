@@ -1,5 +1,9 @@
 #pragma once
+#include "Level.h"
+#include "Avatar.h"
+#include "Camera.h"
 #include "CollectibleManager.h"
+
 
 class Game final
 {
@@ -25,6 +29,9 @@ private:
 	// DATA MEMBERS
 	const Window m_Window;
 
+	Level m_Level;
+	Avatar m_PlayerAvater;
+	Camera m_Camera;
 	CollectibleManager m_CollectibleManager{ true };
 
 	// FUNCTIONS

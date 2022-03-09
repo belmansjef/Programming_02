@@ -2,14 +2,16 @@
 #include <math.h>
 #include "utils.h"
 #include "Texture.h"
+#include "Sprite.h"
 
-class Level;
 enum class ActionState
 {
-	waiting,
+	idle,
 	moving,
-	transforming
+	jumping
 };
+
+class Level;
 
 class Avatar
 {
@@ -23,14 +25,8 @@ public:
 	Rectf GetShape() const;
 
 private:
-	Texture* m_pSpritesTexture;
-	Rectf m_Shape{ 50.0f, 280.0f, 72.0f, 97.0f };
-	float m_ClipWidth{ 72.0f };
-	float m_ClipHeight{ 97.0f };
-	int m_NrOfFrames{ 10 };
-	int m_NrFramesPerSec{ 10 };
-	int m_AnimFrame{};
-	float m_AnimTime{};
+	Sprite m_Sprite;
+	Rectf m_Shape{ 50.0f, 280.0f, 24.0f, 16.0f };
 
 	float m_Gravity{ -981.0f };
 	float m_GravityScale{ 1.0f };
@@ -43,14 +39,10 @@ private:
 	float m_InitialJumpVelocity{ 542.5f };
 
 	ActionState m_ActionState{ ActionState::moving };
-	float m_AccuTransformSec{ 0.0f };
-	float m_MaxTransformSec{ 1.0f };
-	int m_Power{ 0 };
 
-	void UpdateWaitingState();
+	void UpdateIdleState();
 	void UpdateMovingState(float elapsedSec, const Level& level);
-	void UpdateTransformingState(float elapsedSec);
-	void UpdateAnimation(float elapsedSec);
+	void UpdateJumpingState(float elapsedSec, const Level& level);
 	void ClampVelocity();
 	void DampVelocity(float elapsedSec);
 };

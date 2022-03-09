@@ -7,19 +7,15 @@ Level::Level()
 		Point2f(0.0f, 100.0f),
 		Point2f(1280.0f, 100.0f)
 	}}
-	, m_pBackgroundTexture { new Texture("./Resources/Images/background.png")}
-	, m_pFenceTexture { new Texture("./Resources/Images/Fence.png")}
-	, m_FenceBottomLeft{ Point2f(200.0f, 190.0f) }
 {
+	m_Boundaries = Rectf{ 0.0f, 0.0f, 1280.0f, 800.0f };
 }
 
 Level::~Level()
 {
 	delete m_pBackgroundTexture;
-	delete m_pFenceTexture;
 
 	m_pBackgroundTexture = nullptr;
-	m_pFenceTexture = nullptr;
 }
 
 void Level::DrawBackground() const
@@ -27,14 +23,6 @@ void Level::DrawBackground() const
 	glPushMatrix();
 		glTranslatef(0.0f, 0.0f, 0.0f);
 		m_pBackgroundTexture->Draw();
-	glPopMatrix();
-}
-		
-void Level::DrawForeground() const
-{
-	glPushMatrix();
-		glTranslatef(m_FenceBottomLeft.x, m_FenceBottomLeft.y, 0.0f);
-		m_pFenceTexture->Draw();
 	glPopMatrix();
 }
 
@@ -57,6 +45,11 @@ bool Level::IsOnGround(const Rectf& actorShape) const
 
 	utils::HitInfo hitInfo;
 	return utils::Raycast(m_Verticies, startPos, endPos, hitInfo);
+}
+
+Rectf Level::GetBoundaries() const
+{
+	return m_Boundaries;
 }
 
 void Level::DrawVector(const Vector2f& v, const Point2f& startPos) const

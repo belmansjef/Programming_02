@@ -5,7 +5,7 @@
 #include "Level.h"
 
 Avatar::Avatar()
-	: m_pSpritesTexture{ new Texture("Resources/Images/AvatarSheet.png") }
+	: m_Sprite { Sprite(Sprite::SpriteType::player) }
 {
 }
 
@@ -17,47 +17,39 @@ void Avatar::Update(float elapsedSec, const Level& level)
 {
 	switch (m_ActionState)
 	{
-	case ActionState::waiting:
-		UpdateWaitingState();
+	case ActionState::idle:
+		UpdateIdleState();
 		break;
 	case ActionState::moving:
 		UpdateMovingState(elapsedSec, level);
 		break;
-	case ActionState::transforming:
-		UpdateTransformingState(elapsedSec);
+	case ActionState::jumping:
+		UpdateJumpingState(elapsedSec, level);
 		break;
 	default:
 		break;
 	}
 
-	UpdateAnimation(elapsedSec);
+	m_Sprite.Update(elapsedSec);
 }
 
 void Avatar::Draw() const
 {
-	// Draw avatar
-	const Rectf clipRect
-	{
-		m_ClipWidth * m_AnimFrame,
-		m_pSpritesTexture->GetHeight() + (m_ClipHeight * (int(m_ActionState) + (m_Power * 3) + 1)),
-		m_ClipWidth,
-		m_ClipHeight
-	};
-
 	glPushMatrix();
 		glTranslatef(m_Shape.left, m_Shape.bottom, 0);
+		glScalef(5, 5, 1);
 		if (m_Velocity.x < 0.0f)
 		{
 			glScalef(-1, 1, 1);
 			glTranslatef(-m_Shape.width, 0, 0);
 		}
-		m_pSpritesTexture->Draw(Point2f(), clipRect);
+		m_Sprite.Draw();
 	glPopMatrix();
 }
 
 void Avatar::PowerUpHit()
 {
-	m_ActionState = ActionState::transforming;
+	
 }
 
 Rectf Avatar::GetShape() const
@@ -65,11 +57,12 @@ Rectf Avatar::GetShape() const
 	return m_Shape;
 }
 
-void Avatar::UpdateWaitingState()
+void Avatar::UpdateIdleState()
 {
 	const Uint8* state = SDL_GetKeyboardState(NULL);
 	if (state[SDL_SCANCODE_RIGHT] || state[SDL_SCANCODE_LEFT] || state[SDL_SCANCODE_UP])
 	{
+		m_Sprite.SetAnimation("run");
 		m_ActionState = ActionState::moving;
 	}
 }
@@ -88,15 +81,13 @@ void Avatar::UpdateMovingState(float elapsedSec, const Level& level)
 
 	if (!isGrounded)
 	{
-		if (!state[SDL_SCANCODE_UP] || m_Velocity.y < 0.0f)
-		{
-			m_GravityScale = 3.0f;
-		}
-		m_Velocity.y += m_Gravity * m_GravityScale * elapsedSec;
+		m_Sprite.SetAnimation("jumpup");
+		m_ActionState = ActionState::jumping;
 	}
 	else if (m_Velocity.x == 0.0f)
 	{
-		m_ActionState = ActionState::waiting;
+		m_Sprite.SetAnimation("idle");
+		m_ActionState = ActionState::idle;
 	}
 
 	DampVelocity(elapsedSec);
@@ -107,25 +98,37 @@ void Avatar::UpdateMovingState(float elapsedSec, const Level& level)
 	level.HandleCollision(m_Shape, m_Velocity);
 }
 
-void Avatar::UpdateTransformingState(float elapsedSec)
+void Avatar::UpdateJumpingState(float elapsedSec, const Level& level)
 {
-	m_AccuTransformSec += elapsedSec;
-	if(m_AccuTransformSec >= m_MaxTransformSec)
-	{
-		m_AccuTransformSec = 0.0f;
-		++m_Power;
-		m_ActionState = ActionState::moving;
-	}
-}
+	bool isGrounded{ level.IsOnGround(m_Shape) };
+	const Uint8* state = SDL_GetKeyboardState(NULL);
 
-void Avatar::UpdateAnimation(float elapsedSec)
-{
-	m_AnimTime += elapsedSec;
-	if (m_AnimTime >= 1.0f / m_NrFramesPerSec)
+	if (!state[SDL_SCANCODE_UP] || m_Velocity.y < 0.0f)
 	{
-		m_AnimFrame++;
-		m_AnimTime = 0.0f;
+		m_GravityScale = 3.0f;
 	}
+
+	m_Velocity.y += m_Gravity * m_GravityScale * elapsedSec;
+
+	DampVelocity(elapsedSec);
+	ClampVelocity();
+	m_Shape.left += m_Velocity.x * elapsedSec;
+	m_Shape.bottom += m_Velocity.y * elapsedSec;
+
+	level.HandleCollision(m_Shape, m_Velocity);
+
+	if (isGrounded)
+	{
+		m_Sprite.SetAnimation("run");
+		m_ActionState = ActionState::idle;
+	}
+
+	if(m_Velocity.y < 0.0f)
+	{
+		m_Sprite.SetAnimation("jumpdown");
+	}
+
+	
 }
 
 void Avatar::ClampVelocity()

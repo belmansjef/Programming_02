@@ -3,6 +3,7 @@
 
 Game::Game( const Window& window ) 
 	:m_Window{ window }
+	,m_Camera{window.width, window.height}
 {
 	Initialize( );
 }
@@ -14,11 +15,7 @@ Game::~Game( )
 
 void Game::Initialize( )
 {
-	for (size_t i = 0; i < 32; i++)
-	{
-		const Point2f leftBottom{ 16.0f + (32.0f * i), 16.0f };
-		m_CollectibleManager.AddItem(leftBottom, Collectible::Type(i % 2));
-	}
+	m_Camera.SetLevelBoundaries(m_Level.GetBoundaries());
 }
 
 void Game::Cleanup( )
@@ -28,14 +25,18 @@ void Game::Cleanup( )
 
 void Game::Update( float elapsedSec )
 {
-
+	m_PlayerAvater.Update(elapsedSec, m_Level);
 }
 
 void Game::Draw( ) const
 {
 	ClearBackground( );
 
-	m_CollectibleManager.Draw();
+	glPushMatrix();
+		m_Camera.Transform(m_PlayerAvater.GetShape());
+		// m_Level.DrawBackground();
+		m_PlayerAvater.Draw();
+	glPopMatrix();
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
