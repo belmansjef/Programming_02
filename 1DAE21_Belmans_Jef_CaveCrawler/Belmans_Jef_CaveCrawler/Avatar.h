@@ -14,11 +14,12 @@ public:
 	void Update(float elapsedSec, const Level& level);
 	void Draw() const;
 	void PowerUpHit();
+
 	Rectf GetShape() const;
 
 private:
 	Sprite m_Sprite;
-	Rectf m_Shape{ 50.0f, 40.0f, 24.0f, 16.0f };
+	Rectf m_Shape{ 50.0f, 40.0f, 13.0f, 14.0f };
 
 	float m_Gravity{ -250.0f };
 	float m_GravityScale{ 1.0f };

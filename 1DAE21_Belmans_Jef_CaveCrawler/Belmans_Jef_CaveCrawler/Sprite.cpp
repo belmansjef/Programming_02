@@ -79,8 +79,8 @@ void Sprite::UpdateSprite()
 		m_pTexture = new Texture{ "Resources/Images/Sprite_Player.png" };
 		m_SheetWidth = m_pTexture->GetWidth();
 		m_SheetHeight = m_pTexture->GetHeight();
-		m_FrameWidth = 24.0f;
-		m_FrameHeight = 16.0f;
+		m_FrameWidth = 18.0f;
+		m_FrameHeight = 15.0f;
 
 		m_CurrentFrame = 0;
 		m_FrameAccuSec = 0;
