@@ -24,9 +24,9 @@ void Avatar::Draw() const
 {
 	glPushMatrix();
 		glTranslatef(m_Shape.left, m_Shape.bottom, 0);
-		if (m_Velocity.x < 0.0f)
+		glScalef(m_HorizontalScale, 1, 1);
+		if (m_HorizontalScale < 0)
 		{
-			glScalef(-1, 1, 1);
 			glTranslatef(-m_Shape.width, 0, 0);
 		}
 		m_Sprite.Draw();
@@ -128,6 +128,15 @@ void Avatar::GetInput()
 void Avatar::ProcessInput(float elapsedSec, const Level& level)
 {
 	bool isGrounded{ level.IsOnGround(m_Shape) };
+
+	if (m_MovementDirection < 0)
+	{
+		m_HorizontalScale = -1;
+	}
+	else if (m_MovementDirection > 0)
+	{
+		m_HorizontalScale = 1;
+	}
 
 	m_Velocity.x = m_MovementDirection * m_MovementSpeed;
 

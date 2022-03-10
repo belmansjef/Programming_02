@@ -28,8 +28,8 @@ private:
 	float m_MaxVelocity{ 700.0f };
 	float m_Damping{ 1.0f };
 
+	GLfloat m_HorizontalScale{ 1 };
 	int m_MovementDirection{ 0 };
-	int m_HorizontalScale{ 1 };
 	int m_JumpInput{ 0 };
 	float m_MovementSpeed{ 50.0f };
 	float m_JumpHeight{ 5.0f };
