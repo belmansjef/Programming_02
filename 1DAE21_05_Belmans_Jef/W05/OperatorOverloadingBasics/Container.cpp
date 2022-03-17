@@ -14,6 +14,16 @@ Container::~Container( )
 	delete[] m_pElement; 
 }
 
+int& Container::operator[](int lhs)
+{
+	return m_pElement[lhs];
+}
+
+int& Container::operator[](int lhs) const
+{
+	return m_pElement[lhs];
+}
+
 int Container::Size( ) const
 { 
 	return m_Size; 

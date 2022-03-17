@@ -10,6 +10,9 @@ public:
 	Container( Container&& other )noexcept = delete;           
 	Container& operator=( Container&& other )noexcept = delete;
 
+	int& operator[](int lhs);
+	int& operator[](int lhs) const;
+
 	int Size( ) const;
 	int Capacity( ) const;
 	int Get( int index ) const;

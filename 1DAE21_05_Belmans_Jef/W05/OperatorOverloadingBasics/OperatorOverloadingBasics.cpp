@@ -8,13 +8,13 @@
 #include <cassert>
 #include <sstream>
 #include "Health.h"
-//#include "Container.h"
+#include "Container.h"
 
 
 // Test function declarations
 void TestHealthClass( );
 void TestContainerClass( );
-//void PrintContainer( const Container &container );
+void PrintContainer( const Container &container );
 
 
 // Your code that uses the operators
@@ -28,11 +28,11 @@ int main( )
 	
 
 	
-	TestHealthClass( );
-	//UseHealthOperators();
+	TestHealthClass();
+	UseHealthOperators();
 
-	//TestContainerClass( );
-	//UseContainerOperators( );
+	TestContainerClass( );
+	UseContainerOperators( );
 
 	std::cout << "Push ENTER to quit\n";
 	std::cin.get( );
@@ -49,10 +49,23 @@ void UseHealthOperators( )
 	nr1 += nr2;
 	nr3 = nr1 += nr2;
 	nr3 += nr2 += nr1;
-	nr3 += nr2 += nr1;
+
+	Health h1{ 2 };
+	Health h2{ 3 };
+	Health h3{ 0 };
+	h1 += h2;
+	h3 = h1 += h2;
+	h3 += h2 += h1;
 }
 void UseContainerOperators( )
 {
+	Container c1{ 5 };
+	Container c2{ 3 };
+	Container c3{ 5 };
+
+	c1[1] += c2[1];
+	c3[1] = c1[1] += c2[1];
+	c3[1] += c2[1] += c1[1];
 }
 
 void TestHealthClass()
@@ -177,43 +190,43 @@ void TestHealthClass()
 
 void TestContainerClass()
 {
-	//// Initialize
-	//const int cap{ 5 };
-	//Container container{ cap };
-	//for (int nr{ 1 }; nr <= cap; ++nr)
-	//{
-	//	container.PushBack(rand() % 20 + 1);
-	//}
-	//int testCntr{};
+	// Initialize
+	const int cap{ 5 };
+	Container container{ cap };
+	for (int nr{ 1 }; nr <= cap; ++nr)
+	{
+		container.PushBack(rand() % 20 + 1);
+	}
+	int testCntr{};
 
-	//++testCntr;
-	//std::cout << "\n==> " << testCntr << ". Test of: Container[idx] to get an element\n";
-	//for (int idx{ 0 }; idx < container.Size(); ++idx)
-	//{
-	//	assert(container[idx] == container.Get(idx));
-	//}
-	//std::cout << "ok\n";
+	++testCntr;
+	std::cout << "\n==> " << testCntr << ". Test of: Container[idx] to get an element\n";
+	for (int idx{ 0 }; idx < container.Size(); ++idx)
+	{
+		assert(container[idx] == container.Get(idx));
+	}
+	std::cout << "ok\n";
 
-	//++testCntr;
-	//std::cout << "\n==> " << testCntr << ". Test of: Container[idx] to assign a new value to an element\n";
-	//for (int idx{ 0 }; idx < container.Size(); ++idx)
-	//{
-	//	container[idx] = rand() % 20 + 1;
-	//	assert(container[idx] == container.Get(idx));
-	//}
-	//std::cout << "ok\n";
+	++testCntr;
+	std::cout << "\n==> " << testCntr << ". Test of: Container[idx] to assign a new value to an element\n";
+	for (int idx{ 0 }; idx < container.Size(); ++idx)
+	{
+		container[idx] = rand() % 20 + 1;
+		assert(container[idx] == container.Get(idx));
+	}
+	std::cout << "ok\n";
 
-	//++testCntr;
-	//std::cout << "\n==> " << testCntr << ". Test of: Container[idx] to get an element of a const Container\n";
-	//PrintContainer(container);
+	++testCntr;
+	std::cout << "\n==> " << testCntr << ". Test of: Container[idx] to get an element of a const Container\n";
+	PrintContainer(container);
 }
 
-//void PrintContainer(const Container &container)
-//{
-//	for (int idx{ 0 }; idx < container.Size(); ++idx)
-//	{
-//		std::cout << container[idx] << " ";
-//	}
-//	std::cout << "\nok\n";
-//}
+void PrintContainer(const Container &container)
+{
+	for (int idx{ 0 }; idx < container.Size(); ++idx)
+	{
+		std::cout << container[idx] << " ";
+	}
+	std::cout << "\nok\n";
+}
 
