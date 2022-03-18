@@ -5,6 +5,10 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OperatorOverloadingBasics", "OperatorOverloadingBasics\OperatorOverloadingBasics.vcxproj", "{A6DA9292-638A-4B4A-BC67-39A412541819}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TransformationBasics", "TransformationBasics\TransformationBasics.vcxproj", "{C49709DA-98B2-416A-B007-14B489B8F1CC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Diamonds", "Diamonds\Diamonds.vcxproj", "{CCDC561A-01E8-4DBF-85C6-7562CD8680E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +25,22 @@ Global
 		{A6DA9292-638A-4B4A-BC67-39A412541819}.Release|x64.Build.0 = Release|x64
 		{A6DA9292-638A-4B4A-BC67-39A412541819}.Release|x86.ActiveCfg = Release|Win32
 		{A6DA9292-638A-4B4A-BC67-39A412541819}.Release|x86.Build.0 = Release|Win32
+		{C49709DA-98B2-416A-B007-14B489B8F1CC}.Debug|x64.ActiveCfg = Debug|x64
+		{C49709DA-98B2-416A-B007-14B489B8F1CC}.Debug|x64.Build.0 = Debug|x64
+		{C49709DA-98B2-416A-B007-14B489B8F1CC}.Debug|x86.ActiveCfg = Debug|Win32
+		{C49709DA-98B2-416A-B007-14B489B8F1CC}.Debug|x86.Build.0 = Debug|Win32
+		{C49709DA-98B2-416A-B007-14B489B8F1CC}.Release|x64.ActiveCfg = Release|x64
+		{C49709DA-98B2-416A-B007-14B489B8F1CC}.Release|x64.Build.0 = Release|x64
+		{C49709DA-98B2-416A-B007-14B489B8F1CC}.Release|x86.ActiveCfg = Release|Win32
+		{C49709DA-98B2-416A-B007-14B489B8F1CC}.Release|x86.Build.0 = Release|Win32
+		{CCDC561A-01E8-4DBF-85C6-7562CD8680E6}.Debug|x64.ActiveCfg = Debug|x64
+		{CCDC561A-01E8-4DBF-85C6-7562CD8680E6}.Debug|x64.Build.0 = Debug|x64
+		{CCDC561A-01E8-4DBF-85C6-7562CD8680E6}.Debug|x86.ActiveCfg = Debug|Win32
+		{CCDC561A-01E8-4DBF-85C6-7562CD8680E6}.Debug|x86.Build.0 = Debug|Win32
+		{CCDC561A-01E8-4DBF-85C6-7562CD8680E6}.Release|x64.ActiveCfg = Release|x64
+		{CCDC561A-01E8-4DBF-85C6-7562CD8680E6}.Release|x64.Build.0 = Release|x64
+		{CCDC561A-01E8-4DBF-85C6-7562CD8680E6}.Release|x86.ActiveCfg = Release|Win32
+		{CCDC561A-01E8-4DBF-85C6-7562CD8680E6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
