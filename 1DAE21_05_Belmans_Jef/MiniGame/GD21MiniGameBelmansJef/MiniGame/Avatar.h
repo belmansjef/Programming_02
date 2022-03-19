@@ -36,11 +36,11 @@ private:
 	float m_GravityScale{ 1.0f };
 	float m_Damping{ 1.0f };
 	Vector2f m_Velocity{ 0.0f, 0.0f };
-	float m_MaxVelocity{ 700.0f };
+	float m_MaxVelocity{ 800.0f };
 
 	float m_MovementSpeed{ 200.0f };
 	float m_JumpHeight{ 5.0f };
-	float m_InitialJumpVelocity{ 542.5f };
+	float m_InitialJumpVelocity{ 642.5f };
 
 	ActionState m_ActionState{ ActionState::moving };
 	float m_AccuTransformSec{ 0.0f };

@@ -66,6 +66,12 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -114,6 +120,12 @@
       <Filter>Game Files</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
       <Filter>Game Files</Filter>
     </ClInclude>
   </ItemGroup>

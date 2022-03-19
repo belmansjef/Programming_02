@@ -5,6 +5,8 @@
 Game::Game( const Window& window )
 	:m_Window{ window }
 	,m_Camera{ window.width, window.height }
+	,m_EndScreenOverlay{ 0.0f, 0.0f, window.width, window.height }
+	, m_Hud{ Point2f(10.0f, window.height - 50.0f), 0 }
 {	 
 	Initialize( );
 }
@@ -19,6 +21,8 @@ void Game::Initialize( )
 	ShowTestMessage( );
 	AddPowerUps( );
 	m_Camera.SetLevelBoundaries(m_Level.GetBoundaries());
+	m_EndReached = false;
+	m_Hud.SetTotalPowerUps(int(m_PowerUpManager.Size()));
 }
 
 void Game::Cleanup( )
@@ -27,12 +31,16 @@ void Game::Cleanup( )
 
 void Game::Update( float elapsedSec )
 {
+	if (m_EndReached) return;
+
 	// Update game objects
 	m_PowerUpManager.Update( elapsedSec );
 	m_Avatar.Update( elapsedSec, m_Level );
 
 	// Do collision
 	DoCollisionTests( );
+
+	m_EndReached = m_Level.HasReachedEnd(m_Avatar.GetShape());
 }
 
 void Game::Draw( ) const
@@ -46,6 +54,14 @@ void Game::Draw( ) const
 		m_Avatar.Draw( );
 		m_Level.DrawForeground( );
 	glPopMatrix();
+
+	m_Hud.Draw();
+
+	if (m_EndReached)
+	{
+		utils::SetColor(Color4f(0.0f, 0.0f, 0.0f, 0.8f));
+		utils::FillRect(m_EndScreenOverlay);
+	}
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
@@ -103,6 +119,7 @@ void Game::DoCollisionTests( )
 	if ( m_PowerUpManager.HitItem( m_Avatar.GetShape( ) ) )
 	{
 		m_Avatar.PowerUpHit( );
+		m_Hud.PowerUpHit();
 	}
 }
 

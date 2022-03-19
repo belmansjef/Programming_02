@@ -76,8 +76,8 @@ void Avatar::UpdateWaitingState()
 
 void Avatar::UpdateMovingState(float elapsedSec, const Level& level)
 {
-	const Uint8* state = SDL_GetKeyboardState(NULL);
-	bool isGrounded{ level.IsOnGround(m_Shape) };
+	const Uint8* state = SDL_GetKeyboardState(nullptr);
+	bool isGrounded{ level.IsOnGround(m_Shape, m_Velocity) };
 
 	if (isGrounded)
 	{

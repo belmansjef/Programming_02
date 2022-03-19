@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "PowerUpManager.h"
 #include "PowerUp.h"
+#include "SoundEffect.h"
 
 PowerUpManager::PowerUpManager()
+	: m_pPowerUpSE{ new SoundEffect("Resources/Sounds/powerUp.mp3")}
 {
 }
 
@@ -12,6 +14,9 @@ PowerUpManager::~PowerUpManager()
 	{
 		DeletePowerUp(element);
 	}
+
+	delete m_pPowerUpSE;
+	m_pPowerUpSE = nullptr;
 }
 
 PowerUp* PowerUpManager::AddItem(const Point2f& center, PowerUp::Type type)
@@ -53,6 +58,8 @@ bool PowerUpManager::HitItem(const Rectf& rect)
 			m_pItems[i] = temp;
 			m_pItems.pop_back();
 			
+			m_pPowerUpSE->Play(1);
+
 			return true;
 		}
 	}

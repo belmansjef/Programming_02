@@ -3,6 +3,7 @@
 #include <vector>
 #include "structs.h"
 
+class SoundEffect;
 class PowerUpManager final
 {
 public:
@@ -24,4 +25,6 @@ private:
 
 	std::vector<PowerUp*> m_pItems;
 	void DeletePowerUp(const PowerUp* powerup);
+
+	SoundEffect* m_pPowerUpSE;
 };

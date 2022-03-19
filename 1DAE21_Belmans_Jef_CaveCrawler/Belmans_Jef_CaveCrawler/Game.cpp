@@ -3,7 +3,7 @@
 
 Game::Game( const Window& window ) 
 	:m_Window{ window }
-	, m_Camera{ window.width, window.height }
+	,m_Camera{ window.width / m_ScaleFactor, window.height / m_ScaleFactor }
 {
 	Initialize( );
 }
@@ -32,7 +32,11 @@ void Game::Draw( ) const
 {
 	ClearBackground( );
 
+	
+
 	glPushMatrix();
+		glScalef(m_ScaleFactor, m_ScaleFactor, 1); // Scale all objects
+
 		m_Camera.Transform(m_PlayerAvater.GetShape());
 		m_Level.DrawBackground();
 		m_PlayerAvater.Draw();

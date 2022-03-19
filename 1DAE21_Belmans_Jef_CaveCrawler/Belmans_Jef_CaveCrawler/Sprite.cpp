@@ -26,6 +26,12 @@ Sprite::~Sprite()
 {
 	delete m_pTexture;
 	m_pTexture = nullptr;
+
+	for (Animation* anim : m_pAnimations)
+	{
+		delete anim;
+		anim = nullptr;
+	}
 }
 
 void Sprite::Draw() const
@@ -59,7 +65,7 @@ void Sprite::SetAnimation(const std::string animName)
 {
 	if (animName == m_pCurrentAnimation->m_AnimName) return;
 
-	for (Animation* ptr : m_Animations)
+	for (Animation* ptr : m_pAnimations)
 	{
 		if (ptr->m_AnimName == animName)
 		{
@@ -71,7 +77,7 @@ void Sprite::SetAnimation(const std::string animName)
 
 void Sprite::UpdateSprite()
 {
-	m_Animations.clear();
+	m_pAnimations.clear();
 
 	switch (m_Type)
 	{
@@ -93,11 +99,11 @@ void Sprite::UpdateSprite()
 			m_FrameHeight
 		};
 
-		m_Animations.push_back(new Animation("idle", 4, 5, 1, 4, 0, 0)); // Idle animation
-		m_Animations.push_back(new Animation("run", 4, 10, 1, 4, 1, 0)); // Run animation
-		m_Animations.push_back(new Animation("jump_up", 1, 10, 1, 1, 0, 4)); // Jump up animation
-		m_Animations.push_back(new Animation("jump_down", 1, 10, 1, 1, 1, 4)); // Jump down animation
-		m_pCurrentAnimation = m_Animations[0]; // Set current animation to idle
+		m_pAnimations.push_back(new Animation("idle", 4, 5, 1, 4, 0, 0)); // Idle animation
+		m_pAnimations.push_back(new Animation("run", 4, 10, 1, 4, 1, 0)); // Run animation
+		m_pAnimations.push_back(new Animation("jump_up", 1, 10, 1, 1, 0, 4)); // Jump up animation
+		m_pAnimations.push_back(new Animation("jump_down", 1, 10, 1, 1, 1, 4)); // Jump down animation
+		m_pCurrentAnimation = m_pAnimations[0]; // Set current animation to idle
 		break;
 	default:
 		break;

@@ -1,22 +1,20 @@
 #pragma once
-#include "Level.h"
-#include "Avatar.h"
-#include "Camera.h"
-#include "CollectibleManager.h"
-
+#include "SoundEffect.h"
+#include "SoundStream.h"
+#include "Texture.h"
 
 class Game final
 {
 public:
-	explicit Game( const Window& window );
+	explicit Game(const Window& window);
 	Game(const Game& other) = delete;
 	Game& operator=(const Game& other) = delete;
-	Game( Game&& other) = delete;
+	Game(Game&& other) = delete;
 	Game& operator=(Game&& other) = delete;
 	~Game();
 
-	void Update( float elapsedSec );
-	void Draw( ) const;
+	void Update(float elapsedSec);
+	void Draw() const;
 
 	// Event handling
 	void ProcessKeyDownEvent( const SDL_KeyboardEvent& e );
@@ -29,15 +27,24 @@ private:
 	// DATA MEMBERS
 	const Window m_Window;
 
-	const float m_ScaleFactor{ 6 };
+	//Which test series
+	bool m_StreamTest;
+	const Texture m_StreamMenuText;
+	const Texture m_EffectMenuText;
 
-	Level m_Level;
-	Avatar m_PlayerAvater;
-	Camera m_Camera;
-	CollectibleManager m_CollectibleManager{ true };
+	SoundStream m_DonkeySS;
+	SoundStream m_MarioSS;
+	SoundEffect m_LaserSE;
+	SoundEffect m_JinglesSE;
 
 	// FUNCTIONS
 	void Initialize( );
 	void Cleanup( );
 	void ClearBackground( ) const;
+
+	void DrawMenu( ) const;
+	void SwitchTest( );
+	void TestStreams( const SDL_KeyboardEvent& e );
+	void TestEffects( const SDL_KeyboardEvent& e );
+
 };

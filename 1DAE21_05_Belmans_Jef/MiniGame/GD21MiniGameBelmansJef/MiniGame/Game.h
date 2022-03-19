@@ -4,6 +4,7 @@
 #include "PowerUpManager.h"
 #include "Avatar.h"
 #include "Camera.h"
+#include "HUD.h"
 
 class Game final
 {
@@ -33,6 +34,10 @@ private:
 	PowerUpManager m_PowerUpManager;
 	Avatar m_Avatar;
 	Camera m_Camera;
+	HUD m_Hud;
+
+	bool m_EndReached;
+	Rectf m_EndScreenOverlay;
 
 	// FUNCTIONS
 	void Initialize( );

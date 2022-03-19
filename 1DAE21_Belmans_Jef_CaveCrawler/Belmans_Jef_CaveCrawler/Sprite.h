@@ -47,7 +47,7 @@ private:
 	float m_FrameAccuSec;
 
 	Animation* m_pCurrentAnimation;
-	std::vector<Animation*> m_Animations;
+	std::vector<Animation*> m_pAnimations;
 
 	void UpdateSprite();
 };

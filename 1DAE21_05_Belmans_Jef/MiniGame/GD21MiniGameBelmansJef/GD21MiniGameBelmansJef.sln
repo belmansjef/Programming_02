@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PowerUpManager", "PowerUpMa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MiniGame", "MiniGame\MiniGame.vcxproj", "{57502E1E-56B2-45D6-A4DA-43E67468A772}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sound", "Sound\Sound.vcxproj", "{A8A02EA7-E826-4BD3-AF7F-A5202B889C00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{57502E1E-56B2-45D6-A4DA-43E67468A772}.Release|x64.Build.0 = Release|x64
 		{57502E1E-56B2-45D6-A4DA-43E67468A772}.Release|x86.ActiveCfg = Release|Win32
 		{57502E1E-56B2-45D6-A4DA-43E67468A772}.Release|x86.Build.0 = Release|Win32
+		{A8A02EA7-E826-4BD3-AF7F-A5202B889C00}.Debug|x64.ActiveCfg = Debug|x64
+		{A8A02EA7-E826-4BD3-AF7F-A5202B889C00}.Debug|x64.Build.0 = Debug|x64
+		{A8A02EA7-E826-4BD3-AF7F-A5202B889C00}.Debug|x86.ActiveCfg = Debug|Win32
+		{A8A02EA7-E826-4BD3-AF7F-A5202B889C00}.Debug|x86.Build.0 = Debug|Win32
+		{A8A02EA7-E826-4BD3-AF7F-A5202B889C00}.Release|x64.ActiveCfg = Release|x64
+		{A8A02EA7-E826-4BD3-AF7F-A5202B889C00}.Release|x64.Build.0 = Release|x64
+		{A8A02EA7-E826-4BD3-AF7F-A5202B889C00}.Release|x86.ActiveCfg = Release|Win32
+		{A8A02EA7-E826-4BD3-AF7F-A5202B889C00}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

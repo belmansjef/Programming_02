@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{57502e1e-56b2-45d6-a4da-43e67468a772}</ProjectGuid>
-    <RootNamespace>MiniGame</RootNamespace>
+    <ProjectGuid>{a8a02ea7-e826-4bd3-af7f-a5202b889c00}</ProjectGuid>
+    <RootNamespace>Sound</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -143,38 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Avatar.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="HUD.cpp" />
-    <ClCompile Include="Level.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Matrix2x3.cpp" />
-    <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Platform.cpp" />
-    <ClCompile Include="PowerUp.cpp" />
-    <ClCompile Include="PowerUpManager.cpp" />
-    <ClCompile Include="SoundEffect.cpp" />
-    <ClCompile Include="SoundStream.cpp" />
-    <ClCompile Include="structs.cpp" />
-    <ClCompile Include="SVGParser.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="utils.cpp" />
-    <ClCompile Include="Vector2f.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Avatar.h" />
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="HUD.h" />
-    <ClInclude Include="Level.h" />
     <ClInclude Include="Matrix2x3.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Platform.h" />
-    <ClInclude Include="PowerUp.h" />
-    <ClInclude Include="PowerUpManager.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SoundStream.h" />
     <ClInclude Include="structs.h" />
@@ -182,6 +154,20 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2f.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix2x3.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SoundEffect.cpp" />
+    <ClCompile Include="SoundStream.cpp" />
+    <ClCompile Include="structs.cpp" />
+    <ClCompile Include="SVGParser.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="Vector2f.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
