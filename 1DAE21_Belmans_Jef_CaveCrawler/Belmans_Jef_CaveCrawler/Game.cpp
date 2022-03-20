@@ -1,3 +1,4 @@
+#include <iomanip>
 #include "pch.h"
 #include "Game.h"
 
@@ -25,17 +26,23 @@ void Game::Cleanup( )
 
 void Game::Update( float elapsedSec )
 {
+	SDL_Delay(m_FrameDelay);
+
+	if (1000.0f / m_MaxFPS > (elapsedSec * 1000.0f))
+	{
+		m_FrameDelay = Uint32((1000.0f / m_MaxFPS - (elapsedSec * 1000.0f)));
+	}
+
 	m_PlayerAvater.Update(elapsedSec, m_Level);
+	UpdateFrameStats(elapsedSec);
 }
 
 void Game::Draw( ) const
 {
 	ClearBackground( );
 
-	
-
 	glPushMatrix();
-		glScalef(m_ScaleFactor, m_ScaleFactor, 1); // Scale all objects
+		glScalef(m_ScaleFactor, m_ScaleFactor, 1);
 
 		m_Camera.Transform(m_PlayerAvater.GetShape());
 		m_Level.DrawBackground();
@@ -72,4 +79,22 @@ void Game::ClearBackground( ) const
 {
 	glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
 	glClear( GL_COLOR_BUFFER_BIT );
+}
+
+void Game::UpdateFrameStats(float elapsedSec)
+{
+	m_Frames++;
+	m_FrameTime += elapsedSec + m_FrameDelay / 1000.0f;
+
+	if (m_FrameTime > 1.0f) // Every second
+	{
+		m_FrameRate = float(m_Frames) * 0.5f + m_FrameRate * 0.5f; // Stabilize reading
+		m_Frames = 0;
+	
+		m_AvgFrameTime = (1.0f / m_FrameRate) * 1000.0f;
+
+		std::cout << std::setprecision(2) << "[Frametime]\t\t[FPS]\r\n\t" << m_AvgFrameTime << " ms\t\t" << std::setprecision(3) << m_FrameRate << std::endl;
+
+		m_FrameTime = 0.0f;
+	}
 }

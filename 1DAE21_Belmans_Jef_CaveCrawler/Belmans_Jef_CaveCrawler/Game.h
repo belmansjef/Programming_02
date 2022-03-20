@@ -28,8 +28,15 @@ public:
 private:
 	// DATA MEMBERS
 	const Window m_Window;
-
 	const float m_ScaleFactor{ 6 };
+
+	int m_Frames{ 0 };
+	float m_FrameTime{ 0.0f };
+	float m_AvgFrameTime{ 0.0f };
+	float m_FrameRate{ 0.0f };
+	const float m_MaxFPS{ 144.0f };
+
+	Uint32 m_FrameDelay{ 0 };
 
 	Level m_Level;
 	Avatar m_PlayerAvater;
@@ -40,4 +47,6 @@ private:
 	void Initialize( );
 	void Cleanup( );
 	void ClearBackground( ) const;
+
+	void UpdateFrameStats(float elapsedSec);
 };
