@@ -185,6 +185,10 @@ void Core::Run( )
 			// Prevent jumps in time caused by break points
 			elapsedSeconds = std::min(elapsedSeconds, m_MaxElapsedSeconds);
 
+			// Update time class
+			Time::deltaTime = elapsedSeconds;
+			Time::time += elapsedSeconds;
+
 			// Call the Game object 's Update function, using time in seconds (!)
 			pGame->Update(elapsedSeconds);
 

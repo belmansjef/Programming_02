@@ -19,7 +19,6 @@ private:
 	Texture* m_pBackgroundTexture{};
 	Rectf m_Boundaries;
 
-
 	void LevelCollision(Rectf& actorShape, Vector2f& actorVelocity) const;
 	void DrawVector(const Vector2f& v, const Point2f& startPos) const;
 };

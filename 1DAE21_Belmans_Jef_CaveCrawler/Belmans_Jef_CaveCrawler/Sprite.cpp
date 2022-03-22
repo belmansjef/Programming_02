@@ -39,9 +39,9 @@ void Sprite::Draw() const
 	m_pTexture->Draw(Point2f(), m_TextureClip);
 }
 
-void Sprite::Update(float elapsedSec)
+void Sprite::Update()
 {
-	m_FrameAccuSec += elapsedSec;
+	m_FrameAccuSec += Time::deltaTime;
 	if (m_FrameAccuSec >= 1.0f / m_pCurrentAnimation->m_NrFramesPerSec)
 	{
 		m_CurrentFrame = (m_CurrentFrame + 1) % m_pCurrentAnimation->m_NrFrames;

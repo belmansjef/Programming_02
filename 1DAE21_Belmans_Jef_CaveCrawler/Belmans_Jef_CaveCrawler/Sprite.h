@@ -7,7 +7,6 @@ struct Animation
 {
 	Animation();
 	Animation(std::string animName, int nrFrames, int nrFramesPerSec, int nrRows, int nrCols, int rowOffset, int colOffset);
-
 	
 	std::string m_AnimName;
 	int m_NrFrames;
@@ -30,7 +29,7 @@ public:
 	~Sprite();
 
 	void Draw() const;
-	void Update(float elapsedSec);
+	void Update();
 	void SetType(const SpriteType& type);
 	void SetAnimation(const std::string animName);
 
