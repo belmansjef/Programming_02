@@ -32,7 +32,7 @@ void Avatar::Draw() const
 
 bool Avatar::ShouldTrack() const
 {
-	return abs(m_StandStillPos.x - m_Shape.left) > m_HorCamDeadZone || m_TickMovementTimer;
+	return abs(m_StandStillPos.x - m_Shape.left) > m_HorCamDeadZone || m_IsMoving;
 }
 
 Rectf Avatar::GetShape() const
@@ -67,12 +67,9 @@ void Avatar::ProcessInput(const Level& level)
 
 	m_Velocity.x = m_MovementDirection * m_MovementSpeed;
 
-	if (m_Velocity.x == 0.0f && m_Velocity.y == 0.0f && ShouldTrack() && !m_TickMovementTimer)
-	{
-		m_TickMovementTimer = true;
-	}
+	m_IsMoving |= (m_Velocity.x == 0.0f && m_Velocity.y == 0.0f && ShouldTrack());
 
-	if (m_TickMovementTimer)
+	if (m_IsMoving)
 	{
 		if (m_Velocity.x == 0.0f && m_Velocity.y == 0.0f)
 		{
@@ -89,7 +86,7 @@ void Avatar::ProcessInput(const Level& level)
 		m_StandStillPos.x = m_Shape.left;
 		m_StandStillPos.y = m_Shape.bottom;
 		m_TimeSinceMovement = 0.0f;
-		m_TickMovementTimer = false;
+		m_IsMoving = false;
 	}
 
 	if (m_IsGrounded)

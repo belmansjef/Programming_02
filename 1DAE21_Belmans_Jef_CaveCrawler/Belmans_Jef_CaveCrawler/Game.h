@@ -4,7 +4,6 @@
 #include "Camera.h"
 #include "CollectibleManager.h"
 
-
 class Game final
 {
 public:

@@ -72,6 +72,9 @@
     <ClCompile Include="Time.cpp">
       <Filter>Framework Files</Filter>
     </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Framework Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Game Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
