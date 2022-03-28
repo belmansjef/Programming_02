@@ -14,7 +14,7 @@ public:
 	Avatar& operator=(const Avatar& other) = delete;
 	Avatar(Avatar&& other) = delete;
 	Avatar& operator=(Avatar&& other) = delete;
-	~Avatar() = default;
+	virtual ~Avatar() = default;
 
 	void Update(const Level& level);
 	void Draw() const;
@@ -29,7 +29,7 @@ private:
 	Rectf m_Shape;
 	Health m_AvatarHealth;
 
-	float m_Gravity{ -250.0f };
+	float m_Gravity{ -350.0f };
 	float m_GravityScale{ 1.0f };
 
 	Vector2f m_Velocity{ 0.0f, 0.0f };
@@ -49,9 +49,9 @@ private:
 	bool m_IsPressingJump{ false };
 	bool m_IsGrounded{ false };
 	bool m_HasJumped{ false };
-	float m_MovementSpeed{ 50.0f };
+	float m_MovementSpeed{ 80.0f };
 	float m_JumpHeight{ 5.0f };
-	float m_InitialJumpVelocity{ 120.0f };
+	float m_InitialJumpVelocity{ 175.0f };
 	float m_TimeSinceGrounded{ 0.0f };
 	const float m_CoyoteTime{ 0.1f };
 

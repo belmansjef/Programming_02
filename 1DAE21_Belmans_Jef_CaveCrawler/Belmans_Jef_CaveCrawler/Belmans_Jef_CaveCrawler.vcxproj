@@ -145,6 +145,8 @@
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraZone.cpp" />
+    <ClCompile Include="CameraZoneManager.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DamageBlock.cpp" />
     <ClCompile Include="DamageBlockManager.cpp" />
@@ -169,6 +171,8 @@
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraZone.h" />
+    <ClInclude Include="CameraZoneManager.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="DamageBlock.h" />
     <ClInclude Include="DamageBlockManager.h" />

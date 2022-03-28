@@ -11,7 +11,7 @@ int main( int argc, char *argv[] )
 
 	StartHeapControl();
 
-	Core* pCore{ new Core{ Window{ "Cave Crawler - Belmans, Jef- 1DAE21", 1280.0f , 528.0f, false } } };
+	Core* pCore{ new Core{ Window{ "Cave Crawler - Belmans, Jef- 1DAE21", 1024.0f , 576.0f, true } } };
 	pCore->Run();
 	delete pCore;
 

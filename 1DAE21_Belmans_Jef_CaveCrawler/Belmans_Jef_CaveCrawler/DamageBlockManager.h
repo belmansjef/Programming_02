@@ -4,6 +4,7 @@
 
 class Health;
 class DamageBlock;
+class Camera;
 class DamageBlockManager final
 {
 public:
@@ -14,11 +15,12 @@ public:
 	DamageBlockManager(DamageBlockManager&& other) = delete;
 	DamageBlockManager& operator=(DamageBlockManager&& other) = delete;
 
-	DamageBlock* AddItem(const Point2f& center);
+	DamageBlock* AddItem(const Point2f& bottomLeft);
+	bool AddItemsFromSvgFile(const std::string& filePath);
 
 	void Draw() const;
-	void Update(const Rectf& actorShape, Health& actorHealth);
-	void CollisionCheck(const Rectf& acotrShape, Health& actorHealth);
+	void Update(const Rectf& actorShape, Health& actorHealth, Camera& cam);
+	void CollisionCheck(const Rectf& acotrShape, Health& actorHealth, Camera& cam);
 
 private:
 	std::vector<DamageBlock*> m_pItems;

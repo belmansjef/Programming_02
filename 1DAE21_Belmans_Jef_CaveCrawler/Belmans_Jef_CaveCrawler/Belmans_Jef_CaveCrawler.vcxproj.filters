@@ -81,6 +81,12 @@
     <ClCompile Include="DamageBlockManager.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
+    <ClCompile Include="CameraZone.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraZoneManager.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -144,6 +150,12 @@
       <Filter>Game Files</Filter>
     </ClInclude>
     <ClInclude Include="DamageBlockManager.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraZone.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraZoneManager.h">
       <Filter>Game Files</Filter>
     </ClInclude>
   </ItemGroup>

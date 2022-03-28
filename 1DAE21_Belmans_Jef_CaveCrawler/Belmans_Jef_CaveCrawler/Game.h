@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "CollectibleManager.h"
 #include "DamageBlockManager.h"
+#include "CameraZoneManager.h"
 
 class Game final
 {
@@ -28,7 +29,7 @@ public:
 private:
 	// DATA MEMBERS
 	const Window m_Window;
-	const float m_ScaleFactor{ 6 };
+	const float m_ScaleFactor{ 4.0f };
 
 	bool m_ShouldPrintStats{ true };
 	int m_Frames{ 0 };
@@ -44,6 +45,7 @@ private:
 	Camera m_Camera;
 	CollectibleManager m_CollectibleManager;
 	DamageBlockManager m_DamageBlockManager;
+	CameraZoneManager m_CameraZoneManager;
 
 	// FUNCTIONS
 	void Initialize( );

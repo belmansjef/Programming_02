@@ -164,7 +164,7 @@ void Avatar::SetGravityScale()
 	}
 	else if (m_Velocity.y <= 0.0f || !m_IsPressingJump)
 	{
-		m_GravityScale = 4.0f;
+		m_GravityScale = 4.5f;
 	}
 }
 

@@ -16,9 +16,11 @@ Game::~Game( )
 
 void Game::Initialize( )
 {
-	m_Camera.SetLevelBoundaries(m_Level.GetBoundaries());
-	m_DamageBlockManager.AddItem(Point2f(184.0f, 16.0f));
-	m_DamageBlockManager.AddItem(Point2f(184.0f, 24.0f));
+	m_DamageBlockManager.AddItemsFromSvgFile("Resources/Images/Level_1_Spikes.svg");
+	m_CameraZoneManager.AddItem(0.0f, 0.0f, 39.0f * 8.0f, 18.0f * 8.0f);
+	m_CameraZoneManager.AddItem(39.0f * 8.0f, 0.0f, 34.0f * 8.0f, 18.0f * 8.0f);
+	m_CameraZoneManager.AddItem(73.0f * 8.0f, 0.0f, 32.0f * 8.0f, 27.0f * 8.0f);
+	m_CameraZoneManager.AddItem(0.0f, 18.0f * 8.0f, 73.0f * 8.0f, 18.0f * 8.0f);
 }
 
 void Game::Cleanup( )
@@ -38,7 +40,8 @@ void Game::Update( float elapsedSec )
 	// Updates
 	m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
 	m_PlayerAvatar.Update(m_Level);
-	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera);
+	m_Camera.SetLevelBoundaries(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
 
 	UpdateFrameStats(elapsedSec);
 }

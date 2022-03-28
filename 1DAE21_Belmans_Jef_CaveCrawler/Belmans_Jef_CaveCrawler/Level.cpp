@@ -4,10 +4,10 @@
 #include "SVGParser.h"
 
 Level::Level()
-	:m_pBackgroundTexture{ new Texture("Resources/Images/Level_Test.png") }
+	:m_pBackgroundTexture{ new Texture("Resources/Images/Level_1.png") }
 {
 	m_Boundaries = Rectf{ 0.0f, 0.0f, m_pBackgroundTexture->GetWidth(), m_pBackgroundTexture->GetHeight()};
-	SVGParser::GetVerticesFromSvgFile("Resources/Images/Level_Test.svg", m_Verticies);
+	SVGParser::GetVerticesFromSvgFile("Resources/Images/Level_1.svg", m_Verticies);
 }
 
 Level::~Level()
