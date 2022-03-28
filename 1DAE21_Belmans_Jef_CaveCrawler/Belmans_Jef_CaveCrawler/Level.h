@@ -2,8 +2,7 @@
 #include "utils.h"
 
 class Texture;
-
-class Level
+class Level final
 {
 public:
 	Level();

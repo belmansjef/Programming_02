@@ -75,6 +75,12 @@
     <ClCompile Include="Health.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
+    <ClCompile Include="DamageBlock.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageBlockManager.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -132,6 +138,12 @@
       <Filter>Framework Files</Filter>
     </ClInclude>
     <ClInclude Include="Health.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageBlock.h">
+      <Filter>Game Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageBlockManager.h">
       <Filter>Game Files</Filter>
     </ClInclude>
   </ItemGroup>

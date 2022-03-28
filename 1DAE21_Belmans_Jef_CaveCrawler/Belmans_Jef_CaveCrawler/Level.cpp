@@ -68,92 +68,128 @@ void Level::LevelCollision(Rectf& actorShape, Vector2f& actorVelocity) const
 	// Backward detection
 	Point2f startPos = Point2f{ actorShape.left + rayLength, actorShape.bottom + actorShape.height - rayOffset };
 	Point2f endPos = Point2f{ actorShape.left, startPos.y };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.left = hitInfo.intersectPoint.x;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.left = hitInfo.intersectPoint.x;
+		}
 	}
 
 	startPos = Point2f{ actorShape.left + rayLength, actorShape.bottom + actorShape.height / 2.0f };
 	endPos = Point2f{ actorShape.left, startPos.y };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.left = hitInfo.intersectPoint.x;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.left = hitInfo.intersectPoint.x;
+		}
 	}
 
 	startPos = Point2f{ actorShape.left + rayLength, actorShape.bottom + rayOffset };
 	endPos = Point2f{ actorShape.left, startPos.y };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.left = hitInfo.intersectPoint.x;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.left = hitInfo.intersectPoint.x;
+		}
 	}
 
 	// Forward detection
 	startPos = Point2f{ actorShape.left + actorShape.width - rayLength, actorShape.bottom + actorShape.height - rayOffset };
 	endPos = Point2f{ actorShape.left + actorShape.width, startPos.y };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.left = hitInfo.intersectPoint.x - actorShape.width;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.left = hitInfo.intersectPoint.x - actorShape.width;
+		}
 	}
 
 	startPos = Point2f{ actorShape.left + actorShape.width - rayLength, actorShape.bottom + actorShape.height / 2.0f };
 	endPos = Point2f{ actorShape.left + actorShape.width, startPos.y };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.left = hitInfo.intersectPoint.x - actorShape.width;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.left = hitInfo.intersectPoint.x - actorShape.width;
+		}
 	}
 
 	startPos = Point2f{ actorShape.left + actorShape.width - rayLength, actorShape.bottom + rayOffset };
 	endPos = Point2f{ actorShape.left + actorShape.width, startPos.y };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.left = hitInfo.intersectPoint.x - actorShape.width;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.left = hitInfo.intersectPoint.x - actorShape.width;
+		}
 	}
 
 	// Upward detection
 	startPos = Point2f{ actorShape.left + 1, actorShape.bottom + actorShape.height - rayLength };
 	endPos = Point2f{ startPos.x, actorShape.bottom + actorShape.height };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.bottom = hitInfo.intersectPoint.y - actorShape.height;
-		actorVelocity.y = 0.0f;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.bottom = hitInfo.intersectPoint.y - actorShape.height;
+			actorVelocity.y = 0.0f;
+		}
 	}
 
 	startPos = Point2f{ actorShape.left + actorShape.width / 2.0f, actorShape.bottom + actorShape.height - rayLength };
 	endPos = Point2f{ startPos.x, actorShape.bottom + actorShape.height };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.bottom = hitInfo.intersectPoint.y - actorShape.height;
-		actorVelocity.y = 0.0f;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.bottom = hitInfo.intersectPoint.y - actorShape.height;
+			actorVelocity.y = 0.0f;
+		}
 	}
 
 	startPos = Point2f{ actorShape.left + actorShape.width - 1, actorShape.bottom + actorShape.height - rayLength };
 	endPos = Point2f{ startPos.x, actorShape.bottom + actorShape.height };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.bottom = hitInfo.intersectPoint.y - actorShape.height;
-		actorVelocity.y = 0.0f;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.bottom = hitInfo.intersectPoint.y - actorShape.height;
+			actorVelocity.y = 0.0f;
+		}
 	}
 
 	// Downward detection
 	startPos = Point2f{ actorShape.left + 1, actorShape.bottom + 5 };
 	endPos = Point2f{ actorShape.left + 1, actorShape.bottom };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.bottom = hitInfo.intersectPoint.y;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.bottom = hitInfo.intersectPoint.y;
+		}
 	}
 
 	startPos = Point2f{ actorShape.left + actorShape.width / 2.0f, actorShape.bottom + rayLength };
 	endPos = Point2f{ actorShape.left + actorShape.width / 2.0f, actorShape.bottom };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.bottom = hitInfo.intersectPoint.y;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.bottom = hitInfo.intersectPoint.y;
+		}
 	}
 
 	startPos = Point2f{ actorShape.left + actorShape.width - 1, actorShape.bottom + rayLength };
 	endPos = Point2f{ actorShape.left + actorShape.width - 1, actorShape.bottom };
-	if (utils::Raycast(m_Verticies[0], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[1], startPos, endPos, hitInfo) || utils::Raycast(m_Verticies[2], startPos, endPos, hitInfo))
+	for (std::vector<Point2f> verts : m_Verticies)
 	{
-		actorShape.bottom = hitInfo.intersectPoint.y;
+		if (utils::Raycast(verts, startPos, endPos, hitInfo))
+		{
+			actorShape.bottom = hitInfo.intersectPoint.y;
+		}
 	}
 }
 

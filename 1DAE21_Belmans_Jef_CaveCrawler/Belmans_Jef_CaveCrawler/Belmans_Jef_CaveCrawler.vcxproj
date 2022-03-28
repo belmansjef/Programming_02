@@ -146,6 +146,8 @@
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DamageBlock.cpp" />
+    <ClCompile Include="DamageBlockManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -168,6 +170,8 @@
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="DamageBlock.h" />
+    <ClInclude Include="DamageBlockManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="Level.h" />

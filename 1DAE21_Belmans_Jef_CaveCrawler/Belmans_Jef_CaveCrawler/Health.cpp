@@ -4,6 +4,7 @@
 Health::Health(int maxHealth)
 	: m_MaxHealth { maxHealth }
 	, m_CurrentHealth { maxHealth }
+	, m_TimeSinceLastHit{ 0 }
 {
 }
 
@@ -14,12 +15,20 @@ void Health::Heal(int amount)
 
 void Health::TakeDamage(int amount)
 {
-	m_CurrentHealth -= amount;
-	if (m_CurrentHealth <= 0)
+	if (m_TimeSinceLastHit + m_DamageCooldown < Time::time)
 	{
-		m_CurrentHealth = 0;
-		Die();
+		m_CurrentHealth -= amount;
+		m_TimeSinceLastHit = Time::time;
+
+		std::cout << "Autch!" << std::endl;
+
+		if (m_CurrentHealth <= 0)
+		{
+			m_CurrentHealth = 0;
+			Die();
+		}
 	}
+
 }
 
 void Health::Die()

@@ -16,6 +16,9 @@ private:
 	int m_MaxHealth;
 	int m_CurrentHealth;
 
+	const float m_DamageCooldown{ 1.0f };
+	float m_TimeSinceLastHit;
+
 	void Die();
 };
 

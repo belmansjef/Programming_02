@@ -17,6 +17,8 @@ Game::~Game( )
 void Game::Initialize( )
 {
 	m_Camera.SetLevelBoundaries(m_Level.GetBoundaries());
+	m_DamageBlockManager.AddItem(Point2f(184.0f, 16.0f));
+	m_DamageBlockManager.AddItem(Point2f(184.0f, 24.0f));
 }
 
 void Game::Cleanup( )
@@ -36,6 +38,8 @@ void Game::Update( float elapsedSec )
 	// Updates
 	m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
 	m_PlayerAvatar.Update(m_Level);
+	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+
 	UpdateFrameStats(elapsedSec);
 }
 
@@ -48,6 +52,7 @@ void Game::Draw( ) const
 		m_Camera.Transform();
 		m_Level.DrawBackground();
 		m_PlayerAvatar.Draw();
+		m_DamageBlockManager.Draw();
 	glPopMatrix();
 }
 

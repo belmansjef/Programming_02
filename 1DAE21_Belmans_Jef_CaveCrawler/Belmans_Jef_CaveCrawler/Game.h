@@ -3,6 +3,7 @@
 #include "Avatar.h"
 #include "Camera.h"
 #include "CollectibleManager.h"
+#include "DamageBlockManager.h"
 
 class Game final
 {
@@ -29,19 +30,20 @@ private:
 	const Window m_Window;
 	const float m_ScaleFactor{ 6 };
 
-	bool m_ShouldPrintStats{ false };
+	bool m_ShouldPrintStats{ true };
 	int m_Frames{ 0 };
 	float m_FrameTime{ 0.0f };
 	float m_AvgFrameTime{ 0.0f };
 	float m_FrameRate{ 0.0f };
-	const float m_MaxFPS{ 360.0f };
+	const float m_MaxFPS{ 0.0f };
 
 	Uint32 m_FrameDelay{ 0 };
 
 	Level m_Level;
-	Avatar m_PlayerAvatar;
+	Avatar m_PlayerAvatar{50.0f, 40.0f, 13.0f, 14.0f, 5};
 	Camera m_Camera;
-	CollectibleManager m_CollectibleManager{ true };
+	CollectibleManager m_CollectibleManager;
+	DamageBlockManager m_DamageBlockManager;
 
 	// FUNCTIONS
 	void Initialize( );

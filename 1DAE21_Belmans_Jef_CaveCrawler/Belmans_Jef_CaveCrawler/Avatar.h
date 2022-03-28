@@ -9,7 +9,11 @@ class Level;
 class Avatar
 {
 public:
-	Avatar();
+	Avatar(float left, float bottom, float width, float height, int maxhealth);
+	Avatar(const Avatar& other) = delete;
+	Avatar& operator=(const Avatar& other) = delete;
+	Avatar(Avatar&& other) = delete;
+	Avatar& operator=(Avatar&& other) = delete;
 	~Avatar() = default;
 
 	void Update(const Level& level);
@@ -18,12 +22,12 @@ public:
 	bool ShouldTrack() const;
 
 	Rectf GetShape() const;
+	Health& GetHealth();
 
 private:
 	Sprite m_Sprite;
-	Rectf m_Shape{ 50.0f, 40.0f, 13.0f, 14.0f };
-
-	Health m_AvatarHealth{ 5 };
+	Rectf m_Shape;
+	Health m_AvatarHealth;
 
 	float m_Gravity{ -250.0f };
 	float m_GravityScale{ 1.0f };

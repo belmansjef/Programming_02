@@ -3,13 +3,9 @@
 #include "CollectibleManager.h"
 #include "Collectible.h"
 
-CollectibleManager::CollectibleManager(bool debugEnabled)
-	: m_DebugEnabled { debugEnabled }
+CollectibleManager::CollectibleManager()
 {
-	if (m_DebugEnabled)
-	{
-		std::cout << "CollectibleManager created!\r\n";
-	}
+
 }
 
 CollectibleManager::~CollectibleManager()

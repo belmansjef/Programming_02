@@ -5,8 +5,10 @@
 #include "Level.h"
 #include "Game.h"
 
-Avatar::Avatar()
-	: m_Sprite { Sprite(Sprite::SpriteType::player) }
+Avatar::Avatar(float left, float bottom, float width, float height, int maxhealth)
+	: m_Sprite { Sprite(SpriteType::player) }
+	, m_Shape{ Rectf(left, bottom, width, height) }
+	, m_AvatarHealth{ Health(maxhealth) }
 {
 }
 
@@ -38,6 +40,11 @@ bool Avatar::ShouldTrack() const
 Rectf Avatar::GetShape() const
 {
 	return m_Shape;
+}
+
+Health& Avatar::GetHealth()
+{
+	return m_AvatarHealth;
 }
 
 void Avatar::GetInput()
