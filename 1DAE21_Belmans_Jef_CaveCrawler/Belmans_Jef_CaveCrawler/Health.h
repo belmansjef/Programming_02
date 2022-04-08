@@ -11,6 +11,7 @@ public:
 
 	void Heal(int amount);
 	void TakeDamage(int amount);
+	bool ShouldHit() const;
 
 private:
 	int m_MaxHealth;

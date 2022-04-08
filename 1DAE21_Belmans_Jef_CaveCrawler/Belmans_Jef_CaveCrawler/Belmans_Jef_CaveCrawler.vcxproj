@@ -151,6 +151,7 @@
     <ClCompile Include="DamageBlock.cpp" />
     <ClCompile Include="DamageBlockManager.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="DamageBlock.h" />
     <ClInclude Include="DamageBlockManager.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Matrix2x3.h" />

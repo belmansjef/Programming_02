@@ -22,6 +22,8 @@ void Camera::UpdatePosition(const Rectf& target, bool shouldTrack)
 	{
 		m_RawCameraPos = Track(target);
 		m_RawCameraPos = Clamp(m_RawCameraPos);
+
+		if (m_ScreenShakeTimer <= 0.0f ) m_DoScreenShake = false;
 	}
 	
 	if (m_DoScreenShake)
@@ -35,10 +37,6 @@ void Camera::UpdatePosition(const Rectf& target, bool shouldTrack)
 		m_RawCameraPos.y = m_RawCameraPos.y + sin(m_Frequency * (m_Angle + m_HorizontalShift)) * m_Amplitude;
 
 		m_ScreenShakeTimer -= Time::deltaTime;
-		if (m_ScreenShakeTimer <= 0.0f)
-		{
-			m_DoScreenShake = false;
-		}
 	}
 
 	m_SmoothCameraPos.x = std::lerp(m_SmoothCameraPos.x, m_RawCameraPos.x, m_Smoothing * Time::deltaTime);

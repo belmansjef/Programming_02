@@ -15,20 +15,26 @@ void Health::Heal(int amount)
 
 void Health::TakeDamage(int amount)
 {
-	if (m_TimeSinceLastHit + m_DamageCooldown < Time::time)
+	if (ShouldHit())
 	{
 		m_CurrentHealth -= amount;
 		m_TimeSinceLastHit = Time::time;
-
-		std::cout << "Autch!" << std::endl;
 
 		if (m_CurrentHealth <= 0)
 		{
 			m_CurrentHealth = 0;
 			Die();
 		}
+		else
+		{
+			std::cout << "Autch!" << std::endl;
+		}
 	}
+}
 
+bool Health::ShouldHit() const
+{
+	return m_TimeSinceLastHit + m_DamageCooldown <= Time::time;
 }
 
 void Health::Die()

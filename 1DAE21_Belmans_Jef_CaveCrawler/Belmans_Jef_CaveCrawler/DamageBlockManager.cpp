@@ -78,8 +78,11 @@ void DamageBlockManager::CollisionCheck(const Rectf& acotrShape, Health& actorHe
 	{
 		if (element->IsOverlapping(acotrShape))
 		{
-			actorHealth.TakeDamage(1);
-			cam.DoScreenShake();
+			if (actorHealth.ShouldHit())
+			{
+				cam.DoScreenShake();
+				actorHealth.TakeDamage(1);
+			}
 		}
 	}
 }

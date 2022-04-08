@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Sprite.h"
 #include "Health.h"
+#include "Gun.h"
 
 class Level;
 class Avatar
@@ -47,6 +48,8 @@ private:
 	GLfloat m_HorizontalScale{ 1 };
 	int m_MovementDirection{ 0 };
 	bool m_IsPressingJump{ false };
+	bool m_IsPressingShoot{ false };
+
 	bool m_IsGrounded{ false };
 	bool m_HasJumped{ false };
 	float m_MovementSpeed{ 80.0f };
@@ -54,6 +57,8 @@ private:
 	float m_InitialJumpVelocity{ 175.0f };
 	float m_TimeSinceGrounded{ 0.0f };
 	const float m_CoyoteTime{ 0.1f };
+
+	Gun m_Gun;
 
 	void GetInput();
 	void ProcessInput(const Level& level);

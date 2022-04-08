@@ -24,7 +24,7 @@ private:
 	// Screenshake
 	bool m_DoScreenShake{ true };
 
-	const float m_ScreenShakeTime{ 0.2f };
+	const float m_ScreenShakeTime{ 0.1f };
 	float m_ScreenShakeTimer{ 0.0f };
 
 	const float m_Amplitude{ 25.0f };

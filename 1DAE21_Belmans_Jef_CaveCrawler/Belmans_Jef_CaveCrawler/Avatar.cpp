@@ -9,6 +9,7 @@ Avatar::Avatar(float left, float bottom, float width, float height, int maxhealt
 	: m_Sprite { Sprite(SpriteType::player) }
 	, m_Shape{ Rectf(left, bottom, width, height) }
 	, m_AvatarHealth{ Health(maxhealth) }
+	, m_Gun { Gun() }
 {
 }
 
@@ -53,10 +54,16 @@ void Avatar::GetInput()
 
 	m_MovementDirection = state[SDL_SCANCODE_D] - state[SDL_SCANCODE_A];
 	m_IsPressingJump = bool(state[SDL_SCANCODE_SPACE]);
+	m_IsPressingShoot = bool(state[SDL_SCANCODE_LCTRL]);
 }
 
 void Avatar::ProcessInput(const Level& level)
 {
+	if (m_IsPressingShoot)
+	{
+		m_Gun.Shoot(m_Shape);
+	}
+
 	m_IsGrounded = level.IsOnGround(m_Shape);
 
 	if (m_MovementDirection < 0)
