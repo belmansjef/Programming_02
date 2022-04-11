@@ -5,10 +5,6 @@
 #include "utils.h"
 #include "Camera.h"
 
-DamageBlockManager::DamageBlockManager()
-{
-}
-
 DamageBlockManager::~DamageBlockManager()
 {
 	for (DamageBlock* element : m_pItems)

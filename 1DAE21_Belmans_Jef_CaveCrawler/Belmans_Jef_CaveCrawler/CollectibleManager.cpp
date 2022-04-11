@@ -3,11 +3,6 @@
 #include "CollectibleManager.h"
 #include "Collectible.h"
 
-CollectibleManager::CollectibleManager()
-{
-
-}
-
 CollectibleManager::~CollectibleManager()
 {
 	for (Collectible* element : m_pItems)

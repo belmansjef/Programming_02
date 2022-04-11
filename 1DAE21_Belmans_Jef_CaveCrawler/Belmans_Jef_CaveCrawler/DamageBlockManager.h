@@ -8,7 +8,7 @@ class Camera;
 class DamageBlockManager final
 {
 public:
-	DamageBlockManager();
+	DamageBlockManager() = default;
 	~DamageBlockManager();
 	DamageBlockManager(const DamageBlockManager& other) = delete;
 	DamageBlockManager& operator=(const DamageBlockManager& other) = delete;

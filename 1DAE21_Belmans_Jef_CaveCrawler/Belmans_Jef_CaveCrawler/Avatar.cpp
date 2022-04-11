@@ -18,6 +18,7 @@ void Avatar::Update(const Level& level)
 	GetInput();
 	ProcessInput(level);
 	m_Sprite.Update();
+	m_Gun.Update(level.GetLevelVerts());
 }
 
 void Avatar::Draw() const
@@ -31,6 +32,8 @@ void Avatar::Draw() const
 		}
 		m_Sprite.Draw();
 	glPopMatrix();
+
+	m_Gun.Draw();
 }
 
 bool Avatar::ShouldTrack() const
@@ -59,11 +62,6 @@ void Avatar::GetInput()
 
 void Avatar::ProcessInput(const Level& level)
 {
-	if (m_IsPressingShoot)
-	{
-		m_Gun.Shoot(m_Shape);
-	}
-
 	m_IsGrounded = level.IsOnGround(m_Shape);
 
 	if (m_MovementDirection < 0)
@@ -75,13 +73,17 @@ void Avatar::ProcessInput(const Level& level)
 		m_HorizontalScale = 1;
 	}
 
+	if (m_IsPressingShoot)
+	{
+		m_Gun.Shoot(m_Shape, int(m_HorizontalScale));
+	}
+
+	m_Velocity.x = m_MovementDirection * m_MovementSpeed;
+	m_IsMoving |= (m_Velocity.x == 0.0f && m_Velocity.y == 0.0f && ShouldTrack());
+
 	Jump();
 	SetAnimation();
 	SetGravityScale();
-
-	m_Velocity.x = m_MovementDirection * m_MovementSpeed;
-
-	m_IsMoving |= (m_Velocity.x == 0.0f && m_Velocity.y == 0.0f && ShouldTrack());
 
 	if (m_IsMoving)
 	{

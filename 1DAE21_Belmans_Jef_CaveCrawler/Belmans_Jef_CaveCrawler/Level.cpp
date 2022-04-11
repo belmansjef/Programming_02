@@ -59,6 +59,11 @@ Rectf Level::GetBoundaries() const
 	return m_Boundaries;
 }
 
+const std::vector<std::vector<Point2f>>& Level::GetLevelVerts() const
+{
+	return m_Verticies;
+}
+
 void Level::LevelCollision(Rectf& actorShape, Vector2f& actorVelocity) const
 {
 	const int rayLength{ 8 };

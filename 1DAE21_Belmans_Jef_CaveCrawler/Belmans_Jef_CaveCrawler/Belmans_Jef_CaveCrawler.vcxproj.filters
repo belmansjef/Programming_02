@@ -19,6 +19,9 @@
     <Filter Include="Game Files\Player">
       <UniqueIdentifier>{f300367e-c50c-4d10-8a4d-22deb4c93ee0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Weapon">
+      <UniqueIdentifier>{6c576d47-b7f0-43f5-a92e-2cf179a24a50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -94,7 +97,13 @@
       <Filter>Game Files</Filter>
     </ClCompile>
     <ClCompile Include="Gun.cpp">
-      <Filter>Game Files\Player</Filter>
+      <Filter>Game Files\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Game Files\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileManager.cpp">
+      <Filter>Game Files\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +177,13 @@
       <Filter>Game Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="Gun.h">
-      <Filter>Game Files\Player</Filter>
+      <Filter>Game Files\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Game Files\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileManager.h">
+      <Filter>Game Files\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include "Vector2f.h"
+#include "ProjectileManager.h"
 
-class Projectile;
 class Gun final
 {
 public:
@@ -13,9 +13,17 @@ public:
 	Gun& operator=(Gun&& other) = delete;
 	~Gun();
 
-	void Shoot(const Rectf& actorShape) const;
+	void Shoot(const Rectf& actorShape, int horScale);
+
+	void Update(const std::vector<std::vector<Point2f>>& levelVerts);
+	void Draw() const;
 
 private:
-	const Vector2f m_ShootPos{ 18.0f, 8.0f };
+	ProjectileManager m_ProjectileManager;
+
+	const Vector2f m_ShootPos{ 17.0f, 7.0f };
+	const float m_ShotSpeed{ 150.0f };
+	const float m_FireRate{ 0.5f };
+	float m_LastShotTime{ 0.0f };
 };
 

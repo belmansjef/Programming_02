@@ -6,7 +6,7 @@
 class CollectibleManager final
 {
 public:
-	CollectibleManager();
+	CollectibleManager() = default;
 	~CollectibleManager();
 	CollectibleManager(const CollectibleManager&) = delete;
 	CollectibleManager& operator=(const CollectibleManager&) = delete;
