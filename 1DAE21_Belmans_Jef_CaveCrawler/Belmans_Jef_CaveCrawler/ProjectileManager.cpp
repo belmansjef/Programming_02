@@ -60,6 +60,14 @@ void ProjectileManager::Draw() const
 	}
 }
 
+void ProjectileManager::Reset()
+{
+	for (Projectile* proj : m_pItems)
+	{
+		proj->Reset();
+	}
+}
+
 void ProjectileManager::CollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts)
 {
 	for (Projectile* proj : m_pItems) 

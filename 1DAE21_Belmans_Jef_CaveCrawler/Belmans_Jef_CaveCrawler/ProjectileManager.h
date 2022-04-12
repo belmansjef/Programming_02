@@ -21,6 +21,8 @@ public:
 	void Update(const std::vector<std::vector<Point2f>>& levelVerts);
 	void Draw() const;
 
+	void Reset();
+
 	void CollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts);
 
 private:

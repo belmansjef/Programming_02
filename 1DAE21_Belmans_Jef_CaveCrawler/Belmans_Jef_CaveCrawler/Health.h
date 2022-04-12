@@ -5,7 +5,7 @@ public:
 	Health(int maxHealth, float damageCooldown = 1.0f);
 	Health(const Health& other) = delete;
 	Health& operator=(const Health& other) = delete;
-	Health(Health&& other) = delete;
+	Health(Health&& other);
 	Health& operator=(Health&& other) = delete;
 	~Health() = default;
 

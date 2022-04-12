@@ -10,7 +10,7 @@ class Level;
 class Avatar final
 {
 public:
-	Avatar(float left, float bottom, float width, float height, int maxhealth);
+	Avatar(float left, float bottom, float width, float height);
 	Avatar(const Avatar& other) = delete;
 	Avatar& operator=(const Avatar& other) = delete;
 	Avatar(Avatar&& other) = delete;
@@ -19,20 +19,27 @@ public:
 
 	ProjectileManager& GetProjectileManager();
 
-	void OnMouseDownEvent(const SDL_MouseButtonEvent& e);
-
-	void Update(const Level& level);
-	void Draw() const;
-
+	bool GetIsDead() const;
 	bool ShouldTrack() const;
 
 	Rectf GetShape() const;
 	Health& GetHealth();
 
+	void OnMouseDownEvent(const SDL_MouseButtonEvent& e);
+
+	void Update(const Level& level);
+	void Draw() const;
+
+	void Reset();
+
 private:
+	Point2f m_StartPos;
+
 	Sprite m_Sprite;
 	Rectf m_Shape;
-	Health m_AvatarHealth;
+	
+	const int m_MaxHealth{ 5 };
+	Health m_AvatarHealth{ m_MaxHealth };
 
 	float m_Gravity{ -350.0f };
 	float m_GravityScale{ 1.0f };

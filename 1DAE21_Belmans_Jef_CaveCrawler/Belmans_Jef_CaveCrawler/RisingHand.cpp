@@ -54,6 +54,12 @@ void RisingHand::Draw() const
 	glPopMatrix();
 }
 
+void RisingHand::Reset()
+{
+	m_Health.Heal(3);
+	m_Sprite.SetAnimation("idle");
+}
+
 bool RisingHand::IsOverlapping(const Rectf& actorShape) const
 {
 	return utils::IsOverlapping(m_BoxCollider, actorShape);

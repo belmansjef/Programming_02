@@ -19,6 +19,8 @@ public:
 	void Update();
 	void Draw() const;
 
+	void Reset();
+
 	bool HitCheck(const std::vector<Point2f>& verts);
 	bool HitCheck(const Rectf& rect);
 private:

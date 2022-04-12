@@ -13,11 +13,12 @@ public:
 	RisingHand& operator=(RisingHand&& other) = delete;
 
 	Rectf GetBoxCollider() const;
-	
 	Health& GetHealth();
 
 	void Update(const Rectf& actorShape);
 	void Draw() const;
+
+	void Reset();
 
 	bool IsOverlapping(const Rectf& actorShape) const;
 

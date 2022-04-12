@@ -5,10 +5,10 @@
 #include "Level.h"
 #include "Game.h"
 
-Avatar::Avatar(float left, float bottom, float width, float height, int maxhealth)
-	: m_Sprite { Sprite(SpriteType::player) }
+Avatar::Avatar(float left, float bottom, float width, float height)
+	: m_StartPos { Point2f(left, bottom) }
+	, m_Sprite { Sprite(SpriteType::player) }
 	, m_Shape{ Rectf(left, bottom, width, height) }
-	, m_AvatarHealth{ Health(maxhealth) }
 	, m_Gun { Gun() }
 {
 }
@@ -16,6 +16,26 @@ Avatar::Avatar(float left, float bottom, float width, float height, int maxhealt
 ProjectileManager& Avatar::GetProjectileManager()
 {
 	return m_Gun.GetProjectileManager();
+}
+
+bool Avatar::GetIsDead() const
+{
+	return m_AvatarHealth.GetIsDead();
+}
+
+bool Avatar::ShouldTrack() const
+{
+	return abs(m_StandStillPos.x - m_Shape.left) > m_HorCamDeadZone || m_IsMoving;
+}
+
+Rectf Avatar::GetShape() const
+{
+	return m_Shape;
+}
+
+Health& Avatar::GetHealth()
+{
+	return m_AvatarHealth;
 }
 
 void Avatar::OnMouseDownEvent(const SDL_MouseButtonEvent& e)
@@ -53,19 +73,12 @@ void Avatar::Draw() const
 	m_Gun.Draw();
 }
 
-bool Avatar::ShouldTrack() const
+void Avatar::Reset()
 {
-	return abs(m_StandStillPos.x - m_Shape.left) > m_HorCamDeadZone || m_IsMoving;
-}
-
-Rectf Avatar::GetShape() const
-{
-	return m_Shape;
-}
-
-Health& Avatar::GetHealth()
-{
-	return m_AvatarHealth;
+	m_Shape.left = m_StartPos.x;
+	m_Shape.bottom = m_StartPos.y;
+	m_AvatarHealth.Heal(m_MaxHealth);
+	m_Gun.GetProjectileManager().Reset();
 }
 
 void Avatar::GetInput()

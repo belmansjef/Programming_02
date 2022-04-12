@@ -39,6 +39,14 @@ void RisingHandManager::Draw() const
 	}
 }
 
+void RisingHandManager::Reset()
+{
+	for (RisingHand* hand : m_pItems)
+	{
+		hand->Reset();
+	}
+}
+
 void RisingHandManager::CollisionCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam)
 {
 	for (RisingHand* hand : m_pItems)

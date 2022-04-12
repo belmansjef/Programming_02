@@ -51,6 +51,11 @@ void Game::Update( float elapsedSec )
 	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera);
 	m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
 
+	if (m_PlayerAvatar.GetIsDead())
+	{
+		ResetLevel();
+	}
+
 	UpdateFrameStats();
 }
 
@@ -118,4 +123,12 @@ void Game::UpdateFrameStats()
 
 		m_FrameTime = 0.0f;
 	}
+}
+
+void Game::ResetLevel()
+{
+	m_RisingHandManager.Reset();
+	m_PlayerAvatar.Reset();
+
+	std::cout << "Reset level!" << std::endl;
 }

@@ -42,7 +42,7 @@ private:
 	Uint32 m_FrameDelay{ 0 };
 
 	Level m_Level;
-	Avatar m_PlayerAvatar{50.0f, 40.0f, 13.0f, 14.0f, 5};
+	Avatar m_PlayerAvatar{50.0f, 40.0f, 13.0f, 14.0f};
 	Camera m_Camera;
 	CollectibleManager m_CollectibleManager;
 	DamageBlockManager m_DamageBlockManager;
@@ -54,5 +54,6 @@ private:
 	void Cleanup( );
 	void ClearBackground( ) const;
 
+	void ResetLevel();
 	void UpdateFrameStats();
 };

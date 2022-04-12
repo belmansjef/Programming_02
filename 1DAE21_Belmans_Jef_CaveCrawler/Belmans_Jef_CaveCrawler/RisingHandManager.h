@@ -21,6 +21,8 @@ public:
 	void Update(const Rectf& actorShape, Health& actorHealth, Camera& cam, std::vector<Projectile*> pProjectiles);
 	void Draw() const;
 
+	void Reset();
+
 private:
 	std::vector<RisingHand*> m_pItems;
 

@@ -18,6 +18,7 @@ bool Health::GetIsDead() const
 void Health::Heal(int amount)
 {
 	m_CurrentHealth = std::min(m_CurrentHealth + amount, m_MaxHealth);
+	m_IsDead = m_CurrentHealth == 0;
 }
 
 void Health::TakeDamage(int amount)

@@ -63,6 +63,11 @@ void Projectile::Draw() const
 	glPopMatrix();
 }
 
+void Projectile::Reset()
+{
+	m_IsInstanciated = false;
+}
+
 bool Projectile::HitCheck(const std::vector<Point2f>& verts)
 {
 	const Point2f startPos = Point2f{ m_RectGraphic.left, m_RectGraphic.bottom + m_RectGraphic.height / 2.0f };
