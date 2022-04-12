@@ -161,6 +161,8 @@
     <ClCompile Include="CollectibleManager.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
+    <ClCompile Include="RisingHand.cpp" />
+    <ClCompile Include="RisingHandManager.cpp" />
     <ClCompile Include="SoundEffect.cpp" />
     <ClCompile Include="SoundStream.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -189,6 +191,8 @@
     <ClInclude Include="CollectibleManager.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileManager.h" />
+    <ClInclude Include="RisingHand.h" />
+    <ClInclude Include="RisingHandManager.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SoundStream.h" />
     <ClInclude Include="Sprite.h" />

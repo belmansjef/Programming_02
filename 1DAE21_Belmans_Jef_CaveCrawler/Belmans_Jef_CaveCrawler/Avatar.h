@@ -7,7 +7,7 @@
 #include "Gun.h"
 
 class Level;
-class Avatar
+class Avatar final
 {
 public:
 	Avatar(float left, float bottom, float width, float height, int maxhealth);
@@ -15,7 +15,11 @@ public:
 	Avatar& operator=(const Avatar& other) = delete;
 	Avatar(Avatar&& other) = delete;
 	Avatar& operator=(Avatar&& other) = delete;
-	virtual ~Avatar() = default;
+	~Avatar() = default;
+
+	ProjectileManager& GetProjectileManager();
+
+	void OnMouseDownEvent(const SDL_MouseButtonEvent& e);
 
 	void Update(const Level& level);
 	void Draw() const;

@@ -5,6 +5,7 @@
 #include "CollectibleManager.h"
 #include "DamageBlockManager.h"
 #include "CameraZoneManager.h"
+#include "RisingHandManager.h"
 
 class Game final
 {
@@ -46,11 +47,12 @@ private:
 	CollectibleManager m_CollectibleManager;
 	DamageBlockManager m_DamageBlockManager;
 	CameraZoneManager m_CameraZoneManager;
+	RisingHandManager m_RisingHandManager;
 
 	// FUNCTIONS
 	void Initialize( );
 	void Cleanup( );
 	void ClearBackground( ) const;
 
-	void UpdateFrameStats(float elapsedSec);
+	void UpdateFrameStats();
 };

@@ -13,6 +13,23 @@ Avatar::Avatar(float left, float bottom, float width, float height, int maxhealt
 {
 }
 
+ProjectileManager& Avatar::GetProjectileManager()
+{
+	return m_Gun.GetProjectileManager();
+}
+
+void Avatar::OnMouseDownEvent(const SDL_MouseButtonEvent& e)
+{
+	switch (e.button)
+	{
+	case SDL_BUTTON_LEFT:
+		m_Gun.Shoot(m_Shape, int(m_HorizontalScale));
+		break;
+	default:
+		break;
+	}
+}
+
 void Avatar::Update(const Level& level)
 {
 	GetInput();
@@ -57,7 +74,6 @@ void Avatar::GetInput()
 
 	m_MovementDirection = state[SDL_SCANCODE_D] - state[SDL_SCANCODE_A];
 	m_IsPressingJump = bool(state[SDL_SCANCODE_SPACE]);
-	m_IsPressingShoot = bool(state[SDL_SCANCODE_LCTRL]);
 }
 
 void Avatar::ProcessInput(const Level& level)
@@ -71,11 +87,6 @@ void Avatar::ProcessInput(const Level& level)
 	else if (m_MovementDirection > 0)
 	{
 		m_HorizontalScale = 1;
-	}
-
-	if (m_IsPressingShoot)
-	{
-		m_Gun.Shoot(m_Shape, int(m_HorizontalScale));
 	}
 
 	m_Velocity.x = m_MovementDirection * m_MovementSpeed;

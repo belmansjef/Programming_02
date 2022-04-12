@@ -105,6 +105,12 @@
     <ClCompile Include="ProjectileManager.cpp">
       <Filter>Game Files\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="RisingHand.cpp">
+      <Filter>Game Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="RisingHandManager.cpp">
+      <Filter>Game Files\Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -184,6 +190,12 @@
     </ClInclude>
     <ClInclude Include="ProjectileManager.h">
       <Filter>Game Files\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="RisingHand.h">
+      <Filter>Game Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="RisingHandManager.h">
+      <Filter>Game Files\Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

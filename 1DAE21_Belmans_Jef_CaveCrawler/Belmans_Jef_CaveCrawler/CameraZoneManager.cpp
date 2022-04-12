@@ -2,8 +2,13 @@
 #include "CameraZone.h"
 #include "utils.h"
 
-CameraZoneManager::CameraZoneManager()
+CameraZoneManager::~CameraZoneManager()
 {
+	for (CameraZone* zone : m_pItems)
+	{
+		delete zone;
+		zone = nullptr;
+	}
 }
 
 CameraZone* CameraZoneManager::AddItem(float left, float bottom, float width, float height)

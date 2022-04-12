@@ -24,6 +24,9 @@ void Game::Initialize( )
 	m_CameraZoneManager.AddItem(39.0f * 8.0f, 0.0f, 34.0f * 8.0f, 18.0f * 8.0f);
 	m_CameraZoneManager.AddItem(73.0f * 8.0f, 0.0f, 32.0f * 8.0f, 27.0f * 8.0f);
 	m_CameraZoneManager.AddItem(0.0f, 18.0f * 8.0f, 73.0f * 8.0f, 18.0f * 8.0f);
+
+	// Load risinghands
+	m_RisingHandManager.AddItem(Point2f(128.0f, 24.0f), 3);
 }
 
 void Game::Cleanup( )
@@ -41,12 +44,14 @@ void Game::Update( float elapsedSec )
 	SDL_Delay(m_FrameDelay);
 
 	// Updates
-	m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
 	m_PlayerAvatar.Update(m_Level);
-	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera);
+	m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
 	m_Camera.SetLevelBoundaries(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
 
-	UpdateFrameStats(elapsedSec);
+	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera);
+	m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+
+	UpdateFrameStats();
 }
 
 void Game::Draw( ) const
@@ -59,6 +64,7 @@ void Game::Draw( ) const
 		m_Level.DrawBackground();
 		m_PlayerAvatar.Draw();
 		m_DamageBlockManager.Draw();
+		m_RisingHandManager.Draw();
 	glPopMatrix();
 }
 
@@ -79,7 +85,7 @@ void Game::ProcessMouseMotionEvent( const SDL_MouseMotionEvent& e )
 
 void Game::ProcessMouseDownEvent( const SDL_MouseButtonEvent& e )
 {
-	
+	m_PlayerAvatar.OnMouseDownEvent(e);
 }
 
 void Game::ProcessMouseUpEvent( const SDL_MouseButtonEvent& e )
@@ -93,10 +99,10 @@ void Game::ClearBackground( ) const
 	glClear( GL_COLOR_BUFFER_BIT );
 }
 
-void Game::UpdateFrameStats(float elapsedSec)
+void Game::UpdateFrameStats()
 {
 	m_Frames++;
-	m_FrameTime += elapsedSec + m_FrameDelay / 1000.0f;
+	m_FrameTime += Time::deltaTime + m_FrameDelay / 1000.0f;
 
 	if (m_FrameTime > 1.0f) // Every second
 	{

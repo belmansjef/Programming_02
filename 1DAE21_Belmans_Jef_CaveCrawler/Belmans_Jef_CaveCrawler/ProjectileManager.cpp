@@ -4,24 +4,29 @@
 
 ProjectileManager::~ProjectileManager()
 {
-	for (Projectile* proj : m_Projectiles)
+	for (Projectile* proj : m_pItems)
 	{
 		delete proj;
 		proj = nullptr;
 	}
 }
 
+std::vector<Projectile*> ProjectileManager::GetProjectiles()
+{
+	return m_pItems;
+}
+
 void ProjectileManager::PoolProjectiles(int nrObjects)
 {
 	for (size_t i = 0; i < nrObjects; i++)
 	{
-		m_Projectiles.push_back(new Projectile());
+		m_pItems.push_back(new Projectile());
 	}
 }
 
 void ProjectileManager::InstanciateProjectile(const Vector2f& velocity, const Point2f& bottomLeft)
 {
-	for (Projectile* proj : m_Projectiles)
+	for (Projectile* proj : m_pItems)
 	{
 		if (!proj->IsInstanciated())
 		{
@@ -33,7 +38,7 @@ void ProjectileManager::InstanciateProjectile(const Vector2f& velocity, const Po
 
 void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVerts)
 {
-	for (Projectile* proj : m_Projectiles)
+	for (Projectile* proj : m_pItems)
 	{
 		if (proj->IsInstanciated())
 		{
@@ -46,7 +51,7 @@ void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVer
 
 void ProjectileManager::Draw() const
 {
-	for (Projectile* proj : m_Projectiles)
+	for (Projectile* proj : m_pItems)
 	{
 		if (proj->IsInstanciated())
 		{
@@ -57,7 +62,7 @@ void ProjectileManager::Draw() const
 
 void ProjectileManager::CollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts)
 {
-	for (Projectile* proj : m_Projectiles) 
+	for (Projectile* proj : m_pItems) 
 	{
 		if (!proj->IsInstanciated()) continue;
 		for (std::vector<Point2f> verts : levelVerts)

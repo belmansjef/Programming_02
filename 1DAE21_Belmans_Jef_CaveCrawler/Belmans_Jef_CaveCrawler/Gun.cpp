@@ -9,7 +9,12 @@ Gun::Gun()
 
 Gun::~Gun()
 {
-	
+	m_ProjectileManager.~ProjectileManager();
+}
+
+ProjectileManager& Gun::GetProjectileManager()
+{
+	return m_ProjectileManager;
 }
 
 void Gun::Shoot(const Rectf& actorShape, int horScale)

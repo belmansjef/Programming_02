@@ -6,12 +6,12 @@
 struct Animation
 {
 	Animation();
+	~Animation() = default;
 	Animation(std::string animName, int nrFrames, int nrFramesPerSec, int nrRows, int nrCols, int rowOffset, int colOffset, bool holdLastFrame = false);
 	Animation(const Animation& other) = delete;
 	Animation& operator=(const Animation& other) = default;
 	Animation(Animation&& other) = delete;
 	Animation operator=(Animation&& other) = delete;
-	~Animation() = default;
 	
 	std::string m_AnimName;
 	int m_NrFrames;
@@ -27,18 +27,22 @@ struct Animation
 enum class SpriteType
 {
 	player,
-	damageBlock
+	damageBlock,
+	risingHand
 };
 
 class Sprite
 {
 public:
 	Sprite(const SpriteType& type);
+	~Sprite();
 	Sprite(const Sprite& other) = delete;
 	Sprite& operator=(const Sprite& other) = delete;
 	Sprite(Sprite&& other) = delete;
 	Sprite& operator=(Sprite&& other) = delete;
-	~Sprite();
+
+	float GetFrameWidth() const;
+	float GetFrameHeight() const;
 
 	void Draw() const;
 	void Update();

@@ -20,10 +20,10 @@ public:
 
 	void Draw() const;
 	void Update(const Rectf& actorShape, Health& actorHealth, Camera& cam);
-	void CollisionCheck(const Rectf& acotrShape, Health& actorHealth, Camera& cam);
 
 private:
 	std::vector<DamageBlock*> m_pItems;
 
 	void DeleteBlock(const DamageBlock* block) const;
+	void CollisionCheck(const Rectf& acotrShape, Health& actorHealth, Camera& cam);
 };

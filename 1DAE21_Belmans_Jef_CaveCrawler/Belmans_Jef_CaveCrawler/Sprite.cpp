@@ -36,6 +36,16 @@ Sprite::~Sprite()
 	}
 }
 
+float Sprite::GetFrameWidth() const
+{
+	return m_FrameWidth;
+}
+
+float Sprite::GetFrameHeight() const
+{
+	return m_FrameHeight;
+}
+
 void Sprite::Draw() const
 {
 	m_pTexture->Draw(Point2f(), m_TextureClip);
@@ -87,17 +97,6 @@ void Sprite::SetSprite()
 		m_FrameWidth = 18.0f;
 		m_FrameHeight = 15.0f;
 
-		m_FrameAccuSec = 0.0f;
-		m_CurrentFrame = 0;
-
-		m_TextureClip = Rectf
-		{
-			0.0f,
-			0.0f,
-			m_FrameWidth,
-			m_FrameHeight
-		};
-
 		m_pAnimations.push_back(new Animation("idle", 4, 5, 1, 4, 0, 0));
 		m_pAnimations.push_back(new Animation("run", 4, 10, 1, 4, 1, 0));
 		m_pAnimations.push_back(new Animation("jump_up", 1, 10, 1, 1, 0, 4));
@@ -111,23 +110,35 @@ void Sprite::SetSprite()
 		m_FrameWidth = 8.0f;
 		m_FrameHeight = 8.0f;
 
-		m_FrameAccuSec = 0.0f;
-		m_CurrentFrame = 0;
-
-		m_TextureClip = Rectf
-		{
-			0.0f,
-			0.0f,
-			m_FrameWidth,
-			m_FrameHeight
-		};
-
 		m_pAnimations.push_back(new Animation("shine", 9, 15, 3, 4, 0, 0, true)); 
 		m_pCurrentAnimation = m_pAnimations[0]; // Set current animation to shine
 	break;
+	case SpriteType::risingHand:
+		m_pTexture = new Texture{ "Resources/Images/Sprite_RisingHand.png" };
+		m_SheetWidth = m_pTexture->GetWidth();
+		m_SheetHeight = m_pTexture->GetHeight();
+		m_FrameWidth = 16.0f;
+		m_FrameHeight = 18.0f;
+
+		m_pAnimations.push_back(new Animation("idle", 1, 2, 1, 1, 0, 0));
+		m_pAnimations.push_back(new Animation("extended", 1, 2, 1, 1, 0, 1));
+		m_pAnimations.push_back(new Animation("grabbing", 1, 60, 1, 1, 0, 2));
+		m_pCurrentAnimation = m_pAnimations[0];
+		break;
 	default:
 		break;
 	}
+
+	m_FrameAccuSec = 0.0f;
+	m_CurrentFrame = 0;
+
+	m_TextureClip = Rectf
+	{
+		0.0f,
+		0.0f,
+		m_FrameWidth,
+		m_FrameHeight
+	};
 
 	UpdateTextClip();
 }

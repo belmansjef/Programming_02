@@ -63,7 +63,7 @@ void Projectile::Draw() const
 	glPopMatrix();
 }
 
-void Projectile::HitCheck(const std::vector<Point2f>& verts)
+bool Projectile::HitCheck(const std::vector<Point2f>& verts)
 {
 	const Point2f startPos = Point2f{ m_RectGraphic.left, m_RectGraphic.bottom + m_RectGraphic.height / 2.0f };
 	const Point2f endPos = Point2f{ m_RectGraphic.left + m_RectGraphic.width, startPos.y };
@@ -73,11 +73,15 @@ void Projectile::HitCheck(const std::vector<Point2f>& verts)
 	{
 		m_IsInstanciated = false;
 	}
+
+	return !m_IsInstanciated;
 }
 
-void Projectile::HitCheck(const Rectf& rect)
+bool Projectile::HitCheck(const Rectf& rect)
 {
-	utils::IsOverlapping(rect, m_CircleCollider)
+	utils::IsOverlapping(rect, m_RectGraphic)
 		? m_IsInstanciated = false
 		: m_IsInstanciated = true;
+
+	return !m_IsInstanciated;
 }

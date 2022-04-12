@@ -13,6 +13,8 @@ public:
 	ProjectileManager(ProjectileManager&& other) = delete;
 	ProjectileManager& operator=(ProjectileManager&& other) = delete;
 
+	std::vector<Projectile*> GetProjectiles();
+
 	void PoolProjectiles(int nrObjects);
 	void InstanciateProjectile(const Vector2f& velocity, const Point2f& bottomLeft);
 
@@ -22,6 +24,6 @@ public:
 	void CollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts);
 
 private:
-	std::vector<Projectile*> m_Projectiles;
+	std::vector<Projectile*> m_pItems;
 };
 

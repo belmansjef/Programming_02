@@ -6,8 +6,8 @@ class CameraZone;
 class CameraZoneManager final
 {
 public:
-	CameraZoneManager();
-	~CameraZoneManager() = default;
+	CameraZoneManager() = default;
+	~CameraZoneManager();
 	CameraZoneManager(const CameraZoneManager& other) = delete;
 	CameraZoneManager& operator=(const CameraZoneManager& other) = delete;
 	CameraZoneManager(CameraZoneManager&& other) = delete;

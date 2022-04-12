@@ -19,8 +19,8 @@ public:
 	void Update();
 	void Draw() const;
 
-	void HitCheck(const std::vector<Point2f>& verts);
-	void HitCheck(const Rectf& rect);
+	bool HitCheck(const std::vector<Point2f>& verts);
+	bool HitCheck(const Rectf& rect);
 private:
 	bool m_IsInstanciated{};
 

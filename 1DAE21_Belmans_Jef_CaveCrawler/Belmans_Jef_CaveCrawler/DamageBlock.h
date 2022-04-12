@@ -5,11 +5,11 @@ class DamageBlock
 {
 public:
 	DamageBlock(float left, float bottom);
+	~DamageBlock();
 	DamageBlock(const DamageBlock& other) = delete;
 	DamageBlock& operator=(const DamageBlock& other) = delete;
 	DamageBlock(DamageBlock&& other) = delete;
 	DamageBlock& operator=(DamageBlock&& other) = delete;
-	~DamageBlock();
 
 	bool IsOverlapping(const Rectf& rect);
 

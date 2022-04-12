@@ -1,11 +1,18 @@
 #include "Health.h"
 #include "pch.h"
 
-Health::Health(int maxHealth)
+Health::Health(int maxHealth, float damageCooldown)
 	: m_MaxHealth { maxHealth }
 	, m_CurrentHealth { maxHealth }
-	, m_TimeSinceLastHit{ 0 }
+	, m_TimeSinceLastHit{ -damageCooldown }
+	, m_DamageCooldown { damageCooldown }
+	, m_IsDead { false } 
 {
+}
+
+bool Health::GetIsDead() const
+{
+	return m_IsDead;
 }
 
 void Health::Heal(int amount)
@@ -27,7 +34,7 @@ void Health::TakeDamage(int amount)
 		}
 		else
 		{
-			std::cout << "Autch!" << std::endl;
+			// Took damage
 		}
 	}
 }
@@ -39,5 +46,5 @@ bool Health::ShouldHit() const
 
 void Health::Die()
 {
-	std::cout << "Am dead!" << std::endl;
+	m_IsDead = true;
 }
