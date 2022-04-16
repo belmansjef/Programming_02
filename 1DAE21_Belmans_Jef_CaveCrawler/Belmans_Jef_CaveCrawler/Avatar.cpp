@@ -8,9 +8,9 @@
 Avatar::Avatar(float left, float bottom, float width, float height)
 	: m_StartPos { Point2f(left, bottom) }
 	, m_Sprite { Sprite(SpriteType::player) }
-	, m_Shape{ Rectf(left, bottom, width, height) }
+	, m_Pb { PhysicsBody(left, bottom, width, height, 150.0f) }
 	, m_Gun { Gun() }
-{
+{ 
 }
 
 ProjectileManager& Avatar::GetProjectileManager()
@@ -23,14 +23,15 @@ bool Avatar::GetIsDead() const
 	return m_AvatarHealth.GetIsDead();
 }
 
-bool Avatar::ShouldTrack() const
+bool Avatar::ShouldTrack()
 {
-	return abs(m_StandStillPos.x - m_Shape.left) > m_HorCamDeadZone || m_IsMoving;
+	m_ShouldTrack |= abs(m_StandStillPos.x - m_Pb.GetPosition().x) > m_HorCamDeadZone;
+	return m_ShouldTrack;
 }
 
 Rectf Avatar::GetShape() const
 {
-	return m_Shape;
+	return m_Pb.GetShape();
 }
 
 Health& Avatar::GetHealth()
@@ -43,7 +44,7 @@ void Avatar::OnMouseDownEvent(const SDL_MouseButtonEvent& e)
 	switch (e.button)
 	{
 	case SDL_BUTTON_LEFT:
-		m_Gun.Shoot(m_Shape, int(m_HorizontalScale));
+		m_Gun.Shoot(m_Pb.Shape(), int(m_HorizontalScale));
 		break;
 	default:
 		break;
@@ -54,6 +55,7 @@ void Avatar::Update(const Level& level)
 {
 	GetInput();
 	ProcessInput(level);
+	m_Pb.Update(level);
 	m_Sprite.Update();
 	m_Gun.Update(level.GetLevelVerts());
 }
@@ -61,12 +63,10 @@ void Avatar::Update(const Level& level)
 void Avatar::Draw() const
 {
 	glPushMatrix();
-		glTranslatef(m_Shape.left, m_Shape.bottom, 0);
+		glTranslatef(m_Pb.GetPosition().x, m_Pb.GetPosition().y, 0);
 		glScalef(m_HorizontalScale, 1, 1);
 		if (m_HorizontalScale < 0)
-		{
-			glTranslatef(-m_Shape.width, 0, 0);
-		}
+			glTranslatef(-m_Pb.GetShape().width, 0, 0);
 		m_Sprite.Draw();
 	glPopMatrix();
 
@@ -75,8 +75,8 @@ void Avatar::Draw() const
 
 void Avatar::Reset()
 {
-	m_Shape.left = m_StartPos.x;
-	m_Shape.bottom = m_StartPos.y;
+	m_Pb.Shape().left = m_StartPos.x;
+	m_Pb.Shape().bottom = m_StartPos.y;
 	m_AvatarHealth.Heal(m_MaxHealth);
 	m_Gun.GetProjectileManager().Reset();
 }
@@ -91,8 +91,6 @@ void Avatar::GetInput()
 
 void Avatar::ProcessInput(const Level& level)
 {
-	m_IsGrounded = level.IsOnGround(m_Shape);
-
 	if (m_MovementDirection < 0)
 	{
 		m_HorizontalScale = -1;
@@ -102,73 +100,44 @@ void Avatar::ProcessInput(const Level& level)
 		m_HorizontalScale = 1;
 	}
 
-	m_Velocity.x = m_MovementDirection * m_MovementSpeed;
-	m_IsMoving |= (m_Velocity.x == 0.0f && m_Velocity.y == 0.0f && ShouldTrack());
-
-	Jump();
-	SetAnimation();
-	SetGravityScale();
-
-	if (m_IsMoving)
+	m_Pb.Velocity().x = m_MovementDirection* m_MovementSpeed;;
+	if (m_IsPressingJump)
 	{
-		if (m_Velocity.x == 0.0f && m_Velocity.y == 0.0f)
+		m_Pb.Jump();
+	}
+
+	if (m_ShouldTrack)
+	{
+		if (!m_Pb.GetIsMoving())
 		{
-			m_TimeSinceMovement += Time::deltaTime;
+			m_TimeSinceLastMoved += Time::deltaTime;
 		}
 		else
 		{
-			m_TimeSinceMovement = 0.0f;
+			m_TimeSinceLastMoved = 0.0f;
 		}
 	}
 
-	if (abs(m_Velocity.x) <= 0.01f && m_TimeSinceMovement >= m_StandStillDetectionTime)
+	if (m_TimeSinceLastMoved >= m_StandStillDetectionTime)
 	{
-		m_StandStillPos.x = m_Shape.left;
-		m_StandStillPos.y = m_Shape.bottom;
-		m_TimeSinceMovement = 0.0f;
-		m_IsMoving = false;
+		m_StandStillPos.x = m_Pb.GetPosition().x;
+		m_StandStillPos.y = m_Pb.GetPosition().y;
+		m_TimeSinceLastMoved = 0.0f;
+		m_ShouldTrack = false;
 	}
 
-	if (m_IsGrounded)
+	if (m_Pb.GetIsGrounded())
 	{
-		if (m_TimeSinceGrounded > 0.0f) // Reset velocity when first touching ground
-		{
-			m_Velocity.y = 0.0f;
-		}
-
-		m_HasJumped = m_IsPressingJump;
-		m_TimeSinceGrounded = 0.0f;
-	}
-	else
-	{
-		if (m_TimeSinceGrounded >= m_CoyoteTime || m_HasJumped)
-		{
-			m_Velocity.y += (m_Gravity * m_GravityScale) * Time::deltaTime;
-		}
-		
-		m_TimeSinceGrounded += Time::deltaTime;
+		m_Pb.SetHasJumped(m_IsPressingJump);
 	}
 
-	ClampVelocity();
-	m_Shape.left += m_Velocity.x * Time::deltaTime;
-	m_Shape.bottom += m_Velocity.y * Time::deltaTime;
-
-	level.HandleCollision(m_Shape, m_Velocity);
-}
-
-void Avatar::Jump()
-{
-	if ((m_IsPressingJump && !m_HasJumped) && m_TimeSinceGrounded <= m_CoyoteTime)
-	{
-		m_Velocity.y = m_InitialJumpVelocity;
-		m_GravityScale = 1.0f;
-		m_HasJumped = true;
-	}
+	SetAnimation();
+	SetGravityScale();
 }
 
 void Avatar::SetAnimation()
 {
-	if (m_IsGrounded)
+	if (m_Pb.GetIsGrounded())
 	{
 		if (m_MovementDirection != 0)
 		{
@@ -182,7 +151,7 @@ void Avatar::SetAnimation()
 	else
 	{
 		m_Sprite.SetAnimation("jump_up");
-		if (!m_IsPressingJump || m_Velocity.y < 0.0f)
+		if (!m_IsPressingJump || m_Pb.Velocity().y < 0.0f)
 		{
 			m_Sprite.SetAnimation("jump_down");
 		}
@@ -191,27 +160,12 @@ void Avatar::SetAnimation()
 
 void Avatar::SetGravityScale()
 {
-	if (m_IsGrounded)
+	if (m_Pb.GetIsGrounded())
 	{
-		m_GravityScale = 1.0f;
+		m_Pb.SetGravityScale(1.0f);
 	}
-	else if (m_Velocity.y <= 0.0f || !m_IsPressingJump)
+	else if (m_Pb.Velocity().y <= 0.0f || !m_IsPressingJump)
 	{
-		m_GravityScale = 4.5f;
+		m_Pb.SetGravityScale(4.0f);
 	}
-}
-
-void Avatar::ClampVelocity()
-{
-	const float currentVelocity{ sqrtf(powf(m_Velocity.x, 2) + powf(m_Velocity.y,2)) };
-	if (currentVelocity > m_MaxVelocity)
-	{
-		float velocityScale{ m_MaxVelocity / currentVelocity };
-		m_Velocity *= velocityScale;
-	}
-}
-
-void Avatar::DampVelocity()
-{
-	m_Velocity = m_Velocity / (1 + m_Damping * Time::deltaTime);
 }

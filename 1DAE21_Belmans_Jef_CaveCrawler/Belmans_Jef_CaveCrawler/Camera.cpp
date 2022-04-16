@@ -20,9 +20,7 @@ void Camera::UpdatePosition(const Rectf& target, bool shouldTrack)
 {
 	if (shouldTrack || m_DoScreenShake)
 	{
-		m_RawCameraPos = Track(target);
-		m_RawCameraPos = Clamp(m_RawCameraPos);
-
+		m_RawCameraPos = Clamp(Track(target));
 		if (m_ScreenShakeTimer <= 0.0f ) m_DoScreenShake = false;
 	}
 	

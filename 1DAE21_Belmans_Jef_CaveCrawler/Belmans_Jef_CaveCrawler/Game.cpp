@@ -109,7 +109,7 @@ void Game::UpdateFrameStats()
 	m_Frames++;
 	m_FrameTime += Time::deltaTime + m_FrameDelay / 1000.0f;
 
-	if (m_FrameTime > 1.0f) // Every second
+	if (m_FrameTime >= 1.0f) // Every second
 	{
 		m_FrameRate = float(m_Frames) * 0.5f + m_FrameRate * 0.5f; // Stabilize reading
 		m_Frames = 0;

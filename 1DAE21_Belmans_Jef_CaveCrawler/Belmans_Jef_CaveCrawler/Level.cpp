@@ -33,13 +33,13 @@ bool Level::IsOnGround(const Rectf& actorShape) const
 {
 	utils::HitInfo hitInfo;
 
-	Point2f startPosLeft { actorShape.left + 1, actorShape.bottom + actorShape.height / 2.0f };
+	Point2f startPosLeft { actorShape.left + 1, actorShape.bottom + actorShape.height / 3.0f };
 	Point2f endPosLeft { startPosLeft.x, actorShape.bottom };
 
-	Point2f startPosMid { actorShape.left + actorShape.width / 2.0f, actorShape.bottom + actorShape.height / 2.0f };
+	Point2f startPosMid { actorShape.left + actorShape.width / 2.0f, actorShape.bottom + actorShape.height / 3.0f };
 	Point2f endPosMid { startPosMid.x, actorShape.bottom };
 
-	Point2f startPosRight { actorShape.left + actorShape.width - 1, actorShape.bottom + actorShape.height / 2.0f };
+	Point2f startPosRight { actorShape.left + actorShape.width - 1, actorShape.bottom + actorShape.height / 3.0f };
 	Point2f endPosRight { startPosRight.x, actorShape.bottom };
 
 	bool isGrounded{false};

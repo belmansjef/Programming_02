@@ -22,6 +22,9 @@
     <Filter Include="Game Files\Weapon">
       <UniqueIdentifier>{6c576d47-b7f0-43f5-a92e-2cf179a24a50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Level\Hazards">
+      <UniqueIdentifier>{99f57c44-d709-49cf-a191-1ebd98c6931e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -63,12 +66,6 @@
     <ClCompile Include="Level.cpp">
       <Filter>Game Files\Level</Filter>
     </ClCompile>
-    <ClCompile Include="DamageBlockManager.cpp">
-      <Filter>Game Files\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageBlock.cpp">
-      <Filter>Game Files\Level</Filter>
-    </ClCompile>
     <ClCompile Include="CollectibleManager.cpp">
       <Filter>Game Files\Level</Filter>
     </ClCompile>
@@ -105,11 +102,20 @@
     <ClCompile Include="ProjectileManager.cpp">
       <Filter>Game Files\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="DamageBlock.cpp">
+      <Filter>Game Files\Level\Hazards</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageBlockManager.cpp">
+      <Filter>Game Files\Level\Hazards</Filter>
+    </ClCompile>
     <ClCompile Include="RisingHand.cpp">
-      <Filter>Game Files\Level</Filter>
+      <Filter>Game Files\Level\Hazards</Filter>
     </ClCompile>
     <ClCompile Include="RisingHandManager.cpp">
-      <Filter>Game Files\Level</Filter>
+      <Filter>Game Files\Level\Hazards</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsBody.cpp">
+      <Filter>Game Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,12 +158,6 @@
     <ClInclude Include="Level.h">
       <Filter>Game Files\Level</Filter>
     </ClInclude>
-    <ClInclude Include="DamageBlockManager.h">
-      <Filter>Game Files\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageBlock.h">
-      <Filter>Game Files\Level</Filter>
-    </ClInclude>
     <ClInclude Include="CollectibleManager.h">
       <Filter>Game Files\Level</Filter>
     </ClInclude>
@@ -191,11 +191,20 @@
     <ClInclude Include="ProjectileManager.h">
       <Filter>Game Files\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="DamageBlock.h">
+      <Filter>Game Files\Level\Hazards</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageBlockManager.h">
+      <Filter>Game Files\Level\Hazards</Filter>
+    </ClInclude>
     <ClInclude Include="RisingHand.h">
-      <Filter>Game Files\Level</Filter>
+      <Filter>Game Files\Level\Hazards</Filter>
     </ClInclude>
     <ClInclude Include="RisingHandManager.h">
-      <Filter>Game Files\Level</Filter>
+      <Filter>Game Files\Level\Hazards</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsBody.h">
+      <Filter>Game Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

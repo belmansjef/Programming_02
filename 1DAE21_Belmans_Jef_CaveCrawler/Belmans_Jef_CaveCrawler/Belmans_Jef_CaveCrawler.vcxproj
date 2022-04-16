@@ -159,6 +159,7 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Collectible.cpp" />
     <ClCompile Include="CollectibleManager.cpp" />
+    <ClCompile Include="PhysicsBody.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="RisingHand.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Collectible.h" />
     <ClInclude Include="CollectibleManager.h" />
+    <ClInclude Include="PhysicsBody.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="RisingHand.h" />
