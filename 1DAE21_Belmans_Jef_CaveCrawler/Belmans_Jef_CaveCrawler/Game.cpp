@@ -26,7 +26,11 @@ void Game::Initialize( )
 	m_CameraZoneManager.AddItem(0.0f, 18.0f * 8.0f, 73.0f * 8.0f, 18.0f * 8.0f);
 
 	// Load risinghands
-	m_RisingHandManager.AddItem(Point2f(128.0f, 24.0f), 3);
+	m_RisingHandManager.AddItem(Point2f(192.0f, 24.0f), 3);
+
+	// Load crabs
+	m_CrabEnemyManager.AddItem(Point2f(128.0f, 256.0f), 1, 2);
+	m_CrabEnemyManager.AddItem(Point2f(64.0f, 24.0f), 1, 2);
 }
 
 void Game::Cleanup( )
@@ -50,6 +54,7 @@ void Game::Update( float elapsedSec )
 
 	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera);
 	m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+	m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
 
 	if (m_PlayerAvatar.GetIsDead())
 	{
@@ -70,6 +75,7 @@ void Game::Draw( ) const
 		m_PlayerAvatar.Draw();
 		m_DamageBlockManager.Draw();
 		m_RisingHandManager.Draw();
+		m_CrabEnemyManager.Draw();
 	glPopMatrix();
 }
 
@@ -128,6 +134,7 @@ void Game::UpdateFrameStats()
 void Game::ResetLevel()
 {
 	m_RisingHandManager.Reset();
+	m_CrabEnemyManager.Reset();
 	m_PlayerAvatar.Reset();
 
 	std::cout << "Reset level!" << std::endl;

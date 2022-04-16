@@ -16,20 +16,29 @@
     <Filter Include="Game Files\Level">
       <UniqueIdentifier>{010e1ae5-9b6e-4a7d-b73b-0b120193ed7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Files\Player">
-      <UniqueIdentifier>{f300367e-c50c-4d10-8a4d-22deb4c93ee0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Files\Weapon">
-      <UniqueIdentifier>{6c576d47-b7f0-43f5-a92e-2cf179a24a50}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game Files\Level\Hazards">
       <UniqueIdentifier>{99f57c44-d709-49cf-a191-1ebd98c6931e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Game">
+      <UniqueIdentifier>{e6b35a8c-8d6c-4d7e-9085-31b873aaf3ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Charachters">
+      <UniqueIdentifier>{3a4a5416-dfbe-42df-bf2e-880e3435b55a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Charachters\Player">
+      <UniqueIdentifier>{f300367e-c50c-4d10-8a4d-22deb4c93ee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Charachters\Player\Weapon">
+      <UniqueIdentifier>{6c576d47-b7f0-43f5-a92e-2cf179a24a50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Charachters\Common">
+      <UniqueIdentifier>{352149e5-ac76-4376-a361-a2949c963cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Charachters\Enemies">
+      <UniqueIdentifier>{335e2d4d-ec59-4dac-84e8-0773b20d496f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core.cpp">
       <Filter>Framework Files</Filter>
     </ClCompile>
@@ -72,35 +81,23 @@
     <ClCompile Include="Collectible.cpp">
       <Filter>Game Files\Level</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Game Files\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Health.cpp">
-      <Filter>Game Files\Player</Filter>
-    </ClCompile>
     <ClCompile Include="CameraZoneManager.cpp">
-      <Filter>Game Files\Player</Filter>
+      <Filter>Game Files\Charachters\Player</Filter>
     </ClCompile>
     <ClCompile Include="CameraZone.cpp">
-      <Filter>Game Files\Player</Filter>
+      <Filter>Game Files\Charachters\Player</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Game Files\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Avatar.cpp">
-      <Filter>Game Files\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Game Files</Filter>
+      <Filter>Game Files\Charachters\Player</Filter>
     </ClCompile>
     <ClCompile Include="Gun.cpp">
-      <Filter>Game Files\Weapon</Filter>
+      <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
-      <Filter>Game Files\Weapon</Filter>
+      <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="ProjectileManager.cpp">
-      <Filter>Game Files\Weapon</Filter>
+      <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="DamageBlock.cpp">
       <Filter>Game Files\Level\Hazards</Filter>
@@ -114,8 +111,29 @@
     <ClCompile Include="RisingHandManager.cpp">
       <Filter>Game Files\Level\Hazards</Filter>
     </ClCompile>
+    <ClCompile Include="Avatar.cpp">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClCompile>
     <ClCompile Include="PhysicsBody.cpp">
-      <Filter>Game Files</Filter>
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Game Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CrabEnemy.cpp">
+      <Filter>Game Files\Charachters\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="CrabEnemyManager.cpp">
+      <Filter>Game Files\Charachters\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,9 +167,6 @@
     <ClInclude Include="Vector2f.h">
       <Filter>Framework Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game Files</Filter>
-    </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Framework Files</Filter>
     </ClInclude>
@@ -164,32 +179,23 @@
     <ClInclude Include="Collectible.h">
       <Filter>Game Files\Level</Filter>
     </ClInclude>
-    <ClInclude Include="Health.h">
-      <Filter>Game Files\Player</Filter>
-    </ClInclude>
     <ClInclude Include="CameraZoneManager.h">
-      <Filter>Game Files\Player</Filter>
+      <Filter>Game Files\Charachters\Player</Filter>
     </ClInclude>
     <ClInclude Include="CameraZone.h">
-      <Filter>Game Files\Player</Filter>
+      <Filter>Game Files\Charachters\Player</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Game Files\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Avatar.h">
-      <Filter>Game Files\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Game Files\Player</Filter>
+      <Filter>Game Files\Charachters\Player</Filter>
     </ClInclude>
     <ClInclude Include="Gun.h">
-      <Filter>Game Files\Weapon</Filter>
+      <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
-      <Filter>Game Files\Weapon</Filter>
+      <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="ProjectileManager.h">
-      <Filter>Game Files\Weapon</Filter>
+      <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="DamageBlock.h">
       <Filter>Game Files\Level\Hazards</Filter>
@@ -203,8 +209,26 @@
     <ClInclude Include="RisingHandManager.h">
       <Filter>Game Files\Level\Hazards</Filter>
     </ClInclude>
+    <ClInclude Include="Avatar.h">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClInclude>
     <ClInclude Include="PhysicsBody.h">
-      <Filter>Game Files</Filter>
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CrabEnemy.h">
+      <Filter>Game Files\Charachters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="CrabEnemyManager.h">
+      <Filter>Game Files\Charachters\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

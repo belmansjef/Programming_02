@@ -17,14 +17,14 @@ ProjectileManager& Gun::GetProjectileManager()
 	return m_ProjectileManager;
 }
 
-void Gun::Shoot(const Rectf& actorShape, int horScale)
+void Gun::Shoot(const Point2f& actorPos, int horScale)
 {
 	if (m_LastShotTime + m_FireRate <= Time::time)
 	{
-		const Vector2f shotVelocity{ horScale > 0 ? m_ShotSpeed : -m_ShotSpeed, 0.0f };
-		const Point2f relShootPos{ horScale > 0 ? m_ShootPos.x + actorShape.left : actorShape.left - 4.0f, m_ShootPos.y + actorShape.bottom };
+		const Vector2f projectileVelocity{ horScale > 0 ? m_ShotSpeed : -m_ShotSpeed, 0.0f };
+		const Point2f relShootPos{ horScale > 0 ? m_ShootPos.x + actorPos.x : actorPos.x - 8.0f, m_ShootPos.y + actorPos.y };
 		
-		m_ProjectileManager.InstanciateProjectile(shotVelocity, relShootPos);
+		m_ProjectileManager.InstanciateProjectile(projectileVelocity, relShootPos);
 		m_LastShotTime = Time::time;
 	}
 }

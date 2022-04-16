@@ -69,5 +69,12 @@ struct Ellipsef
 	float radiusY;
 };
 
+struct Rayf
+{
+	Rayf();
+	explicit Rayf(const Point2f& start, const Point2f& end);
+	explicit Rayf(float startX, float startY, float endX, float endY);
 
-
+	Point2f start;
+	Point2f end;
+};

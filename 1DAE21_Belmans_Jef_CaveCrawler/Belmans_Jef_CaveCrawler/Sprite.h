@@ -27,6 +27,7 @@ struct Animation
 enum class SpriteType
 {
 	player,
+	crabEnemy,
 	damageBlock,
 	risingHand
 };
@@ -44,8 +45,8 @@ public:
 	float GetFrameWidth() const;
 	float GetFrameHeight() const;
 
-	void Draw() const;
 	void Update();
+	void Draw() const;
 	void SetAnimation(const std::string animName);
 
 private:

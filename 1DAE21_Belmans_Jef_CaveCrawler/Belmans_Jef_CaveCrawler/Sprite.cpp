@@ -101,7 +101,15 @@ void Sprite::SetSprite()
 		m_pAnimations.push_back(new Animation("run", 4, 10, 1, 4, 1, 0));
 		m_pAnimations.push_back(new Animation("jump_up", 1, 10, 1, 1, 0, 4));
 		m_pAnimations.push_back(new Animation("jump_down", 1, 10, 1, 1, 1, 4));
-		m_pCurrentAnimation = m_pAnimations[0]; // Set current animation to idle
+		break;
+	case SpriteType::crabEnemy:
+		m_pTexture = new Texture{ "Resources/Images/Sprite_Crab.png" };
+		m_SheetWidth = m_pTexture->GetWidth();
+		m_SheetHeight = m_pTexture->GetHeight();
+		m_FrameWidth = m_SheetWidth / 3.0f;
+		m_FrameHeight = m_SheetHeight;
+
+		m_pAnimations.push_back(new Animation("walk", 3, 6, 1, 3, 0, 0));
 		break;
 	case SpriteType::damageBlock:
 		m_pTexture = new Texture{ "Resources/Images/Sprite_Damageblock.png" };
@@ -111,7 +119,6 @@ void Sprite::SetSprite()
 		m_FrameHeight = 8.0f;
 
 		m_pAnimations.push_back(new Animation("shine", 9, 15, 3, 4, 0, 0, true)); 
-		m_pCurrentAnimation = m_pAnimations[0]; // Set current animation to shine
 	break;
 	case SpriteType::risingHand:
 		m_pTexture = new Texture{ "Resources/Images/Sprite_RisingHand.png" };
@@ -123,7 +130,6 @@ void Sprite::SetSprite()
 		m_pAnimations.push_back(new Animation("idle", 1, 2, 1, 1, 0, 0));
 		m_pAnimations.push_back(new Animation("extended", 1, 2, 1, 1, 0, 1));
 		m_pAnimations.push_back(new Animation("grabbing", 1, 60, 1, 1, 0, 2));
-		m_pCurrentAnimation = m_pAnimations[0];
 		break;
 	default:
 		break;
@@ -131,6 +137,7 @@ void Sprite::SetSprite()
 
 	m_FrameAccuSec = 0.0f;
 	m_CurrentFrame = 0;
+	m_pCurrentAnimation = m_pAnimations[0];
 
 	m_TextureClip = Rectf
 	{

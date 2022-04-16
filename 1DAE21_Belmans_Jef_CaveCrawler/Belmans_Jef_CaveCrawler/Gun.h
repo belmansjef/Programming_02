@@ -15,7 +15,7 @@ public:
 
 	ProjectileManager& GetProjectileManager();
 
-	void Shoot(const Rectf& actorShape, int horScale);
+	void Shoot(const Point2f& actorPos, int horScale);
 
 	void Update(const std::vector<std::vector<Point2f>>& levelVerts);
 	void Draw() const;

@@ -95,3 +95,23 @@ Ellipsef::Ellipsef( float centerX, float centerY, float radiusX, float radiusY )
 	: Ellipsef{ Point2f{ centerX, centerY }, radiusX, radiusY }
 {
 }
+
+//-----------------------------------------------------------------
+// Rayf Constructors
+//-----------------------------------------------------------------
+Rayf::Rayf()
+	: Rayf{ 0.0f, 0.0f, 0.0f, 0.0f }
+{
+
+}
+
+Rayf::Rayf(const Point2f& start, const Point2f& end)
+	: start { start }
+	, end { end }
+{
+}
+
+Rayf::Rayf(float startX, float startY, float endX, float endY)
+	: Rayf { Point2f(startX, startY), Point2f(endX, endY) }
+{
+}

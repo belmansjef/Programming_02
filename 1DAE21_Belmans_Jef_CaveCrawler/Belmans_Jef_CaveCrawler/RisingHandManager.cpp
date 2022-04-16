@@ -26,7 +26,7 @@ void RisingHandManager::Update(const Rectf& actorShape, Health& actorHealth, Cam
 		hand->Update(actorShape);
 	}
 
-	CollisionCheck(actorShape, actorHealth, cam);
+	PlayerOverlapCheck(actorShape, actorHealth, cam);
 	ProjectileCollisionCheck(pProjectiles);
 }
 
@@ -47,7 +47,7 @@ void RisingHandManager::Reset()
 	}
 }
 
-void RisingHandManager::CollisionCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam)
+void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam)
 {
 	for (RisingHand* hand : m_pItems)
 	{

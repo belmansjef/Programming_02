@@ -26,6 +26,6 @@ public:
 private:
 	std::vector<RisingHand*> m_pItems;
 
-	void CollisionCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam);
+	void PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam);
 	void ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles);
 };

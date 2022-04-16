@@ -535,6 +535,11 @@ bool utils::Raycast( const std::vector<Point2f>& vertices, const Point2f& rayP1,
 	return Raycast( vertices.data( ), vertices.size( ), rayP1, rayP2, hitInfo );
 }
 
+bool utils::Raycast(const std::vector<Point2f>& vertices, const Rayf& ray, HitInfo& hitInfo)
+{
+	return Raycast(vertices.data(), vertices.size(), ray.start, ray.end, hitInfo);
+}
+
 bool utils::Raycast( const Point2f* vertices, const size_t nrVertices, const Point2f& rayP1, const Point2f& rayP2, HitInfo& hitInfo )
 {
 	if ( nrVertices == 0 )
