@@ -3,6 +3,7 @@
 #include "structs.h"
 #include "Collectible.h"
 
+class Health;
 class CollectibleManager final
 {
 public:
@@ -13,14 +14,16 @@ public:
 	CollectibleManager(CollectibleManager&&) = delete;
 	CollectibleManager& operator=(CollectibleManager&&) = delete;
 
-	Collectible* AddItem( const Point2f &bottomL, Collectible::Type type );
-	void Draw( ) const;
+	Collectible* AddItem(const Point2f& bottomLeft, Collectible::CollectibleType type);
 
-	size_t Size( ) const;
-	bool HitItem( const Rectf& rect ) ;
+	void Update(const Rectf& actorShape, Health& actorHealth);
+	void Draw() const;
+	void Reset();
 
 private:
 	std::vector<Collectible*> m_pItems;
+	int m_NrPointsCollected{ 0 };
 
-	void DeleteCollectible(const Collectible* powerup) const;
+	bool HitItem(const Rectf& rect, Health& actorHealth);
+	void DeleteCollectible(const Collectible* collectible) const;
 };

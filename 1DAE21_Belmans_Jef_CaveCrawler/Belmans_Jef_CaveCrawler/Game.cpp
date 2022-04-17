@@ -16,6 +16,29 @@ Game::~Game( )
 
 void Game::Initialize( )
 {
+	// Load collectibles
+	m_CollectibleManager.AddItem(Point2f(192.0f, 42.0f), Collectible::CollectibleType::points);
+	m_CollectibleManager.AddItem(Point2f(192.0f, 50.0f), Collectible::CollectibleType::points);
+
+	m_CollectibleManager.AddItem(Point2f(444.0f, 42.0f), Collectible::CollectibleType::points);
+	m_CollectibleManager.AddItem(Point2f(444.0f, 50.0f), Collectible::CollectibleType::points);
+
+	m_CollectibleManager.AddItem(Point2f(672.0f, 88.0f), Collectible::CollectibleType::points);
+	m_CollectibleManager.AddItem(Point2f(672.0f, 96.0f), Collectible::CollectibleType::points);
+
+	m_CollectibleManager.AddItem(Point2f(752.0f, 80.0f), Collectible::CollectibleType::points);
+	m_CollectibleManager.AddItem(Point2f(752.0f, 88.0f), Collectible::CollectibleType::points);
+
+	m_CollectibleManager.AddItem(Point2f(256.0f, 200.0f), Collectible::CollectibleType::points);
+	m_CollectibleManager.AddItem(Point2f(272.0f, 200.0f), Collectible::CollectibleType::points);
+	m_CollectibleManager.AddItem(Point2f(288.0f, 200.0f), Collectible::CollectibleType::points);
+	m_CollectibleManager.AddItem(Point2f(304.0f, 200.0f), Collectible::CollectibleType::points);
+
+	m_CollectibleManager.AddItem(Point2f(452.0f, 172.0f), Collectible::CollectibleType::points);
+	m_CollectibleManager.AddItem(Point2f(452.0f, 180.0f), Collectible::CollectibleType::points);
+
+	m_CollectibleManager.AddItem(Point2f(148.0f, 216.0f), Collectible::CollectibleType::health);
+
 	// Load damagablocks
 	m_DamageBlockManager.AddItemsFromSvgFile("Resources/Images/Level_1_Spikes.svg");
 
@@ -30,7 +53,7 @@ void Game::Initialize( )
 
 	// Load crabs
 	m_CrabEnemyManager.AddItem(Point2f(64.0f, 24.0f), 1, 3);
-	m_CrabEnemyManager.AddItem(Point2f(128.0f, 256.0f), 1, 3);
+	m_CrabEnemyManager.AddItem(Point2f(128.0f, 208.0f), 1, 3);
 }
 
 void Game::Cleanup( )
@@ -52,10 +75,11 @@ void Game::Update( float elapsedSec )
 	m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
 	m_Camera.SetLevelBoundaries(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
 
+	// Managers
 	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera);
 	m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
 	m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-
+	m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 
 	if (m_PlayerAvatar.GetIsDead())
@@ -75,16 +99,23 @@ void Game::Draw( ) const
 		m_Camera.Transform();
 		m_Level.DrawBackground();
 		m_PlayerAvatar.Draw();
+
+		// Managers
 		m_DamageBlockManager.Draw();
 		m_RisingHandManager.Draw();
 		m_CrabEnemyManager.Draw();
+		m_CollectibleManager.Draw();
 		m_Lava.Draw();
 	glPopMatrix();
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 {
-	
+	if (e.keysym.scancode == SDL_SCANCODE_I)
+	{
+		std::cout << "Player position: [" << m_PlayerAvatar.GetShape().left
+			<< ", " << m_PlayerAvatar.GetShape().bottom << "]\r\n";
+	}
 }
 
 void Game::ProcessKeyUpEvent( const SDL_KeyboardEvent& e )
@@ -139,6 +170,5 @@ void Game::ResetLevel()
 	m_RisingHandManager.Reset();
 	m_CrabEnemyManager.Reset();
 	m_PlayerAvatar.Reset();
-
-	std::cout << "Reset level!" << std::endl;
+	m_CollectibleManager.Reset();
 }

@@ -13,7 +13,6 @@ void Lava::Update(const Rectf& actorShape, Health& actorHealth)
 	if(PlayerOverlapCheck(actorShape))
 	{
 		actorHealth.TakeDamage(10);
-		std::cout << "Lava hit!" << std::endl;
 	}
 }
 

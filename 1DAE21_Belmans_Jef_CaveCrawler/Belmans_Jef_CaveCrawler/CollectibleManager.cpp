@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "CollectibleManager.h"
 #include "Collectible.h"
+#include "Health.h"
 
 CollectibleManager::~CollectibleManager()
 {
@@ -11,46 +12,67 @@ CollectibleManager::~CollectibleManager()
 	}
 }
 
-Collectible* CollectibleManager::AddItem(const Point2f& center, Collectible::Type type)
+Collectible* CollectibleManager::AddItem(const Point2f& bottomLeft, Collectible::CollectibleType type)
 {
-	m_pItems.push_back(new Collectible(center, type));
+	m_pItems.push_back(new Collectible(bottomLeft, type));
 	return m_pItems.back();
+}
+
+void CollectibleManager::Update(const Rectf& actorShape, Health& actorHealth)
+{
+	HitItem(actorShape, actorHealth);
 }
 
 void CollectibleManager::Draw() const
 {
 	for (Collectible* collectible : m_pItems)
 	{
+		if (collectible->GetIsPickedUp()) continue;
 		collectible->Draw();
 	}
 }
 
-size_t CollectibleManager::Size() const
+void CollectibleManager::Reset()
 {
-	return m_pItems.size();
+	for (Collectible* collectible : m_pItems)
+	{
+		collectible->SetIsPickedUp(false);
+	}
+
+	m_NrPointsCollected = 0;
 }
 
-bool CollectibleManager::HitItem(const Rectf& rect)
+bool CollectibleManager::HitItem(const Rectf& rect, Health& actorHealth)
 {
-	for (int i = 0; i < m_pItems.size(); i++)
+	for (Collectible* collectible : m_pItems)
 	{
-		if (m_pItems[i]->IsOverlapping(rect))
-		{
-			DeleteCollectible(m_pItems[i]);
+		if (collectible->GetIsPickedUp()) continue;
 
-			Collectible* temp = m_pItems.back();
-			m_pItems[i] = temp;
-			m_pItems.pop_back();
-			
+		if (collectible->IsOverlapping(rect))
+		{
+			collectible->SetIsPickedUp(true);
+
+			switch (collectible->GetType())
+			{
+			case Collectible::CollectibleType::points:
+				m_NrPointsCollected++;
+				break;
+			case Collectible::CollectibleType::health:
+				actorHealth.Heal(1);
+				break;
+			default:
+				break;
+			}
+
 			return true;
 		}
 	}
-
+	
 	return false;
 }
 
-void CollectibleManager::DeleteCollectible(const Collectible* powerup) const
+void CollectibleManager::DeleteCollectible(const Collectible* collectible) const
 {
-	delete powerup;
-	powerup = nullptr;
+	delete collectible;
+	collectible = nullptr;
 }
