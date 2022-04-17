@@ -23,7 +23,7 @@ public:
 
 	void Reset();
 
-	void CollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts);
+	void LevelCollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts);
 
 private:
 	std::vector<Projectile*> m_pItems;

@@ -23,6 +23,7 @@ void RisingHandManager::Update(const Rectf& actorShape, Health& actorHealth, Cam
 {
 	for (RisingHand* hand : m_pItems)
 	{
+		if (hand->IsDead()) continue;
 		hand->Update(actorShape);
 	}
 
@@ -34,7 +35,7 @@ void RisingHandManager::Draw() const
 {
 	for (RisingHand* hand : m_pItems)
 	{
-		if (hand->GetHealth().GetIsDead()) continue;
+		if (hand->IsDead()) continue;
 		hand->Draw();
 	}
 }
@@ -51,7 +52,7 @@ void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape, Health& acto
 {
 	for (RisingHand* hand : m_pItems)
 	{
-		if (hand->IsOverlapping(actorShape) && actorHealth.ShouldHit() && !hand->GetHealth().GetIsDead())
+		if (hand->IsOverlapping(actorShape) && actorHealth.ShouldHit() && !hand->IsDead())
 		{
 			cam.DoScreenShake();
 			actorHealth.TakeDamage(1);
@@ -63,15 +64,14 @@ void RisingHandManager::ProjectileCollisionCheck(std::vector<Projectile*> pProje
 {
 	for (Projectile* proj : pProjectiles)
 	{
-		if (proj->IsInstanciated())
+		if (!proj->IsInstanciated()) continue;
+
+		for (RisingHand* hand : m_pItems)
 		{
-			for (RisingHand* hand : m_pItems)
-			{
-				if (proj->HitCheck(hand->GetBoxCollider()))
-				{
-					hand->GetHealth().TakeDamage(1);
-				}
-			}
+			if (!proj->IsInstanciated()) break;
+			if (hand->IsDead()) continue;
+
+			if (proj->HitCheck(hand->GetBoxCollider())) hand->TakeDamage(1);
 		}
 	}
 }

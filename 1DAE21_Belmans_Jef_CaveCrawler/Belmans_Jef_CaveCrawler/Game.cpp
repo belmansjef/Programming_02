@@ -29,8 +29,8 @@ void Game::Initialize( )
 	m_RisingHandManager.AddItem(Point2f(192.0f, 24.0f), 3);
 
 	// Load crabs
-	m_CrabEnemyManager.AddItem(Point2f(128.0f, 256.0f), 1, 2);
-	m_CrabEnemyManager.AddItem(Point2f(64.0f, 24.0f), 1, 2);
+	m_CrabEnemyManager.AddItem(Point2f(64.0f, 24.0f), 1, 3);
+	m_CrabEnemyManager.AddItem(Point2f(128.0f, 256.0f), 1, 3);
 }
 
 void Game::Cleanup( )
@@ -56,6 +56,8 @@ void Game::Update( float elapsedSec )
 	m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
 	m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
 
+	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+
 	if (m_PlayerAvatar.GetIsDead())
 	{
 		ResetLevel();
@@ -76,6 +78,7 @@ void Game::Draw( ) const
 		m_DamageBlockManager.Draw();
 		m_RisingHandManager.Draw();
 		m_CrabEnemyManager.Draw();
+		m_Lava.Draw();
 	glPopMatrix();
 }
 

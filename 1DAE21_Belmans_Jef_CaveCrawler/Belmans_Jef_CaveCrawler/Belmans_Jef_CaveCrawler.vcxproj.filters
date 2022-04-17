@@ -135,6 +135,9 @@
     <ClCompile Include="CrabEnemyManager.cpp">
       <Filter>Game Files\Charachters\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Lava.cpp">
+      <Filter>Game Files\Level\Hazards</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="CrabEnemyManager.h">
       <Filter>Game Files\Charachters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Lava.h">
+      <Filter>Game Files\Level\Hazards</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

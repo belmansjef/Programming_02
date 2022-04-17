@@ -46,7 +46,7 @@ void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVer
 		}
 	}
 	
-	CollisionCheck(levelVerts);
+	LevelCollisionCheck(levelVerts);
 }
 
 void ProjectileManager::Draw() const
@@ -68,11 +68,12 @@ void ProjectileManager::Reset()
 	}
 }
 
-void ProjectileManager::CollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts)
+void ProjectileManager::LevelCollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts)
 {
 	for (Projectile* proj : m_pItems) 
 	{
 		if (!proj->IsInstanciated()) continue;
+
 		for (std::vector<Point2f> verts : levelVerts)
 		{
 			proj->HitCheck(verts);

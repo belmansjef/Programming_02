@@ -8,18 +8,11 @@ Projectile::Projectile()
 {
 }
 
-Projectile::Projectile(Vector2f velocity, Rectf rectGraphic)
+Projectile::Projectile(const Vector2f& velocity, const Rectf& rectGraphic)
 	: m_IsInstanciated{ false }
 	, m_Velocity { velocity }
 	, m_RectGraphic { rectGraphic }
 {
-	m_CircleCollider = Circlef
-	(
-		(m_RectGraphic.left + m_RectGraphic.width) - m_RectGraphic.height / 2.0f,
-		m_RectGraphic.bottom + (m_RectGraphic.height / 2.0f),
-		m_RectGraphic.height / 2.0f
-	);
-
 	m_Angle = atan2f(m_Velocity.y, m_Velocity.x);
 }
 
@@ -32,12 +25,6 @@ void Projectile::Instanciate(const Vector2f& velocity, const Point2f& bottomLeft
 		bottomLeft.y,
 		6.0f,
 		2.0f
-	);
-	m_CircleCollider = Circlef
-	(
-		(m_RectGraphic.left + m_RectGraphic.width) - m_RectGraphic.height / 2.0f,
-		m_RectGraphic.bottom + (m_RectGraphic.height / 2.0f),
-		m_RectGraphic.height / 2.0f
 	);
 
 	m_IsInstanciated = true;
@@ -84,9 +71,10 @@ bool Projectile::HitCheck(const std::vector<Point2f>& verts)
 
 bool Projectile::HitCheck(const Rectf& rect)
 {
-	utils::IsOverlapping(rect, m_RectGraphic)
-		? m_IsInstanciated = false
-		: m_IsInstanciated = true;
+	if (utils::IsOverlapping(rect, m_RectGraphic))
+	{
+		m_IsInstanciated = false;
+	}
 
 	return !m_IsInstanciated;
 }

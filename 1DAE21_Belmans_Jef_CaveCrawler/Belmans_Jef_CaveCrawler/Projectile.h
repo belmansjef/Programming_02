@@ -7,7 +7,7 @@ class Projectile final
 public:
 	Projectile();
 	~Projectile() = default;
-	Projectile(Vector2f velocity, Rectf rectGraphic);
+	Projectile(const Vector2f& velocity, const Rectf& rectGraphic);
 	Projectile(const Projectile& other) = delete;
 	Projectile& operator=(const Projectile& other) = delete;
 	Projectile(Projectile&& other) = delete;
@@ -24,12 +24,11 @@ public:
 	bool HitCheck(const std::vector<Point2f>& verts);
 	bool HitCheck(const Rectf& rect);
 private:
-	bool m_IsInstanciated{};
+	bool m_IsInstanciated;
 
-	Rectf m_RectGraphic{};
-	Circlef m_CircleCollider{};
+	Rectf m_RectGraphic;
 	
-	Vector2f m_Velocity{};
-	float m_Angle{};
+	Vector2f m_Velocity;
+	float m_Angle;
 };
 

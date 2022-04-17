@@ -61,17 +61,16 @@ void CrabEnemyManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actor
 
 void CrabEnemyManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles)
 {
-	for (Projectile* proj : pProjectiles)
+	for (Projectile* projectile : pProjectiles)
 	{
-		if (proj->IsInstanciated())
+		if (!projectile->IsInstanciated()) continue;
+
+		for (CrabEnemy* crab : m_pItems)
 		{
-			for (CrabEnemy* crab : m_pItems)
-			{
-				if (proj->HitCheck(crab->GetBoxCollider()))
-				{
-					crab->TakeDamage(1);
-				}
-			}
+			if (!projectile->IsInstanciated()) break;
+			if (crab->IsDead()) continue;
+
+			if (projectile->HitCheck(crab->GetBoxCollider())) crab->TakeDamage(1);
 		}
 	}
 }
