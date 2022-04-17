@@ -48,7 +48,7 @@ void RisingHandManager::Reset()
 	}
 }
 
-void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam)
+void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam) const
 {
 	for (RisingHand* hand : m_pItems)
 	{
@@ -60,7 +60,7 @@ void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape, Health& acto
 	}
 }
 
-void RisingHandManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles)
+void RisingHandManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles) const
 {
 	for (Projectile* proj : pProjectiles)
 	{

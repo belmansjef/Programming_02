@@ -12,12 +12,17 @@ public:
 
 	explicit Collectible(const Point2f& leftBottom, Collectible::Type type );
 	~Collectible();
+	Collectible(const Collectible&) = delete;
+	Collectible& operator=(const Collectible&) = delete;
+	Collectible(Collectible&&) = delete;
+	Collectible& operator=(Collectible&&) = delete;
 
 	void Draw( ) const;
-	bool IsOverlapping(const Rectf& rect ) const;
+	bool IsOverlapping(const Rectf& actorShape) const;
 
 private:
 	const Type m_Type;
-	Rectf m_Shape;
 	const Texture* m_pTexture;
+
+	Rectf m_Shape;
 };

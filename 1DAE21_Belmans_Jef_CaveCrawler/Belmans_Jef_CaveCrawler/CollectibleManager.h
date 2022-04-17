@@ -22,5 +22,5 @@ public:
 private:
 	std::vector<Collectible*> m_pItems;
 
-	void DeletePowerUp(const Collectible* powerup) const;
+	void DeleteCollectible(const Collectible* powerup) const;
 };

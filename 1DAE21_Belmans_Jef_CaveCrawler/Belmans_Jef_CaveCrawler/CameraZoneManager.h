@@ -1,6 +1,6 @@
 #pragma once
-#include "pch.h"
 #include <vector>
+#include "structs.h"
 
 class CameraZone;
 class CameraZoneManager final

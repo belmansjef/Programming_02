@@ -1,5 +1,6 @@
 #include "DamageBlock.h"
 #include "utils.h"
+#include "pch.h"
 
 DamageBlock::DamageBlock(float left, float bottom)
 	: m_Sprite{ Sprite(SpriteType::damageBlock) }
@@ -7,11 +8,7 @@ DamageBlock::DamageBlock(float left, float bottom)
 {
 }
 
-DamageBlock::~DamageBlock()
-{
-}
-
-bool DamageBlock::IsOverlapping(const Rectf& rect)
+bool DamageBlock::IsOverlapping(const Rectf& rect) const
 {
 	return utils::IsOverlapping(m_Shape, rect);
 }

@@ -1,6 +1,6 @@
-#include "pch.h"
 #include "Camera.h"
-#include "Game.h"
+#include "pch.h"
+#include "utils.h"
 
 Camera::Camera(float width, float height)
 	: m_Width { width }

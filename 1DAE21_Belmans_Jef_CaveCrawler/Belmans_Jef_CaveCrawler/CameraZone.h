@@ -1,5 +1,5 @@
 #pragma once
-#include "pch.h"
+#include "structs.h"
 
 class CameraZone final
 {

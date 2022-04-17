@@ -25,7 +25,6 @@ public:
 	bool HitCheck(const Rectf& rect);
 private:
 	bool m_IsInstanciated;
-
 	Rectf m_RectGraphic;
 	
 	Vector2f m_Velocity;

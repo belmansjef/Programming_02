@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "pch.h"
+#include "structs.h"
 
 class Projectile;
 class RisingHand;
@@ -26,6 +26,6 @@ public:
 private:
 	std::vector<RisingHand*> m_pItems;
 
-	void PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam);
-	void ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles);
+	void PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam) const;
+	void ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles) const;
 };

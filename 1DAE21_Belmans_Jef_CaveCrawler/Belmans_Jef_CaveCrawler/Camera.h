@@ -1,10 +1,15 @@
 #pragma once
-#include "utils.h"
+#include "structs.h"
 
-class Camera
+class Camera final
 {
 public:
 	Camera(float width, float height);
+	~Camera() = default;
+	Camera(const Camera& other) = delete;
+	Camera& operator=(const Camera& other) = delete;
+	Camera(Camera&& other) = delete;
+	Camera& operator=(Camera&& other) = delete;
 	
 	void SetLevelBoundaries(const Rectf& levelBoundaries);
 	void UpdatePosition(const Rectf& target, bool shouldTrack);

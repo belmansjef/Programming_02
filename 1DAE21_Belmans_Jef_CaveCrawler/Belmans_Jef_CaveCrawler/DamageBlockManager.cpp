@@ -7,9 +7,9 @@
 
 DamageBlockManager::~DamageBlockManager()
 {
-	for (DamageBlock* element : m_pItems)
+	for (DamageBlock* block : m_pItems)
 	{
-		DeleteBlock(element);
+		DeleteBlock(block);
 	}
 }
 
@@ -52,27 +52,27 @@ bool DamageBlockManager::AddItemsFromSvgFile(const std::string& filePath)
 
 void DamageBlockManager::Draw() const
 {
-	for (DamageBlock* element : m_pItems)
+	for (DamageBlock* block : m_pItems)
 	{
-		element->Draw();
+		block->Draw();
 	}
 }
 
 void DamageBlockManager::Update(const Rectf& actorShape, Health& actorHealth, Camera& cam)
 {
-	for (DamageBlock* element : m_pItems)
+	for (DamageBlock* block : m_pItems)
 	{
-		element->Update();
+		block->Update();
 	}
 
-	CollisionCheck(actorShape, actorHealth, cam);
+	PlayerCollisionCheck(actorShape, actorHealth, cam);
 }
 
-void DamageBlockManager::CollisionCheck(const Rectf& acotrShape, Health& actorHealth, Camera& cam)
+void DamageBlockManager::PlayerCollisionCheck(const Rectf& acotrShape, Health& actorHealth, Camera& cam)
 {
-	for (DamageBlock* element : m_pItems)
+	for (DamageBlock* block : m_pItems)
 	{
-		if (element->IsOverlapping(acotrShape) && actorHealth.ShouldHit())
+		if (block->IsOverlapping(acotrShape) && actorHealth.ShouldHit())
 		{
 			cam.DoScreenShake();
 			actorHealth.TakeDamage(1);

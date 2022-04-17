@@ -1,4 +1,5 @@
 #include "RisingHand.h"
+#include "pch.h"
 #include "utils.h"
 
 RisingHand::RisingHand(const Point2f& bottomLeft, int maxHealth)

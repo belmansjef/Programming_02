@@ -18,5 +18,5 @@ public:
 private:
 	Rectf m_BoxCollider;
 
-	bool PlayerOverlapCheck(const Rectf& actorShape);
+	bool PlayerOverlapCheck(const Rectf& actorShape) const;
 };

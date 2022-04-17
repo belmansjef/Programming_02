@@ -197,9 +197,3 @@ void Level::LevelCollision(Rectf& actorShape, Vector2f& actorVelocity) const
 		}
 	}
 }
-
-void Level::DrawVector(const Vector2f& v, const Point2f& startPos) const
-{
-	const Point2f endPos{ startPos + v };
-	utils::DrawLine(startPos, endPos);
-}

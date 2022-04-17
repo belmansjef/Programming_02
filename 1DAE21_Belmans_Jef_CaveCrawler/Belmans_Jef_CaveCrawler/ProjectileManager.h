@@ -20,12 +20,12 @@ public:
 
 	void Update(const std::vector<std::vector<Point2f>>& levelVerts);
 	void Draw() const;
-
 	void Reset();
-
-	void LevelCollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts);
 
 private:
 	std::vector<Projectile*> m_pItems;
+
+	void LevelCollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts) const;
+
 };
 

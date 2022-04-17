@@ -25,7 +25,7 @@ void Lava::Draw() const
 	glPopMatrix();
 }
 
-bool Lava::PlayerOverlapCheck(const Rectf& actorShape)
+bool Lava::PlayerOverlapCheck(const Rectf& actorShape) const
 {
 	return utils::IsOverlapping(actorShape, m_BoxCollider);
 }

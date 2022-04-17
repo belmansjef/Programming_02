@@ -24,6 +24,6 @@ public:
 private:
 	std::vector<DamageBlock*> m_pItems;
 
+	void PlayerCollisionCheck(const Rectf& acotrShape, Health& actorHealth, Camera& cam);
 	void DeleteBlock(const DamageBlock* block) const;
-	void CollisionCheck(const Rectf& acotrShape, Health& actorHealth, Camera& cam);
 };

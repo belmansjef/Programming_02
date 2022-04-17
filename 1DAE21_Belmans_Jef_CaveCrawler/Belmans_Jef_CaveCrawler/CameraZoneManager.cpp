@@ -1,6 +1,7 @@
 #include "CameraZoneManager.h"
 #include "CameraZone.h"
 #include "utils.h"
+#include "pch.h"
 
 CameraZoneManager::~CameraZoneManager()
 {
@@ -26,5 +27,7 @@ Rectf CameraZoneManager::GetCurrentZone(const Rectf& actorShape) const
 			return zone->GetBoundaries();
 		}
 	}
+
+	std::cout << "Error getting camerazone!" << std::endl;
 	return Rectf{};
 }

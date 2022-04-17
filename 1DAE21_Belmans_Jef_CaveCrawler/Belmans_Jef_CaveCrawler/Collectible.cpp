@@ -20,12 +20,11 @@ void Collectible::Draw() const
 {
 	glPushMatrix();
 		glTranslatef(m_Shape.left, m_Shape.bottom, 0);
-		glScalef(2.0f, 2.0f, 1.0f);
 		m_pTexture->Draw();
 	glPopMatrix();
 }
 
-bool Collectible::IsOverlapping(const Rectf& rect) const
+bool Collectible::IsOverlapping(const Rectf& actorShape) const
 {
-	return utils::IsOverlapping(rect, m_Shape);
+	return utils::IsOverlapping(actorShape, m_Shape);
 }

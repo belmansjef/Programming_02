@@ -1,6 +1,7 @@
 #include "Gun.h"
 #include "pch.h"
 #include "Projectile.h"
+#include "ProjectileManager.h"
 
 Gun::Gun()
 {

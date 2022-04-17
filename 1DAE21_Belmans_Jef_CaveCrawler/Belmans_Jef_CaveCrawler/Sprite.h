@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include "pch.h"
-#include "Texture.h"
+#include "structs.h"
 
+class Texture;
 struct Animation
 {
 	Animation();
@@ -32,7 +32,7 @@ enum class SpriteType
 	risingHand
 };
 
-class Sprite
+class Sprite final
 {
 public:
 	Sprite(const SpriteType& type);

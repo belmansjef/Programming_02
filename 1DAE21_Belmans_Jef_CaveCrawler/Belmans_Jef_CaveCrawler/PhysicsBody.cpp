@@ -5,6 +5,7 @@
 PhysicsBody::PhysicsBody(float left, float bottom, float width, float height, float initialJumpVelocity)
 	: m_Shape { Rectf(left, bottom, width, height) }
 	, m_InitialJumpVelocity { initialJumpVelocity }
+	, m_HasJumped { false }
 {
 }
 

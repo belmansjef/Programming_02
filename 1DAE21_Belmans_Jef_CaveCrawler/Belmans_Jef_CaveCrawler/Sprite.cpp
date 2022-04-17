@@ -1,4 +1,6 @@
 #include "Sprite.h"
+#include "pch.h"
+#include "Texture.h"
 
 Animation::Animation()
 	: Animation("anim", 0, 0, 0, 0, 0, 0)

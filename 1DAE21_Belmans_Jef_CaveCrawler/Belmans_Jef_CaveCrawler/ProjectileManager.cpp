@@ -68,7 +68,7 @@ void ProjectileManager::Reset()
 	}
 }
 
-void ProjectileManager::LevelCollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts)
+void ProjectileManager::LevelCollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts) const
 {
 	for (Projectile* proj : m_pItems) 
 	{
