@@ -3,9 +3,9 @@
 #include "Game.h"
 
 Game::Game( const Window& window )
-	:m_Window{ window }
-	,m_Camera{ window.width, window.height }
-	,m_EndScreenOverlay{ 0.0f, 0.0f, window.width, window.height }
+	: m_Window{ window }
+	, m_Camera{ window.width, window.height }
+	, m_EndScreenOverlay{ 0.0f, 0.0f, window.width, window.height }
 	, m_Hud{ Point2f(10.0f, window.height - 50.0f), 0 }
 {	 
 	Initialize( );

@@ -3,8 +3,20 @@
 #include "Texture.h"
 #include "SVGParser.h"
 
-Level::Level()
-	:m_pBackgroundTexture{ new Texture("Resources/Images/Level_1.png") }
+LevelEnd::LevelEnd()
+	: LevelEnd(Point2f())
+{
+}
+
+LevelEnd::LevelEnd(const Point2f& bottomLeft)
+	: pTexture{ new Texture("./Resources/Images/Sprite_LevelEnd.png") }
+	, shape{ Rectf (bottomLeft.x, bottomLeft.y, pTexture->GetWidth(), pTexture->GetHeight())}
+{
+}
+
+Level::Level(const Point2f& endBottomLeft)
+	: m_pBackgroundTexture{ new Texture("Resources/Images/Level_1.png") }
+	, m_LevelEnd { LevelEnd(endBottomLeft) }
 {
 	m_Boundaries = Rectf{ 0.0f, 0.0f, m_pBackgroundTexture->GetWidth(), m_pBackgroundTexture->GetHeight()};
 	SVGParser::GetVerticesFromSvgFile("Resources/Images/Level_1.svg", m_Verticies);
@@ -14,13 +26,17 @@ Level::~Level()
 {
 	delete m_pBackgroundTexture;
 	m_pBackgroundTexture = nullptr;
+
+	delete m_LevelEnd.pTexture;
+	m_LevelEnd.pTexture = nullptr;
 }
 
 void Level::DrawBackground() const
 {
 	glPushMatrix();
-		glTranslatef(0, 0, 0);
 		m_pBackgroundTexture->Draw();
+		glTranslatef(m_LevelEnd.shape.left, m_LevelEnd.shape.bottom, 0);
+		m_LevelEnd.pTexture->Draw();
 	glPopMatrix();
 }
 
@@ -52,6 +68,11 @@ bool Level::IsOnGround(const Rectf& actorShape) const
 	}
 
 	return isGrounded;
+}
+
+bool Level::HasReachedEnd(const Rectf& actorShape) const
+{
+	return utils::IsOverlapping(actorShape, m_LevelEnd.shape);
 }
 
 Rectf Level::GetBoundaries() const

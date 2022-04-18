@@ -35,16 +35,16 @@ private:
 	const float m_ScaleFactor{ 4.0f };
 
 	bool m_ShouldPrintStats{ true };
-	int m_Frames{ 0 };
 	float m_FrameTime{ 0.0f };
 	float m_AvgFrameTime{ 0.0f };
 	float m_FrameRate{ 0.0f };
-	const float m_MaxFPS{ 0.0f };
+	const int m_MaxFPS{ 5000 };
+	const int m_MaxFrameTime{ 1000 / m_MaxFPS };
 
 	Uint32 m_FrameDelay{ 0 };
 
-	Level m_Level;
-	Avatar m_PlayerAvatar{ 50.0f, 24.0f, 13.0f, 14.0f };
+	Level m_Level{Point2f(32.0f, 232.0f)};
+	Avatar m_PlayerAvatar{ 48.0f, 24.0f, 13.0f, 14.0f };
 	Camera m_Camera;
 	CollectibleManager m_CollectibleManager;
 	DamageBlockManager m_DamageBlockManager;
@@ -52,6 +52,9 @@ private:
 	RisingHandManager m_RisingHandManager;
 	CrabEnemyManager m_CrabEnemyManager;
 	Lava m_Lava{Point2f(432.0f, 0.0f), 32.0f, 16.0f};
+
+	bool m_HasReachedEnd{ false };
+	Rectf m_EndScreenOverlay;
 
 	// FUNCTIONS
 	void Initialize( );

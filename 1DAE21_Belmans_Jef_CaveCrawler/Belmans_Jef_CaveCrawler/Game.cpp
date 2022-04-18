@@ -3,8 +3,9 @@
 #include "Game.h"
 
 Game::Game( const Window& window ) 
-	:m_Window{ window }
-	,m_Camera{ window.width / m_ScaleFactor, window.height / m_ScaleFactor }
+	: m_Window{ window }
+	, m_Camera{ window.width / m_ScaleFactor, window.height / m_ScaleFactor }
+	, m_EndScreenOverlay{ Rectf(0.0f, 0.0f, window.width, window.height) }
 {
 	Initialize( );
 }
@@ -50,10 +51,10 @@ void Game::Initialize( )
 
 	// Load risinghands
 	m_RisingHandManager.AddItem(Point2f(192.0f, 24.0f), 3);
+	m_RisingHandManager.AddItem(Point2f(128.0f, 208.0f), 3);
 
 	// Load crabs
-	m_CrabEnemyManager.AddItem(Point2f(64.0f, 24.0f), 1, 3);
-	m_CrabEnemyManager.AddItem(Point2f(128.0f, 208.0f), 1, 3);
+	m_CrabEnemyManager.AddItem(Point2f(704.0f, 24.0f), 1, 3);
 }
 
 void Game::Cleanup( )
@@ -64,35 +65,37 @@ void Game::Cleanup( )
 void Game::Update( float elapsedSec )
 {
 	// Lock framerate
-	if (1000.0f / m_MaxFPS > (Time::deltaTime * 1000.0f))
-	{
-		m_FrameDelay = Uint32((1000.0f / m_MaxFPS - (Time::deltaTime * 1000.0f)));
-	}
+	m_FrameDelay = UINT32(m_MaxFrameTime - (Time::deltaTime));
 	SDL_Delay(m_FrameDelay);
 
 	// Updates
-	m_PlayerAvatar.Update(m_Level);
-	m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
-	m_Camera.SetLevelBoundaries(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
-
-	// Managers
-	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera);
-	m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-	m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-	m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-
-	if (m_PlayerAvatar.GetIsDead())
+	if (!m_HasReachedEnd)
 	{
-		ResetLevel();
-	}
+		m_PlayerAvatar.Update(m_Level);
+		m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
+		m_Camera.SetCameraBounds(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
 
+		// Managers
+		m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera);
+		m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+		m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+		m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+		m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+
+		if (m_PlayerAvatar.GetIsDead())
+		{
+			ResetLevel();
+		}
+
+		m_HasReachedEnd = m_Level.HasReachedEnd(m_PlayerAvatar.GetShape());
+	}
+	
 	UpdateFrameStats();
 }
 
-void Game::Draw( ) const
+void Game::Draw() const
 {
-	ClearBackground( );
+	ClearBackground();
 
 	glPushMatrix();
 		glScalef(m_ScaleFactor, m_ScaleFactor, 1);
@@ -107,14 +110,26 @@ void Game::Draw( ) const
 		m_CollectibleManager.Draw();
 		m_Lava.Draw();
 	glPopMatrix();
+
+	if (m_HasReachedEnd)
+	{
+		utils::SetColor(Color4f(0.0f, 0.0f, 0.0f, 0.75f));
+		utils::FillRect(m_EndScreenOverlay);
+	}
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 {
-	if (e.keysym.scancode == SDL_SCANCODE_I)
+	switch (e.keysym.scancode)
 	{
-		std::cout << "Player position: [" << m_PlayerAvatar.GetShape().left
-			<< ", " << m_PlayerAvatar.GetShape().bottom << "]\r\n";
+	case SDL_SCANCODE_I:
+		std::cout << "Move using the [WASD] Keys, jump with [SPACE] and shoot with [LMB].\r\nPress [R] to reset the level" << std::endl;
+		break;
+	case SDL_SCANCODE_R:
+		ResetLevel();
+		break;
+	default:
+		break;
 	}
 }
 
@@ -130,7 +145,10 @@ void Game::ProcessMouseMotionEvent( const SDL_MouseMotionEvent& e )
 
 void Game::ProcessMouseDownEvent( const SDL_MouseButtonEvent& e )
 {
-	m_PlayerAvatar.OnMouseDownEvent(e);
+	if (!m_HasReachedEnd)
+	{
+		m_PlayerAvatar.OnMouseDownEvent(e);
+	}
 }
 
 void Game::ProcessMouseUpEvent( const SDL_MouseButtonEvent& e )
@@ -146,15 +164,12 @@ void Game::ClearBackground( ) const
 
 void Game::UpdateFrameStats()
 {
-	m_Frames++;
-	m_FrameTime += Time::deltaTime + m_FrameDelay / 1000.0f;
+	m_FrameRate++;
+	m_FrameTime += Time::deltaTime;
 
 	if (m_FrameTime >= 1.0f) // Every second
 	{
-		m_FrameRate = float(m_Frames) * 0.5f + m_FrameRate * 0.5f; // Stabilize reading
-		m_Frames = 0;
-	
-		m_AvgFrameTime = (1.0f / m_FrameRate) * 1000.0f;
+		m_AvgFrameTime = 1000 / m_FrameRate;
 
 		if (m_ShouldPrintStats)
 		{
@@ -162,6 +177,7 @@ void Game::UpdateFrameStats()
 		}
 
 		m_FrameTime = 0.0f;
+		m_FrameRate = 0.0f;
 	}
 }
 
@@ -171,4 +187,7 @@ void Game::ResetLevel()
 	m_CrabEnemyManager.Reset();
 	m_PlayerAvatar.Reset();
 	m_CollectibleManager.Reset();
+	m_Camera.Reset();
+
+	m_HasReachedEnd = false;
 }

@@ -44,7 +44,7 @@ void RisingHand::Update(const Rectf& actorShape)
 		m_Sprite.SetAnimation("grabbing");
 	}
 	else if ( utils::GetDistance
-			( Point2f(actorShape.left + actorShape.width / 2.0f, actorShape.bottom + actorShape.bottom / 2.0f)
+			( Point2f(actorShape.left + actorShape.width / 2.0f, actorShape.bottom + actorShape.height / 2.0f)
 			, Point2f(m_BoxCollider.left + m_Sprite.GetFrameWidth() / 2.0f, m_BoxCollider.bottom + m_Sprite.GetFrameHeight() / 2.0f)) <= m_TriggerDistance)
 	{
 		m_Sprite.SetAnimation("extended");
