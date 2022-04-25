@@ -15,10 +15,12 @@ class Avatar
 {
 public:
 	explicit Avatar();
-	Avatar(const Avatar& other);
 	~Avatar();
 
+	Avatar(const Avatar& other);
 	Avatar& operator=(const Avatar& other);
+	Avatar(Avatar&& other) = delete;
+	Avatar& operator=(Avatar&& other) = delete;
 
 	void Update(float elapsedSec, const Level& level);
 	void Draw() const;

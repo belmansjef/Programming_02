@@ -11,9 +11,12 @@ public:
 	};
 
 	explicit PowerUp(const Point2f& center, PowerUp::Type type );
-	PowerUp(const PowerUp& other);
 	~PowerUp();
+
+	PowerUp(const PowerUp& other);
 	PowerUp& operator=(const PowerUp& other) = delete;
+	PowerUp(PowerUp&& other) = delete;
+	PowerUp& operator=(PowerUp&& other) = delete;
 
 	void Update( float elapsedSec );
 	void Draw( ) const;

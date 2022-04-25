@@ -7,10 +7,12 @@ class Level
 {
 public:
 	explicit Level();
-	Level(const Level& other);
 	~Level();
 	
+	Level(const Level& other);
 	Level& operator=(const Level& other);
+	Level(Level&& other) = delete;
+	Level& operator=(Level&& other) = delete;
 
 	void DrawBackground() const;
 	void DrawForeground() const;
