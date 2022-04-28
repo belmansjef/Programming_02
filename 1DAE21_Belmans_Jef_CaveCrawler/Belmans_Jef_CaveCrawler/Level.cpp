@@ -31,10 +31,14 @@ Level::~Level()
 	m_LevelEnd.pTexture = nullptr;
 }
 
-void Level::DrawBackground() const
+void Level::DrawLevel() const
 {
 	glPushMatrix();
+		glTranslatef(-16, -16, 0);
 		m_pBackgroundTexture->Draw();
+	glPopMatrix();
+
+	glPushMatrix();
 		glTranslatef(m_LevelEnd.shape.left, m_LevelEnd.shape.bottom, 0);
 		m_LevelEnd.pTexture->Draw();
 	glPopMatrix();

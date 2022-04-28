@@ -100,7 +100,7 @@ void Game::Draw() const
 	glPushMatrix();
 		glScalef(m_ScaleFactor, m_ScaleFactor, 1);
 		m_Camera.Transform();
-		m_Level.DrawBackground();
+		m_Level.DrawLevel();
 		m_PlayerAvatar.Draw();
 
 		// Managers

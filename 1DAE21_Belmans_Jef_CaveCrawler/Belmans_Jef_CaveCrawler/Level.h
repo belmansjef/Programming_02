@@ -22,7 +22,7 @@ public:
 	Level(Level&& other) = delete;
 	Level& operator= (Level&& other) = delete;
 	
-	void DrawBackground() const;
+	void DrawLevel() const;
 	void HandleCollision(Rectf& actorShape, Vector2f& actorVelocity) const;
 	bool IsOnGround(const Rectf& actorShape) const;
 	bool HasReachedEnd(const Rectf& actorShape) const;
