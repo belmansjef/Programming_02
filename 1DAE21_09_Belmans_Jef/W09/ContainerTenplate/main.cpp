@@ -78,35 +78,29 @@ void TestInitializerList()
 
 void TestVector2fContainer()
 {
-	// TODO: 7. Create a Container 'velocities' of Vector2f elements 
 	// using the constructor with std::initializer_list parameter
 	Container<Vector2f> velocities{ Vector2f(0, 0), Vector2f(1, 0), Vector2f(0, 1), Vector2f(1,1) };
 
-	// TODO: 8. Add some elements, enough to expand the container
 	for (int i = 0; i < 5; i++)
 	{
 		velocities.PushBack(Vector2f(float(rand() % 5), float(rand() % 5)));
 	}
 
-	// TODO: 9. Print the elements using a for loop and the operator[] of the container
 	for (int i = 0; i < velocities.Size(); i++)
 	{
 		std::cout << velocities[i] << std::endl;
 	}
 
-	// TODO: 10. Add value 10 to x-part of all the elements using the operator[] of the container
 	for (int i = 0; i < velocities.Size(); i++)
 	{
 		velocities[i].x += 10;
 	}
 
-	// TODO: 11. Add value 5 to y-part of all the elements using the operator[] of the container
 	for (int i = 0; i < velocities.Size(); i++)
 	{
 		velocities[i].y += 5;
 	}
 
-	// TODO: 12. Print the elements using a for loop and the method Get of the container
 	for (int i = 0; i < velocities.Size(); i++)
 	{
 		std::cout << velocities.Get(i) << std::endl;

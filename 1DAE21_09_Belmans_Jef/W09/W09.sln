@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FunctionTemplate", "Functio
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ContainerTenplate", "ContainerTenplate\ContainerTenplate.vcxproj", "{95BCA8E5-BEE0-43FD-BE21-D38D05D69FA9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SinglyLinkedList", "SinglyLinkedList\SinglyLinkedList.vcxproj", "{41A8ED7E-9D09-43F7-B610-F664793D580E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{95BCA8E5-BEE0-43FD-BE21-D38D05D69FA9}.Release|x64.Build.0 = Release|x64
 		{95BCA8E5-BEE0-43FD-BE21-D38D05D69FA9}.Release|x86.ActiveCfg = Release|Win32
 		{95BCA8E5-BEE0-43FD-BE21-D38D05D69FA9}.Release|x86.Build.0 = Release|Win32
+		{41A8ED7E-9D09-43F7-B610-F664793D580E}.Debug|x64.ActiveCfg = Debug|x64
+		{41A8ED7E-9D09-43F7-B610-F664793D580E}.Debug|x64.Build.0 = Debug|x64
+		{41A8ED7E-9D09-43F7-B610-F664793D580E}.Debug|x86.ActiveCfg = Debug|Win32
+		{41A8ED7E-9D09-43F7-B610-F664793D580E}.Debug|x86.Build.0 = Debug|Win32
+		{41A8ED7E-9D09-43F7-B610-F664793D580E}.Release|x64.ActiveCfg = Release|x64
+		{41A8ED7E-9D09-43F7-B610-F664793D580E}.Release|x64.Build.0 = Release|x64
+		{41A8ED7E-9D09-43F7-B610-F664793D580E}.Release|x86.ActiveCfg = Release|Win32
+		{41A8ED7E-9D09-43F7-B610-F664793D580E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
