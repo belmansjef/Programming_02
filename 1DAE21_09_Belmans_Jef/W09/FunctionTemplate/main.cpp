@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Fraction.h"
-#include "MaxFunctions.h"
+#include "MaxFunctions.cpp"
 
 void TestMaxFunction( );
 
