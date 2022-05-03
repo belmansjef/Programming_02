@@ -111,9 +111,6 @@
     <ClCompile Include="RisingHandManager.cpp">
       <Filter>Game Files\Level\Hazards</Filter>
     </ClCompile>
-    <ClCompile Include="Avatar.cpp">
-      <Filter>Game Files\Charachters\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Health.cpp">
       <Filter>Game Files\Charachters\Common</Filter>
     </ClCompile>
@@ -137,6 +134,12 @@
     </ClCompile>
     <ClCompile Include="Lava.cpp">
       <Filter>Game Files\Level\Hazards</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Game Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Avatar.cpp">
+      <Filter>Game Files\Charachters\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +215,6 @@
     <ClInclude Include="RisingHandManager.h">
       <Filter>Game Files\Level\Hazards</Filter>
     </ClInclude>
-    <ClInclude Include="Avatar.h">
-      <Filter>Game Files\Charachters\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Health.h">
       <Filter>Game Files\Charachters\Common</Filter>
     </ClInclude>
@@ -235,6 +235,12 @@
     </ClInclude>
     <ClInclude Include="Lava.h">
       <Filter>Game Files\Level\Hazards</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Game Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Avatar.h">
+      <Filter>Game Files\Charachters\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

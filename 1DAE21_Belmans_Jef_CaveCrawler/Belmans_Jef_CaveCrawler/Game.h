@@ -8,6 +8,7 @@
 #include "RisingHandManager.h"
 #include "CrabEnemyManager.h"
 #include "Lava.h"
+#include "HUD.h"
 
 class Game final
 {
@@ -52,6 +53,7 @@ private:
 	RisingHandManager m_RisingHandManager;
 	CrabEnemyManager m_CrabEnemyManager;
 	Lava m_Lava{Point2f(432.0f, 0.0f), 32.0f, 16.0f};
+	HUD m_HUD;
 
 	bool m_HasReachedEnd{ false };
 	Rectf m_EndScreenOverlay;

@@ -10,6 +10,7 @@ public:
 	~Health() = default;
 
 	bool GetIsDead() const;
+	int GetCurrentHealth() const;
 
 	void Heal(int amount);
 	void TakeDamage(int amount);

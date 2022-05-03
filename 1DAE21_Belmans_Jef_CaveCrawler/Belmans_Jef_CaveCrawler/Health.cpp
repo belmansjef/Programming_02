@@ -15,6 +15,11 @@ bool Health::GetIsDead() const
 	return m_IsDead;
 }
 
+int Health::GetCurrentHealth() const
+{
+	return m_CurrentHealth;
+}
+
 void Health::Heal(int amount)
 {
 	m_CurrentHealth = std::min(m_CurrentHealth + amount, m_MaxHealth);
