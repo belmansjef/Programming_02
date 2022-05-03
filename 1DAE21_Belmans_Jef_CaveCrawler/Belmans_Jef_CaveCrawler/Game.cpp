@@ -6,6 +6,7 @@ Game::Game( const Window& window )
 	: m_Window{ window }
 	, m_Camera{ window.width / m_ScaleFactor, window.height / m_ScaleFactor }
 	, m_EndScreenOverlay{ Rectf(0.0f, 0.0f, window.width, window.height) }
+	, m_HUD { window }
 {
 	Initialize( );
 }
@@ -82,6 +83,8 @@ void Game::Update( float elapsedSec )
 		m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 		m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 
+		m_HUD.Update(m_PlayerAvatar.GetHealth().GetCurrentHealth());
+
 		if (m_PlayerAvatar.GetIsDead())
 		{
 			ResetLevel();
@@ -109,7 +112,11 @@ void Game::Draw() const
 		m_CrabEnemyManager.Draw();
 		m_CollectibleManager.Draw();
 		m_Lava.Draw();
+		
 	glPopMatrix();
+	
+	// Draw HUD and overlays after popping world view
+	m_HUD.Draw();
 
 	if (m_HasReachedEnd)
 	{

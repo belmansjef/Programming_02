@@ -34,7 +34,7 @@ Level::~Level()
 void Level::DrawLevel() const
 {
 	glPushMatrix();
-		glTranslatef(-16, -16, 0);
+		glTranslatef(-16, -16, 0); // offset to background
 		m_pBackgroundTexture->Draw();
 	glPopMatrix();
 

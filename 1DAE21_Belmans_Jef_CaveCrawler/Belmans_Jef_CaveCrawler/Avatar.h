@@ -36,7 +36,7 @@ private:
 	PhysicsBody m_PhysicsBody;
 	Gun m_Gun;
 
-	const int m_MaxHealth{ 5 };
+	const int m_MaxHealth{ 4 };
 	Health m_AvatarHealth{ m_MaxHealth };
 
 	bool m_ShouldTrack{ false };
