@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "utils.h"
 #include "Texture.h"
+#include "SoundManager.h"
 
 Projectile::Projectile()
 	: m_IsInstanciated { false }
@@ -73,6 +74,7 @@ bool Projectile::HitCheck(const std::vector<Point2f>& verts)
 	if (utils::Raycast(verts, startPos, endPos, hitInfo))
 	{
 		m_IsInstanciated = false;
+		SoundManager::GetInstance()->PlayHitWall();
 	}
 
 	return !m_IsInstanciated;

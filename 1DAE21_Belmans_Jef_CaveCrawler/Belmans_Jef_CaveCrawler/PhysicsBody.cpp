@@ -1,6 +1,7 @@
+#include "pch.h"
 #include "PhysicsBody.h"
 #include "Level.h"
-#include "pch.h"
+#include "SoundManager.h"
 
 PhysicsBody::PhysicsBody(float left, float bottom, float width, float height, float initialJumpVelocity)
 	: m_Shape { Rectf(left, bottom, width, height) }
@@ -93,6 +94,8 @@ void PhysicsBody::Jump()
 		m_GravityScale = 1.0f;
 
 		m_HasJumped = true;
+
+		SoundManager::GetInstance()->PlayJump();
 	}	
 }
 

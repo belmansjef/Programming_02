@@ -1,7 +1,8 @@
+#include "pch.h"
 #include "CrabEnemy.h"
 #include "Level.h"
 #include "Sprite.h"
-#include "pch.h"
+#include "SoundManager.h"
 
 CrabEnemy::CrabEnemy(float left, float bottom, float width, float height, int movementDirection, int maxHealth)
 	: m_Health { Health(maxHealth, 0.1f) }

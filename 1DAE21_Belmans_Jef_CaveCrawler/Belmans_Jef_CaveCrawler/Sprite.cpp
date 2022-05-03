@@ -129,8 +129,8 @@ void Sprite::SetSprite()
 		m_FrameWidth = 16.0f;
 		m_FrameHeight = 18.0f;
 
-		m_pAnimations.push_back(new Animation("idle", 1, 2, 1, 1, 0, 0));
-		m_pAnimations.push_back(new Animation("extended", 1, 2, 1, 1, 0, 1));
+		m_pAnimations.push_back(new Animation("idle", 1, 60, 1, 1, 0, 0));
+		m_pAnimations.push_back(new Animation("extended", 1, 60, 1, 1, 0, 1));
 		m_pAnimations.push_back(new Animation("grabbing", 1, 60, 1, 1, 0, 2));
 		break;
 	default:

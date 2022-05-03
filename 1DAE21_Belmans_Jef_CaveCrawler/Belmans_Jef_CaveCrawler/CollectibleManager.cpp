@@ -3,6 +3,8 @@
 #include "CollectibleManager.h"
 #include "Collectible.h"
 #include "Health.h"
+#include "SoundManager.h"
+#include "Avatar.h"
 
 CollectibleManager::~CollectibleManager()
 {
@@ -18,9 +20,9 @@ Collectible* CollectibleManager::AddItem(const Point2f& bottomLeft, Collectible:
 	return m_pItems.back();
 }
 
-void CollectibleManager::Update(const Rectf& actorShape, Health& actorHealth)
+void CollectibleManager::Update(const Rectf& actorShape)
 {
-	HitItem(actorShape, actorHealth);
+	HitItem(actorShape);
 }
 
 void CollectibleManager::Draw() const
@@ -42,7 +44,7 @@ void CollectibleManager::Reset()
 	m_NrPointsCollected = 0;
 }
 
-bool CollectibleManager::HitItem(const Rectf& rect, Health& actorHealth)
+bool CollectibleManager::HitItem(const Rectf& rect)
 {
 	for (Collectible* collectible : m_pItems)
 	{
@@ -56,9 +58,10 @@ bool CollectibleManager::HitItem(const Rectf& rect, Health& actorHealth)
 			{
 			case Collectible::CollectibleType::points:
 				m_NrPointsCollected++;
+				SoundManager::GetInstance()->PlayCoinPickup();
 				break;
 			case Collectible::CollectibleType::health:
-				actorHealth.Heal(1);
+				Avatar::Heal(1);
 				break;
 			default:
 				break;

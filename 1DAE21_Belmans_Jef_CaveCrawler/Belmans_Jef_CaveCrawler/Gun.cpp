@@ -1,7 +1,8 @@
-#include "Gun.h"
 #include "pch.h"
+#include "Gun.h"
 #include "Projectile.h"
 #include "ProjectileManager.h"
+#include "SoundManager.h"
 
 Gun::Gun()
 {
@@ -27,6 +28,8 @@ void Gun::Shoot(const Point2f& actorPos, int horScale)
 		
 		m_ProjectileManager.InstanciateProjectile(projectileVelocity, relShootPos);
 		m_LastShotTime = Time::time;
+
+		SoundManager::GetInstance()->PlayShoot();
 	}
 }
 

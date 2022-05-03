@@ -85,7 +85,7 @@ void Game::Update( float elapsedSec )
 		m_DamageBlockManager.Update(m_PlayerAvatar.GetShape());
 		m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
 		m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-		m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+		m_CollectibleManager.Update(m_PlayerAvatar.GetShape());
 		m_Lava.Update(m_PlayerAvatar.GetShape());
 		m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts());
 

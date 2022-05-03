@@ -159,6 +159,9 @@
     <ClCompile Include="FallingSpikeManager.cpp">
       <Filter>Game Files\Level\Hazards\FallingSpike</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Game Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="FallingSpikeManager.h">
       <Filter>Game Files\Level\Hazards\FallingSpike</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Game Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

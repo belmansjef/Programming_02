@@ -19,6 +19,7 @@ public:
 	~Avatar() = default;
 
 	static void TakeDamage(int damage = 1);
+	static void Heal(int value = 1);
 
 	bool ShouldTrack();
 	bool GetIsDead() const;

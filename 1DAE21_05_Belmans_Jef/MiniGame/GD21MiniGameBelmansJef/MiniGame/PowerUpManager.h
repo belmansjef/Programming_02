@@ -1,6 +1,6 @@
 #pragma once
-#include "PowerUp.h"
 #include <vector>
+#include "PowerUp.h"
 #include "structs.h"
 
 class SoundEffect;

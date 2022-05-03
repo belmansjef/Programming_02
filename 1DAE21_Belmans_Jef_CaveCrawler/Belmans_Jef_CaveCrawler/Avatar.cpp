@@ -34,6 +34,11 @@ void Avatar::TakeDamage(int damage)
 	}
 }
 
+void Avatar::Heal(int value)
+{
+	m_AvatarHealth.Heal(value);
+}
+
 bool Avatar::ShouldTrack()
 {
 	m_ShouldTrack |= abs(m_StandStillPos.x - m_PhysicsBody.GetPosition().x) > m_HorCamDeadZone;

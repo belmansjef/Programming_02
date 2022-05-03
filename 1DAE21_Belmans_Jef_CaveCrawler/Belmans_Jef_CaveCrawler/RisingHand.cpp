@@ -1,6 +1,7 @@
 #include "RisingHand.h"
 #include "pch.h"
 #include "utils.h"
+#include "SoundManager.h"
 
 RisingHand::RisingHand(const Point2f& bottomLeft, int maxHealth)
 	: m_Sprite { Sprite(SpriteType::risingHand)}
@@ -43,16 +44,23 @@ void RisingHand::Update(const Rectf& actorShape)
 	{
 		m_Sprite.SetAnimation("grabbing");
 	}
-	else if ( utils::GetDistance
-			( Point2f(actorShape.left + actorShape.width / 2.0f, actorShape.bottom + actorShape.height / 2.0f)
-			, Point2f(m_BoxCollider.left + m_Sprite.GetFrameWidth() / 2.0f, m_BoxCollider.bottom + m_Sprite.GetFrameHeight() / 2.0f)) <= m_TriggerDistance)
+	else if ( utils::GetDistance( Point2f(actorShape.left + actorShape.width / 2.0f, actorShape.bottom + actorShape.height / 2.0f)
+		, Point2f(m_BoxCollider.left + m_Sprite.GetFrameWidth() / 2.0f, m_BoxCollider.bottom + m_Sprite.GetFrameHeight() / 2.0f)) <= m_TriggerDistance)
 	{
+		
 		m_Sprite.SetAnimation("extended");
+		if (!m_HasExtended)
+		{
+			SoundManager::GetInstance()->PlayHandRise();
+		}
+		
+		m_HasExtended = true;
 	}
 	else
 	{
 		m_Sprite.SetAnimation("idle");
 		m_BoxCollider.height = 0.0f;
+		m_HasExtended = false;
 	}
 
 	m_Sprite.Update();

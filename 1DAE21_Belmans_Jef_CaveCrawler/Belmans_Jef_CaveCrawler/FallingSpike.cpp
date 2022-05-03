@@ -3,6 +3,7 @@
 #include "utils.h"
 #include "Texture.h"
 #include "Camera.h"
+#include "SoundManager.h"
 
 FallingSpike::FallingSpike(const Point2f& bottomLeft)
 	: m_pTexture { new Texture("Resources/Images/Sprite_FallingSpike.png")}
@@ -51,6 +52,7 @@ void FallingSpike::Destroy()
 {
 	m_IsDestroyed = true;
 	Camera::DoScreenShake();
+	SoundManager::GetInstance()->PlayExplosion();
 }
 
 void FallingSpike::Update(const Rectf& actorShape)
@@ -60,6 +62,7 @@ void FallingSpike::Update(const Rectf& actorShape)
 		&& actorShape.bottom <= m_BoxCollider.bottom && !m_IsFalling)
 	{
 		m_IsFalling = true;
+		SoundManager::GetInstance()->PlaySpikeFall();
 	}
 	else if(m_IsFalling)
 	{

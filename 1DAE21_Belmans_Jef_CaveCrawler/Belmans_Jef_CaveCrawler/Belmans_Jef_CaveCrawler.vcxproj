@@ -171,6 +171,7 @@
     <ClCompile Include="RisingHand.cpp" />
     <ClCompile Include="RisingHandManager.cpp" />
     <ClCompile Include="SoundEffect.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SoundStream.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="structs.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="RisingHand.h" />
     <ClInclude Include="RisingHandManager.h" />
     <ClInclude Include="SoundEffect.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SoundStream.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="structs.h" />

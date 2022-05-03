@@ -29,5 +29,7 @@ private:
 	Sprite m_Sprite;
 	Rectf m_BoxCollider;
 	Health m_Health;
+
+	bool m_HasExtended{ false };
 };
 

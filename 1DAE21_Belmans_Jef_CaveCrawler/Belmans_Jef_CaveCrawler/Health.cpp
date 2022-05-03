@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "HUD.h"
 #include "Camera.h"
+#include "SoundManager.h"
 
 Health::Health(int maxHealth, float damageCooldown, bool isPlayer)
 	: m_MaxHealth { maxHealth }
@@ -31,6 +32,7 @@ void Health::Heal(int amount)
 	if (m_IsPlayer)
 	{
 		HUD::UpdateHealth(m_CurrentHealth);
+		SoundManager::GetInstance()->PlayHealthPickup();
 	}
 }
 
@@ -40,6 +42,7 @@ void Health::TakeDamage(int amount)
 	{
 		m_CurrentHealth -= amount;
 		m_TimeSinceLastHit = Time::time;
+		SoundManager::GetInstance()->PlayHitHurt();
 
 		if (m_CurrentHealth <= 0)
 		{
@@ -63,4 +66,5 @@ bool Health::ShouldHit() const
 void Health::Die()
 {
 	m_IsDead = true;
+	SoundManager::GetInstance()->PlayExplosion();
 }
