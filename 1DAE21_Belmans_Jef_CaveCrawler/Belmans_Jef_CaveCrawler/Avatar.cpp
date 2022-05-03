@@ -5,6 +5,9 @@
 #include "Level.h"
 #include "Game.h"
 
+const int Avatar::m_MaxHealth{ 4 };
+Health Avatar::m_AvatarHealth{ 4, 1.0f, true };
+
 Avatar::Avatar(float left, float bottom, float width, float height)
 	: m_StartPos { Point2f(left, bottom) }
 	, m_Sprite { Sprite(SpriteType::player) }
@@ -21,6 +24,14 @@ ProjectileManager& Avatar::GetProjectileManager()
 bool Avatar::GetIsDead() const
 {
 	return m_AvatarHealth.GetIsDead();
+}
+
+void Avatar::TakeDamage(int damage)
+{
+	if (m_AvatarHealth.ShouldHit())
+	{
+		m_AvatarHealth.TakeDamage(damage);
+	}
 }
 
 bool Avatar::ShouldTrack()

@@ -37,6 +37,18 @@
     <Filter Include="Game Files\Charachters\Enemies">
       <UniqueIdentifier>{335e2d4d-ec59-4dac-84e8-0773b20d496f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Level\Hazards\DamageBlock">
+      <UniqueIdentifier>{46fb5431-3a78-4870-a5cf-5d66e19e98dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Level\Hazards\Lava">
+      <UniqueIdentifier>{bb7679f1-158d-455f-827b-81bf51a42175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Level\Hazards\RisingHand">
+      <UniqueIdentifier>{8e8dc5fd-2057-4ddd-99a2-c77a85d61d44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Level\Hazards\FallingSpike">
+      <UniqueIdentifier>{e66dc6d4-5314-4735-bf81-12824386f43b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp">
@@ -99,18 +111,6 @@
     <ClCompile Include="ProjectileManager.cpp">
       <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="DamageBlock.cpp">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageBlockManager.cpp">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClCompile>
-    <ClCompile Include="RisingHand.cpp">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClCompile>
-    <ClCompile Include="RisingHandManager.cpp">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClCompile>
     <ClCompile Include="Health.cpp">
       <Filter>Game Files\Charachters\Common</Filter>
     </ClCompile>
@@ -132,14 +132,32 @@
     <ClCompile Include="CrabEnemyManager.cpp">
       <Filter>Game Files\Charachters\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Lava.cpp">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClCompile>
     <ClCompile Include="HUD.cpp">
       <Filter>Game Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Avatar.cpp">
       <Filter>Game Files\Charachters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageBlock.cpp">
+      <Filter>Game Files\Level\Hazards\DamageBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageBlockManager.cpp">
+      <Filter>Game Files\Level\Hazards\DamageBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="Lava.cpp">
+      <Filter>Game Files\Level\Hazards\Lava</Filter>
+    </ClCompile>
+    <ClCompile Include="RisingHand.cpp">
+      <Filter>Game Files\Level\Hazards\RisingHand</Filter>
+    </ClCompile>
+    <ClCompile Include="RisingHandManager.cpp">
+      <Filter>Game Files\Level\Hazards\RisingHand</Filter>
+    </ClCompile>
+    <ClCompile Include="FallingSpike.cpp">
+      <Filter>Game Files\Level\Hazards\FallingSpike</Filter>
+    </ClCompile>
+    <ClCompile Include="FallingSpikeManager.cpp">
+      <Filter>Game Files\Level\Hazards\FallingSpike</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,18 +221,6 @@
     <ClInclude Include="ProjectileManager.h">
       <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="DamageBlock.h">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageBlockManager.h">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClInclude>
-    <ClInclude Include="RisingHand.h">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClInclude>
-    <ClInclude Include="RisingHandManager.h">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClInclude>
     <ClInclude Include="Health.h">
       <Filter>Game Files\Charachters\Common</Filter>
     </ClInclude>
@@ -233,14 +239,32 @@
     <ClInclude Include="CrabEnemyManager.h">
       <Filter>Game Files\Charachters\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Lava.h">
-      <Filter>Game Files\Level\Hazards</Filter>
-    </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>Game Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Avatar.h">
       <Filter>Game Files\Charachters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageBlock.h">
+      <Filter>Game Files\Level\Hazards\DamageBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageBlockManager.h">
+      <Filter>Game Files\Level\Hazards\DamageBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="Lava.h">
+      <Filter>Game Files\Level\Hazards\Lava</Filter>
+    </ClInclude>
+    <ClInclude Include="RisingHand.h">
+      <Filter>Game Files\Level\Hazards\RisingHand</Filter>
+    </ClInclude>
+    <ClInclude Include="RisingHandManager.h">
+      <Filter>Game Files\Level\Hazards\RisingHand</Filter>
+    </ClInclude>
+    <ClInclude Include="FallingSpike.h">
+      <Filter>Game Files\Level\Hazards\FallingSpike</Filter>
+    </ClInclude>
+    <ClInclude Include="FallingSpikeManager.h">
+      <Filter>Game Files\Level\Hazards\FallingSpike</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

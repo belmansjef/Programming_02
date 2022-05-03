@@ -12,7 +12,7 @@ public:
 	Lava(Lava&& other) = delete;
 	Lava& operator=(Lava&& other) = delete;
 
-	void Update(const Rectf& actorShape, Health& actorHealth);
+	void Update(const Rectf& actorShape);
 	void Draw() const;
 
 private:

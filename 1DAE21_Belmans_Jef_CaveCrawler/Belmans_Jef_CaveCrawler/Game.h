@@ -7,6 +7,7 @@
 #include "CameraZoneManager.h"
 #include "RisingHandManager.h"
 #include "CrabEnemyManager.h"
+#include "FallingSpikeManager.h"
 #include "Lava.h"
 #include "HUD.h"
 
@@ -52,6 +53,7 @@ private:
 	CameraZoneManager m_CameraZoneManager;
 	RisingHandManager m_RisingHandManager;
 	CrabEnemyManager m_CrabEnemyManager;
+	FallingSpikeManager m_FallingSpikeManager;
 	Lava m_Lava{Point2f(432.0f, 0.0f), 32.0f, 16.0f};
 	HUD m_HUD;
 

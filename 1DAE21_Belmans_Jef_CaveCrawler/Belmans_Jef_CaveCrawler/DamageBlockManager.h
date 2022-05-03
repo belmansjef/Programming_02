@@ -1,6 +1,6 @@
 #pragma once
-#include "pch.h"
 #include <vector>
+#include "structs.h"
 
 class Health;
 class DamageBlock;
@@ -19,11 +19,11 @@ public:
 	bool AddItemsFromSvgFile(const std::string& filePath);
 
 	void Draw() const;
-	void Update(const Rectf& actorShape, Health& actorHealth, Camera& cam);
+	void Update(const Rectf& actorShape);
 
 private:
 	std::vector<DamageBlock*> m_pItems;
 
-	void PlayerCollisionCheck(const Rectf& acotrShape, Health& actorHealth, Camera& cam);
+	void PlayerCollisionCheck(const Rectf& acotrShape);
 	void DeleteBlock(const DamageBlock* block) const;
 };

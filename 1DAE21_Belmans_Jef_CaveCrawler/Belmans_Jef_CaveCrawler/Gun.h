@@ -22,7 +22,7 @@ public:
 private:
 	ProjectileManager m_ProjectileManager;
 
-	const Vector2f m_ShootPos{ 17.0f, 7.0f };
+	const Vector2f m_ShootPos{ 14.0f, 7.0f };
 	const float m_ShotSpeed{ 150.0f };
 	const float m_FireRate{ 0.35f };
 	float m_LastShotTime{ 0.0f };

@@ -2,12 +2,14 @@
 #include <vector>
 #include "Vector2f.h"
 
+class Texture;
+
 class Projectile final
 {
 public:
 	Projectile();
-	~Projectile() = default;
-	Projectile(const Vector2f& velocity, const Rectf& rectGraphic);
+	Projectile(const Vector2f& velocity, const Rectf& boxCollider);
+	~Projectile();
 	Projectile(const Projectile& other) = delete;
 	Projectile& operator=(const Projectile& other) = delete;
 	Projectile(Projectile&& other) = delete;
@@ -25,8 +27,9 @@ public:
 	bool HitCheck(const Rectf& rect);
 private:
 	bool m_IsInstanciated;
-	Rectf m_RectGraphic;
-	
+	Texture* m_pTexture;
+	Rectf m_BoxCollider;
+
 	Vector2f m_Velocity;
 	float m_Angle;
 };

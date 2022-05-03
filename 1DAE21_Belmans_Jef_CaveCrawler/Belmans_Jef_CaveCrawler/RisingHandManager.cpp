@@ -3,13 +3,14 @@
 #include "Health.h"
 #include "Camera.h"
 #include "Projectile.h"
+#include "Avatar.h"
 
 RisingHandManager::~RisingHandManager()
 {
-	for (RisingHand* hand : m_pItems)
+	for (RisingHand* element : m_pItems)
 	{
-		delete hand;
-		hand = nullptr;
+		delete element;
+		element = nullptr;
 	}
 }
 
@@ -19,43 +20,46 @@ RisingHand* RisingHandManager::AddItem(const Point2f& bottomLeft, int maxHealth)
 	return m_pItems.back();
 }
 
-void RisingHandManager::Update(const Rectf& actorShape, Health& actorHealth, Camera& cam, std::vector<Projectile*> pProjectiles)
+void RisingHandManager::Update(const Rectf& actorShape, std::vector<Projectile*> pProjectiles)
 {
-	for (RisingHand* hand : m_pItems)
+	for (RisingHand* element : m_pItems)
 	{
-		if (hand->IsDead()) continue;
-		hand->Update(actorShape);
+		if (!element->IsDead())
+		{
+			element->Update(actorShape);
+		}
 	}
 
-	PlayerOverlapCheck(actorShape, actorHealth, cam);
+	PlayerOverlapCheck(actorShape);
 	ProjectileCollisionCheck(pProjectiles);
 }
 
 void RisingHandManager::Draw() const
 {
-	for (RisingHand* hand : m_pItems)
+	for (RisingHand* element : m_pItems)
 	{
-		if (hand->IsDead()) continue;
-		hand->Draw();
+		if (!element->IsDead())
+		{
+			element->Draw();
+		}
 	}
 }
 
 void RisingHandManager::Reset()
 {
-	for (RisingHand* hand : m_pItems)
+	for (RisingHand* element : m_pItems)
 	{
-		hand->Reset();
+		element->Reset();
 	}
 }
 
-void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam) const
+void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape) const
 {
-	for (RisingHand* hand : m_pItems)
+	for (RisingHand* element : m_pItems)
 	{
-		if (hand->IsOverlapping(actorShape) && actorHealth.ShouldHit() && !hand->IsDead())
+		if (element->IsOverlapping(actorShape) && !element->IsDead())
 		{
-			cam.DoScreenShake();
-			actorHealth.TakeDamage(1);
+			Avatar::TakeDamage();
 		}
 	}
 }
@@ -66,12 +70,12 @@ void RisingHandManager::ProjectileCollisionCheck(std::vector<Projectile*> pProje
 	{
 		if (!proj->IsInstanciated()) continue;
 
-		for (RisingHand* hand : m_pItems)
+		for (RisingHand* element : m_pItems)
 		{
 			if (!proj->IsInstanciated()) break;
-			if (hand->IsDead()) continue;
+			if (element->IsDead()) continue;
 
-			if (proj->HitCheck(hand->GetBoxCollider())) hand->TakeDamage(1);
+			if (proj->HitCheck(element->GetBoxCollider())) element->TakeDamage(1);
 		}
 	}
 }

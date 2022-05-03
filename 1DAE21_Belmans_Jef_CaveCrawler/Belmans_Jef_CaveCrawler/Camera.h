@@ -6,18 +6,18 @@ class Camera final
 public:
 	Camera(float width, float height);
 	~Camera() = default;
+
 	Camera(const Camera& other) = delete;
 	Camera& operator=(const Camera& other) = delete;
 	Camera(Camera&& other) = delete;
 	Camera& operator=(Camera&& other) = delete;
 	
+	static void DoScreenShake();
+
 	void SetCameraBounds(const Rectf& cameraBounds);
 	void UpdatePosition(const Rectf& target, bool shouldTrack);
 	void Transform() const;
-
-	void DoScreenShake();
 	void Reset();
-
 private:
 	float m_Width;
 	float m_Height;
@@ -31,9 +31,9 @@ private:
 	float m_SmoothDisableTime{ -m_SmoothCooldown };
 
 	// Screenshake
-	bool m_DoScreenShake{ true };
-	const float m_ScreenShakeTime{ 0.1f };
-	float m_ScreenShakeTimer{ 0.0f };
+	static bool m_DoScreenShake;
+	static const float m_ScreenShakeTime;
+	static float m_ScreenShakeTimer;
 
 	const float m_Amplitude{ 25.0f };
 	const float m_HorizontalShift{ 35.0f };

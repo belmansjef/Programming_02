@@ -1,12 +1,15 @@
 #include "Health.h"
 #include "pch.h"
+#include "HUD.h"
+#include "Camera.h"
 
-Health::Health(int maxHealth, float damageCooldown)
+Health::Health(int maxHealth, float damageCooldown, bool isPlayer)
 	: m_MaxHealth { maxHealth }
 	, m_CurrentHealth { maxHealth }
 	, m_TimeSinceLastHit{ -damageCooldown }
 	, m_DamageCooldown { damageCooldown }
 	, m_IsDead { false } 
+	, m_IsPlayer { isPlayer }
 {
 }
 
@@ -24,6 +27,11 @@ void Health::Heal(int amount)
 {
 	m_CurrentHealth = std::min(m_CurrentHealth + amount, m_MaxHealth);
 	m_IsDead = m_CurrentHealth == 0;
+
+	if (m_IsPlayer)
+	{
+		HUD::UpdateHealth(m_CurrentHealth);
+	}
 }
 
 void Health::TakeDamage(int amount)
@@ -38,9 +46,11 @@ void Health::TakeDamage(int amount)
 			m_CurrentHealth = 0;
 			Die();
 		}
-		else
+		else if(m_IsPlayer)
 		{
 			// Took damage
+			HUD::UpdateHealth(m_CurrentHealth);
+			Camera::DoScreenShake();
 		}
 	}
 }

@@ -18,7 +18,7 @@ public:
 
 	RisingHand* AddItem(const Point2f& bottomLeft, int maxHealth);
 
-	void Update(const Rectf& actorShape, Health& actorHealth, Camera& cam, std::vector<Projectile*> pProjectiles);
+	void Update(const Rectf& actorShape, std::vector<Projectile*> pProjectiles);
 	void Draw() const;
 
 	void Reset();
@@ -26,6 +26,6 @@ public:
 private:
 	std::vector<RisingHand*> m_pItems;
 
-	void PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam) const;
+	void PlayerOverlapCheck(const Rectf& actorShape) const;
 	void ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles) const;
 };

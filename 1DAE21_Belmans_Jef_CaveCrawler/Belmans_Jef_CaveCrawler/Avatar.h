@@ -1,11 +1,11 @@
 #pragma once
 #include <math.h>
 #include "utils.h"
-#include "Texture.h"
 #include "Sprite.h"
 #include "Health.h"
 #include "Gun.h"
 #include "PhysicsBody.h"
+#include "pch.h"
 
 class Level;
 class Avatar final
@@ -18,8 +18,9 @@ public:
 	Avatar& operator=(Avatar&& other) = delete;
 	~Avatar() = default;
 
-	bool ShouldTrack();
+	static void TakeDamage(int damage = 1);
 
+	bool ShouldTrack();
 	bool GetIsDead() const;
 	Rectf GetShape() const;
 	Health& GetHealth();
@@ -36,8 +37,8 @@ private:
 	PhysicsBody m_PhysicsBody;
 	Gun m_Gun;
 
-	const int m_MaxHealth{ 4 };
-	Health m_AvatarHealth{ m_MaxHealth };
+	static const int m_MaxHealth;
+	static Health m_AvatarHealth;
 
 	bool m_ShouldTrack{ false };
 	const float m_HorCamDeadZone{ 10.0f };

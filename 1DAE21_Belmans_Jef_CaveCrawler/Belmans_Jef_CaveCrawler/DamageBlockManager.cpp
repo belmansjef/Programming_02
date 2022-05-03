@@ -4,6 +4,7 @@
 #include "SVGParser.h"
 #include "utils.h"
 #include "Camera.h"
+#include "Avatar.h"
 
 DamageBlockManager::~DamageBlockManager()
 {
@@ -58,24 +59,23 @@ void DamageBlockManager::Draw() const
 	}
 }
 
-void DamageBlockManager::Update(const Rectf& actorShape, Health& actorHealth, Camera& cam)
+void DamageBlockManager::Update(const Rectf& actorShape)
 {
 	for (DamageBlock* block : m_pItems)
 	{
 		block->Update();
 	}
 
-	PlayerCollisionCheck(actorShape, actorHealth, cam);
+	PlayerCollisionCheck(actorShape);
 }
 
-void DamageBlockManager::PlayerCollisionCheck(const Rectf& acotrShape, Health& actorHealth, Camera& cam)
+void DamageBlockManager::PlayerCollisionCheck(const Rectf& acotrShape)
 {
 	for (DamageBlock* block : m_pItems)
 	{
-		if (block->IsOverlapping(acotrShape) && actorHealth.ShouldHit())
+		if (block->IsOverlapping(acotrShape))
 		{
-			cam.DoScreenShake();
-			actorHealth.TakeDamage(1);
+			Avatar::TakeDamage();
 		}
 	}
 }

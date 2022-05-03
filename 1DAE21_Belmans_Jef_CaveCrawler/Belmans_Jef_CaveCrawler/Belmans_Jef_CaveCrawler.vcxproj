@@ -152,6 +152,8 @@
     <ClCompile Include="CrabEnemyManager.cpp" />
     <ClCompile Include="DamageBlock.cpp" />
     <ClCompile Include="DamageBlockManager.cpp" />
+    <ClCompile Include="FallingSpike.cpp" />
+    <ClCompile Include="FallingSpikeManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Health.cpp" />
@@ -188,6 +190,8 @@
     <ClInclude Include="CrabEnemyManager.h" />
     <ClInclude Include="DamageBlock.h" />
     <ClInclude Include="DamageBlockManager.h" />
+    <ClInclude Include="FallingSpike.h" />
+    <ClInclude Include="FallingSpikeManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="Health.h" />

@@ -6,7 +6,7 @@ Game::Game( const Window& window )
 	: m_Window{ window }
 	, m_Camera{ window.width / m_ScaleFactor, window.height / m_ScaleFactor }
 	, m_EndScreenOverlay{ Rectf(0.0f, 0.0f, window.width, window.height) }
-	, m_HUD { window }
+	, m_HUD { window, m_PlayerAvatar.GetHealth().GetCurrentHealth() }
 {
 	Initialize( );
 }
@@ -56,11 +56,16 @@ void Game::Initialize( )
 
 	// Load crabs
 	m_CrabEnemyManager.AddItem(Point2f(704.0f, 24.0f), 1, 3);
+
+	// Load Falling spikes
+	m_FallingSpikeManager.AddItem(Point2f(128.0f, 120.0f));
+	m_FallingSpikeManager.AddItem(Point2f(400.0f, 264.0f));
+	m_FallingSpikeManager.AddItem(Point2f(444.0f, 120.0f));
 }
 
 void Game::Cleanup( )
 {
-
+	
 }
 
 void Game::Update( float elapsedSec )
@@ -77,13 +82,12 @@ void Game::Update( float elapsedSec )
 		m_Camera.SetCameraBounds(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
 
 		// Managers
-		m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera);
-		m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-		m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetHealth(), m_Camera, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+		m_DamageBlockManager.Update(m_PlayerAvatar.GetShape());
+		m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+		m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
 		m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-		m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-
-		m_HUD.Update(m_PlayerAvatar.GetHealth().GetCurrentHealth());
+		m_Lava.Update(m_PlayerAvatar.GetShape());
+		m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts());
 
 		if (m_PlayerAvatar.GetIsDead())
 		{
@@ -112,7 +116,7 @@ void Game::Draw() const
 		m_CrabEnemyManager.Draw();
 		m_CollectibleManager.Draw();
 		m_Lava.Draw();
-		
+		m_FallingSpikeManager.Draw();
 	glPopMatrix();
 	
 	// Draw HUD and overlays after popping world view
@@ -195,6 +199,7 @@ void Game::ResetLevel()
 	m_PlayerAvatar.Reset();
 	m_CollectibleManager.Reset();
 	m_Camera.Reset();
+	m_FallingSpikeManager.Reset();
 
 	m_HasReachedEnd = false;
 }

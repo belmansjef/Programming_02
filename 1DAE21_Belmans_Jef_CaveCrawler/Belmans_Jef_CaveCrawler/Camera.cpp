@@ -2,6 +2,10 @@
 #include "pch.h"
 #include "utils.h"
 
+bool Camera::m_DoScreenShake{ false };
+const float Camera::m_ScreenShakeTime{ 0.1f };
+float Camera::m_ScreenShakeTimer{ 0.0f };
+
 Camera::Camera(float width, float height)
 	: m_Width { width }
 	, m_Height { height }

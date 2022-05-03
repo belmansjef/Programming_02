@@ -1,6 +1,7 @@
 #include "CrabEnemyManager.h"
 #include "Camera.h"
 #include "Projectile.h"
+#include "Avatar.h"
 
 CrabEnemyManager::~CrabEnemyManager()
 {
@@ -17,14 +18,14 @@ CrabEnemy* CrabEnemyManager::AddItem(const Point2f& bottomLeft, int movementDire
 	return m_pItems.back();
 }
 
-void CrabEnemyManager::Update(const Rectf& actorShape, const Level& level, Health& actorHealth, Camera& cam, std::vector<Projectile*> pProjectiles)
+void CrabEnemyManager::Update(const Rectf& actorShape, const Level& level, std::vector<Projectile*> pProjectiles)
 {
 	for (CrabEnemy* crab : m_pItems)
 	{
 		crab->Update(level);
 	}
 
-	PlayerOverlapCheck(actorShape, actorHealth, cam);
+	PlayerOverlapCheck(actorShape);
 	ProjectileCollisionCheck(pProjectiles);
 }
 
@@ -47,14 +48,13 @@ void CrabEnemyManager::Reset()
 	}
 }
 
-void CrabEnemyManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth, Camera& cam)
+void CrabEnemyManager::PlayerOverlapCheck(const Rectf& actorShape)
 {
 	for (CrabEnemy* crab : m_pItems)
 	{
-		if (crab->IsOverlapping(actorShape) && actorHealth.ShouldHit() && !crab->IsDead())
+		if (crab->IsOverlapping(actorShape) && !crab->IsDead())
 		{
-			cam.DoScreenShake();
-			actorHealth.TakeDamage(1);
+			Avatar::TakeDamage();
 		}
 	}
 }
