@@ -74,7 +74,7 @@ bool Projectile::HitCheck(const std::vector<Point2f>& verts)
 	if (utils::Raycast(verts, startPos, endPos, hitInfo))
 	{
 		m_IsInstanciated = false;
-		SoundManager::GetInstance()->PlayHitWall();
+		SoundManager::GetInstance()->PlaySound(SoundType::hitWall);
 	}
 
 	return !m_IsInstanciated;

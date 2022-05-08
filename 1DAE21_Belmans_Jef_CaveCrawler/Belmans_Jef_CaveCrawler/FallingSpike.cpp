@@ -52,7 +52,7 @@ void FallingSpike::Destroy()
 {
 	m_IsDestroyed = true;
 	Camera::DoScreenShake();
-	SoundManager::GetInstance()->PlayExplosion();
+	SoundManager::GetInstance()->PlaySound(SoundType::explosion);
 }
 
 void FallingSpike::Update(const Rectf& actorShape)
@@ -62,7 +62,7 @@ void FallingSpike::Update(const Rectf& actorShape)
 		&& actorShape.bottom <= m_BoxCollider.bottom && !m_IsFalling)
 	{
 		m_IsFalling = true;
-		SoundManager::GetInstance()->PlaySpikeFall();
+		SoundManager::GetInstance()->PlaySound(SoundType::spikeFall);
 	}
 	else if(m_IsFalling)
 	{

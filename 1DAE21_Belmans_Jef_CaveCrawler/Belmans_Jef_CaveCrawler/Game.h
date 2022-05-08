@@ -65,6 +65,8 @@ private:
 	void Cleanup( );
 	void ClearBackground( ) const;
 
+	void PlayerReachedEnd() const;
+
 	void ResetLevel();
 	void UpdateFrameStats();
 };

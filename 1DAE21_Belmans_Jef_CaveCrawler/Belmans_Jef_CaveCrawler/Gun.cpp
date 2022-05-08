@@ -29,7 +29,7 @@ void Gun::Shoot(const Point2f& actorPos, int horScale)
 		m_ProjectileManager.InstanciateProjectile(projectileVelocity, relShootPos);
 		m_LastShotTime = Time::time;
 
-		SoundManager::GetInstance()->PlayShoot();
+		SoundManager::GetInstance()->PlaySound(SoundType::shoot);
 	}
 }
 

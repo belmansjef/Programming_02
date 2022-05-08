@@ -95,7 +95,7 @@ void PhysicsBody::Jump()
 
 		m_HasJumped = true;
 
-		SoundManager::GetInstance()->PlayJump();
+		SoundManager::GetInstance()->PlaySound(SoundType::jump);
 	}	
 }
 

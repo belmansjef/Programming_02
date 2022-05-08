@@ -58,7 +58,7 @@ bool CollectibleManager::HitItem(const Rectf& rect)
 			{
 			case Collectible::CollectibleType::points:
 				m_NrPointsCollected++;
-				SoundManager::GetInstance()->PlayCoinPickup();
+				SoundManager::GetInstance()->PlaySound(SoundType::coinPickup);
 				break;
 			case Collectible::CollectibleType::health:
 				Avatar::Heal(1);

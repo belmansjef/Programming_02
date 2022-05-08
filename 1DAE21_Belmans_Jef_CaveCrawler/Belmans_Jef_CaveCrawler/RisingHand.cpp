@@ -51,7 +51,7 @@ void RisingHand::Update(const Rectf& actorShape)
 		m_Sprite.SetAnimation("extended");
 		if (!m_HasExtended)
 		{
-			SoundManager::GetInstance()->PlayHandRise();
+			SoundManager::GetInstance()->PlaySound(SoundType::handRise);
 		}
 		
 		m_HasExtended = true;

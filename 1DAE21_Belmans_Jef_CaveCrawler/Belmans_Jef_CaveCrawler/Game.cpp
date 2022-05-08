@@ -1,6 +1,7 @@
 #include <iomanip>
 #include "pch.h"
 #include "Game.h"
+#include "SoundManager.h"
 
 Game::Game( const Window& window ) 
 	: m_Window{ window }
@@ -94,7 +95,10 @@ void Game::Update( float elapsedSec )
 			ResetLevel();
 		}
 
-		m_HasReachedEnd = m_Level.HasReachedEnd(m_PlayerAvatar.GetShape());
+		if (m_HasReachedEnd = m_Level.HasReachedEnd(m_PlayerAvatar.GetShape()))
+		{
+			PlayerReachedEnd();
+		};
 	}
 	
 	UpdateFrameStats();
@@ -202,4 +206,9 @@ void Game::ResetLevel()
 	m_FallingSpikeManager.Reset();
 
 	m_HasReachedEnd = false;
+}
+
+void Game::PlayerReachedEnd() const
+{
+	SoundManager::GetInstance()->PlaySound(SoundType::levelFinish);
 }
