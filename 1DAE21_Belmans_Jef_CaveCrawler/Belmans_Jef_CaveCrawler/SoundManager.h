@@ -1,10 +1,11 @@
 #pragma once
-#include <map>
+#include <vector>
+#include <unordered_map>
 #include "SoundEffect.h"
 
 enum class SoundType
 {
-	selectUI,
+	selectUI = 0,
 	enterUI,
 	explosion,
 	coinPickup,
@@ -18,18 +19,32 @@ enum class SoundType
 	levelFinish
 };
 
+enum class SoundCategory
+{
+	master,
+	music,
+	effects
+};
+
 class SoundManager final
 {
 public:
 	static SoundManager* GetInstance();
-	~SoundManager();
 
 	void PlaySound(const SoundType& sound) const;
-	void SetMasterVolume(int value);
+	void AdjustVolume(const SoundCategory& soundCategory, float value);
+	void Initialize();
+	void Destroy();
 
 protected:
-	SoundManager();
-	static SoundManager* m_pSingleton;
+	static SoundManager* m_pInstance;
 
-	std::map<SoundType, SoundEffect*> m_pSoundEffects;
+	const float m_MaxVolume{ 80.0f };
+	float m_MusicVolume{ 50.0f };
+	float m_EffectsVolume{ 50.0f };
+
+	std::unordered_map<SoundType, SoundEffect*> m_pSoundEffects;
+
+	void ApplyVolume();
+	std::string GetAttributeValue(const std::string& attrName, const std::string& element);
 };

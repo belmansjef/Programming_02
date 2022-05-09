@@ -1,0 +1,48 @@
+<Sound
+  Type="0"
+  Path="Resources/Sounds/SelectUI.wav"
+/>
+<Sound
+  Type="1"
+  Path="Resources/Sounds/EnterUI.wav"
+/>
+<Sound
+  Type="2"
+  Path="Resources/Sounds/Explosion.wav"
+/>
+<Sound
+  Type="3"
+  Path="Resources/Sounds/CoinPickup.wav"
+/>
+<Sound
+  Type="4"
+  Path="Resources/Sounds/HealthPickup.wav"
+/>
+<Sound
+  Type="5"
+  Path="Resources/Sounds/HandRise.wav"
+/>
+<Sound
+  Type="6"
+  Path="Resources/Sounds/HitHurt.wav"
+/>
+<Sound
+  Type="7"
+  Path="Resources/Sounds/HitWall.wav"
+/>
+<Sound
+  Type="8"
+  Path="Resources/Sounds/Jump.wav"
+/>
+<Sound
+  Type="9"
+  Path="Resources/Sounds/Shoot.wav"
+/>
+<Sound
+  Type="10"
+  Path="Resources/Sounds/SpikeFall.wav"
+/>
+<Sound
+  Type="11"
+  Path="Resources/Sounds/LevelFinish.wav"
+/>

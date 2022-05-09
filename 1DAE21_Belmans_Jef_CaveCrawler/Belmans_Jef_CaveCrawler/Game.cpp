@@ -19,6 +19,8 @@ Game::~Game( )
 
 void Game::Initialize( )
 {
+	SoundManager::GetInstance()->Initialize();
+
 	// Load collectibles
 	m_CollectibleManager.AddItem(Point2f(192.0f, 42.0f), Collectible::CollectibleType::points);
 	m_CollectibleManager.AddItem(Point2f(192.0f, 50.0f), Collectible::CollectibleType::points);
@@ -66,7 +68,8 @@ void Game::Initialize( )
 
 void Game::Cleanup( )
 {
-	
+	SoundManager::GetInstance()->Destroy();
+	std::cout << "Game destuctor" << std::endl;
 }
 
 void Game::Update( float elapsedSec )
@@ -142,6 +145,12 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 		break;
 	case SDL_SCANCODE_R:
 		ResetLevel();
+		break;
+	case SDL_SCANCODE_UP:
+		SoundManager::GetInstance()->AdjustVolume(SoundCategory::master, 20.0f);
+		break;
+	case SDL_SCANCODE_DOWN:
+		SoundManager::GetInstance()->AdjustVolume(SoundCategory::master, -20.0f);
 		break;
 	default:
 		break;

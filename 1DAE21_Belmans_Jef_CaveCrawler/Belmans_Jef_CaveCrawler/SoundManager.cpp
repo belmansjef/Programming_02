@@ -1,56 +1,110 @@
 #include <iostream>
+#include <algorithm>
+#include <sstream>
+#include <fstream>
 #include "SoundManager.h"
 
 
-SoundManager* SoundManager::m_pSingleton{ nullptr };
+SoundManager* SoundManager::m_pInstance{ nullptr };
 
 SoundManager* SoundManager::GetInstance()
 {
-	if (m_pSingleton == nullptr)
+	if (m_pInstance == nullptr)
 	{
-		m_pSingleton = new SoundManager();
+		m_pInstance = new SoundManager();
 	}
 
-	return m_pSingleton;
-}
-
-SoundManager::~SoundManager()
-{
-	delete m_pSingleton;
-	m_pSingleton = nullptr;
+	return m_pInstance;
 }
 
 void SoundManager::PlaySound(const SoundType& sound) const
 {
-	std::map<SoundType, SoundEffect*>::const_iterator cit = m_pSoundEffects.find(sound);
+	std::unordered_map<SoundType, SoundEffect*>::const_iterator cit = m_pSoundEffects.find(sound);
 	if (cit != m_pSoundEffects.end())
 	{
 		cit->second->Play(0);
 	}
-	else std::cout << "Sound " << int(sound) << " not found!" << std::endl;
+	else std::cout << "Tried to play a sound that doesn't exist!" << std::endl;
 }
 
-SoundManager::SoundManager()
+void SoundManager::AdjustVolume(const SoundCategory& soundCategory, float value)
 {
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::selectUI, new SoundEffect("Resources/Sounds/SelectUI.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::enterUI, new SoundEffect("Resources/Sounds/EnterUI.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::explosion, new SoundEffect("Resources/Sounds/Explosion.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::coinPickup, new SoundEffect("Resources/Sounds/CoinPickup.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::healthPickup, new SoundEffect("Resources/Sounds/HealthPickup.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::handRise, new SoundEffect("Resources/Sounds/HandRise.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::hitHurt, new SoundEffect("Resources/Sounds/HitHurt.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::hitWall, new SoundEffect("Resources/Sounds/HitWall.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::jump, new SoundEffect("Resources/Sounds/Jump.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::shoot, new SoundEffect("Resources/Sounds/Shoot.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::spikeFall, new SoundEffect("Resources/Sounds/SpikeFall.wav")));
-	m_pSoundEffects.insert(std::pair<SoundType, SoundEffect*>(SoundType::levelFinish, new SoundEffect("Resources/Sounds/LevelFinish.wav")));
-	SetMasterVolume(25);
-}
-
-void SoundManager::SetMasterVolume(int value)
-{
-	for (auto const& [key, val] : m_pSoundEffects)
+	switch (soundCategory)
 	{
-		val->SetVolume(value);
+	case SoundCategory::master:
+		m_MusicVolume = std::clamp(m_MusicVolume + value, 0.0f, m_MaxVolume);
+		m_EffectsVolume = std::clamp(m_EffectsVolume + value, 0.0f, m_MaxVolume);
+		break;
+	case SoundCategory::music:
+		m_MusicVolume = std::clamp(m_MusicVolume + value, 0.0f, m_MaxVolume);
+		break;
+	case SoundCategory::effects:
+		m_EffectsVolume = std::clamp(m_EffectsVolume + value, 0.0f, m_MaxVolume);
+		break;
+	default:
+		break;
 	}
+
+	ApplyVolume();
+}
+
+void SoundManager::Initialize()
+{
+	std::ifstream soundfile{ "Resources/Initializers/Sounds.txt" };
+
+	if (soundfile.good())
+	{
+		while (soundfile.peek() != EOF)
+		{
+			std::string line;
+			std::getline(soundfile, line, '>');
+			int Type{ std::stoi(GetAttributeValue("Type", line)) };
+			std::string Path{ GetAttributeValue("Path", line) };
+
+			if (Path != "")
+			{
+				
+				m_pSoundEffects.insert(std::make_pair(SoundType(Type), new SoundEffect(Path)));
+			}
+		}
+	}
+	ApplyVolume();
+}
+
+void SoundManager::Destroy()
+{
+	for (auto& [key, val] : m_pSoundEffects)
+	{
+		delete val;
+		val = nullptr;
+	}
+
+	delete m_pInstance;
+	m_pInstance = nullptr;
+}
+
+void SoundManager::ApplyVolume()
+{
+	for (auto& [key, val] : m_pSoundEffects)
+	{
+		val->SetVolume(int(m_EffectsVolume));
+	}
+}
+
+std::string SoundManager::GetAttributeValue(const std::string& attrName, const std::string& element)
+{
+	std::string attribute;
+	std::string attrSearch{ attrName + "=" };
+
+	size_t attrPos = element.find(attrSearch);
+	if (attrPos == std::string::npos)
+	{
+		std::cerr << R"(Attribute ")" << attrName << R"(" not found!)";
+		return "";
+	}
+	size_t startPos{ element.find(R"(")", attrPos) };
+	size_t endPos{ element.find(R"(")", startPos + 1) };
+
+	attribute = element.substr(startPos + 1, endPos - startPos - 1);
+	return attribute;
 }
