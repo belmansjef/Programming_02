@@ -5,7 +5,7 @@
 #include "SoundManager.h"
 
 CrabEnemy::CrabEnemy(float left, float bottom, float width, float height, int movementDirection, int maxHealth)
-	: m_Health { Health(maxHealth, 0.1f) }
+	: m_Health { Health(maxHealth, &m_Sprite, 0.1f) }
 	, m_MaxHealth { maxHealth }
 	, m_PhysicsBody { left, bottom, width, height }
 	, m_MovementDirection { movementDirection }

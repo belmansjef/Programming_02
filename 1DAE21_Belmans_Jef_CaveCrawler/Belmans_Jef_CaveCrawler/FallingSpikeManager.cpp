@@ -1,6 +1,6 @@
 #include "FallingSpikeManager.h"
 #include "FallingSpike.h"
-#include "Avatar.h"
+#include "Health.h"
 
 FallingSpikeManager::~FallingSpikeManager()
 {
@@ -17,7 +17,7 @@ FallingSpike* FallingSpikeManager::AddItem(const Point2f& bottomLeft)
 	return m_pItems.back();
 }
 
-void FallingSpikeManager::Update(const Rectf& actorShape, const std::vector<std::vector<Point2f>>& verts)
+void FallingSpikeManager::Update(const Rectf& actorShape, const std::vector<std::vector<Point2f>>& verts, Health& actorHealth)
 {
 	for (FallingSpike* element : m_pItems)
 	{
@@ -28,7 +28,7 @@ void FallingSpikeManager::Update(const Rectf& actorShape, const std::vector<std:
 	}
 
 	LevelOverlapCheck(verts);
-	PlayerOverlapCheck(actorShape);
+	PlayerOverlapCheck(actorShape, actorHealth);
 }
 
 void FallingSpikeManager::Draw() const
@@ -50,13 +50,13 @@ void FallingSpikeManager::Reset()
 	}
 }
 
-void FallingSpikeManager::PlayerOverlapCheck(const Rectf& actorShape) const
+void FallingSpikeManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth) const
 {
 	for (FallingSpike* element : m_pItems)
 	{
 		if (element->IsOverlapping(actorShape) && !element->IsDestroyed())
 		{
-			Avatar::TakeDamage();
+			actorHealth.TakeDamage(1);
 			element->Destroy();
 		}
 	}

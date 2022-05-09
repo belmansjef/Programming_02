@@ -18,8 +18,8 @@ public:
 	Avatar& operator=(Avatar&& other) = delete;
 	~Avatar() = default;
 
-	static void TakeDamage(int damage = 1);
-	static void Heal(int value = 1);
+	void TakeDamage(int damage = 1);
+	void Heal(int value = 1);
 
 	bool ShouldTrack();
 	bool GetIsDead() const;
@@ -38,8 +38,8 @@ private:
 	PhysicsBody m_PhysicsBody;
 	Gun m_Gun;
 
-	static const int m_MaxHealth;
-	static Health m_AvatarHealth;
+	const int m_MaxHealth{ 4 };
+	Health m_AvatarHealth;
 
 	bool m_ShouldTrack{ false };
 	const float m_HorCamDeadZone{ 10.0f };

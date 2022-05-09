@@ -16,7 +16,7 @@ public:
 
 	Collectible* AddItem(const Point2f& bottomLeft, Collectible::CollectibleType type);
 
-	void Update(const Rectf& actorShape);
+	void Update(const Rectf& actorShape, Health& actorHealth);
 	void Draw() const;
 	void Reset();
 
@@ -24,6 +24,6 @@ private:
 	std::vector<Collectible*> m_pItems;
 	int m_NrPointsCollected{ 0 };
 
-	bool HitItem(const Rectf& rect);
+	bool HitItem(const Rectf& rect, Health& actorHealth);
 	void DeleteCollectible(const Collectible* collectible) const;
 };

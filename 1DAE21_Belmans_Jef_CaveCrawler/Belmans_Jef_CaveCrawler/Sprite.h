@@ -48,6 +48,7 @@ public:
 	void Update();
 	void Draw() const;
 	void SetAnimation(const std::string animName);
+	void FlashSprite();
 
 private:
 	Texture* m_pTexture;
@@ -60,6 +61,14 @@ private:
 
 	int m_CurrentFrame;
 	float m_FrameAccuSec;
+
+	// Damage flash indicator
+	const float m_FlashDuration;
+	const int m_TotalFlashes;
+	float m_LastFlashTime;
+	int m_CurrentFlashes;
+	bool m_DoFlash;
+	bool m_DoChangeColor;
 
 	Animation* m_pCurrentAnimation;
 	std::vector<Animation*> m_pAnimations;

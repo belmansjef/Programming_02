@@ -212,7 +212,7 @@ void Texture::CreateFromSurface( SDL_Surface* pSurface )
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
 }
 
-void Texture::Draw( const Point2f& dstBottomLeft, const Rectf& srcRect ) const
+void Texture::Draw( const Point2f& dstBottomLeft, const Rectf& srcRect, bool doFlashTexture ) const
 {
 	const float epsilon{ 0.001f };
 	if ( !m_CreationOk )
@@ -234,11 +234,11 @@ void Texture::Draw( const Point2f& dstBottomLeft, const Rectf& srcRect ) const
 			dstRect.width = m_Width;
 			dstRect.height = m_Height;
 		}
-		Draw( dstRect, srcRect );
+		Draw( dstRect, srcRect, doFlashTexture);
 	}
 }
 
-void Texture::Draw( const Rectf& dstRect, const Rectf& srcRect ) const
+void Texture::Draw( const Rectf& dstRect, const Rectf& srcRect, bool doFlashTexture) const
 {
 	const float epsilon{ 0.001f };
 	if ( !m_CreationOk )
@@ -292,13 +292,20 @@ void Texture::Draw( const Rectf& dstRect, const Rectf& srcRect ) const
 	{
 		vertexRight = vertexLeft + dstRect.width;
 		vertexTop = vertexBottom + dstRect.height;
-
 	}
 
 	// Tell opengl which texture we will use
 	glBindTexture( GL_TEXTURE_2D, m_Id );
-	glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
-
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MULT);
+	if (doFlashTexture) // <--- Moddified code to add damage animation via color multiplication
+	{
+		glColor3f(1, 0, 0);
+	}
+	else
+	{
+		glColor3f(1, 1, 1);
+	}
+	
 	// Draw
 	glEnable( GL_TEXTURE_2D );
 	{

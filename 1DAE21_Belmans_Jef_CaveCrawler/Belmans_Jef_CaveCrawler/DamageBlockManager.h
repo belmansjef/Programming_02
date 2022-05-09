@@ -19,11 +19,11 @@ public:
 	bool AddItemsFromSvgFile(const std::string& filePath);
 
 	void Draw() const;
-	void Update(const Rectf& actorShape);
+	void Update(const Rectf& actorShape, Health& actorHealth);
 
 private:
 	std::vector<DamageBlock*> m_pItems;
 
-	void PlayerCollisionCheck(const Rectf& acotrShape);
+	void PlayerCollisionCheck(const Rectf& acotrShape, Health& actorHealth);
 	void DeleteBlock(const DamageBlock* block) const;
 };

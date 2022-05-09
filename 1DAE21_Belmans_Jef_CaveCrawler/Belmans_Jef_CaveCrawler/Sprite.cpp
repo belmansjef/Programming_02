@@ -22,6 +22,10 @@ Animation::Animation(std::string animName, int nrFrames, int nrFramesPerSec, int
 
 Sprite::Sprite(const SpriteType& type)
 	: m_Type { type }
+	, m_FlashDuration { 0.1f }
+	, m_TotalFlashes { 6 }
+	, m_DoFlash { false }
+	, m_DoChangeColor { false }
 {
 	SetSprite();
 }
@@ -50,7 +54,7 @@ float Sprite::GetFrameHeight() const
 
 void Sprite::Draw() const
 {
-	m_pTexture->Draw(Point2f(), m_TextureClip);
+	m_pTexture->Draw(Point2f(), m_TextureClip, m_DoChangeColor);
 }
 
 void Sprite::Update()
@@ -70,6 +74,21 @@ void Sprite::Update()
 
 		UpdateTextClip();
 	}
+
+	if (m_DoFlash)
+	{
+		if (m_LastFlashTime + m_FlashDuration < Time::time)
+		{
+			m_DoChangeColor = !m_DoChangeColor;
+			m_CurrentFlashes++;
+			
+			m_LastFlashTime = Time::time;
+			if (m_CurrentFlashes >= m_TotalFlashes)
+			{
+				m_DoFlash = m_DoChangeColor = false;
+			}
+		}
+	}
 }
 
 void Sprite::SetAnimation(const std::string animName)
@@ -84,6 +103,13 @@ void Sprite::SetAnimation(const std::string animName)
 			m_pCurrentAnimation = ptr;
 		}
 	}
+}
+
+void Sprite::FlashSprite()
+{
+	m_CurrentFlashes = 0;
+	m_DoFlash = m_DoChangeColor = true;
+	m_LastFlashTime = Time::time;
 }
 
 void Sprite::SetSprite()

@@ -3,14 +3,16 @@
 #include "HUD.h"
 #include "Camera.h"
 #include "SoundManager.h"
+#include "Sprite.h"
 
-Health::Health(int maxHealth, float damageCooldown, bool isPlayer)
+Health::Health(int maxHealth, Sprite* sprite, float damageCooldown, bool isPlayer)
 	: m_MaxHealth { maxHealth }
 	, m_CurrentHealth { maxHealth }
 	, m_TimeSinceLastHit{ -damageCooldown }
 	, m_DamageCooldown { damageCooldown }
 	, m_IsDead { false } 
 	, m_IsPlayer { isPlayer }
+	, m_pSprite { sprite }
 {
 }
 
@@ -49,11 +51,15 @@ void Health::TakeDamage(int amount)
 			m_CurrentHealth = 0;
 			Die();
 		}
-		else if(m_IsPlayer)
+		else if(m_IsPlayer) // Player took damage
 		{
-			// Took damage
 			HUD::UpdateHealth(m_CurrentHealth);
 			Camera::DoScreenShake();
+			m_pSprite->FlashSprite();
+		}
+		else // Any other health components took damage
+		{
+			m_pSprite->FlashSprite();
 		}
 	}
 }

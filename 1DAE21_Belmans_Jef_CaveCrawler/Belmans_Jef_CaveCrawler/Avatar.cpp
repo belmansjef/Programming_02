@@ -5,14 +5,12 @@
 #include "Level.h"
 #include "Game.h"
 
-const int Avatar::m_MaxHealth{ 4 };
-Health Avatar::m_AvatarHealth{ 4, 1.0f, true };
-
 Avatar::Avatar(float left, float bottom, float width, float height)
 	: m_StartPos { Point2f(left, bottom) }
-	, m_Sprite { Sprite(SpriteType::player) }
 	, m_PhysicsBody { PhysicsBody(left, bottom, width, height, 150.0f) }
 	, m_Gun { Gun() }
+	, m_Sprite{ Sprite(SpriteType::player) }	
+	, m_AvatarHealth{ Health(m_MaxHealth, &m_Sprite, 1.0f, true) }
 { 
 }
 
@@ -28,10 +26,7 @@ bool Avatar::GetIsDead() const
 
 void Avatar::TakeDamage(int damage)
 {
-	if (m_AvatarHealth.ShouldHit())
-	{
-		m_AvatarHealth.TakeDamage(damage);
-	}
+	m_AvatarHealth.TakeDamage(damage);
 }
 
 void Avatar::Heal(int value)

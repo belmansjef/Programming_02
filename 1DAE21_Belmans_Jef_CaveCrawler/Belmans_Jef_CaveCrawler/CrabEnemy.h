@@ -5,7 +5,6 @@
 #include "Sprite.h"
 
 class Level;
-class Sprite;
 class CrabEnemy final
 {
 public:

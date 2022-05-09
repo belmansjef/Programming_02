@@ -86,12 +86,12 @@ void Game::Update( float elapsedSec )
 		m_Camera.SetCameraBounds(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
 
 		// Managers
-		m_DamageBlockManager.Update(m_PlayerAvatar.GetShape());
-		m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-		m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-		m_CollectibleManager.Update(m_PlayerAvatar.GetShape());
-		m_Lava.Update(m_PlayerAvatar.GetShape());
-		m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts());
+		m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+		m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetProjectileManager().GetProjectiles(), m_PlayerAvatar.GetHealth());
+		m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetProjectileManager().GetProjectiles(), m_PlayerAvatar.GetHealth());
+		m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+		m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+		m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetHealth());
 
 		if (m_PlayerAvatar.GetIsDead())
 		{

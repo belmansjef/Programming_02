@@ -3,7 +3,6 @@
 #include "Health.h"
 #include "Camera.h"
 #include "Projectile.h"
-#include "Avatar.h"
 
 RisingHandManager::~RisingHandManager()
 {
@@ -20,7 +19,7 @@ RisingHand* RisingHandManager::AddItem(const Point2f& bottomLeft, int maxHealth)
 	return m_pItems.back();
 }
 
-void RisingHandManager::Update(const Rectf& actorShape, std::vector<Projectile*> pProjectiles)
+void RisingHandManager::Update(const Rectf& actorShape, std::vector<Projectile*> pProjectiles, Health& actorHealth)
 {
 	for (RisingHand* element : m_pItems)
 	{
@@ -30,7 +29,7 @@ void RisingHandManager::Update(const Rectf& actorShape, std::vector<Projectile*>
 		}
 	}
 
-	PlayerOverlapCheck(actorShape);
+	PlayerOverlapCheck(actorShape, actorHealth);
 	ProjectileCollisionCheck(pProjectiles);
 }
 
@@ -53,13 +52,13 @@ void RisingHandManager::Reset()
 	}
 }
 
-void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape) const
+void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth) const
 {
 	for (RisingHand* element : m_pItems)
 	{
 		if (element->IsOverlapping(actorShape) && !element->IsDead())
 		{
-			Avatar::TakeDamage();
+			actorHealth.TakeDamage(1);
 		}
 	}
 }

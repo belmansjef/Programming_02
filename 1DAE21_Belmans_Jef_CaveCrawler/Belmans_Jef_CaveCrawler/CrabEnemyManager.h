@@ -18,7 +18,7 @@ public:
 
 	CrabEnemy* AddItem(const Point2f& bottomLeft, int movementDirection = 1, int maxHealth = 3);
 
-	void Update(const Rectf& actorShape, const Level& level, std::vector<Projectile*> pProjectiles);
+	void Update(const Rectf& actorShape, const Level& level, std::vector<Projectile*> pProjectiles, Health& actorHealth);
 	void Draw() const;
 
 	void Reset();
@@ -26,7 +26,7 @@ public:
 private:
 	std::vector<CrabEnemy*> m_pItems;
 
-	void PlayerOverlapCheck(const Rectf& actorShape);
+	void PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth);
 	void ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles);
 };
 

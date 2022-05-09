@@ -5,7 +5,7 @@
 
 RisingHand::RisingHand(const Point2f& bottomLeft, int maxHealth)
 	: m_Sprite { Sprite(SpriteType::risingHand)}
-	, m_Health { Health(maxHealth, 0.1f) }
+	, m_Health { Health(maxHealth, &m_Sprite, 0.1f) }
 	, m_MaxHealth { maxHealth }
 {
 	m_BoxCollider = Rectf
