@@ -186,6 +186,23 @@ void Game::ClearBackground( ) const
 	glClear( GL_COLOR_BUFFER_BIT );
 }
 
+void Game::PlayerReachedEnd() const
+{
+	SoundManager::GetInstance()->PlaySound(SoundType::levelFinish);
+}
+
+void Game::ResetLevel()
+{
+	m_RisingHandManager.Reset();
+	m_CrabEnemyManager.Reset();
+	m_PlayerAvatar.Reset();
+	m_CollectibleManager.Reset();
+	m_Camera.Reset();
+	m_FallingSpikeManager.Reset();
+
+	m_HasReachedEnd = false;
+}
+
 void Game::UpdateFrameStats()
 {
 	m_FrameRate++;
@@ -205,19 +222,7 @@ void Game::UpdateFrameStats()
 	}
 }
 
-void Game::ResetLevel()
+void Game::SetGameState(const GameState& state)
 {
-	m_RisingHandManager.Reset();
-	m_CrabEnemyManager.Reset();
-	m_PlayerAvatar.Reset();
-	m_CollectibleManager.Reset();
-	m_Camera.Reset();
-	m_FallingSpikeManager.Reset();
-
-	m_HasReachedEnd = false;
-}
-
-void Game::PlayerReachedEnd() const
-{
-	SoundManager::GetInstance()->PlaySound(SoundType::levelFinish);
+	m_CurrentGameState = state;
 }

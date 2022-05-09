@@ -11,6 +11,14 @@
 #include "Lava.h"
 #include "HUD.h"
 
+enum class GameState
+{
+	MainMenu,
+	InGame,
+	Paused,
+	Finished
+};
+
 class Game final
 {
 public:
@@ -20,6 +28,8 @@ public:
 	Game(Game&& other) = delete;
 	Game& operator=(Game&& other) = delete;
 	~Game();
+
+	void SetGameState(const GameState& state);
 
 	void Update(float elapsedSec);
 	void Draw() const;
@@ -36,11 +46,13 @@ private:
 	const Window m_Window;
 	const float m_ScaleFactor{ 4.0f };
 
+	GameState m_CurrentGameState{ GameState::MainMenu };
+
 	bool m_ShouldPrintStats{ true };
 	float m_FrameTime{ 0.0f };
 	float m_AvgFrameTime{ 0.0f };
 	float m_FrameRate{ 0.0f };
-	const int m_MaxFPS{ 5000 };
+	const int m_MaxFPS{ 50000 };
 	const int m_MaxFrameTime{ 1000 / m_MaxFPS };
 
 	Uint32 m_FrameDelay{ 0 };
@@ -66,7 +78,6 @@ private:
 	void ClearBackground( ) const;
 
 	void PlayerReachedEnd() const;
-
 	void ResetLevel();
 	void UpdateFrameStats();
 };

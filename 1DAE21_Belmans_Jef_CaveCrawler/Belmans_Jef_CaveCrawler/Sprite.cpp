@@ -23,7 +23,7 @@ Animation::Animation(std::string animName, int nrFrames, int nrFramesPerSec, int
 Sprite::Sprite(const SpriteType& type)
 	: m_Type { type }
 	, m_FlashDuration { 0.1f }
-	, m_TotalFlashes { 6 }
+	, m_TotalFlashes { 3 }
 	, m_DoFlash { false }
 	, m_DoChangeColor { false }
 {

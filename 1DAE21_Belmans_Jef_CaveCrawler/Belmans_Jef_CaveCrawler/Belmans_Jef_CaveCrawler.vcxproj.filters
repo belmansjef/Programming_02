@@ -49,6 +49,9 @@
     <Filter Include="Game Files\Level\Hazards\FallingSpike">
       <UniqueIdentifier>{e66dc6d4-5314-4735-bf81-12824386f43b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Game\HUD">
+      <UniqueIdentifier>{be60febd-1894-4e57-ac83-6f5b2cf54263}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp">
@@ -123,17 +126,11 @@
     <ClCompile Include="Game.cpp">
       <Filter>Game Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Game Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="CrabEnemy.cpp">
       <Filter>Game Files\Charachters\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="CrabEnemyManager.cpp">
       <Filter>Game Files\Charachters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Game Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Avatar.cpp">
       <Filter>Game Files\Charachters\Player</Filter>
@@ -161,6 +158,21 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Game Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Game Files\Game\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Game Files\Game\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuBase.cpp">
+      <Filter>Game Files\Game\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Game Files\Game\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Game Files\Game\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +254,6 @@
     <ClInclude Include="CrabEnemyManager.h">
       <Filter>Game Files\Charachters\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="HUD.h">
-      <Filter>Game Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Avatar.h">
       <Filter>Game Files\Charachters\Player</Filter>
     </ClInclude>
@@ -272,5 +281,20 @@
     <ClInclude Include="SoundManager.h">
       <Filter>Game Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Game Files\Game\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuBase.h">
+      <Filter>Game Files\Game\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Game Files\Game\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Game Files\Game\HUD</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraZone.cpp" />
     <ClCompile Include="CameraZoneManager.cpp" />
@@ -161,7 +162,9 @@
     <ClCompile Include="Lava.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Matrix2x3.cpp" />
+    <ClCompile Include="MenuBase.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Collectible.cpp" />
     <ClCompile Include="CollectibleManager.cpp" />
@@ -183,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraZone.h" />
     <ClInclude Include="CameraZoneManager.h" />
@@ -199,7 +203,9 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Lava.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Matrix2x3.h" />
+    <ClInclude Include="MenuBase.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Collectible.h" />
     <ClInclude Include="CollectibleManager.h" />
@@ -218,6 +224,9 @@
     <ClInclude Include="Time.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2f.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
