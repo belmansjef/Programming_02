@@ -216,6 +216,7 @@ void Game::ResetLevel()
 	m_Camera.Reset();
 	m_FallingSpikeManager.Reset();
 
+	m_HasReachedEnd = false;
 	m_MainMenu.Open();
 	SetGameState(GameState::MainMenu);
 }
