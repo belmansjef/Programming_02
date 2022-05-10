@@ -199,6 +199,7 @@
     <ClInclude Include="FallingSpikeManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gun.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Lava.h" />

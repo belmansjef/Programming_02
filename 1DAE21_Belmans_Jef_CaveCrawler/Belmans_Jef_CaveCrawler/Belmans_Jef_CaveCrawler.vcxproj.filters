@@ -293,6 +293,9 @@
     <ClInclude Include="MainMenu.h">
       <Filter>Game Files\Game\HUD</Filter>
     </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Game Files\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

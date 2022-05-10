@@ -62,10 +62,14 @@ void Avatar::OnMouseDownEvent(const SDL_MouseButtonEvent& e)
 	}
 }
 
-void Avatar::Update(const Level& level)
+void Avatar::Update(const Level& level, const GameState& state)
 {
-	GetInput();
-	ProcessInput(level);
+	if (state == GameState::InGame)
+	{
+		GetInput();
+		ProcessInput(level);
+	}
+	
 	m_PhysicsBody.Update(level);
 	m_Sprite.Update();
 	m_Gun.Update(level.GetLevelVerts());
@@ -86,8 +90,14 @@ void Avatar::Draw() const
 
 void Avatar::Reset()
 {
+	m_HorizontalScale = 1;
+
 	m_PhysicsBody.Shape().left = m_StartPos.x;
 	m_PhysicsBody.Shape().bottom = m_StartPos.y;
+	m_PhysicsBody.Velocity() = Vector2f();
+
+	m_Sprite.SetAnimation("idle");
+
 	m_AvatarHealth.Heal(m_MaxHealth);
 	m_Gun.GetProjectileManager().Reset();
 }
@@ -98,6 +108,7 @@ void Avatar::GetInput()
 
 	m_MovementDirection = state[SDL_SCANCODE_D] - state[SDL_SCANCODE_A];
 	m_IsPressingJump = bool(state[SDL_SCANCODE_SPACE]);
+	m_IsPressingShoot = bool(state[SDL_SCANCODE_RCTRL]);
 }
 
 void Avatar::ProcessInput(const Level& level)
@@ -140,6 +151,11 @@ void Avatar::ProcessInput(const Level& level)
 	if (m_PhysicsBody.GetIsGrounded())
 	{
 		m_PhysicsBody.SetHasJumped(m_IsPressingJump);
+	}
+
+	if (m_IsPressingShoot)
+	{
+		m_Gun.Shoot(m_PhysicsBody.GetPosition(), int(m_HorizontalScale));
 	}
 
 	SetAnimation();

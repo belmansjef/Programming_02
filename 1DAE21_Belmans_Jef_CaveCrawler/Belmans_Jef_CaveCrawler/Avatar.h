@@ -1,11 +1,12 @@
 #pragma once
 #include <math.h>
+#include "pch.h"
 #include "utils.h"
 #include "Sprite.h"
 #include "Health.h"
 #include "Gun.h"
 #include "PhysicsBody.h"
-#include "pch.h"
+#include "Enums.h"
 
 class Level;
 class Avatar final
@@ -28,7 +29,7 @@ public:
 	ProjectileManager& GetProjectileManager();
 
 	void OnMouseDownEvent(const SDL_MouseButtonEvent& e);
-	void Update(const Level& level);
+	void Update(const Level& level, const GameState& state);
 	void Draw() const;
 	void Reset();
 

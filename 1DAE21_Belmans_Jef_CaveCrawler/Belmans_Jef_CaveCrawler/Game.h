@@ -10,14 +10,8 @@
 #include "FallingSpikeManager.h"
 #include "Lava.h"
 #include "HUD.h"
-
-enum class GameState
-{
-	MainMenu,
-	InGame,
-	Paused,
-	Finished
-};
+#include "MainMenu.h"
+#include "Enums.h"
 
 class Game final
 {
@@ -30,6 +24,7 @@ public:
 	~Game();
 
 	void SetGameState(const GameState& state);
+	GameState GetGameState() const;
 
 	void Update(float elapsedSec);
 	void Draw() const;
@@ -58,7 +53,7 @@ private:
 	Uint32 m_FrameDelay{ 0 };
 
 	Level m_Level{Point2f(32.0f, 232.0f)};
-	Avatar m_PlayerAvatar{ 48.0f, 24.0f, 13.0f, 14.0f };
+	Avatar m_PlayerAvatar{ 72.0f, 24.0f, 13.0f, 14.0f };
 	Camera m_Camera;
 	CollectibleManager m_CollectibleManager;
 	DamageBlockManager m_DamageBlockManager;
@@ -67,6 +62,9 @@ private:
 	CrabEnemyManager m_CrabEnemyManager;
 	FallingSpikeManager m_FallingSpikeManager;
 	Lava m_Lava{Point2f(432.0f, 0.0f), 32.0f, 16.0f};
+
+	MenuBase* m_ActiveMenu;
+	MainMenu m_MainMenu;
 	HUD m_HUD;
 
 	bool m_HasReachedEnd{ false };
