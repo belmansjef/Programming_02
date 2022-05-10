@@ -67,9 +67,9 @@ void Avatar::Update(const Level& level, const GameState& state)
 	if (state == GameState::InGame)
 	{
 		GetInput();
-		ProcessInput(level);
 	}
 	
+	ProcessInput(level);
 	m_PhysicsBody.Update(level);
 	m_Sprite.Update();
 	m_Gun.Update(level.GetLevelVerts());
@@ -95,6 +95,10 @@ void Avatar::Reset()
 	m_PhysicsBody.Shape().left = m_StartPos.x;
 	m_PhysicsBody.Shape().bottom = m_StartPos.y;
 	m_PhysicsBody.Velocity() = Vector2f();
+
+	m_MovementDirection = 0;
+	m_IsPressingJump = false;
+	m_IsPressingShoot = false;
 
 	m_Sprite.SetAnimation("idle");
 

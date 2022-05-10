@@ -4,8 +4,8 @@
 #include "Button.h"
 #include "SoundManager.h"
 
-MainMenu::MainMenu(const Point2f& buttonPanelBottomLeft, const Window& window)
-	: MenuBase("CAVE CRAWLER", 52, window, Rectf(buttonPanelBottomLeft.x, buttonPanelBottomLeft.y, 100.0f, 180.0f))
+MainMenu::MainMenu(const Point2f& buttonPanelBottomLeft, float windowWidth, float windowHeight)
+	: MenuBase("CAVE CRAWLER", 52, windowWidth, windowHeight, Rectf(buttonPanelBottomLeft.x, buttonPanelBottomLeft.y, 100.0f, 180.0f))
 	, m_pStartButton{ new Button(Point2f(), "START")}
 	, m_pOptionsButton{ new Button(Point2f(), "OPTIONS") }
 	, m_pExitButton{ new Button(Point2f(), "EXIT") }
@@ -17,7 +17,6 @@ MainMenu::MainMenu(const Point2f& buttonPanelBottomLeft, const Window& window)
 	FitButtonsToPanel();
 }
 
-
 MainMenu::~MainMenu()
 {
 	m_pStartButton = nullptr;
@@ -27,18 +26,23 @@ MainMenu::~MainMenu()
 
 void MainMenu::Enter(Game& game)
 {
-	SoundManager::GetInstance()->PlaySound(SoundType::enterUI);
-	if (m_pHighlightedButton == m_pStartButton)
+	MenuBase::Enter(game);
+
+	if (IsActive())
 	{
-		game.SetGameState(GameState::InGame);
-		Close();
-	}
-	else if (m_pHighlightedButton == m_pOptionsButton)
-	{
-		// TODO: open options
-	}
-	else if (m_pHighlightedButton == m_pExitButton)
-	{
-		exit(0);	
+		Button* pHighlightedButton = GetHighlightedButton();
+		if (pHighlightedButton == m_pStartButton)
+		{
+			game.SetGameState(GameState::InGame);
+			Close();
+		}
+		else if (pHighlightedButton == m_pOptionsButton)
+		{
+			// TODO: open options
+		}
+		else if (pHighlightedButton == m_pExitButton)
+		{
+			exit(3); // <-- Mem leaks
+		}
 	}
 }

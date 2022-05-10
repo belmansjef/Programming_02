@@ -4,7 +4,7 @@
 #include "Texture.h"
 #include "SoundManager.h"
 
-MenuBase::MenuBase(const std::string& titleText, const int fontSize, const Window& window, const Rectf& buttonPanel)
+MenuBase::MenuBase(const std::string& titleText, const int fontSize, float windowWidth, float windowHeight, const Rectf& buttonPanel)
 	: m_pTitleText { new Texture(titleText, "Resources/Font.ttf", fontSize, Color4f(1.0f, 1.0f, 1.0f, 1.0f))}
 	, m_IsActive { false }
 	, m_ActiveButtonIdx{ 0 }
@@ -13,8 +13,8 @@ MenuBase::MenuBase(const std::string& titleText, const int fontSize, const Windo
 {
 	m_TitleTextPos = Point2f
 	(
-		(window.width / 2.0f) - m_pTitleText->GetWidth() / 2.0f,
-		((window.height / 4.0f) * 3.0f) - m_pTitleText->GetHeight() / 2.0f
+		(windowWidth / 2.0f) - m_pTitleText->GetWidth() / 2.0f,
+		((windowHeight / 4.0f) * 3.0f) - m_pTitleText->GetHeight() / 2.0f
 	);
 }
 	
@@ -43,6 +43,14 @@ void MenuBase::Draw() const
 	}
 }
 
+void MenuBase::Enter(Game& game)
+{
+	if (m_IsActive)
+	{
+		SoundManager::GetInstance()->PlaySound(SoundType::enterUI);
+	}
+}
+
 void MenuBase::CycleSelection(bool up)
 {
 	if (m_IsActive)
@@ -67,6 +75,11 @@ void MenuBase::Open()
 	m_IsActive = true;
 }
 
+Button* MenuBase::GetHighlightedButton() const
+{
+	return m_pHighlightedButton;
+}
+
 void MenuBase::AddButton(Button* btn)
 {
 	if (m_pButtons.size() == 0)
@@ -89,4 +102,9 @@ void MenuBase::FitButtonsToPanel()
 		};
 		m_pButtons[i]->Reposition(newPos);
 	}
+}
+
+bool MenuBase::IsActive() const
+{
+	return m_IsActive;
 }

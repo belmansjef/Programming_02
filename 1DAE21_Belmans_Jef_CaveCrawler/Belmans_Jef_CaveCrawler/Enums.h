@@ -5,6 +5,14 @@ enum class GameState
 	MainMenu,
 	InGame,
 	Paused,
-	Died,
+	Dead,
 	Finished
+};
+
+enum class MenuType
+{
+	Main,
+	Options,
+	Pause,
+	Finished,
 };

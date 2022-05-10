@@ -52,6 +52,12 @@
     <Filter Include="Game Files\Game\HUD">
       <UniqueIdentifier>{be60febd-1894-4e57-ac83-6f5b2cf54263}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Game\HUD\Components">
+      <UniqueIdentifier>{09a90aac-0d3e-4233-aa70-976872deee9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Game\HUD\Menus">
+      <UniqueIdentifier>{e78c006d-2cc1-41a9-bf8c-90a0afd3a6dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp">
@@ -162,17 +168,26 @@
     <ClCompile Include="HUD.cpp">
       <Filter>Game Files\Game\HUD</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Game Files\Game\HUD</Filter>
+    <ClCompile Include="Button.cpp">
+      <Filter>Game Files\Game\HUD\Components</Filter>
     </ClCompile>
     <ClCompile Include="MenuBase.cpp">
-      <Filter>Game Files\Game\HUD</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Game Files\Game\HUD</Filter>
+      <Filter>Game Files\Game\HUD\Components</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>Game Files\Game\HUD</Filter>
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Game Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuManager.cpp">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelFinishedMenu.cpp">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,17 +299,26 @@
     <ClInclude Include="HUD.h">
       <Filter>Game Files\Game\HUD</Filter>
     </ClInclude>
-    <ClInclude Include="MenuBase.h">
-      <Filter>Game Files\Game\HUD</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Game Files\Game\HUD</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Game Files\Game\HUD</Filter>
-    </ClInclude>
     <ClInclude Include="Enums.h">
       <Filter>Game Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Game Files\Game\HUD\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuBase.h">
+      <Filter>Game Files\Game\HUD\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuManager.h">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelFinishedMenu.h">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

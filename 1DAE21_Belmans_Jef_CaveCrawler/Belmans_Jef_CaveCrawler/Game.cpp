@@ -8,7 +8,7 @@ Game::Game( const Window& window )
 	, m_Camera{ window.width / m_ScaleFactor, window.height / m_ScaleFactor }
 	, m_EndScreenOverlay{ Rectf(0.0f, 0.0f, window.width, window.height) }
 	, m_HUD { window, m_PlayerAvatar.GetHealth().GetCurrentHealth() }
-	, m_MainMenu { Point2f(80.0f, 50.0f), window }
+	, m_MenuManager { window.width, window.height }
 {
 	Initialize( );
 }
@@ -21,8 +21,6 @@ Game::~Game( )
 void Game::Initialize( )
 {
 	SoundManager::GetInstance()->Initialize();
-	m_ActiveMenu = &m_MainMenu;
-	m_ActiveMenu->Open();
 
 	// Load collectibles
 	m_CollectibleManager.AddItem(Point2f(192.0f, 42.0f), Collectible::CollectibleType::points);
@@ -82,30 +80,22 @@ void Game::Update( float elapsedSec )
 	SDL_Delay(m_FrameDelay);
 
 	// Updates
-	if (!m_HasReachedEnd)
+	m_PlayerAvatar.Update(m_Level, m_CurrentGameState);
+	m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
+	m_Camera.SetCameraBounds(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
+
+	// Managers
+	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+	m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetProjectileManager().GetProjectiles(), m_PlayerAvatar.GetHealth());
+	m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetProjectileManager().GetProjectiles(), m_PlayerAvatar.GetHealth());
+	m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
+	m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetHealth());
+
+	if (m_HasReachedEnd = m_Level.HasReachedEnd(m_PlayerAvatar.GetShape()) && m_CurrentGameState != GameState::Finished)
 	{
-		m_PlayerAvatar.Update(m_Level, m_CurrentGameState);
-		m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
-		m_Camera.SetCameraBounds(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
-
-		// Managers
-		m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-		m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetProjectileManager().GetProjectiles(), m_PlayerAvatar.GetHealth());
-		m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetProjectileManager().GetProjectiles(), m_PlayerAvatar.GetHealth());
-		m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-		m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-		m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetHealth());
-
-		if (m_PlayerAvatar.GetIsDead())
-		{
-			ResetLevel();
-		}
-
-		if (m_HasReachedEnd = m_Level.HasReachedEnd(m_PlayerAvatar.GetShape()))
-		{
-			PlayerReachedEnd();
-		};
-	}
+		PlayerFinished();
+	};
 	
 	UpdateFrameStats();
 }
@@ -132,23 +122,16 @@ void Game::Draw() const
 	// Draw HUD and overlays after popping world view
 	switch (m_CurrentGameState)
 	{
-	case GameState::MainMenu:
-		m_MainMenu.Draw();
-		break;
 	case GameState::InGame:
 		m_HUD.Draw();
-		break;
-	case GameState::Paused:
-		break;
-	case GameState::Died:
 		break;
 	case GameState::Finished:
 		utils::SetColor(Color4f(0.0f, 0.0f, 0.0f, 0.75f));
 		utils::FillRect(m_EndScreenOverlay);
 		break;
-	default:
-		break;
 	}
+
+	m_MenuManager.DrawActiveMenu();
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
@@ -156,23 +139,32 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 	switch (e.keysym.scancode)
 	{
 	case SDL_SCANCODE_I:
-		std::cout << "Move using the [WASD] Keys, jump with [SPACE] and shoot with [RCTRL].\r\nPress [R] to reset the level" << std::endl;
+		std::cout << "Move using the [WASD] Keys, jump with [SPACE] and shoot with [RCTRL].\r\nPress [R] to reset the level\r\nPress [ESC] to pause the game" << std::endl;
 		break;
 	case SDL_SCANCODE_R:
 		ResetLevel();
 		break;
 	case SDL_SCANCODE_UP:
-		SoundManager::GetInstance()->AdjustVolume(SoundCategory::master, 20.0f);
-		m_ActiveMenu->CycleSelection(true);
+		m_MenuManager.CycleSelection(true);
 		break;
 	case SDL_SCANCODE_DOWN:
-		SoundManager::GetInstance()->AdjustVolume(SoundCategory::master, -20.0f);
-		m_ActiveMenu->CycleSelection(false);
+		m_MenuManager.CycleSelection(false);
 		break;
 	case SDL_SCANCODE_RETURN:
-		m_ActiveMenu->Enter(*this);
+		m_MenuManager.Enter(*this);
 		break;
-	default:
+	case SDL_SCANCODE_PAGEUP:
+		SoundManager::GetInstance()->AdjustVolume(SoundCategory::master, 20.0f);
+		break;
+	case SDL_SCANCODE_PAGEDOWN:
+		SoundManager::GetInstance()->AdjustVolume(SoundCategory::master, -20.0f);
+		break;
+	case SDL_SCANCODE_ESCAPE:
+		if (m_CurrentGameState == GameState::InGame)
+		{
+			Time::SetTimeScale(0.0f);
+			m_MenuManager.OpenMenu(MenuType::Pause);
+		}
 		break;
 	}
 }
@@ -202,8 +194,12 @@ void Game::ClearBackground( ) const
 	glClear( GL_COLOR_BUFFER_BIT );
 }
 
-void Game::PlayerReachedEnd() const
+void Game::PlayerFinished()
 {
+	Time::SetTimeScale(0.0f);
+	SetGameState(GameState::Finished);
+	m_MenuManager.OpenMenu(MenuType::Finished); 
+
 	SoundManager::GetInstance()->PlaySound(SoundType::levelFinish);
 }
 
@@ -217,8 +213,8 @@ void Game::ResetLevel()
 	m_FallingSpikeManager.Reset();
 
 	m_HasReachedEnd = false;
-	m_MainMenu.Open();
-	SetGameState(GameState::MainMenu);
+	Time::SetTimeScale(1.0f);
+	SetGameState(GameState::InGame);
 }
 
 void Game::UpdateFrameStats()
@@ -245,7 +241,8 @@ void Game::SetGameState(const GameState& state)
 	m_CurrentGameState = state;
 }
 
-GameState Game::GetGameState() const
+void Game::BackToMainMenu()
 {
-	return m_CurrentGameState;
+	m_MenuManager.OpenMenu(MenuType::Main);
+	SetGameState(GameState::MainMenu);
 }

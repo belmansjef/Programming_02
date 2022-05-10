@@ -9,8 +9,8 @@
 #include "CrabEnemyManager.h"
 #include "FallingSpikeManager.h"
 #include "Lava.h"
+#include "MenuManager.h"
 #include "HUD.h"
-#include "MainMenu.h"
 #include "Enums.h"
 
 class Game final
@@ -24,10 +24,12 @@ public:
 	~Game();
 
 	void SetGameState(const GameState& state);
-	GameState GetGameState() const;
+	void BackToMainMenu();
 
 	void Update(float elapsedSec);
 	void Draw() const;
+
+	void ResetLevel();
 
 	// Event handling
 	void ProcessKeyDownEvent(const SDL_KeyboardEvent& e);
@@ -63,9 +65,9 @@ private:
 	FallingSpikeManager m_FallingSpikeManager;
 	Lava m_Lava{Point2f(432.0f, 0.0f), 32.0f, 16.0f};
 
-	MenuBase* m_ActiveMenu;
-	MainMenu m_MainMenu;
+	// Menus
 	HUD m_HUD;
+	MenuManager m_MenuManager;
 
 	bool m_HasReachedEnd{ false };
 	Rectf m_EndScreenOverlay;
@@ -75,7 +77,6 @@ private:
 	void Cleanup( );
 	void ClearBackground( ) const;
 
-	void PlayerReachedEnd() const;
-	void ResetLevel();
+	void PlayerFinished();
 	void UpdateFrameStats();
 };

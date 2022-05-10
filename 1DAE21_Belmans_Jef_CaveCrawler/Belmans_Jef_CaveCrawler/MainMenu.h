@@ -4,7 +4,7 @@
 class MainMenu final : public MenuBase
 {
 public:
-	MainMenu(const Point2f& buttenPanelBottomLeft, const Window& window);
+	MainMenu(const Point2f& buttonPanelBottomLeft, float windowWidth, float windowHeight);
 	~MainMenu();
 
 	MainMenu(const MainMenu& other) = delete;
