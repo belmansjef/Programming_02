@@ -4,7 +4,7 @@
 class LevelFinishedMenu final : public MenuBase
 {
 public:
-	LevelFinishedMenu(const Point2f& buttonPanelBottomLeft, float windowWidth, float windowHeight);
+	LevelFinishedMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight);
 	~LevelFinishedMenu();
 
 	LevelFinishedMenu(const LevelFinishedMenu& other) = delete;

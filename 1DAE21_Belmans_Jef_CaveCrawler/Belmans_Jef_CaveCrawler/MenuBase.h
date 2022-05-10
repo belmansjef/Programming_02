@@ -9,7 +9,7 @@ class Texture;
 class MenuBase
 {
 public:
-	MenuBase(const std::string& titleText, const int fontSize, float windowWidth, float windowHeight, const Rectf& buttonPanel = {});
+	MenuBase(const std::string& titleText, const int fontSize, float windowWidth, float windowHeight, const Point2f& buttonPannelBottomLeft = {});
 	virtual ~MenuBase();
 
 	MenuBase(const MenuBase& other) = delete;
@@ -34,6 +34,7 @@ protected:
 	bool IsActive() const;
 
 private:
+	const int m_ButtonPadding;
 	bool m_IsActive;
 	int m_ActiveButtonIdx;
 
@@ -43,5 +44,7 @@ private:
 	std::vector<Button*> m_pButtons;
 	Button* m_pHighlightedButton;
 	Rectf m_ButtonPanel;
+	Rectf m_ButtonBackground;
+	Rectf m_TitleBackground;
 };
 

@@ -5,7 +5,7 @@ class MenuBase;
 class MainMenu;
 class OptionsMenu;
 class PauseMenu;
-class DeathMenu;
+class GameOverMenu;
 class LevelFinishedMenu;
 
 class Game;
@@ -27,7 +27,7 @@ private:
 	MainMenu* m_pMainMenu;
 	OptionsMenu* m_pOptionsMenu;
 	PauseMenu* m_pPauseMenu;
-	DeathMenu* m_pDeathMenu;
+	GameOverMenu* m_pGameOverMenu;
 	LevelFinishedMenu* m_pLevelFinishedMenu;
 };
 

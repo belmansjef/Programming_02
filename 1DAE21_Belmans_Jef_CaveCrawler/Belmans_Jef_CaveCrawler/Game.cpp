@@ -80,9 +80,12 @@ void Game::Update( float elapsedSec )
 	SDL_Delay(m_FrameDelay);
 
 	// Updates
-	m_PlayerAvatar.Update(m_Level, m_CurrentGameState);
-	m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
-	m_Camera.SetCameraBounds(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
+	if (m_CurrentGameState != GameState::Dead)
+	{
+		m_PlayerAvatar.Update(m_Level, m_CurrentGameState);
+		m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
+		m_Camera.SetCameraBounds(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
+	}
 
 	// Managers
 	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
@@ -92,7 +95,12 @@ void Game::Update( float elapsedSec )
 	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 	m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetHealth());
 
-	if (m_HasReachedEnd = m_Level.HasReachedEnd(m_PlayerAvatar.GetShape()) && m_CurrentGameState != GameState::Finished)
+	if (m_PlayerAvatar.GetIsDead() && m_CurrentGameState != GameState::Dead)
+	{
+		PlayerDied();
+	}
+
+	if (m_Level.HasReachedEnd(m_PlayerAvatar.GetShape()) && m_CurrentGameState != GameState::Finished)
 	{
 		PlayerFinished();
 	};
@@ -139,7 +147,8 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 	switch (e.keysym.scancode)
 	{
 	case SDL_SCANCODE_I:
-		std::cout << "Move using the [WASD] Keys, jump with [SPACE] and shoot with [RCTRL].\r\nPress [R] to reset the level\r\nPress [ESC] to pause the game" << std::endl;
+		std::cout << "Move using the [WASD] Keys, jump with [SPACE] and shoot with [RCTRL]." <<
+			"\r\nPress [PgUp] and [PgDn] to control the volume\r\nPress [R] to reset the level\r\nPress [ESC] to pause the game" << std::endl;
 		break;
 	case SDL_SCANCODE_R:
 		ResetLevel();
@@ -194,6 +203,12 @@ void Game::ClearBackground( ) const
 	glClear( GL_COLOR_BUFFER_BIT );
 }
 
+void Game::PlayerDied()
+{
+	SetGameState(GameState::Dead);
+	m_MenuManager.OpenMenu(MenuType::GameOver);
+}
+
 void Game::PlayerFinished()
 {
 	Time::SetTimeScale(0.0f);
@@ -212,7 +227,6 @@ void Game::ResetLevel()
 	m_Camera.Reset();
 	m_FallingSpikeManager.Reset();
 
-	m_HasReachedEnd = false;
 	Time::SetTimeScale(1.0f);
 	SetGameState(GameState::InGame);
 }

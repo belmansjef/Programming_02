@@ -1,11 +1,11 @@
-#include "LevelFinishedMenu.h"
+#include "GameOverMenu.h"
 #include "Button.h"
 #include "Game.h"
 
-LevelFinishedMenu::LevelFinishedMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight)
-	: MenuBase("LEVEL FINISHED", 52, windowWidth, windowHeight, bottomLeft)
-	, m_pRestartButton{ new Button(Point2f(), "RESTART")}
-	, m_pMenuButton { new Button(Point2f(), "MENU")}
+GameOverMenu::GameOverMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight)
+	: MenuBase("YOU DIED!", 52, windowWidth, windowHeight, bottomLeft)
+	, m_pRestartButton { new Button(Point2f(), "RESTART") }
+	, m_pMenuButton { new Button(Point2f(), "MENU") }
 {
 	AddButton(m_pRestartButton);
 	AddButton(m_pMenuButton);
@@ -13,13 +13,13 @@ LevelFinishedMenu::LevelFinishedMenu(const Point2f& bottomLeft, float windowWidt
 	FitButtonsToPanel();
 }
 
-LevelFinishedMenu::~LevelFinishedMenu()
+GameOverMenu::~GameOverMenu()
 {
 	m_pRestartButton = nullptr;
 	m_pMenuButton = nullptr;
 }
 
-void LevelFinishedMenu::Enter(Game& game)
+void GameOverMenu::Enter(Game& game)
 {
 	MenuBase::Enter(game);
 

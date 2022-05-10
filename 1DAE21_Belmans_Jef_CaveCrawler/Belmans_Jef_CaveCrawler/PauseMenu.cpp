@@ -3,8 +3,8 @@
 #include "Button.h"
 #include "SoundManager.h"
 
-PauseMenu::PauseMenu(const Point2f& buttonPanelBottomLeft, float windowWidth, float windowHeight)
-	: MenuBase("PAUSED", 52, windowWidth, windowHeight, Rectf(buttonPanelBottomLeft.x, buttonPanelBottomLeft.y, 100.0f, 180.0f))
+PauseMenu::PauseMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight)
+	: MenuBase("PAUSED", 52, windowWidth, windowHeight, bottomLeft)
 	, m_pContinueButton { new Button(Point2f(), "CONTINUE") }
 	, m_pRestartButton { new Button(Point2f(), "RESTART") }
 	, m_pBackToMenuButton { new Button(Point2f(), "MENU") }

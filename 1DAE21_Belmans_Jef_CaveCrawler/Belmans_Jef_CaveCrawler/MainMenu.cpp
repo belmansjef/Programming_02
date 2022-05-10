@@ -4,8 +4,8 @@
 #include "Button.h"
 #include "SoundManager.h"
 
-MainMenu::MainMenu(const Point2f& buttonPanelBottomLeft, float windowWidth, float windowHeight)
-	: MenuBase("CAVE CRAWLER", 52, windowWidth, windowHeight, Rectf(buttonPanelBottomLeft.x, buttonPanelBottomLeft.y, 100.0f, 180.0f))
+MainMenu::MainMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight)
+	: MenuBase("CAVE CRAWLER", 52, windowWidth, windowHeight, bottomLeft)
 	, m_pStartButton{ new Button(Point2f(), "START")}
 	, m_pOptionsButton{ new Button(Point2f(), "OPTIONS") }
 	, m_pExitButton{ new Button(Point2f(), "EXIT") }

@@ -4,7 +4,7 @@
 class PauseMenu final : public MenuBase
 {
 public:
-	PauseMenu(const Point2f& buttonPanelBottomLeft, float windowWidth, float windowHeight);
+	PauseMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight);
 	~PauseMenu();
 
 	PauseMenu(const PauseMenu& other) = delete;

@@ -14,5 +14,6 @@ enum class MenuType
 	Main,
 	Options,
 	Pause,
+	GameOver,
 	Finished,
 };

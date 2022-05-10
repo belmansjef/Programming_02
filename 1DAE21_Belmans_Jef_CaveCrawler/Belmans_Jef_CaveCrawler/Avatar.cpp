@@ -42,6 +42,10 @@ bool Avatar::ShouldTrack()
 
 Rectf Avatar::GetShape() const
 {
+	if (m_AvatarHealth.GetIsDead())
+	{
+		return Rectf();
+	}
 	return m_PhysicsBody.GetShape();
 }
 
@@ -77,6 +81,8 @@ void Avatar::Update(const Level& level, const GameState& state)
 
 void Avatar::Draw() const
 {
+	if (m_AvatarHealth.GetIsDead()) return;
+
 	glPushMatrix();
 		glTranslatef(m_PhysicsBody.GetPosition().x, m_PhysicsBody.GetPosition().y, 0);
 		glScalef(m_HorizontalScale, 1, 1);

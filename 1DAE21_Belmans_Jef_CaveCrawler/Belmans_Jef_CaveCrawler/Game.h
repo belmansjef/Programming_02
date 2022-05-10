@@ -69,7 +69,6 @@ private:
 	HUD m_HUD;
 	MenuManager m_MenuManager;
 
-	bool m_HasReachedEnd{ false };
 	Rectf m_EndScreenOverlay;
 
 	// FUNCTIONS
@@ -77,6 +76,7 @@ private:
 	void Cleanup( );
 	void ClearBackground( ) const;
 
+	void PlayerDied();
 	void PlayerFinished();
 	void UpdateFrameStats();
 };

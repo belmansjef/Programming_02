@@ -41,6 +41,11 @@ float Button::GetHeight() const
 	return m_Graphic.height;
 }
 
+float Button::GetWidth() const
+{
+	return m_Graphic.width;
+}
+
 void Button::Reposition(const Point2f& newPos)
 {
 	m_Graphic.left = newPos.x;

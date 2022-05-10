@@ -17,6 +17,8 @@ public:
 	void SetHighlighted(bool isHighlighted);
 
 	float GetHeight() const;
+	float GetWidth() const;
+
 	void Reposition(const Point2f& newPos);
 	void Draw() const;
 
