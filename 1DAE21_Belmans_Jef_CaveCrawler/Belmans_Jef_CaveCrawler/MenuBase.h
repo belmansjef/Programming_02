@@ -25,7 +25,6 @@ public:
 	void Open();
 
 protected:
-
 	Button* GetHighlightedButton() const;
 
 	void AddButton(Button* btn);

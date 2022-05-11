@@ -168,6 +168,7 @@
     <ClCompile Include="Matrix2x3.cpp" />
     <ClCompile Include="MenuBase.cpp" />
     <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Collectible.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="Matrix2x3.h" />
     <ClInclude Include="MenuBase.h" />
     <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Collectible.h" />

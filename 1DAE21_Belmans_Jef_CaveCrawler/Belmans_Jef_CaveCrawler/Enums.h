@@ -17,3 +17,19 @@ enum class MenuType
 	GameOver,
 	Finished,
 };
+
+enum class SoundType
+{
+	selectUI = 0,
+	enterUI,
+	explosion,
+	coinPickup,
+	healthPickup,
+	handRise,
+	hitHurt,
+	hitWall,
+	jump,
+	shoot,
+	spikeFall,
+	levelFinish
+};

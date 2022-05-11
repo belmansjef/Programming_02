@@ -27,25 +27,15 @@ void SoundManager::PlaySound(const SoundType& sound) const
 	else std::cout << "Tried to play a sound that doesn't exist!" << std::endl;
 }
 
-void SoundManager::AdjustVolume(const SoundCategory& soundCategory, float value)
+void SoundManager::AdjustVolume(float value)
 {
-	switch (soundCategory)
-	{
-	case SoundCategory::master:
-		m_MusicVolume = std::clamp(m_MusicVolume + value, 0.0f, m_MaxVolume);
-		m_EffectsVolume = std::clamp(m_EffectsVolume + value, 0.0f, m_MaxVolume);
-		break;
-	case SoundCategory::music:
-		m_MusicVolume = std::clamp(m_MusicVolume + value, 0.0f, m_MaxVolume);
-		break;
-	case SoundCategory::effects:
-		m_EffectsVolume = std::clamp(m_EffectsVolume + value, 0.0f, m_MaxVolume);
-		break;
-	default:
-		break;
-	}
-
+	m_CurrentVolume = std::clamp(m_CurrentVolume + value, 0.0f, m_MaxVolume);
 	ApplyVolume();
+}
+
+float SoundManager::GetVolume() const
+{
+	return m_CurrentVolume;
 }
 
 void SoundManager::Initialize()
@@ -87,7 +77,7 @@ void SoundManager::ApplyVolume()
 {
 	for (auto& [key, val] : m_pSoundEffects)
 	{
-		val->SetVolume(int(m_EffectsVolume));
+		val->SetVolume(int(m_CurrentVolume));
 	}
 }
 

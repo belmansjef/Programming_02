@@ -163,10 +163,10 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 		m_MenuManager.Enter(*this);
 		break;
 	case SDL_SCANCODE_PAGEUP:
-		SoundManager::GetInstance()->AdjustVolume(SoundCategory::master, 20.0f);
+		SoundManager::GetInstance()->AdjustVolume(20.0f);
 		break;
 	case SDL_SCANCODE_PAGEDOWN:
-		SoundManager::GetInstance()->AdjustVolume(SoundCategory::master, -20.0f);
+		SoundManager::GetInstance()->AdjustVolume(-20.0f);
 		break;
 	case SDL_SCANCODE_ESCAPE:
 		if (m_CurrentGameState == GameState::InGame)
@@ -258,5 +258,11 @@ void Game::SetGameState(const GameState& state)
 void Game::BackToMainMenu()
 {
 	m_MenuManager.OpenMenu(MenuType::Main);
+	SetGameState(GameState::MainMenu);
+}
+
+void Game::OpenOptionsMenu()
+{
+	m_MenuManager.OpenMenu(MenuType::Options);
 	SetGameState(GameState::MainMenu);
 }

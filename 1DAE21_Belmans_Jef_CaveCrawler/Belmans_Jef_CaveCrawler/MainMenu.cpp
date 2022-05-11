@@ -38,7 +38,8 @@ void MainMenu::Enter(Game& game)
 		}
 		else if (pHighlightedButton == m_pOptionsButton)
 		{
-			// TODO: open options
+			game.OpenOptionsMenu();
+			Close();
 		}
 		else if (pHighlightedButton == m_pExitButton)
 		{

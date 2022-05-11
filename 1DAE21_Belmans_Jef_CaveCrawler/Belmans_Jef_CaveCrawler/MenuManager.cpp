@@ -1,5 +1,6 @@
 #include "MenuManager.h"
 #include "MainMenu.h"
+#include "OptionsMenu.h"
 #include "PauseMenu.h"
 #include "LevelFinishedMenu.h"
 #include "GameOverMenu.h"
@@ -8,6 +9,7 @@
 MenuManager::MenuManager(float windowWidth, float windowHeight)
 	: m_pActiveMenu { nullptr }
 	, m_pMainMenu{ new MainMenu(Point2f(80.0f, 108.0f), windowWidth, windowHeight) }
+	, m_pOptionsMenu { new OptionsMenu(Point2f(80.0f, 108.0f), windowWidth, windowHeight) }
 	, m_pPauseMenu{ new PauseMenu(Point2f(80.0f, 108.0f), windowWidth, windowHeight) }
 	, m_pLevelFinishedMenu { new LevelFinishedMenu(Point2f(80.0f, 108.0f), windowWidth, windowHeight)}
 	, m_pGameOverMenu{ new GameOverMenu(Point2f(80.0f, 108.0f), windowWidth, windowHeight)}
@@ -18,14 +20,14 @@ MenuManager::MenuManager(float windowWidth, float windowHeight)
 MenuManager::~MenuManager()
 {
 	delete m_pMainMenu;
-	// delete m_pOptionsMenu;
+	delete m_pOptionsMenu;
 	delete m_pPauseMenu;
 	delete m_pGameOverMenu;
 	delete m_pLevelFinishedMenu;
 
 	m_pActiveMenu = nullptr;
 	m_pMainMenu = nullptr;
-	// m_pOptionsMenu = nullptr;
+	m_pOptionsMenu = nullptr;
 	m_pPauseMenu = nullptr;
 	m_pGameOverMenu = nullptr;
 	m_pLevelFinishedMenu = nullptr;
@@ -54,6 +56,7 @@ void MenuManager::OpenMenu(const MenuType& menu)
 		m_pActiveMenu = m_pMainMenu;
 		break;
 	case MenuType::Options:
+		m_pActiveMenu = m_pOptionsMenu;
 		break;
 	case MenuType::Pause:
 		m_pActiveMenu = m_pPauseMenu;

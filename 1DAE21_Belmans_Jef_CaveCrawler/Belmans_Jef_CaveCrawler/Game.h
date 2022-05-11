@@ -25,6 +25,7 @@ public:
 
 	void SetGameState(const GameState& state);
 	void BackToMainMenu();
+	void OpenOptionsMenu();
 
 	void Update(float elapsedSec);
 	void Draw() const;

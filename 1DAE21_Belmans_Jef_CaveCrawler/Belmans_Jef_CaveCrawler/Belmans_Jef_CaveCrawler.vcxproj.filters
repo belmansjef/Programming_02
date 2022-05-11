@@ -192,6 +192,9 @@
     <ClCompile Include="GameOverMenu.cpp">
       <Filter>Game Files\Game\HUD\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="OptionsMenu.cpp">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -324,6 +327,9 @@
       <Filter>Game Files\Game\HUD\Menus</Filter>
     </ClInclude>
     <ClInclude Include="GameOverMenu.h">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsMenu.h">
       <Filter>Game Files\Game\HUD\Menus</Filter>
     </ClInclude>
   </ItemGroup>
