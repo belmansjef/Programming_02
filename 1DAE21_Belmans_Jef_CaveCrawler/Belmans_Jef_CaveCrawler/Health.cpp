@@ -57,7 +57,7 @@ void Health::TakeDamage(int amount)
 			Camera::DoScreenShake();
 			m_pSprite->FlashSprite();
 		}
-		else // Any other health components took damage
+		else // Any other health component took damage
 		{
 			m_pSprite->FlashSprite();
 		}

@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "structs.h"
+#include "Enums.h"
 
 class Texture;
 struct Animation
@@ -24,14 +25,6 @@ struct Animation
 	float m_HoldTime;
 };
 
-enum class SpriteType
-{
-	player,
-	crabEnemy,
-	damageBlock,
-	risingHand
-};
-
 class Sprite final
 {
 public:
@@ -47,7 +40,7 @@ public:
 
 	void Update();
 	void Draw() const;
-	void SetAnimation(const std::string animName);
+	void SetAnimation(const std::string& animName);
 	void FlashSprite();
 
 private:

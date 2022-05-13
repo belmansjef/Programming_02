@@ -148,6 +148,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraZone.cpp" />
     <ClCompile Include="CameraZoneManager.cpp" />
+    <ClCompile Include="CannonEnemy.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="CrabEnemy.cpp" />
     <ClCompile Include="CrabEnemyManager.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraZone.h" />
     <ClInclude Include="CameraZoneManager.h" />
+    <ClInclude Include="CannonEnemy.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="CrabEnemy.h" />
     <ClInclude Include="CrabEnemyManager.h" />

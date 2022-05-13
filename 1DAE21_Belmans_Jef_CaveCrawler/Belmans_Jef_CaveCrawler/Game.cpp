@@ -9,6 +9,7 @@ Game::Game( const Window& window )
 	, m_EndScreenOverlay{ Rectf(0.0f, 0.0f, window.width, window.height) }
 	, m_HUD { window, m_PlayerAvatar.GetHealth().GetCurrentHealth() }
 	, m_MenuManager { window.width, window.height }
+	, m_Cannon { Point2f(144.0f, 120.0f), 0.0f }
 {
 	Initialize( );
 }
@@ -95,6 +96,8 @@ void Game::Update( float elapsedSec )
 	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 	m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetHealth());
 
+	m_Cannon.Update(m_PlayerAvatar.GetShape());
+
 	if (m_PlayerAvatar.GetIsDead() && m_CurrentGameState != GameState::Dead)
 	{
 		PlayerDied();
@@ -119,6 +122,7 @@ void Game::Draw() const
 		m_PlayerAvatar.Draw();
 
 		// Managers
+		m_Cannon.Draw();
 		m_DamageBlockManager.Draw();
 		m_RisingHandManager.Draw();
 		m_CrabEnemyManager.Draw();

@@ -20,7 +20,7 @@ enum class MenuType
 
 enum class SoundType
 {
-	selectUI = 0,
+	selectUI,
 	enterUI,
 	explosion,
 	coinPickup,
@@ -32,4 +32,14 @@ enum class SoundType
 	shoot,
 	spikeFall,
 	levelFinish
+};
+
+enum class SpriteType
+{
+	player,
+	crabEnemy,
+	cannonEnemyBase,
+	cannonEnemyBarrel,
+	damageBlock,
+	risingHand
 };

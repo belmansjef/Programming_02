@@ -58,6 +58,12 @@
     <Filter Include="Game Files\Game\HUD\Menus">
       <UniqueIdentifier>{e78c006d-2cc1-41a9-bf8c-90a0afd3a6dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Charachters\Enemies\Crab">
+      <UniqueIdentifier>{59a23726-05b0-43fc-8ef1-8370cf2d48f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Charachters\Enemies\Cannon">
+      <UniqueIdentifier>{7379e9fc-710e-43df-a17d-2a43adc483f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp">
@@ -132,12 +138,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Game Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="CrabEnemy.cpp">
-      <Filter>Game Files\Charachters\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="CrabEnemyManager.cpp">
-      <Filter>Game Files\Charachters\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="Avatar.cpp">
       <Filter>Game Files\Charachters\Player</Filter>
     </ClCompile>
@@ -194,6 +194,15 @@
     </ClCompile>
     <ClCompile Include="OptionsMenu.cpp">
       <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="CrabEnemy.cpp">
+      <Filter>Game Files\Charachters\Enemies\Crab</Filter>
+    </ClCompile>
+    <ClCompile Include="CrabEnemyManager.cpp">
+      <Filter>Game Files\Charachters\Enemies\Crab</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonEnemy.cpp">
+      <Filter>Game Files\Charachters\Enemies\Cannon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,12 +278,6 @@
     <ClInclude Include="Game.h">
       <Filter>Game Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="CrabEnemy.h">
-      <Filter>Game Files\Charachters\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="CrabEnemyManager.h">
-      <Filter>Game Files\Charachters\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="Avatar.h">
       <Filter>Game Files\Charachters\Player</Filter>
     </ClInclude>
@@ -331,6 +334,15 @@
     </ClInclude>
     <ClInclude Include="OptionsMenu.h">
       <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="CrabEnemy.h">
+      <Filter>Game Files\Charachters\Enemies\Crab</Filter>
+    </ClInclude>
+    <ClInclude Include="CrabEnemyManager.h">
+      <Filter>Game Files\Charachters\Enemies\Crab</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonEnemy.h">
+      <Filter>Game Files\Charachters\Enemies\Cannon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
