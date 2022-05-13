@@ -31,6 +31,7 @@ private:
 	Rectf m_BoxCollider;
 
 	Vector2f m_Velocity;
-	float m_Angle;
+	float m_AngleRad;
+	float m_AngleDeg;
 };
 

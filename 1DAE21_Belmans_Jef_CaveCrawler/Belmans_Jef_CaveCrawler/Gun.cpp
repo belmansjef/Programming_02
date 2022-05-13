@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "ProjectileManager.h"
 #include "SoundManager.h"
+#include "Health.h"
 
 Gun::Gun()
 {
@@ -35,7 +36,7 @@ void Gun::Shoot(const Point2f& actorPos, int horScale)
 
 void Gun::Update(const std::vector<std::vector<Point2f>>& levelVerts)
 {
-	m_ProjectileManager.Update(levelVerts);
+	m_ProjectileManager.Update(levelVerts, Health());
 }
 
 void Gun::Draw() const

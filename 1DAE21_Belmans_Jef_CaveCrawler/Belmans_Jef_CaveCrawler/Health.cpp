@@ -5,6 +5,11 @@
 #include "SoundManager.h"
 #include "Sprite.h"
 
+Health::Health()
+	: Health(3, nullptr)
+{
+}
+
 Health::Health(int maxHealth, Sprite* sprite, float damageCooldown, bool isPlayer)
 	: m_MaxHealth { maxHealth }
 	, m_CurrentHealth { maxHealth }

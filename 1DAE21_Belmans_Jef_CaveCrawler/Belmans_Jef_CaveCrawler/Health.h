@@ -4,12 +4,14 @@ class Sprite;
 class Health final
 {
 public:
-	Health(int maxHealth, Sprite* sprite, float damageCooldown = 1.0f, bool isPlayer = false);
+	Health();
+	explicit Health(int maxHealth, Sprite* sprite, float damageCooldown = 1.0f, bool isPlayer = false);
+	~Health() = default;
+
 	Health(const Health& other) = delete;
 	Health& operator=(const Health& other) = delete;
 	Health(Health&& other) = delete;
 	Health& operator=(Health&& other) = delete;
-	~Health() = default;
 
 	bool GetIsDead() const;
 	int GetCurrentHealth() const;

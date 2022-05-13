@@ -96,7 +96,7 @@ void Game::Update( float elapsedSec )
 	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 	m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetHealth());
 
-	m_Cannon.Update(m_PlayerAvatar.GetShape());
+	m_Cannon.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Level.GetLevelVerts());
 
 	if (m_PlayerAvatar.GetIsDead() && m_CurrentGameState != GameState::Dead)
 	{

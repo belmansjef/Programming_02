@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Vector2f.h"
+#include "Health.h"
 
 class Projectile;
 class ProjectileManager final
@@ -18,7 +19,7 @@ public:
 	void PoolProjectiles(int nrObjects);
 	void InstanciateProjectile(const Vector2f& velocity, const Point2f& bottomLeft);
 
-	void Update(const std::vector<std::vector<Point2f>>& levelVerts);
+	void Update(const std::vector<std::vector<Point2f>>& levelVerts, Health& actorHealth = Health(), const Rectf& actorShape = {});
 	void Draw() const;
 	void Reset();
 
@@ -26,6 +27,7 @@ private:
 	std::vector<Projectile*> m_pItems;
 
 	void LevelCollisionCheck(const std::vector<std::vector<Point2f>>& levelVerts) const;
+	void PlayerCollsionCheck(const Rectf& actorShape, Health& actorHealth);
 
 };
 

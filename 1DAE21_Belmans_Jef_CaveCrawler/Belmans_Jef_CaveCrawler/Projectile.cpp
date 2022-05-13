@@ -6,7 +6,7 @@
 
 Projectile::Projectile()
 	: m_IsInstanciated { false }
-	, m_Angle{ 0.0f }
+	, m_AngleRad{ 0.0f }
 	, m_pTexture { new Texture("Resources/Images/Sprite_ProjectileSmall.png")}
 {
 }
@@ -17,7 +17,7 @@ Projectile::Projectile(const Vector2f& velocity, const Rectf& boxCollider)
 	, m_BoxCollider { boxCollider }
 	, m_pTexture{ new Texture("Resources/Images/Sprite_ProjectileSmall.png") }
 {
-	m_Angle = atan2f(m_Velocity.y, m_Velocity.x);
+	m_AngleRad = atan2f(m_Velocity.y, m_Velocity.x) * float(180.0f / M_PI);
 }
 
 Projectile::~Projectile()
@@ -36,7 +36,8 @@ void Projectile::Instanciate(const Vector2f& velocity, const Point2f& bottomLeft
 		m_pTexture->GetWidth(),
 		m_pTexture->GetHeight()
 	);
-
+	m_AngleRad = atan2f(m_Velocity.y, m_Velocity.x);
+	m_AngleDeg = m_AngleRad * float(180.0f / M_PI);
 	m_IsInstanciated = true;
 }
 
@@ -54,8 +55,8 @@ void Projectile::Update()
 void Projectile::Draw() const
 {
 	glPushMatrix();
-		glRotatef(m_Angle, 0, 0, 1);
 		glTranslatef(m_BoxCollider.left, m_BoxCollider.bottom, 0);
+		glRotatef(m_AngleDeg, 0, 0, 1);
 		m_pTexture->Draw();
 	glPopMatrix();
 }
@@ -68,7 +69,7 @@ void Projectile::Reset()
 bool Projectile::HitCheck(const std::vector<Point2f>& verts)
 {
 	const Point2f startPos = Point2f{ m_BoxCollider.left, m_BoxCollider.bottom + m_BoxCollider.height / 2.0f };
-	const Point2f endPos = Point2f{ m_BoxCollider.left + m_BoxCollider.width, startPos.y };
+	const Point2f endPos = Point2f{ startPos.x + (cosf(m_AngleRad) * 4.0f), startPos.y + (sinf(m_AngleRad) * 4.0f) };
 	utils::HitInfo hitInfo;
 
 	if (utils::Raycast(verts, startPos, endPos, hitInfo))
@@ -85,6 +86,7 @@ bool Projectile::HitCheck(const Rectf& rect)
 	if (utils::IsOverlapping(rect, m_BoxCollider))
 	{
 		m_IsInstanciated = false;
+		SoundManager::GetInstance()->PlaySound(SoundType::hitHurt);
 	}
 
 	return !m_IsInstanciated;

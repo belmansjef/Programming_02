@@ -1,6 +1,8 @@
 #include "ProjectileManager.h"
 #include "Projectile.h"
 #include "utils.h"
+#include "pch.h"
+#include "Health.h"
 
 ProjectileManager::~ProjectileManager()
 {
@@ -36,7 +38,7 @@ void ProjectileManager::InstanciateProjectile(const Vector2f& velocity, const Po
 	}
 }
 
-void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVerts)
+void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVerts, Health& actorHealth, const Rectf& actorShape)
 {
 	for (Projectile* proj : m_pItems)
 	{
@@ -47,6 +49,7 @@ void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVer
 	}
 	
 	LevelCollisionCheck(levelVerts);
+	PlayerCollsionCheck(actorShape, actorHealth);
 }
 
 void ProjectileManager::Draw() const
@@ -77,6 +80,18 @@ void ProjectileManager::LevelCollisionCheck(const std::vector<std::vector<Point2
 		for (std::vector<Point2f> verts : levelVerts)
 		{
 			proj->HitCheck(verts);
+		}
+	}
+}
+
+void ProjectileManager::PlayerCollsionCheck(const Rectf& actorShape, Health& actorHealth)
+{
+	for (Projectile* proj : m_pItems)
+	{
+		if (proj->IsInstanciated())
+		{
+			proj->HitCheck(actorShape);
+			actorHealth.TakeDamage(1);
 		}
 	}
 }

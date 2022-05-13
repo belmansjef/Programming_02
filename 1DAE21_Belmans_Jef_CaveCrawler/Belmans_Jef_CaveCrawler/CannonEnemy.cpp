@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CannonEnemy.h"
+#include "Health.h"
 
 CannonEnemy::CannonEnemy(const Point2f& bottomLeft, float orientation)
 	: m_SpriteBase { SpriteType::cannonEnemyBase }
@@ -7,6 +8,8 @@ CannonEnemy::CannonEnemy(const Point2f& bottomLeft, float orientation)
 	, m_Health { 3, &m_SpriteBase }
 	, m_BaseOrientation { orientation }
 	, m_BarrelAngle { 0.0f }
+	, m_ShotCooldown{ 1.0f }
+	, m_LastShotTime{ 0.0f }
 {
 	m_BoxCollider = Rectf
 	(
@@ -15,15 +18,26 @@ CannonEnemy::CannonEnemy(const Point2f& bottomLeft, float orientation)
 		m_SpriteBase.GetFrameWidth(),
 		m_SpriteBase.GetFrameHeight()
 	);
+
+	m_BaseCenter.x = m_BoxCollider.left + m_BoxCollider.width / 2.0f;
+	m_BaseCenter.y = m_BoxCollider.bottom + m_BoxCollider.height / 2.0f;
+
+	m_ProjectileManager.PoolProjectiles(10);
+	m_SpriteBarrel.SetAnimation("shoot");
 }
 
-void CannonEnemy::Update(const Rectf& actorShape)
+void CannonEnemy::Update(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts)
 {
-	const Point2f baseVec (m_BoxCollider.left + m_SpriteBase.GetFrameWidth() / 2.0f
-		, m_BoxCollider.bottom + m_SpriteBase.GetFrameHeight() / 2.0f);
-	const Point2f freeVec(actorShape.left + actorShape.width / 2.0f - baseVec.x, actorShape.bottom + actorShape.height / 2.0f - baseVec.y);
-
+	const Vector2f freeVec(actorShape.left + actorShape.width / 2.0f - m_BaseCenter.x, actorShape.bottom + actorShape.height / 2.0f - m_BaseCenter.y);
 	m_BarrelAngle = atan2f(freeVec.y, freeVec.x) * float(180.0f / M_PI) - 90.0f; // need to offset by -90 degrees because default orientation is up
+	
+	if (Time::time > m_LastShotTime + m_ShotCooldown)
+	{
+		Shoot(freeVec);
+	}
+
+	m_ProjectileManager.Update(levelVerts, actorHealth, actorShape);
+	m_SpriteBarrel.Update();
 }
 
 void CannonEnemy::Draw() const
@@ -52,4 +66,12 @@ void CannonEnemy::Draw() const
 		
 		m_SpriteBase.Draw();
 	glPopMatrix();
+
+	m_ProjectileManager.Draw();
+}
+
+void CannonEnemy::Shoot(const Vector2f& freeVec)
+{
+	m_ProjectileManager.InstanciateProjectile(freeVec.Normalized() * 100.0f, m_BaseCenter + (freeVec.Normalized() * 12.0f));
+	m_LastShotTime = Time::time;
 }
