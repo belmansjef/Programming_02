@@ -204,6 +204,9 @@
     <ClCompile Include="CannonEnemy.cpp">
       <Filter>Game Files\Charachters\Enemies\Cannon</Filter>
     </ClCompile>
+    <ClCompile Include="CannonEnemyManager.cpp">
+      <Filter>Game Files\Charachters\Enemies\Cannon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -342,6 +345,9 @@
       <Filter>Game Files\Charachters\Enemies\Crab</Filter>
     </ClInclude>
     <ClInclude Include="CannonEnemy.h">
+      <Filter>Game Files\Charachters\Enemies\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonEnemyManager.h">
       <Filter>Game Files\Charachters\Enemies\Cannon</Filter>
     </ClInclude>
   </ItemGroup>

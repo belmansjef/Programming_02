@@ -29,4 +29,3 @@ private:
 	void PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth);
 	void ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles);
 };
-

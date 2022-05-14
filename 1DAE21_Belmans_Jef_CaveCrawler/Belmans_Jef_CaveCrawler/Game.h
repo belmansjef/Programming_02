@@ -8,7 +8,7 @@
 #include "RisingHandManager.h"
 #include "CrabEnemyManager.h"
 #include "FallingSpikeManager.h"
-#include "CannonEnemy.h"
+#include "CannonEnemyManager.h"
 #include "Lava.h"
 #include "MenuManager.h"
 #include "HUD.h"
@@ -64,9 +64,9 @@ private:
 	CameraZoneManager m_CameraZoneManager;
 	RisingHandManager m_RisingHandManager;
 	CrabEnemyManager m_CrabEnemyManager;
+	CannonEnemyManager m_CannonEnemyManager;
 	FallingSpikeManager m_FallingSpikeManager;
 	Lava m_Lava{Point2f(432.0f, 0.0f), 32.0f, 16.0f};
-	CannonEnemy m_Cannon;
 
 	// Menus
 	HUD m_HUD;

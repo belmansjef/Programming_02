@@ -18,6 +18,19 @@ std::vector<Projectile*> ProjectileManager::GetProjectiles()
 	return m_pItems;
 }
 
+bool ProjectileManager::HasHitPlayer(const Rectf& actorShape)
+{
+	for (Projectile* proj : m_pItems)
+	{
+		if (proj->IsInstanciated())
+		{
+			if(proj->HitCheck(actorShape)) return true;
+		}
+	}
+
+	return false;
+}
+
 void ProjectileManager::PoolProjectiles(int nrObjects)
 {
 	for (size_t i = 0; i < nrObjects; i++)
@@ -25,6 +38,7 @@ void ProjectileManager::PoolProjectiles(int nrObjects)
 		m_pItems.push_back(new Projectile());
 	}
 }
+
 
 void ProjectileManager::InstanciateProjectile(const Vector2f& velocity, const Point2f& bottomLeft)
 {
@@ -38,7 +52,7 @@ void ProjectileManager::InstanciateProjectile(const Vector2f& velocity, const Po
 	}
 }
 
-void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVerts, Health& actorHealth, const Rectf& actorShape)
+void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVerts, const Rectf& actorShape)
 {
 	for (Projectile* proj : m_pItems)
 	{
@@ -49,7 +63,6 @@ void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVer
 	}
 	
 	LevelCollisionCheck(levelVerts);
-	PlayerCollsionCheck(actorShape, actorHealth);
 }
 
 void ProjectileManager::Draw() const
@@ -80,18 +93,6 @@ void ProjectileManager::LevelCollisionCheck(const std::vector<std::vector<Point2
 		for (std::vector<Point2f> verts : levelVerts)
 		{
 			proj->HitCheck(verts);
-		}
-	}
-}
-
-void ProjectileManager::PlayerCollsionCheck(const Rectf& actorShape, Health& actorHealth)
-{
-	for (Projectile* proj : m_pItems)
-	{
-		if (proj->IsInstanciated())
-		{
-			proj->HitCheck(actorShape);
-			actorHealth.TakeDamage(1);
 		}
 	}
 }

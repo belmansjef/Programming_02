@@ -36,7 +36,7 @@ void Gun::Shoot(const Point2f& actorPos, int horScale)
 
 void Gun::Update(const std::vector<std::vector<Point2f>>& levelVerts)
 {
-	m_ProjectileManager.Update(levelVerts, Health());
+	m_ProjectileManager.Update(levelVerts);
 }
 
 void Gun::Draw() const

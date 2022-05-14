@@ -84,4 +84,18 @@ namespace utils
 
 #pragma endregion CollisionFunctionality
 
+#pragma region OwnFunctionality
+	template<typename T>
+	T MapValue(std::pair<T, T>& a, std::pair<T, T> b, T val)
+	{
+		T aValNorm = val - a.first;
+		T aUpperNorm = a.second - a.first;
+		T normPistion = aValNorm / aUpperNorm;
+
+		T bUpperNorm = b.second - b.first;
+		T bValNorm = normPistion * bUpperNorm;
+		
+		return b.first + bValNorm;
+	}
+#pragma endregion OwnFunctionality;
 }

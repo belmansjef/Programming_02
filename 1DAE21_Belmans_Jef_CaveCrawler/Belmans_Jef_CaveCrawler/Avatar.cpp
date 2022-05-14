@@ -92,6 +92,7 @@ void Avatar::Draw() const
 	glPopMatrix();
 
 	m_Gun.Draw();
+	utils::DrawRect(GetShape());
 }
 
 void Avatar::Reset()

@@ -43,3 +43,9 @@ enum class SpriteType
 	damageBlock,
 	risingHand
 };
+
+enum class CannonOrientation
+{
+	up,
+	down
+};

@@ -9,7 +9,6 @@ Game::Game( const Window& window )
 	, m_EndScreenOverlay{ Rectf(0.0f, 0.0f, window.width, window.height) }
 	, m_HUD { window, m_PlayerAvatar.GetHealth().GetCurrentHealth() }
 	, m_MenuManager { window.width, window.height }
-	, m_Cannon { Point2f(144.0f, 120.0f), 0.0f }
 {
 	Initialize( );
 }
@@ -62,6 +61,9 @@ void Game::Initialize( )
 	// Load crabs
 	m_CrabEnemyManager.AddItem(Point2f(704.0f, 24.0f), 1, 3);
 
+	// Load cannons
+	m_CannonEnemyManager.AddItem(Point2f(664.0f, 128.0f), CannonOrientation::down);
+
 	// Load Falling spikes
 	m_FallingSpikeManager.AddItem(Point2f(128.0f, 120.0f));
 	m_FallingSpikeManager.AddItem(Point2f(400.0f, 264.0f));
@@ -96,7 +98,7 @@ void Game::Update( float elapsedSec )
 	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 	m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetHealth());
 
-	m_Cannon.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Level.GetLevelVerts());
+	m_CannonEnemyManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
 
 	if (m_PlayerAvatar.GetIsDead() && m_CurrentGameState != GameState::Dead)
 	{
@@ -122,7 +124,7 @@ void Game::Draw() const
 		m_PlayerAvatar.Draw();
 
 		// Managers
-		m_Cannon.Draw();
+		m_CannonEnemyManager.Draw();
 		m_DamageBlockManager.Draw();
 		m_RisingHandManager.Draw();
 		m_CrabEnemyManager.Draw();

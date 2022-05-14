@@ -7,6 +7,7 @@
 Projectile::Projectile()
 	: m_IsInstanciated { false }
 	, m_AngleRad{ 0.0f }
+	, m_AngleDeg{ 0.0f }
 	, m_pTexture { new Texture("Resources/Images/Sprite_ProjectileSmall.png")}
 {
 }
@@ -18,6 +19,8 @@ Projectile::Projectile(const Vector2f& velocity, const Rectf& boxCollider)
 	, m_pTexture{ new Texture("Resources/Images/Sprite_ProjectileSmall.png") }
 {
 	m_AngleRad = atan2f(m_Velocity.y, m_Velocity.x) * float(180.0f / M_PI);
+	m_AngleDeg = m_AngleRad * float(180.0f / M_PI);
+	
 }
 
 Projectile::~Projectile()
@@ -58,6 +61,7 @@ void Projectile::Draw() const
 		glTranslatef(m_BoxCollider.left, m_BoxCollider.bottom, 0);
 		glRotatef(m_AngleDeg, 0, 0, 1);
 		m_pTexture->Draw();
+
 	glPopMatrix();
 }
 
@@ -86,7 +90,6 @@ bool Projectile::HitCheck(const Rectf& rect)
 	if (utils::IsOverlapping(rect, m_BoxCollider))
 	{
 		m_IsInstanciated = false;
-		SoundManager::GetInstance()->PlaySound(SoundType::hitHurt);
 	}
 
 	return !m_IsInstanciated;

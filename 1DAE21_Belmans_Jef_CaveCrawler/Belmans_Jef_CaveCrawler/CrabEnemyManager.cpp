@@ -5,10 +5,10 @@
 
 CrabEnemyManager::~CrabEnemyManager()
 {
-	for (CrabEnemy* hand : m_pItems)
+	for (CrabEnemy* crab : m_pItems)
 	{
-		delete hand;
-		hand = nullptr;
+		delete crab;
+		crab = nullptr;
 	}
 }
 
