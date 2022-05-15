@@ -16,6 +16,7 @@ public:
 	CrabEnemyManager(CrabEnemyManager&& other) = delete;
 	CrabEnemyManager& operator=(CrabEnemyManager&& other) = delete;
 
+	void Initialize(const std::string& filePath);
 	CrabEnemy* AddItem(const Point2f& bottomLeft, int movementDirection = 1, int maxHealth = 3);
 
 	void Update(const Rectf& actorShape, const Level& level, std::vector<Projectile*> pProjectiles, Health& actorHealth);

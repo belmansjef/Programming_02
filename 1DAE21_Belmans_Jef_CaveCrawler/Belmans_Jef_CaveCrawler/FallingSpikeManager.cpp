@@ -1,6 +1,9 @@
+#include <fstream>
+#include <sstream>
 #include "FallingSpikeManager.h"
 #include "FallingSpike.h"
 #include "Health.h"
+#include "FileReader.h"
 
 FallingSpikeManager::~FallingSpikeManager()
 {
@@ -8,6 +11,24 @@ FallingSpikeManager::~FallingSpikeManager()
 	{
 		delete element;
 		element = nullptr;
+	}
+}
+
+void FallingSpikeManager::Initialize(const std::string& filePath)
+{
+	std::ifstream file{ filePath };
+
+	if (file.good())
+	{
+		while (file.peek() != EOF)
+		{
+			std::string line;
+			std::getline(file, line, '>');
+
+			Point2f pos{ FileReader::ToPoint2f(FileReader::GetAttributeValue("Position", line)) };
+
+			AddItem(pos);
+		}
 	}
 }
 

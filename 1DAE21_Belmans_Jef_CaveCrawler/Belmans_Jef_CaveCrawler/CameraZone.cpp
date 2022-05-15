@@ -1,8 +1,13 @@
 #include "CameraZone.h"
 #include "utils.h"
 
+CameraZone::CameraZone(const Rectf& zoneRect)
+	: m_Boundaries { zoneRect }
+{
+}
+
 CameraZone::CameraZone(float left, float bottom, float width, float height)
-	: m_Boundaries { Rectf(left, bottom, width, height) } 
+	: CameraZone(Rectf(left, bottom, width, height))
 {
 }
 

@@ -7,7 +7,7 @@
 
 Gun::Gun()
 {
-	m_ProjectileManager.PoolProjectiles(10);
+	m_ProjectileManager.PoolProjectiles(10, ProjectileType::small);
 }
 
 Gun::~Gun()

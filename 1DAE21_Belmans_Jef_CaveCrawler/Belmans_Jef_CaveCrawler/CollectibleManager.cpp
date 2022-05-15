@@ -1,9 +1,12 @@
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include "pch.h"
 #include "CollectibleManager.h"
 #include "Collectible.h"
 #include "Health.h"
 #include "SoundManager.h"
+#include "FileReader.h"
 
 CollectibleManager::~CollectibleManager()
 {
@@ -13,7 +16,29 @@ CollectibleManager::~CollectibleManager()
 	}
 }
 
-Collectible* CollectibleManager::AddItem(const Point2f& bottomLeft, Collectible::CollectibleType type)
+void CollectibleManager::Initliaze(const std::string& filePath)
+{
+	std::ifstream file{ filePath };
+
+	if (file.good())
+	{
+		while (file.peek() != EOF)
+		{
+			std::string line;
+			std::getline(file, line, '>');
+			
+			int type{ std::stoi(FileReader::GetAttributeValue("Type", line)) };
+			const Point2f pos{ FileReader::ToPoint2f(FileReader::GetAttributeValue("Position", line)) };
+
+			if (type != 0)
+			{
+				AddItem(pos, CollectibleType(type));
+			}
+		}
+	}
+}
+
+Collectible* CollectibleManager::AddItem(const Point2f& bottomLeft, CollectibleType type)
 {
 	m_pItems.push_back(new Collectible(bottomLeft, type));
 	return m_pItems.back();
@@ -55,11 +80,11 @@ bool CollectibleManager::HitItem(const Rectf& rect, Health& actorHealth)
 
 			switch (collectible->GetType())
 			{
-			case Collectible::CollectibleType::points:
+			case CollectibleType::points:
 				m_NrPointsCollected++;
 				SoundManager::GetInstance()->PlaySound(SoundType::coinPickup);
 				break;
-			case Collectible::CollectibleType::health:
+			case CollectibleType::health:
 				actorHealth.Heal(1);
 				break;
 			default:

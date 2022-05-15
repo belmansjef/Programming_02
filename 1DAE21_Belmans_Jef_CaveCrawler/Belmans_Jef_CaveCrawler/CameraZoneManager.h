@@ -13,7 +13,8 @@ public:
 	CameraZoneManager(CameraZoneManager&& other) = delete;
 	CameraZoneManager& operator=(CameraZoneManager&& other) = delete;
 
-	CameraZone* AddItem(float left, float bottom, float width, float height);
+	void Initialize(const std::string& filePath);
+	CameraZone* AddItem(const Rectf& zoneRect);
 	Rectf GetCurrentZone(const Rectf& actorShape) const;
 
 private:

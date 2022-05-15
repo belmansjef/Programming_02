@@ -2,10 +2,11 @@
 #include "Collectible.h"
 #include "utils.h"
 #include "Texture.h"
+#include "Enums.h"
 
-Collectible::Collectible(const Point2f& bottomLeft, Collectible::CollectibleType type)
+Collectible::Collectible(const Point2f& bottomLeft, CollectibleType type)
 	: m_Type{ type }
-	, m_pTexture{ new Texture{ type == Collectible::CollectibleType::points ? "./Resources/Images/Collectible_Points.png" : "./Resources/Images/Collectible_Health.png"} }
+	, m_pTexture{ new Texture{ type == CollectibleType::points ? "./Resources/Images/Collectible_Points.png" : "./Resources/Images/Collectible_Health.png"} }
 	, m_IsPickedUp { false }
 {
 	m_Shape = Rectf{bottomLeft.x, bottomLeft.y, m_pTexture->GetWidth(), m_pTexture->GetHeight()};
@@ -17,7 +18,7 @@ Collectible::~Collectible()
 	m_pTexture = nullptr;
 }
 
-Collectible::CollectibleType Collectible::GetType() const
+CollectibleType Collectible::GetType() const
 {
 	return m_Type;
 }

@@ -3,6 +3,7 @@
 #include "utils.h"
 #include "pch.h"
 #include "Health.h"
+#include "Enums.h"
 
 ProjectileManager::~ProjectileManager()
 {
@@ -31,14 +32,13 @@ bool ProjectileManager::HasHitPlayer(const Rectf& actorShape)
 	return false;
 }
 
-void ProjectileManager::PoolProjectiles(int nrObjects)
+void ProjectileManager::PoolProjectiles(int nrObjects, ProjectileType type)
 {
 	for (size_t i = 0; i < nrObjects; i++)
 	{
-		m_pItems.push_back(new Projectile());
+		m_pItems.push_back(new Projectile(type));
 	}
 }
-
 
 void ProjectileManager::InstanciateProjectile(const Vector2f& velocity, const Point2f& bottomLeft)
 {

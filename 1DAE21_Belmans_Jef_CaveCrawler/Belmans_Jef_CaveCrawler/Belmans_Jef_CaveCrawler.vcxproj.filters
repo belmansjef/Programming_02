@@ -120,12 +120,6 @@
     <ClCompile Include="Gun.cpp">
       <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Game Files\Charachters\Player\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileManager.cpp">
-      <Filter>Game Files\Charachters\Player\Weapon</Filter>
-    </ClCompile>
     <ClCompile Include="Health.cpp">
       <Filter>Game Files\Charachters\Common</Filter>
     </ClCompile>
@@ -207,6 +201,15 @@
     <ClCompile Include="CannonEnemyManager.cpp">
       <Filter>Game Files\Charachters\Enemies\Cannon</Filter>
     </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileManager.cpp">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="FileReader.cpp">
+      <Filter>Framework Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -261,12 +264,6 @@
       <Filter>Game Files\Charachters\Player</Filter>
     </ClInclude>
     <ClInclude Include="Gun.h">
-      <Filter>Game Files\Charachters\Player\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Game Files\Charachters\Player\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectileManager.h">
       <Filter>Game Files\Charachters\Player\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Health.h">
@@ -349,6 +346,15 @@
     </ClInclude>
     <ClInclude Include="CannonEnemyManager.h">
       <Filter>Game Files\Charachters\Enemies\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileManager.h">
+      <Filter>Game Files\Charachters\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReader.h">
+      <Filter>Framework Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

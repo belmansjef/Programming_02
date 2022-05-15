@@ -3,6 +3,7 @@
 #include "Vector2f.h"
 #include "Health.h"
 
+enum class ProjectileType;
 class Projectile;
 class ProjectileManager final
 {
@@ -17,7 +18,7 @@ public:
 	std::vector<Projectile*> GetProjectiles();
 	bool HasHitPlayer(const Rectf& actorShape);
 
-	void PoolProjectiles(int nrObjects);
+	void PoolProjectiles(int nrObjects, ProjectileType type);
 	void InstanciateProjectile(const Vector2f& velocity, const Point2f& bottomLeft);
 
 	void Update(const std::vector<std::vector<Point2f>>& levelVerts, const Rectf& actorShape = {});

@@ -16,6 +16,7 @@ public:
 	CannonEnemyManager(CannonEnemyManager&& other) = delete;
 	CannonEnemyManager& operator=(CannonEnemyManager&& other) = delete;
 
+	void Initialize(const std::string& filePath);
 	CannonEnemy* AddItem(const Point2f& bottomLeft, const CannonOrientation& orientation);
 
 	void Update(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts, std::vector<Projectile*> pProjectiles);

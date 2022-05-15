@@ -1,6 +1,9 @@
+#include <fstream>
+#include <sstream>
 #include "CannonEnemyManager.h"
 #include "Level.h"
 #include "Projectile.h"
+#include "FileReader.h"
 
 CannonEnemyManager::~CannonEnemyManager()
 {
@@ -8,6 +11,25 @@ CannonEnemyManager::~CannonEnemyManager()
 	{
 		delete element;
 		element = nullptr;
+	}
+}
+
+void CannonEnemyManager::Initialize(const std::string& filePath)
+{
+	std::ifstream file{ filePath };
+
+	if (file.good())
+	{
+		while (file.peek() != EOF)
+		{
+			std::string line;
+			std::getline(file, line, '>');
+
+			Point2f pos{ FileReader::ToPoint2f(FileReader::GetAttributeValue("Position", line)) };
+			int orientation{ std::stoi(FileReader::GetAttributeValue("Orientation", line)) };
+
+			AddItem(pos, CannonOrientation(orientation));
+		}
 	}
 }
 
@@ -21,10 +43,7 @@ void CannonEnemyManager::Update(const Rectf& actorShape, Health& actorHealth, co
 {
 	for (CannonEnemy* element : m_pItems)
 	{
-		if (!element->IsDead())
-		{
-			element->Update(actorShape, actorHealth, levelVerts);
-		}
+		element->Update(actorShape, actorHealth, levelVerts);
 	}
 
 	ProjectileCollisionCheck(pProjectiles);
@@ -34,10 +53,7 @@ void CannonEnemyManager::Draw() const
 {
 	for (CannonEnemy* element : m_pItems)
 	{
-		if (!element->IsDead())
-		{
-			element->Draw();
-		}
+		element->Draw();
 	}
 }
 
@@ -57,8 +73,8 @@ void CannonEnemyManager::ProjectileCollisionCheck(std::vector<Projectile*> pProj
 
 		for (CannonEnemy* cannon : m_pItems)
 		{
-			if (!projectile->IsInstanciated()) break;
 			if (cannon->IsDead()) continue;
+			if (!projectile->IsInstanciated()) break;
 
 			if (projectile->HitCheck(cannon->GetBoxCollider())) cannon->TakeDamage(1);
 		}

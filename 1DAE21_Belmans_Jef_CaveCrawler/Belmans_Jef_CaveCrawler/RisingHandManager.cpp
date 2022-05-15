@@ -1,8 +1,12 @@
+#include <fstream>
+#include <sstream>
+#include "pch.h"
 #include "RisingHandManager.h"
 #include "RisingHand.h"
 #include "Health.h"
 #include "Camera.h"
 #include "Projectile.h"
+#include "FileReader.h"
 
 RisingHandManager::~RisingHandManager()
 {
@@ -10,6 +14,28 @@ RisingHandManager::~RisingHandManager()
 	{
 		delete element;
 		element = nullptr;
+	}
+}
+
+void RisingHandManager::Initialize(const std::string& filePath)
+{
+	std::ifstream file{ filePath };
+
+	if (file.good())
+	{
+		while (file.peek() != EOF)
+		{
+			std::string line;
+			std::getline(file, line, '>');
+
+			int health{ std::stoi(FileReader::GetAttributeValue("Health", line)) };
+			Point2f pos{ FileReader::ToPoint2f(FileReader::GetAttributeValue("Position", line)) };
+
+			if (health != 0)
+			{
+				AddItem(pos, health);
+			}
+		}
 	}
 }
 

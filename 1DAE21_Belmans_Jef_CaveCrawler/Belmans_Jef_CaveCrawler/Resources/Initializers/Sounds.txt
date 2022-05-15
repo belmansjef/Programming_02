@@ -46,3 +46,7 @@
   Type="11"
   Path="Resources/Sounds/LevelFinish.wav"
 />
+<Sound
+  Type="12"
+  Path="Resources/Sounds/CannonShoot.wav"
+/>

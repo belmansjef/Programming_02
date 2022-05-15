@@ -19,7 +19,7 @@ DamageBlock* DamageBlockManager::AddItem(const Point2f& bottomLeft)
 	return m_pItems.back();
 }
 
-bool DamageBlockManager::AddItemsFromSvgFile(const std::string& filePath)
+bool DamageBlockManager::Initialize(const std::string& filePath)
 {
 	std::vector<std::vector<Point2f>> vertices;
 	SVGParser::GetVerticesFromSvgFile(filePath, vertices);

@@ -81,18 +81,18 @@ void Avatar::Update(const Level& level, const GameState& state)
 
 void Avatar::Draw() const
 {
-	if (m_AvatarHealth.GetIsDead()) return;
-
-	glPushMatrix();
+	if (!m_AvatarHealth.GetIsDead())
+	{
+		glPushMatrix();
 		glTranslatef(m_PhysicsBody.GetPosition().x, m_PhysicsBody.GetPosition().y, 0);
 		glScalef(m_HorizontalScale, 1, 1);
 		if (m_HorizontalScale < 0)
 			glTranslatef(-m_PhysicsBody.GetShape().width, 0, 0);
 		m_Sprite.Draw();
-	glPopMatrix();
+		glPopMatrix();
 
-	m_Gun.Draw();
-	utils::DrawRect(GetShape());
+		m_Gun.Draw();
+	}	
 }
 
 void Avatar::Reset()

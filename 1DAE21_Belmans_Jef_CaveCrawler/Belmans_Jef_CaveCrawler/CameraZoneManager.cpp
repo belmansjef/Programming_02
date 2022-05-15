@@ -1,7 +1,10 @@
+#include <fstream>
+#include <sstream>
+#include "pch.h"
 #include "CameraZoneManager.h"
 #include "CameraZone.h"
+#include "FileReader.h"
 #include "utils.h"
-#include "pch.h"
 
 CameraZoneManager::~CameraZoneManager()
 {
@@ -12,9 +15,27 @@ CameraZoneManager::~CameraZoneManager()
 	}
 }
 
-CameraZone* CameraZoneManager::AddItem(float left, float bottom, float width, float height)
+void CameraZoneManager::Initialize(const std::string& filePath)
 {
-	m_pItems.push_back(new CameraZone(left, bottom, width, height));
+	std::ifstream file{ filePath };
+
+	if (file.good())
+	{
+		while (file.peek() != EOF)
+		{
+			std::string line;
+			std::getline(file, line, '>');
+
+			Rectf rect{ FileReader::ToRectf(FileReader::GetAttributeValue("Rectf", line))};
+
+			AddItem(rect);
+		}
+	}
+}
+
+CameraZone* CameraZoneManager::AddItem(const Rectf& zoneRect)
+{
+	m_pItems.push_back(new CameraZone(zoneRect));
 	return m_pItems.back();
 }
 
@@ -28,6 +49,6 @@ Rectf CameraZoneManager::GetCurrentZone(const Rectf& actorShape) const
 		}
 	}
 
-	std::cout << "Error getting camerazone!" << std::endl;
+	// std::cout << "Error getting camerazone!" << std::endl;
 	return Rectf{};
 }

@@ -9,12 +9,14 @@ class CollectibleManager final
 public:
 	CollectibleManager() = default;
 	~CollectibleManager();
+
 	CollectibleManager(const CollectibleManager&) = delete;
 	CollectibleManager& operator=(const CollectibleManager&) = delete;
 	CollectibleManager(CollectibleManager&&) = delete;
 	CollectibleManager& operator=(CollectibleManager&&) = delete;
 
-	Collectible* AddItem(const Point2f& bottomLeft, Collectible::CollectibleType type);
+	void Initliaze(const std::string& filePath);
+	Collectible* AddItem(const Point2f& bottomLeft, CollectibleType type);
 
 	void Update(const Rectf& actorShape, Health& actorHealth);
 	void Draw() const;

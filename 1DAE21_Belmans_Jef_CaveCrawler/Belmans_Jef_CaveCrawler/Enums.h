@@ -31,7 +31,8 @@ enum class SoundType
 	jump,
 	shoot,
 	spikeFall,
-	levelFinish
+	levelFinish,
+	cannonShoot
 };
 
 enum class SpriteType
@@ -48,4 +49,16 @@ enum class CannonOrientation
 {
 	up,
 	down
+};
+
+enum class ProjectileType
+{
+	small,
+	big
+};
+
+enum class CollectibleType
+{
+	points = 1,
+	health = 2
 };

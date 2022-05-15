@@ -156,7 +156,7 @@ void Sprite::SetSprite()
 		m_FrameHeight = m_SheetHeight;
 
 		m_pAnimations.push_back(new Animation("idle", 1, 60, 1, 1, 0, 1));
-		m_pAnimations.push_back(new Animation("shoot", 2, 2, 1, 2, 0, 0));
+		m_pAnimations.push_back(new Animation("shot", 1, 60, 1, 1, 0, 0));
 		break;
 	case SpriteType::damageBlock:
 		m_pTexture = new Texture{ "Resources/Images/Sprite_Damageblock.png" };

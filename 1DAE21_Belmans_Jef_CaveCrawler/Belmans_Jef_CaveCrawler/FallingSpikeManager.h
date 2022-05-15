@@ -15,6 +15,7 @@ public:
 	FallingSpikeManager(FallingSpikeManager&& other) = delete;
 	FallingSpikeManager& operator=(FallingSpikeManager&& other) = delete;
 
+	void Initialize(const std::string& filePath);
 	FallingSpike* AddItem(const Point2f& bottomLeft);
 
 	void Update(const Rectf& actorShape, const std::vector<std::vector<Point2f>>& verts, Health& actorHealth);

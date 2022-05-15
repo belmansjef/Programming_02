@@ -1,0 +1,5 @@
+<Crab
+  Health="3"
+  Direction="1"
+  Position="704.0,24.0f"
+/>

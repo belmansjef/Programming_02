@@ -1,0 +1,12 @@
+<CameraZone
+  Rectf="0.0, 0.0, 312.0, 144.0"
+/>
+<CameraZone
+  Rectf="312.0, 0.0, 272.0, 144.0"
+/>
+<CameraZone
+  Rectf="584.0, 0.0, 256.0, 216.0"
+/>
+<CameraZone
+  Rectf="0.0, 144.0, 584.0, 144.0"
+/>

@@ -157,6 +157,7 @@
     <ClCompile Include="DamageBlockManager.cpp" />
     <ClCompile Include="FallingSpike.cpp" />
     <ClCompile Include="FallingSpikeManager.cpp" />
+    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="GameOverMenu.cpp" />
     <ClCompile Include="LevelFinishedMenu.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="DamageBlockManager.h" />
     <ClInclude Include="FallingSpike.h" />
     <ClInclude Include="FallingSpikeManager.h" />
+    <ClInclude Include="FileReader.h" />
     <ClInclude Include="GameOverMenu.h" />
     <ClInclude Include="LevelFinishedMenu.h" />
     <ClInclude Include="Game.h" />

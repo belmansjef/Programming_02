@@ -1,7 +1,10 @@
+#include <fstream>
+#include <sstream>
 #include "CrabEnemyManager.h"
 #include "Camera.h"
 #include "Projectile.h"
 #include "Health.h"
+#include "FileReader.h"
 
 CrabEnemyManager::~CrabEnemyManager()
 {
@@ -9,6 +12,29 @@ CrabEnemyManager::~CrabEnemyManager()
 	{
 		delete crab;
 		crab = nullptr;
+	}
+}
+
+void CrabEnemyManager::Initialize(const std::string& filePath)
+{
+	std::ifstream file{ filePath };
+
+	if (file.good())
+	{
+		while (file.peek() != EOF)
+		{
+			std::string line;
+			std::getline(file, line, '>');
+
+			int health{ std::stoi(FileReader::GetAttributeValue("Health", line)) };
+			int direction{ std::stoi(FileReader::GetAttributeValue("Direction", line)) };
+			Point2f pos{ FileReader::ToPoint2f(FileReader::GetAttributeValue("Position", line)) };
+
+			if (health != 0)
+			{
+				AddItem(pos, direction, health);
+			}
+		}
 	}
 }
 

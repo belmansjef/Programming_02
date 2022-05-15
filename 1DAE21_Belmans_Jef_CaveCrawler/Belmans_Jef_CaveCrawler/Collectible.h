@@ -1,17 +1,13 @@
 #pragma once
 
+enum class CollectibleType;
 class Texture;
 class Collectible final
 {
 public:
-	enum class CollectibleType 
-	{  
-		points = 1, 
-		health = 2	
-	};
-
-	explicit Collectible(const Point2f& leftBottom, Collectible::CollectibleType type );
+	explicit Collectible(const Point2f& leftBottom, CollectibleType type );
 	~Collectible();
+
 	Collectible(const Collectible&) = delete;
 	Collectible& operator=(const Collectible&) = delete;
 	Collectible(Collectible&&) = delete;

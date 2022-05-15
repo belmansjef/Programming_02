@@ -20,54 +20,14 @@ Game::~Game( )
 
 void Game::Initialize( )
 {
-	SoundManager::GetInstance()->Initialize();
-
-	// Load collectibles
-	m_CollectibleManager.AddItem(Point2f(192.0f, 42.0f), Collectible::CollectibleType::points);
-	m_CollectibleManager.AddItem(Point2f(192.0f, 50.0f), Collectible::CollectibleType::points);
-
-	m_CollectibleManager.AddItem(Point2f(444.0f, 42.0f), Collectible::CollectibleType::points);
-	m_CollectibleManager.AddItem(Point2f(444.0f, 50.0f), Collectible::CollectibleType::points);
-
-	m_CollectibleManager.AddItem(Point2f(672.0f, 88.0f), Collectible::CollectibleType::points);
-	m_CollectibleManager.AddItem(Point2f(672.0f, 96.0f), Collectible::CollectibleType::points);
-
-	m_CollectibleManager.AddItem(Point2f(752.0f, 80.0f), Collectible::CollectibleType::points);
-	m_CollectibleManager.AddItem(Point2f(752.0f, 88.0f), Collectible::CollectibleType::points);
-
-	m_CollectibleManager.AddItem(Point2f(256.0f, 200.0f), Collectible::CollectibleType::points);
-	m_CollectibleManager.AddItem(Point2f(272.0f, 200.0f), Collectible::CollectibleType::points);
-	m_CollectibleManager.AddItem(Point2f(288.0f, 200.0f), Collectible::CollectibleType::points);
-	m_CollectibleManager.AddItem(Point2f(304.0f, 200.0f), Collectible::CollectibleType::points);
-
-	m_CollectibleManager.AddItem(Point2f(452.0f, 172.0f), Collectible::CollectibleType::points);
-	m_CollectibleManager.AddItem(Point2f(452.0f, 180.0f), Collectible::CollectibleType::points);
-
-	m_CollectibleManager.AddItem(Point2f(148.0f, 216.0f), Collectible::CollectibleType::health);
-
-	// Load damagablocks
-	m_DamageBlockManager.AddItemsFromSvgFile("Resources/Images/Level_1_Spikes.svg");
-
-	// Load camerazones
-	m_CameraZoneManager.AddItem(0.0f, 0.0f, 39.0f * 8.0f, 18.0f * 8.0f);
-	m_CameraZoneManager.AddItem(39.0f * 8.0f, 0.0f, 34.0f * 8.0f, 18.0f * 8.0f);
-	m_CameraZoneManager.AddItem(73.0f * 8.0f, 0.0f, 32.0f * 8.0f, 27.0f * 8.0f);
-	m_CameraZoneManager.AddItem(0.0f, 18.0f * 8.0f, 73.0f * 8.0f, 18.0f * 8.0f);
-
-	// Load risinghands
-	m_RisingHandManager.AddItem(Point2f(192.0f, 24.0f), 3);
-	m_RisingHandManager.AddItem(Point2f(128.0f, 208.0f), 3);
-
-	// Load crabs
-	m_CrabEnemyManager.AddItem(Point2f(704.0f, 24.0f), 1, 3);
-
-	// Load cannons
-	m_CannonEnemyManager.AddItem(Point2f(664.0f, 128.0f), CannonOrientation::down);
-
-	// Load Falling spikes
-	m_FallingSpikeManager.AddItem(Point2f(128.0f, 120.0f));
-	m_FallingSpikeManager.AddItem(Point2f(400.0f, 264.0f));
-	m_FallingSpikeManager.AddItem(Point2f(444.0f, 120.0f));
+	SoundManager::GetInstance()->Initialize("Resources/Initializers/Sounds.txt");
+	m_DamageBlockManager.Initialize("Resources/Images/Level_1_Spikes.svg");
+	m_CollectibleManager.Initliaze("Resources/Initializers/Collectibles.txt");
+	m_CameraZoneManager.Initialize("Resources/Initializers/CameraZones.txt");
+	m_RisingHandManager.Initialize("Resources/Initializers/RisingHands.txt");
+	m_CrabEnemyManager.Initialize("Resources/Initializers/Crabs.txt");
+	m_CannonEnemyManager.Initialize("Resources/Initializers/Cannons.txt");
+	m_FallingSpikeManager.Initialize("Resources/Initializers/FallingSpikes.txt");
 }
 
 void Game::Cleanup( )
@@ -232,6 +192,7 @@ void Game::ResetLevel()
 	m_CollectibleManager.Reset();
 	m_Camera.Reset();
 	m_FallingSpikeManager.Reset();
+	m_CannonEnemyManager.Reset();
 
 	Time::SetTimeScale(1.0f);
 	SetGameState(GameState::InGame);

@@ -2,12 +2,13 @@
 #include <vector>
 #include "Vector2f.h"
 
+enum class ProjectileType;
 class Texture;
 
 class Projectile final
 {
 public:
-	Projectile();
+	Projectile(ProjectileType type);
 	Projectile(const Vector2f& velocity, const Rectf& boxCollider);
 	~Projectile();
 	Projectile(const Projectile& other) = delete;
@@ -29,6 +30,7 @@ private:
 	bool m_IsInstanciated;
 	Texture* m_pTexture;
 	Rectf m_BoxCollider;
+	Rayf m_Ray;
 
 	Vector2f m_Velocity;
 	float m_AngleRad;

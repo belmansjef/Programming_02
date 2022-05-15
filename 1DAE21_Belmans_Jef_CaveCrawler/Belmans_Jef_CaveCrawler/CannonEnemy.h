@@ -10,11 +10,11 @@ class CannonEnemy final
 public:
 	CannonEnemy(const Point2f& bottomLeft, const CannonOrientation& orientation = CannonOrientation::down);
 
-	void TakeDamage(int damage = 1);
-
 	void Update(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts);
 	void Draw() const;
 	void Reset();
+
+	void TakeDamage(int damage = 1);
 
 	Rectf GetBoxCollider() const;
 	bool IsOverlapping(const Rectf& shape) const;
@@ -36,6 +36,10 @@ private:
 
 	bool m_IsPlayerInRange;
 	const float m_Range;
-
+	
+	void DrawBarrel() const;
+	void DrawBase() const;
+	void SetAnimation();
+	void UpdateProjectiles(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts);
 	void Shoot(const Vector2f& freeVec);
 };

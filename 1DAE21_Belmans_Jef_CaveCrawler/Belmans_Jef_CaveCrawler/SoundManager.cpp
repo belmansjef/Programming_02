@@ -2,8 +2,8 @@
 #include <algorithm>
 #include <sstream>
 #include <fstream>
+#include "FileReader.h"
 #include "SoundManager.h"
-
 
 SoundManager* SoundManager::m_pInstance{ nullptr };
 
@@ -38,22 +38,21 @@ float SoundManager::GetVolume() const
 	return m_CurrentVolume;
 }
 
-void SoundManager::Initialize()
+void SoundManager::Initialize(const std::string& filePath)
 {
-	std::ifstream soundfile{ "Resources/Initializers/Sounds.txt" };
+	std::ifstream file{ filePath };
 
-	if (soundfile.good())
+	if (file.good())
 	{
-		while (soundfile.peek() != EOF)
+		while (file.peek() != EOF)
 		{
 			std::string line;
-			std::getline(soundfile, line, '>');
-			int Type{ std::stoi(GetAttributeValue("Type", line)) };
-			std::string Path{ GetAttributeValue("Path", line) };
+			std::getline(file, line, '>');
+			int Type{ std::stoi(FileReader::GetAttributeValue("Type", line)) };
+			std::string Path{ FileReader::GetAttributeValue("Path", line) };
 
 			if (Path != "")
 			{
-				
 				m_pSoundEffects.insert(std::make_pair(SoundType(Type), new SoundEffect(Path)));
 			}
 		}
@@ -79,22 +78,4 @@ void SoundManager::ApplyVolume()
 	{
 		val->SetVolume(int(m_CurrentVolume));
 	}
-}
-
-std::string SoundManager::GetAttributeValue(const std::string& attrName, const std::string& element)
-{
-	std::string attribute;
-	std::string attrSearch{ attrName + "=" };
-
-	size_t attrPos = element.find(attrSearch);
-	if (attrPos == std::string::npos)
-	{
-		std::cerr << R"(Attribute ")" << attrName << R"(" not found!)";
-		return "";
-	}
-	size_t startPos{ element.find(R"(")", attrPos) };
-	size_t endPos{ element.find(R"(")", startPos + 1) };
-
-	attribute = element.substr(startPos + 1, endPos - startPos - 1);
-	return attribute;
 }
