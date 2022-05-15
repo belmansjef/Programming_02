@@ -23,6 +23,8 @@ OptionsMenu::OptionsMenu(const Point2f& bottomLeft, float windowWidth, float win
 
 OptionsMenu::~OptionsMenu()
 {
+	delete m_pVolumeText;
+	m_pVolumeText = nullptr;
 	m_pVolumeDownButton = nullptr;
 	m_pVolumeUpButton = nullptr;
 	m_pMenuButton = nullptr;
