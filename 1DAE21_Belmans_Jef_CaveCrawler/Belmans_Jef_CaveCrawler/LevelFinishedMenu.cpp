@@ -1,6 +1,7 @@
 #include "LevelFinishedMenu.h"
 #include "Button.h"
 #include "Game.h"
+#include "Enums.h"
 
 LevelFinishedMenu::LevelFinishedMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight)
 	: MenuBase("LEVEL FINISHED", 52, windowWidth, windowHeight, bottomLeft)

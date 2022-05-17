@@ -4,6 +4,7 @@
 #include "Level.h"
 #include "Projectile.h"
 #include "FileReader.h"
+#include "Enums.h"
 
 CannonEnemyManager::~CannonEnemyManager()
 {

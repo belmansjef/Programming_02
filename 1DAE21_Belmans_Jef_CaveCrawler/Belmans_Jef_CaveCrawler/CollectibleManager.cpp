@@ -7,6 +7,7 @@
 #include "Health.h"
 #include "SoundManager.h"
 #include "FileReader.h"
+#include "Enums.h"
 
 CollectibleManager::~CollectibleManager()
 {

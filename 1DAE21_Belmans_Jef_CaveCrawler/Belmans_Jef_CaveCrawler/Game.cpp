@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "Game.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 Game::Game( const Window& window ) 
 	: m_Window{ window }
@@ -10,7 +11,9 @@ Game::Game( const Window& window )
 	, m_HUD { window, m_PlayerAvatar.GetHealth().GetCurrentHealth() }
 	, m_MenuManager { window.width, window.height }
 	, m_DoQuit{ false }
+	, m_CurrentGameState { GameState::MainMenu }
 {
+	pTexture = new Texture("Resources/Images/Sprite_BossBase.png");
 	Initialize( );
 }
 

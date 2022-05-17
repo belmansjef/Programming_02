@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Level.h"
 #include "Game.h"
+#include "Enums.h"
 
 Avatar::Avatar(float left, float bottom, float width, float height)
 	: m_StartPos { Point2f(left, bottom) }

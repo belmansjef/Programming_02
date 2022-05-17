@@ -6,8 +6,8 @@
 #include "Health.h"
 #include "Gun.h"
 #include "PhysicsBody.h"
-#include "Enums.h"
 
+enum class GameState;
 class Level;
 class Avatar final
 {

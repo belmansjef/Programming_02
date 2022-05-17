@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include "pch.h"
 #include "Texture.h"
+#include "Enums.h"
 
 Animation::Animation()
 	: Animation("anim", 0, 0, 0, 0, 0, 0)

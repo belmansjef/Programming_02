@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Camera.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 FallingSpike::FallingSpike(const Point2f& bottomLeft)
 	: m_pTexture { new Texture("Resources/Images/Sprite_FallingSpike.png")}

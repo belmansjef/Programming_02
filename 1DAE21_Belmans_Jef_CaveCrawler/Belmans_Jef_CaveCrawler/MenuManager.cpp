@@ -5,6 +5,7 @@
 #include "LevelFinishedMenu.h"
 #include "GameOverMenu.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 MenuManager::MenuManager(float windowWidth, float windowHeight)
 	: m_pActiveMenu { nullptr }

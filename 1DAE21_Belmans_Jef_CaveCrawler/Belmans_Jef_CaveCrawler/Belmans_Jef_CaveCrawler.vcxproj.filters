@@ -308,9 +308,6 @@
     <ClInclude Include="HUD.h">
       <Filter>Game Files\Game\HUD</Filter>
     </ClInclude>
-    <ClInclude Include="Enums.h">
-      <Filter>Game Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Game Files\Game\HUD\Components</Filter>
     </ClInclude>
@@ -354,6 +351,9 @@
       <Filter>Game Files\Charachters\Common</Filter>
     </ClInclude>
     <ClInclude Include="FileReader.h">
+      <Filter>Framework Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
       <Filter>Framework Files</Filter>
     </ClInclude>
   </ItemGroup>

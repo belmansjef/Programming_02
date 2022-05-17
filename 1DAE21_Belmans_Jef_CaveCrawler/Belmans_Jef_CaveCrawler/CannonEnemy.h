@@ -4,11 +4,12 @@
 #include "Sprite.h"
 #include "ProjectileManager.h"
 
+enum class CannonOrientation;
 class Health;
 class CannonEnemy final
 {
 public:
-	CannonEnemy(const Point2f& bottomLeft, const CannonOrientation& orientation = CannonOrientation::down);
+	CannonEnemy(const Point2f& bottomLeft, const CannonOrientation& orientation);
 
 	void Update(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts);
 	void Draw() const;

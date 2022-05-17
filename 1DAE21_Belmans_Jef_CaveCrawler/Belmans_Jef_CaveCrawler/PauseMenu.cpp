@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Button.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 PauseMenu::PauseMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight)
 	: MenuBase("PAUSED", 52, windowWidth, windowHeight, bottomLeft)

@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "SoundManager.h"
 #include "utils.h"
+#include "Enums.h"
 
 MenuBase::MenuBase(const std::string& titleText, const int fontSize, float windowWidth, float windowHeight, const Point2f& buttonPanelBottomLeft)
 	: m_pTitleText { new Texture(titleText, "Resources/Font.ttf", fontSize, Color4f(1.0f, 1.0f, 1.0f, 1.0f))}

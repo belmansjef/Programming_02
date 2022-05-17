@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Sprite.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 CrabEnemy::CrabEnemy(float left, float bottom, float width, float height, int movementDirection, int maxHealth)
 	: m_Health { Health(maxHealth, &m_Sprite, 0.1f) }

@@ -2,6 +2,7 @@
 #include <vector>
 #include "CannonEnemy.h"
 
+enum class CannonOrientation;
 class Camera;
 class Health;
 class Projectile;

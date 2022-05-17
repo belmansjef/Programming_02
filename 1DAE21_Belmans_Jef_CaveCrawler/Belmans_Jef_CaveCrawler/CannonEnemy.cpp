@@ -1,9 +1,10 @@
+#include <algorithm>
 #include "pch.h"
 #include "CannonEnemy.h"
 #include "utils.h"
 #include "Health.h"
 #include "SoundManager.h"
-#include <algorithm>
+#include "Enums.h"
 
 CannonEnemy::CannonEnemy(const Point2f& bottomLeft, const CannonOrientation& orientation)
 	: m_SpriteBase { SpriteType::cannonEnemyBase }

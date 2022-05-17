@@ -3,6 +3,7 @@
 #include "utils.h"
 #include "Texture.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 Projectile::Projectile(ProjectileType type)
 	: m_IsInstanciated { false }

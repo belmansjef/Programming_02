@@ -205,6 +205,7 @@
     <ClInclude Include="CrabEnemyManager.h" />
     <ClInclude Include="DamageBlock.h" />
     <ClInclude Include="DamageBlockManager.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="FallingSpike.h" />
     <ClInclude Include="FallingSpikeManager.h" />
     <ClInclude Include="FileReader.h" />
@@ -212,7 +213,6 @@
     <ClInclude Include="LevelFinishedMenu.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gun.h" />
-    <ClInclude Include="Enums.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Lava.h" />

@@ -2,6 +2,7 @@
 #include "PhysicsBody.h"
 #include "Level.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 PhysicsBody::PhysicsBody(float left, float bottom, float width, float height, float initialJumpVelocity)
 	: m_Shape { Rectf(left, bottom, width, height) }

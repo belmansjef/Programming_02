@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Button.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 MainMenu::MainMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight)
 	: MenuBase("CAVE CRAWLER", 52, windowWidth, windowHeight, bottomLeft)

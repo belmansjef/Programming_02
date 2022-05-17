@@ -1,6 +1,7 @@
 #include "DamageBlock.h"
 #include "utils.h"
 #include "pch.h"
+#include "Enums.h"
 
 DamageBlock::DamageBlock(float left, float bottom)
 	: m_Sprite{ Sprite(SpriteType::damageBlock) }

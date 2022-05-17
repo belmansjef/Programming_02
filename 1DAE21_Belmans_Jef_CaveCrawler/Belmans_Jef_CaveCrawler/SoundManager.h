@@ -2,8 +2,8 @@
 #include <vector>
 #include <unordered_map>
 #include "SoundEffect.h"
-#include "Enums.h"
 
+enum class SoundType;
 class SoundManager final
 {
 public:

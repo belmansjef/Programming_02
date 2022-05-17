@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "SoundManager.h"
 #include "Sprite.h"
+#include "Enums.h"
 
 Health::Health()
 	: Health(3, nullptr)

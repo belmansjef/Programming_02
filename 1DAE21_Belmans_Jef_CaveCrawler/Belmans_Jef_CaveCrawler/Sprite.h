@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include "structs.h"
-#include "Enums.h"
 
+enum class SpriteType;
 class Texture;
 struct Animation
 {

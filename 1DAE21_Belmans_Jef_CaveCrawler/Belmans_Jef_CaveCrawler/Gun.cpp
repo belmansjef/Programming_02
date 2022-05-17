@@ -4,6 +4,7 @@
 #include "ProjectileManager.h"
 #include "SoundManager.h"
 #include "Health.h"
+#include "Enums.h"
 
 Gun::Gun()
 {

@@ -4,6 +4,7 @@
 #include <fstream>
 #include "FileReader.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 SoundManager* SoundManager::GetInstance()
 {
@@ -56,17 +57,17 @@ void SoundManager::Initialize(const std::string& filePath)
 
 SoundManager::~SoundManager()
 {
-	for (auto& [key, val] : m_pSoundEffects)
+	for (std::pair<SoundType, SoundEffect*> key_val : m_pSoundEffects)
 	{
-		delete val;
-		val = nullptr;
+		delete key_val.second;
+		key_val.second = nullptr;
 	}
 }
 
 void SoundManager::ApplyVolume()
 {
-	for (auto& [key, val] : m_pSoundEffects)
+	for (std::pair<SoundType, SoundEffect*> key_val : m_pSoundEffects)
 	{
-		val->SetVolume(int(m_CurrentVolume));
+		key_val.second->SetVolume(int(m_CurrentVolume));
 	}
 }

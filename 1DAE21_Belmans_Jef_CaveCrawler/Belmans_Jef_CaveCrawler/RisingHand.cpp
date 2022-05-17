@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "utils.h"
 #include "SoundManager.h"
+#include "Enums.h"
 
 RisingHand::RisingHand(const Point2f& bottomLeft, int maxHealth)
 	: m_Sprite { Sprite(SpriteType::risingHand)}

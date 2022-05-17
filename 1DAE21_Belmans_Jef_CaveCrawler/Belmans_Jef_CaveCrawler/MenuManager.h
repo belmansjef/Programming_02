@@ -1,13 +1,12 @@
 #pragma once
-#include "Enums.h"
 
+enum class MenuType;
 class MenuBase;
 class MainMenu;
 class OptionsMenu;
 class PauseMenu;
 class GameOverMenu;
 class LevelFinishedMenu;
-
 class Game;
 
 class MenuManager final

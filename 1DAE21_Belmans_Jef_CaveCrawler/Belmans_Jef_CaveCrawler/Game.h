@@ -12,8 +12,8 @@
 #include "Lava.h"
 #include "MenuManager.h"
 #include "HUD.h"
-#include "Enums.h"
 
+enum class GameState;
 class Game final
 {
 public:
@@ -46,10 +46,10 @@ private:
 	// DATA MEMBERS
 	const Window m_Window;
 	const float m_ScaleFactor{ 4.0f };
-
+	Texture* pTexture;
 	bool m_DoQuit;
 
-	GameState m_CurrentGameState{ GameState::MainMenu };
+	GameState m_CurrentGameState;
 
 	bool m_ShouldPrintStats{ true };
 	float m_FrameTime{ 0.0f };
@@ -75,7 +75,6 @@ private:
 	// Menus
 	HUD m_HUD;
 	MenuManager m_MenuManager;
-
 	Rectf m_EndScreenOverlay;
 
 	// FUNCTIONS
