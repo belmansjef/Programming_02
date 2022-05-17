@@ -43,7 +43,7 @@ void MainMenu::Enter(Game& game)
 		}
 		else if (pHighlightedButton == m_pExitButton)
 		{
-			exit(3); // <-- Mem leaks
+			game.SetDoQuit(true);
 		}
 	}
 }

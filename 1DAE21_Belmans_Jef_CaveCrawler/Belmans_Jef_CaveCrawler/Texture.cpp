@@ -166,7 +166,6 @@ void Texture::CreateFromSurface( SDL_Surface* pSurface )
 		m_CreationOk = false;
 		return;
 	}
-
 	//Generate an array of textures.  We only want one texture (one element array), so trick
 	//it by treating "texture" as array of length one.
 	glGenTextures(1, &m_Id);
@@ -296,7 +295,9 @@ void Texture::Draw( const Rectf& dstRect, const Rectf& srcRect, bool doFlashText
 
 	// Tell opengl which texture we will use
 	glBindTexture( GL_TEXTURE_2D, m_Id );
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MULT);
+
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
 	if (doFlashTexture) // <--- Moddified code to add damage animation via color multiplication
 	{
 		glColor3f(1, 0, 0);

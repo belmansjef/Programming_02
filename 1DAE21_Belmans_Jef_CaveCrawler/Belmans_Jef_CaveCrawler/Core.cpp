@@ -197,6 +197,8 @@ void Core::Run( )
 
 			// Update screen: swap back and front buffer
 			SDL_GL_SwapWindow(m_pWindow);
+
+			quit = pGame->GetDoQuit();
 		}
 	}
 	delete pGame;
@@ -219,5 +221,6 @@ void Core::Cleanup( )
 	HWND hwnd = GetConsoleWindow();
 	HMENU hmenu = GetSystemMenu(hwnd, FALSE);
 	EnableMenuItem(hmenu, SC_CLOSE, MF_ENABLED);
+	std::cout << "Core destructor" << std::endl;
 
 }

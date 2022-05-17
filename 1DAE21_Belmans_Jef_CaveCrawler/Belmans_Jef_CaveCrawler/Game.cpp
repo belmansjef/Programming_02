@@ -9,6 +9,7 @@ Game::Game( const Window& window )
 	, m_EndScreenOverlay{ Rectf(0.0f, 0.0f, window.width, window.height) }
 	, m_HUD { window, m_PlayerAvatar.GetHealth().GetCurrentHealth() }
 	, m_MenuManager { window.width, window.height }
+	, m_DoQuit{ false }
 {
 	Initialize( );
 }
@@ -106,6 +107,17 @@ void Game::Draw() const
 	}
 
 	m_MenuManager.DrawActiveMenu();
+}
+
+
+void Game::SetDoQuit(bool shouldQuit)
+{
+	m_DoQuit = shouldQuit;
+}
+
+bool Game::GetDoQuit() const
+{
+	return m_DoQuit;
 }
 
 void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )

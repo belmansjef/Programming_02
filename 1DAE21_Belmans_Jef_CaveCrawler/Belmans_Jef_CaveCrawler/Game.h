@@ -24,6 +24,8 @@ public:
 	Game& operator=(Game&& other) = delete;
 	~Game();
 
+	void SetDoQuit(bool shouldQuit);
+	bool GetDoQuit() const;
 	void SetGameState(const GameState& state);
 	void BackToMainMenu();
 	void OpenOptionsMenu();
@@ -44,6 +46,8 @@ private:
 	// DATA MEMBERS
 	const Window m_Window;
 	const float m_ScaleFactor{ 4.0f };
+
+	bool m_DoQuit;
 
 	GameState m_CurrentGameState{ GameState::MainMenu };
 

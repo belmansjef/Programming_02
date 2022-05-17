@@ -1,4 +1,5 @@
 #include "Time.h"
+#include "pch.h"
 
 float Time::time{ 0.0f };
 float Time::deltaTime{ 0.0f };
