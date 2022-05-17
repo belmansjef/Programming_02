@@ -48,7 +48,7 @@ void Health::TakeDamage(int amount)
 	if (ShouldHit())
 	{
 		m_CurrentHealth -= amount;
-		m_TimeSinceLastHit = Time::time;
+		m_TimeSinceLastHit = Time::GetInstance()->m_Time;
 		SoundManager::GetInstance()->PlaySound(SoundType::hitHurt);
 
 		if (m_CurrentHealth <= 0)
@@ -71,7 +71,7 @@ void Health::TakeDamage(int amount)
 
 bool Health::ShouldHit() const
 {
-	return m_TimeSinceLastHit + m_DamageCooldown <= Time::time;
+	return m_TimeSinceLastHit + m_DamageCooldown <= Time::GetInstance()->m_Time;
 }
 
 void Health::Die()

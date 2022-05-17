@@ -186,8 +186,8 @@ void Core::Run( )
 			elapsedSeconds = std::min(elapsedSeconds, m_MaxElapsedSeconds);
 
 			// Update time class
-			Time::deltaTime = elapsedSeconds * Time::GetTimeScale();
-			Time::time += elapsedSeconds * Time::GetTimeScale();
+			Time::GetInstance()->m_DeltaTime = elapsedSeconds * Time::GetInstance()->m_TimeScale;
+			Time::GetInstance()->m_Time += elapsedSeconds * Time::GetInstance()->m_TimeScale;
 
 			// Call the Game object 's Update function, using time in seconds (!)
 			pGame->Update(elapsedSeconds);

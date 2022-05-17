@@ -49,6 +49,5 @@ Rectf CameraZoneManager::GetCurrentZone(const Rectf& actorShape) const
 		}
 	}
 
-	// std::cout << "Error getting camerazone!" << std::endl;
 	return Rectf{};
 }

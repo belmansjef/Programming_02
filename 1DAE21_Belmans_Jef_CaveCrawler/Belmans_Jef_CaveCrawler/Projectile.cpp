@@ -55,14 +55,15 @@ bool Projectile::IsInstanciated() const
 
 void Projectile::Update()
 {
-	m_BoxCollider.left += m_Velocity.x * Time::deltaTime;
-	m_BoxCollider.bottom += m_Velocity.y * Time::deltaTime;
+	const float deltaTime{ Time::GetInstance()->m_DeltaTime };
+	m_BoxCollider.left += m_Velocity.x * deltaTime;
+	m_BoxCollider.bottom += m_Velocity.y * deltaTime;
 
-	m_Ray.start.x += m_Velocity.x * Time::deltaTime;
-	m_Ray.start.y += m_Velocity.y * Time::deltaTime;
+	m_Ray.start.x += m_Velocity.x * deltaTime;
+	m_Ray.start.y += m_Velocity.y * deltaTime;
 
-	m_Ray.end.x += m_Velocity.x * Time::deltaTime;
-	m_Ray.end.y += m_Velocity.y * Time::deltaTime;
+	m_Ray.end.x += m_Velocity.x * deltaTime;
+	m_Ray.end.y += m_Velocity.y * deltaTime;
 }
 
 void Projectile::Draw() const

@@ -38,6 +38,6 @@ void LevelFinishedMenu::Enter(Game& game)
 			game.BackToMainMenu();
 		}
 
-		Time::SetTimeScale(1.0f);
+		Time::GetInstance()->m_TimeScale = 1.0f;
 	}
 }

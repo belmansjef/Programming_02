@@ -68,7 +68,7 @@ void CannonEnemy::Update(const Rectf& actorShape, Health& actorHealth, const std
 			}
 		}
 
-		if (Time::time > m_LastShotTime + m_ShotCooldown && m_IsPlayerInRange)
+		if (Time::GetInstance()->m_Time > m_LastShotTime + m_ShotCooldown && m_IsPlayerInRange)
 		{
 			Shoot(freeVec);
 		}
@@ -120,7 +120,7 @@ bool CannonEnemy::IsDead() const
 void CannonEnemy::Shoot(const Vector2f& freeVec)
 {
 	m_ProjectileManager.InstanciateProjectile(freeVec.Normalized() * 100.0f, m_BaseCenter + (freeVec.Normalized() * 12.0f));
-	m_LastShotTime = Time::time;
+	m_LastShotTime = Time::GetInstance()->m_Time;
 	SoundManager::GetInstance()->PlaySound(SoundType::cannonShoot);
 }
 
@@ -155,7 +155,7 @@ void CannonEnemy::DrawBase() const
 
 void CannonEnemy::SetAnimation()
 {
-	if ((Time::time < m_LastShotTime + m_ShotCooldown / 3.0f) && m_IsPlayerInRange)
+	if ((Time::GetInstance()->m_Time < m_LastShotTime + m_ShotCooldown / 3.0f) && m_IsPlayerInRange)
 	{
 		m_SpriteBarrel.SetAnimation("shot");
 	}

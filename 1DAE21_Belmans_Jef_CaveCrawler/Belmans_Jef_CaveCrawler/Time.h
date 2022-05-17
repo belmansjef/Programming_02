@@ -2,13 +2,12 @@
 class Time
 {
 public:
-	static float time;
-	static float deltaTime;
-
-	static void SetTimeScale(float scale);
-	static float GetTimeScale();
+	static Time* GetInstance();
+	float m_Time;
+	float m_DeltaTime;
+	float m_TimeScale;
 
 private:
-	static float m_TimeScale;
+	Time();
 };
 

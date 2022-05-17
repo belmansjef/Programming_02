@@ -33,14 +33,15 @@ void Game::Initialize( )
 
 void Game::Cleanup( )
 {
-	SoundManager::GetInstance()->Destroy();
+	delete Time::GetInstance();
+	delete SoundManager::GetInstance();
 	std::cout << "Game destuctor" << std::endl;
 }
 
 void Game::Update( float elapsedSec )
 {
 	// Lock framerate
-	m_FrameDelay = UINT32(m_MaxFrameTime - (Time::deltaTime));
+	m_FrameDelay = UINT32(m_MaxFrameTime - (Time::GetInstance()->m_DeltaTime));
 	SDL_Delay(m_FrameDelay);
 
 	// Updates
@@ -149,7 +150,7 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 	case SDL_SCANCODE_ESCAPE:
 		if (m_CurrentGameState == GameState::InGame)
 		{
-			Time::SetTimeScale(0.0f);
+			Time::GetInstance()->m_TimeScale = 0.0f;
 			m_MenuManager.OpenMenu(MenuType::Pause);
 		}
 		break;
@@ -189,7 +190,7 @@ void Game::PlayerDied()
 
 void Game::PlayerFinished()
 {
-	Time::SetTimeScale(0.0f);
+	Time::GetInstance()->m_TimeScale = 0.0f;
 	SetGameState(GameState::Finished);
 	m_MenuManager.OpenMenu(MenuType::Finished); 
 
@@ -206,14 +207,14 @@ void Game::ResetLevel()
 	m_FallingSpikeManager.Reset();
 	m_CannonEnemyManager.Reset();
 
-	Time::SetTimeScale(1.0f);
+	Time::GetInstance()->m_TimeScale = 1.0f;
 	SetGameState(GameState::InGame);
 }
 
 void Game::UpdateFrameStats()
 {
 	m_FrameRate++;
-	m_FrameTime += Time::deltaTime;
+	m_FrameTime += Time::GetInstance()->m_DeltaTime;
 
 	if (m_FrameTime >= 1.0f) // Every second
 	{

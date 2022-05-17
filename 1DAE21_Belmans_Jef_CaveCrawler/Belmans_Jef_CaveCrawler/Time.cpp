@@ -1,16 +1,16 @@
 #include "Time.h"
 #include "pch.h"
 
-float Time::time{ 0.0f };
-float Time::deltaTime{ 0.0f };
-float Time::m_TimeScale{ 1.0f };
-
-void Time::SetTimeScale(float scale)
+Time* Time::GetInstance()
 {
-	m_TimeScale = scale;
+	static Time* t = new Time();
+	return t;
 }
 
-float Time::GetTimeScale()
+Time::Time()
+	: m_TimeScale{ 1.0f }
+	, m_DeltaTime { 0.0f }
+	, m_Time { 0.0f }
 {
-	return m_TimeScale;
+
 }

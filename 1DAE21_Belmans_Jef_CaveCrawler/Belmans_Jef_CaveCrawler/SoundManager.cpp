@@ -5,16 +5,10 @@
 #include "FileReader.h"
 #include "SoundManager.h"
 
-SoundManager* SoundManager::m_pInstance{ nullptr };
-
 SoundManager* SoundManager::GetInstance()
 {
-	if (m_pInstance == nullptr)
-	{
-		m_pInstance = new SoundManager();
-	}
-
-	return m_pInstance;
+	static SoundManager* s = new SoundManager();
+	return s;
 }
 
 void SoundManager::PlaySound(const SoundType& sound) const
@@ -60,16 +54,13 @@ void SoundManager::Initialize(const std::string& filePath)
 	ApplyVolume();
 }
 
-void SoundManager::Destroy()
+SoundManager::~SoundManager()
 {
 	for (auto& [key, val] : m_pSoundEffects)
 	{
 		delete val;
 		val = nullptr;
 	}
-
-	delete m_pInstance;
-	m_pInstance = nullptr;
 }
 
 void SoundManager::ApplyVolume()

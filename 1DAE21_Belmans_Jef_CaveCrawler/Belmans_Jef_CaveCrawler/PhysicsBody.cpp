@@ -73,16 +73,16 @@ void PhysicsBody::Update(const Level& level)
 	{
 		if (m_TimeSinceGrounded >= m_CoyoteTime || m_HasJumped)
 		{
-			m_Velocity.y += (m_Gravity * m_GravityScale) * Time::deltaTime;
+			m_Velocity.y += (m_Gravity * m_GravityScale) * Time::GetInstance()->m_DeltaTime;
 		}
 
-		m_TimeSinceGrounded += Time::deltaTime;
+		m_TimeSinceGrounded += Time::GetInstance()->m_DeltaTime;
 	}
 
 	ClampVelocity();
 
-	m_Shape.left += m_Velocity.x * Time::deltaTime;
-	m_Shape.bottom += m_Velocity.y * Time::deltaTime;
+	m_Shape.left += m_Velocity.x * Time::GetInstance()->m_DeltaTime;
+	m_Shape.bottom += m_Velocity.y * Time::GetInstance()->m_DeltaTime;
 	level.HandleCollision(m_Shape, m_Velocity);
 }
 

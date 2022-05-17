@@ -66,8 +66,8 @@ void FallingSpike::Update(const Rectf& actorShape)
 	}
 	else if(m_IsFalling)
 	{
-		m_VelocityY += m_Gravity * Time::deltaTime;
-		m_BoxCollider.bottom += m_VelocityY * Time::deltaTime;
+		m_VelocityY += m_Gravity * Time::GetInstance()->m_DeltaTime;
+		m_BoxCollider.bottom += m_VelocityY * Time::GetInstance()->m_DeltaTime;
 	}
 }
 

@@ -8,16 +8,16 @@ class SoundManager final
 {
 public:
 	static SoundManager* GetInstance();
+	~SoundManager();
 
 	void PlaySound(const SoundType& sound) const;
 	void AdjustVolume(float value);
 	float GetVolume() const;
 
 	void Initialize(const std::string& filePath);
-	void Destroy();
 
 private:
-	static SoundManager* m_pInstance;
+	SoundManager() = default;
 	std::unordered_map<SoundType, SoundEffect*> m_pSoundEffects;
 
 	const float m_MaxVolume{ 80.0f };
