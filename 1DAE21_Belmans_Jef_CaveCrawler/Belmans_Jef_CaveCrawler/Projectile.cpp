@@ -56,15 +56,15 @@ bool Projectile::IsInstanciated() const
 
 void Projectile::Update()
 {
-	const float deltaTime{ Time::GetInstance()->m_DeltaTime };
-	m_BoxCollider.left += m_Velocity.x * deltaTime;
-	m_BoxCollider.bottom += m_Velocity.y * deltaTime;
+	//const float deltaTime{ Time::GetInstance()->m_DeltaTime };
+	//m_BoxCollider.left += m_Velocity.x * deltaTime;
+	//m_BoxCollider.bottom += m_Velocity.y * deltaTime;
 
-	m_Ray.start.x += m_Velocity.x * deltaTime;
+	/*m_Ray.start.x += m_Velocity.x * deltaTime;
 	m_Ray.start.y += m_Velocity.y * deltaTime;
 
 	m_Ray.end.x += m_Velocity.x * deltaTime;
-	m_Ray.end.y += m_Velocity.y * deltaTime;
+	m_Ray.end.y += m_Velocity.y * deltaTime;*/
 }
 
 void Projectile::Draw() const
@@ -89,7 +89,7 @@ bool Projectile::HitCheck(const std::vector<Point2f>& verts)
 	if (utils::Raycast(verts, m_Ray, hitInfo))
 	{
 		m_IsInstanciated = false;
-		SoundManager::GetInstance()->PlaySound(SoundType::hitWall);
+		//SoundManager::GetInstance()->PlaySound(SoundType::hitWall);
 	}
 
 	return !m_IsInstanciated;

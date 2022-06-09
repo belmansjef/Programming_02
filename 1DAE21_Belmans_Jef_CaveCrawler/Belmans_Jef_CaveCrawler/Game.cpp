@@ -13,7 +13,6 @@ Game::Game( const Window& window )
 	, m_DoQuit{ false }
 	, m_CurrentGameState { GameState::MainMenu }
 {
-	pTexture = new Texture("Resources/Images/Sprite_BossBase.png");
 	Initialize( );
 }
 
@@ -24,7 +23,7 @@ Game::~Game( )
 
 void Game::Initialize( )
 {
-	SoundManager::GetInstance()->Initialize("Resources/Initializers/Sounds.txt");
+	//SoundManager::GetInstance()->Initialize("Resources/Initializers/Sounds.txt");
 	m_DamageBlockManager.Initialize("Resources/Images/Level_1_Spikes.svg");
 	m_CollectibleManager.Initliaze("Resources/Initializers/Collectibles.txt");
 	m_CameraZoneManager.Initialize("Resources/Initializers/CameraZones.txt");
@@ -36,15 +35,15 @@ void Game::Initialize( )
 
 void Game::Cleanup( )
 {
-	delete Time::GetInstance();
-	delete SoundManager::GetInstance();
+	// delete Time::GetInstance();
+	// delete SoundManager::GetInstance();
 	std::cout << "Game destuctor" << std::endl;
 }
 
 void Game::Update( float elapsedSec )
 {
 	// Lock framerate
-	m_FrameDelay = UINT32(m_MaxFrameTime - (Time::GetInstance()->m_DeltaTime));
+	// m_FrameDelay = UINT32(m_MaxFrameTime - (Time::GetInstance()->m_DeltaTime));
 	SDL_Delay(m_FrameDelay);
 
 	// Updates
@@ -145,15 +144,15 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 		m_MenuManager.Enter(*this);
 		break;
 	case SDL_SCANCODE_PAGEUP:
-		SoundManager::GetInstance()->AdjustVolume(20.0f);
+		//SoundManager::GetInstance()->AdjustVolume(20.0f);
 		break;
 	case SDL_SCANCODE_PAGEDOWN:
-		SoundManager::GetInstance()->AdjustVolume(-20.0f);
+		//SoundManager::GetInstance()->AdjustVolume(-20.0f);
 		break;
 	case SDL_SCANCODE_ESCAPE:
 		if (m_CurrentGameState == GameState::InGame)
 		{
-			Time::GetInstance()->m_TimeScale = 0.0f;
+			// Time::GetInstance()->m_TimeScale = 0.0f;
 			m_MenuManager.OpenMenu(MenuType::Pause);
 		}
 		break;
@@ -193,11 +192,11 @@ void Game::PlayerDied()
 
 void Game::PlayerFinished()
 {
-	Time::GetInstance()->m_TimeScale = 0.0f;
+	// Time::GetInstance()->m_TimeScale = 0.0f;
 	SetGameState(GameState::Finished);
 	m_MenuManager.OpenMenu(MenuType::Finished); 
 
-	SoundManager::GetInstance()->PlaySound(SoundType::levelFinish);
+	//SoundManager::GetInstance()->PlaySound(SoundType::levelFinish);
 }
 
 void Game::ResetLevel()
@@ -210,14 +209,14 @@ void Game::ResetLevel()
 	m_FallingSpikeManager.Reset();
 	m_CannonEnemyManager.Reset();
 
-	Time::GetInstance()->m_TimeScale = 1.0f;
+	// Time::GetInstance()->m_TimeScale = 1.0f;
 	SetGameState(GameState::InGame);
 }
 
 void Game::UpdateFrameStats()
 {
 	m_FrameRate++;
-	m_FrameTime += Time::GetInstance()->m_DeltaTime;
+	// m_FrameTime += Time::GetInstance()->m_DeltaTime;
 
 	if (m_FrameTime >= 1.0f) // Every second
 	{

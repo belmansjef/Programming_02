@@ -53,7 +53,7 @@ void FallingSpike::Destroy()
 {
 	m_IsDestroyed = true;
 	Camera::DoScreenShake();
-	SoundManager::GetInstance()->PlaySound(SoundType::explosion);
+	//SoundManager::GetInstance()->PlaySound(SoundType::explosion);
 }
 
 void FallingSpike::Update(const Rectf& actorShape)
@@ -63,12 +63,12 @@ void FallingSpike::Update(const Rectf& actorShape)
 		&& actorShape.bottom <= m_BoxCollider.bottom && !m_IsFalling)
 	{
 		m_IsFalling = true;
-		SoundManager::GetInstance()->PlaySound(SoundType::spikeFall);
+		//SoundManager::GetInstance()->PlaySound(SoundType::spikeFall);
 	}
 	else if(m_IsFalling)
 	{
-		m_VelocityY += m_Gravity * Time::GetInstance()->m_DeltaTime;
-		m_BoxCollider.bottom += m_VelocityY * Time::GetInstance()->m_DeltaTime;
+		// m_VelocityY += m_Gravity * Time::GetInstance()->m_DeltaTime;
+		// m_BoxCollider.bottom += m_VelocityY * Time::GetInstance()->m_DeltaTime;
 	}
 }
 

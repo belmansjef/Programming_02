@@ -96,9 +96,6 @@
     <ClCompile Include="Vector2f.cpp">
       <Filter>Framework Files</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>Framework Files</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Game Files\Level</Filter>
     </ClCompile>
@@ -155,9 +152,6 @@
     </ClCompile>
     <ClCompile Include="FallingSpikeManager.cpp">
       <Filter>Game Files\Level\Hazards\FallingSpike</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>Game Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="HUD.cpp">
       <Filter>Game Files\Game\HUD</Filter>
@@ -242,9 +236,6 @@
     <ClInclude Include="Vector2f.h">
       <Filter>Framework Files</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
-      <Filter>Framework Files</Filter>
-    </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Game Files\Level</Filter>
     </ClInclude>
@@ -301,9 +292,6 @@
     </ClInclude>
     <ClInclude Include="FallingSpikeManager.h">
       <Filter>Game Files\Level\Hazards\FallingSpike</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundManager.h">
-      <Filter>Game Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>Game Files\Game\HUD</Filter>

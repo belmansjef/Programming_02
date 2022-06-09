@@ -39,6 +39,6 @@ void GameOverMenu::Enter(Game& game)
 			game.BackToMainMenu();
 		}
 
-		Time::GetInstance()->m_TimeScale = 1.0f;
+		// Time::GetInstance()->m_TimeScale = 1.0f;
 	}
 }

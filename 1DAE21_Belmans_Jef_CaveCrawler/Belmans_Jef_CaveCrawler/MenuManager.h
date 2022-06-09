@@ -1,5 +1,4 @@
 #pragma once
-
 enum class MenuType;
 class MenuBase;
 class MainMenu;

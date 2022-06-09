@@ -67,7 +67,7 @@ void Sprite::Update()
 		: 1.0f / m_pCurrentAnimation->m_NrFramesPerSec
 	};
 
-	m_FrameAccuSec += Time::GetInstance()->m_DeltaTime;
+	//m_FrameAccuSec += Time::GetInstance()->m_DeltaTime;
 	if (m_FrameAccuSec >= frameTime)
 	{
 		m_CurrentFrame = (m_CurrentFrame + 1) % m_pCurrentAnimation->m_NrFrames;
@@ -78,7 +78,7 @@ void Sprite::Update()
 
 	if (m_DoFlash)
 	{
-		if (m_LastFlashTime + m_FlashDuration < Time::GetInstance()->m_Time)
+		/*if (m_LastFlashTime + m_FlashDuration < Time::GetInstance()->m_Time)
 		{
 			m_DoChangeColor = !m_DoChangeColor;
 			m_CurrentFlashes++;
@@ -88,7 +88,7 @@ void Sprite::Update()
 			{
 				m_DoFlash = m_DoChangeColor = false;
 			}
-		}
+		}*/
 	}
 }
 
@@ -110,7 +110,7 @@ void Sprite::FlashSprite()
 {
 	m_CurrentFlashes = 0;
 	m_DoFlash = m_DoChangeColor = true;
-	m_LastFlashTime = Time::GetInstance()->m_Time;
+	//m_LastFlashTime = Time::GetInstance()->m_Time;
 }
 
 void Sprite::SetSprite()
