@@ -3,6 +3,7 @@
 #include "CrabEnemyManager.h"
 #include "Camera.h"
 #include "Projectile.h"
+#include "Avatar.h"
 #include "Health.h"
 #include "FileReader.h"
 
@@ -44,14 +45,14 @@ CrabEnemy* CrabEnemyManager::AddItem(const Point2f& bottomLeft, int movementDire
 	return m_pItems.back();
 }
 
-void CrabEnemyManager::Update(const Rectf& actorShape, const Level& level, std::vector<Projectile*> pProjectiles, Health& actorHealth)
+void CrabEnemyManager::Update(Avatar& playerAvatar, const Level& level, std::vector<Projectile*> pProjectiles)
 {
 	for (CrabEnemy* crab : m_pItems)
 	{
 		crab->Update(level);
 	}
 
-	PlayerOverlapCheck(actorShape, actorHealth);
+	PlayerOverlapCheck(playerAvatar);
 	ProjectileCollisionCheck(pProjectiles);
 }
 
@@ -59,10 +60,7 @@ void CrabEnemyManager::Draw() const
 {
 	for (CrabEnemy* crab : m_pItems)
 	{
-		if (!crab->IsDead())
-		{
-			crab->Draw();
-		}
+		crab->Draw();
 	}
 }
 
@@ -74,13 +72,13 @@ void CrabEnemyManager::Reset()
 	}
 }
 
-void CrabEnemyManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth)
+void CrabEnemyManager::PlayerOverlapCheck(Avatar& playerAvatar)
 {
 	for (CrabEnemy* crab : m_pItems)
 	{
-		if (crab->IsOverlapping(actorShape) && !crab->IsDead())
+		if (crab->IsOverlapping(playerAvatar.GetShape()) && !crab->IsDead())
 		{
-			actorHealth.TakeDamage(1);
+			playerAvatar.TakeDamage(1);
 		}
 	}
 }

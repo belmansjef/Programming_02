@@ -31,6 +31,11 @@ Point2f PhysicsBody::GetPosition() const
 	return Point2f(m_Shape.left, m_Shape.bottom);
 }
 
+Point2f PhysicsBody::GetCenter() const
+{
+	return Point2f(m_Shape.left + m_Shape.width / 2.0f, m_Shape.bottom + m_Shape.height / 2.0f);
+}
+
 float PhysicsBody::GetTimeSinceGrounded() const
 {
 	return m_TimeSinceGrounded;
@@ -74,16 +79,16 @@ void PhysicsBody::Update(const Level& level)
 	{
 		if (m_TimeSinceGrounded >= m_CoyoteTime || m_HasJumped)
 		{
-			//m_Velocity.y += (m_Gravity * m_GravityScale) * Time::GetInstance()->m_DeltaTime;
+			m_Velocity.y += (m_Gravity * m_GravityScale) * Time::GetInstance()->m_DeltaTime;
 		}
 
-		//m_TimeSinceGrounded += Time::GetInstance()->m_DeltaTime;
+		m_TimeSinceGrounded += Time::GetInstance()->m_DeltaTime;
 	}
 
 	ClampVelocity();
 
-	//m_Shape.left += m_Velocity.x * Time::GetInstance()->m_DeltaTime;
-	//bottom += m_Velocity.y * Time::GetInstance()->m_DeltaTime;
+	m_Shape.left += m_Velocity.x * Time::GetInstance()->m_DeltaTime;
+	m_Shape.bottom += m_Velocity.y * Time::GetInstance()->m_DeltaTime;
 	level.HandleCollision(m_Shape, m_Velocity);
 }
 
@@ -96,7 +101,7 @@ void PhysicsBody::Jump()
 
 		m_HasJumped = true;
 
-		//SoundManager::GetInstance()->PlaySound(SoundType::jump);
+		SoundManager::GetInstance()->PlaySound(SoundType::jump);
 	}	
 }
 

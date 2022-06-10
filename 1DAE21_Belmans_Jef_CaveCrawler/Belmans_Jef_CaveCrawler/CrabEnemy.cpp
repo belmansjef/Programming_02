@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Sprite.h"
 #include "SoundManager.h"
+#include "ParticleSystem.h"
 #include "Enums.h"
 
 CrabEnemy::CrabEnemy(float left, float bottom, float width, float height, int movementDirection, int maxHealth)
@@ -12,7 +13,15 @@ CrabEnemy::CrabEnemy(float left, float bottom, float width, float height, int mo
 	, m_MovementDirection { movementDirection }
 	, m_Sprite { Sprite(SpriteType::crabEnemy) }
 	, m_StartPos { left, bottom }
+	, m_pDeathPS { new ParticleSystem(15) }
 {
+	m_pDeathPS->Initialize(Point2f(-20.0f, -20.0f), Point2f{ 20.0f, 20.0f }, Point2f(2.0f, 3.0f), Point2f(0.1f, 0.1f), Point2f(1.5f, 2.5f));
+}
+
+CrabEnemy::~CrabEnemy()
+{
+	delete m_pDeathPS;
+	m_pDeathPS = nullptr;
 }
 
 Rectf CrabEnemy::GetBoxCollider() const
@@ -33,23 +42,38 @@ bool CrabEnemy::IsDead() const
 void CrabEnemy::TakeDamage(int damage)
 {
 	m_Health.TakeDamage(damage);
+	if (m_Health.GetIsDead() && !m_pDeathPS->IsPlaying())
+	{
+		m_pDeathPS->PlayAtPos(m_PhysicsBody.GetCenter());
+	}
 }
 
 void CrabEnemy::Update(const Level& level)
 {
-	m_PhysicsBody.Velocity().x = m_MovementDirection * m_MovementSpeed;
-	m_PhysicsBody.Update(level);
-	DoCollisionCheck(level.GetLevelVerts());
+	if (!m_Health.GetIsDead())
+	{
+		m_PhysicsBody.Velocity().x = m_MovementDirection * m_MovementSpeed;
+		m_PhysicsBody.Update(level);
+		DoCollisionCheck(level.GetLevelVerts());
 
-	m_Sprite.Update();
+		m_Sprite.Update();
+	}
+	
+	m_pDeathPS->Update();
 }
 
 void CrabEnemy::Draw() const
 {
-	glPushMatrix();
+	if (!m_Health.GetIsDead())
+	{
+		glPushMatrix();
 		glTranslatef(m_PhysicsBody.GetPosition().x, m_PhysicsBody.GetPosition().y, 0);
 		m_Sprite.Draw();
-	glPopMatrix();
+		glPopMatrix();
+	}
+	
+
+	m_pDeathPS->Draw();
 }
 
 void CrabEnemy::Reset()

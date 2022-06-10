@@ -5,6 +5,8 @@
 class Health;
 class DamageBlock;
 class Camera;
+class Avatar;
+
 class DamageBlockManager final
 {
 public:
@@ -19,11 +21,11 @@ public:
 	bool Initialize(const std::string& filePath);
 
 	void Draw() const;
-	void Update(const Rectf& actorShape, Health& actorHealth);
+	void Update(Avatar& playerAvatar);
 
 private:
 	std::vector<DamageBlock*> m_pItems;
 
-	void PlayerCollisionCheck(const Rectf& acotrShape, Health& actorHealth);
+	void PlayerCollisionCheck(Avatar& playerAvatar);
 	void DeleteBlock(const DamageBlock* block) const;
 };

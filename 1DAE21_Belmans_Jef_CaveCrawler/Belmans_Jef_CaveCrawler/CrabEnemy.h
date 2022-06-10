@@ -5,11 +5,14 @@
 #include "Sprite.h"
 
 class Level;
+class ParticleSystem;
+
 class CrabEnemy final
 {
 public:
 	CrabEnemy(float left, float bottom, float width, float height, int movementDirection = 1, int maxHealth = 3);
-	~CrabEnemy() = default;
+	~CrabEnemy();
+
 	CrabEnemy(const CrabEnemy& other) = delete;
 	CrabEnemy& operator=(const CrabEnemy& other) = delete;
 	CrabEnemy(CrabEnemy&& other) = delete;
@@ -30,8 +33,9 @@ private:
 	Sprite m_Sprite;
 	Health m_Health;
 	PhysicsBody m_PhysicsBody;
-
 	const Point2f m_StartPos;
+
+	ParticleSystem* m_pDeathPS;
 
 	const int m_MaxHealth;
 	const float m_MovementSpeed{ 40.0f };

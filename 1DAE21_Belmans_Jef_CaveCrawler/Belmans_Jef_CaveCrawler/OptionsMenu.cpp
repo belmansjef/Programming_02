@@ -61,14 +61,14 @@ void OptionsMenu::Enter(Game& game)
 
 void OptionsMenu::ChangeVolume(bool up)
 {
-	//SoundManager::GetInstance()->AdjustVolume(up ? 20.0f : -20.0f);
+	SoundManager::GetInstance()->AdjustVolume(up ? 20.0f : -20.0f);
 	SetVolumeText();
 }
 
 void OptionsMenu::SetVolumeText()
 {
 	std::stringstream ss;
-	//ss << std::setprecision(2) << "VOL " << SoundManager::GetInstance()->GetVolume();
+	ss << std::setprecision(2) << "VOL " << SoundManager::GetInstance()->GetVolume();
 
 	delete m_pVolumeText;
 	m_pVolumeText = new Texture(ss.str(), "Resources/Font.ttf", 16, Color4f(1.0f, 1.0f, 1.0f, 1.0f));

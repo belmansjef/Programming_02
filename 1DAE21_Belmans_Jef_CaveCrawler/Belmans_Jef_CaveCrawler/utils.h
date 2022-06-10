@@ -97,5 +97,7 @@ namespace utils
 		
 		return b.first + bValNorm;
 	}
+
+	float GetRandomNumber(float min, float max);
 #pragma endregion OwnFunctionality;
 }

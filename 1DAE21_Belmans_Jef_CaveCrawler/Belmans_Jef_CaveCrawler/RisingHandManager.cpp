@@ -5,6 +5,7 @@
 #include "RisingHand.h"
 #include "Health.h"
 #include "Camera.h"
+#include "Avatar.h"
 #include "Projectile.h"
 #include "FileReader.h"
 
@@ -45,17 +46,14 @@ RisingHand* RisingHandManager::AddItem(const Point2f& bottomLeft, int maxHealth)
 	return m_pItems.back();
 }
 
-void RisingHandManager::Update(const Rectf& actorShape, std::vector<Projectile*> pProjectiles, Health& actorHealth)
+void RisingHandManager::Update(Avatar& playerAvatar,std::vector<Projectile*> pProjectiles)
 {
 	for (RisingHand* element : m_pItems)
 	{
-		if (!element->IsDead())
-		{
-			element->Update(actorShape);
-		}
+		element->Update(playerAvatar.GetShape());
 	}
 
-	PlayerOverlapCheck(actorShape, actorHealth);
+	PlayerOverlapCheck(playerAvatar);
 	ProjectileCollisionCheck(pProjectiles);
 }
 
@@ -63,10 +61,7 @@ void RisingHandManager::Draw() const
 {
 	for (RisingHand* element : m_pItems)
 	{
-		if (!element->IsDead())
-		{
-			element->Draw();
-		}
+		element->Draw();
 	}
 }
 
@@ -78,13 +73,13 @@ void RisingHandManager::Reset()
 	}
 }
 
-void RisingHandManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth) const
+void RisingHandManager::PlayerOverlapCheck(Avatar& playerAvatar) const
 {
 	for (RisingHand* element : m_pItems)
 	{
-		if (element->IsOverlapping(actorShape) && !element->IsDead())
+		if (element->IsOverlapping(playerAvatar.GetShape()) && !element->IsDead())
 		{
-			actorHealth.TakeDamage(1);
+			playerAvatar.TakeDamage(1);
 		}
 	}
 }

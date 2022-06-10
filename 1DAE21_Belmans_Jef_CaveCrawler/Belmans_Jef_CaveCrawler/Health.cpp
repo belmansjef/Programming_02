@@ -5,6 +5,7 @@
 #include "SoundManager.h"
 #include "Sprite.h"
 #include "Enums.h"
+#include "ParticleSystem.h"
 
 Health::Health()
 	: Health(3, nullptr)
@@ -40,7 +41,7 @@ void Health::Heal(int amount)
 	if (m_IsPlayer)
 	{
 		HUD::UpdateHealth(m_CurrentHealth);
-		//SoundManager::GetInstance()->PlaySound(SoundType::healthPickup);
+		SoundManager::GetInstance()->PlaySound(SoundType::healthPickup);
 	}
 }
 
@@ -49,10 +50,10 @@ void Health::TakeDamage(int amount)
 	if (ShouldHit())
 	{
 		m_CurrentHealth -= amount;
-		//m_TimeSinceLastHit = Time::GetInstance()->m_Time;
-		//SoundManager::GetInstance()->PlaySound(SoundType::hitHurt);
+		m_TimeSinceLastHit = Time::GetInstance()->m_Time;
+		SoundManager::GetInstance()->PlaySound(SoundType::hitHurt);
 
-		if (m_CurrentHealth <= 0)
+		if (m_CurrentHealth <= 0 && !m_IsDead)
 		{
 			m_CurrentHealth = 0;
 			Die();
@@ -72,12 +73,11 @@ void Health::TakeDamage(int amount)
 
 bool Health::ShouldHit() const
 {
-	//return m_TimeSinceLastHit + m_DamageCooldown <= Time::GetInstance()->m_Time;
-	return false;
+	return m_TimeSinceLastHit + m_DamageCooldown <= Time::GetInstance()->m_Time;
 }
 
 void Health::Die()
 {
 	m_IsDead = true;
-	//SoundManager::GetInstance()->PlaySound(SoundType::explosion);
+	SoundManager::GetInstance()->PlaySound(SoundType::explosion);
 }

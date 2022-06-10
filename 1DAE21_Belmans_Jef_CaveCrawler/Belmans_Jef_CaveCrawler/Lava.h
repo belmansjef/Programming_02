@@ -2,6 +2,8 @@
 #include "structs.h"
 
 class Health;
+class Avatar;
+
 class Lava final
 {
 public:
@@ -12,7 +14,7 @@ public:
 	Lava(Lava&& other) = delete;
 	Lava& operator=(Lava&& other) = delete;
 
-	void Update(const Rectf& actorShape, Health& actorHealth);
+	void Update(Avatar& playerAvatar);
 	void Draw() const;
 
 private:

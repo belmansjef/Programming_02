@@ -44,7 +44,7 @@ void ProjectileManager::InstanciateProjectile(const Vector2f& velocity, const Po
 {
 	for (Projectile* proj : m_pItems)
 	{
-		if (!proj->IsInstanciated())
+		if (!proj->IsInstanciated() && !proj->IsEmittingParticles())
 		{
 			proj->Instanciate(velocity, bottomLeft);
 			return;
@@ -56,10 +56,7 @@ void ProjectileManager::Update(const std::vector<std::vector<Point2f>>& levelVer
 {
 	for (Projectile* proj : m_pItems)
 	{
-		if (proj->IsInstanciated())
-		{
-			proj->Update();
-		}
+		proj->Update();
 	}
 	
 	LevelCollisionCheck(levelVerts);
@@ -69,10 +66,7 @@ void ProjectileManager::Draw() const
 {
 	for (Projectile* proj : m_pItems)
 	{
-		if (proj->IsInstanciated())
-		{
-			proj->Draw();
-		}
+		proj->Draw();
 	}
 }
 

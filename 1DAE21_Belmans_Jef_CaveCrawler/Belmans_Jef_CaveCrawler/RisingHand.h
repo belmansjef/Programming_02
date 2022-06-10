@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "Health.h"
 
+class ParticleSystem;
+
 class RisingHand final
 {
 public:
@@ -24,6 +26,8 @@ public:
 private:
 	const float m_TriggerDistance{ 48.0f };
 	const float m_HorDrawOffset{ 4.0f };
+
+	ParticleSystem* m_pDeathPS;
 
 	const int m_MaxHealth;
 	Sprite m_Sprite;

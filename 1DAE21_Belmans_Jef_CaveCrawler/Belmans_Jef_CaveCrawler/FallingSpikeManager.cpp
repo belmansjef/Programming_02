@@ -3,6 +3,7 @@
 #include "FallingSpikeManager.h"
 #include "FallingSpike.h"
 #include "Health.h"
+#include "Avatar.h"
 #include "FileReader.h"
 
 FallingSpikeManager::~FallingSpikeManager()
@@ -38,28 +39,22 @@ FallingSpike* FallingSpikeManager::AddItem(const Point2f& bottomLeft)
 	return m_pItems.back();
 }
 
-void FallingSpikeManager::Update(const Rectf& actorShape, const std::vector<std::vector<Point2f>>& verts, Health& actorHealth)
+void FallingSpikeManager::Update(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& verts)
 {
 	for (FallingSpike* element : m_pItems)
 	{
-		if (!element->IsDestroyed())
-		{
-			element->Update(actorShape);
-		}
+		element->Update(playerAvatar.GetShape());
 	}
 
 	LevelOverlapCheck(verts);
-	PlayerOverlapCheck(actorShape, actorHealth);
+	PlayerOverlapCheck(playerAvatar);
 }
 
 void FallingSpikeManager::Draw() const
 {
 	for (FallingSpike* element : m_pItems)
 	{
-		if (!element->IsDestroyed())
-		{
-			element->Draw();
-		}
+		element->Draw();
 	}
 }
 
@@ -71,13 +66,13 @@ void FallingSpikeManager::Reset()
 	}
 }
 
-void FallingSpikeManager::PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth) const
+void FallingSpikeManager::PlayerOverlapCheck(Avatar& playerAvatar) const
 {
 	for (FallingSpike* element : m_pItems)
 	{
-		if (element->IsOverlapping(actorShape) && !element->IsDestroyed())
+		if (element->IsOverlapping(playerAvatar.GetShape()) && !element->IsDestroyed())
 		{
-			actorHealth.TakeDamage(1);
+			playerAvatar.TakeDamage(1);
 			element->Destroy();
 		}
 	}

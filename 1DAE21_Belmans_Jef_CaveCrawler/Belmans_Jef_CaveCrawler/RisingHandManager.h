@@ -4,8 +4,9 @@
 
 class Projectile;
 class RisingHand;
-class Health;
 class Camera;
+class Avatar;
+
 class RisingHandManager final
 {
 public:
@@ -20,7 +21,7 @@ public:
 	void Initialize(const std::string& filePath);
 	RisingHand* AddItem(const Point2f& bottomLeft, int maxHealth);
 
-	void Update(const Rectf& actorShape, std::vector<Projectile*> pProjectiles, Health& actorHealth);
+	void Update(Avatar& playerAvatar, std::vector<Projectile*> pProjectiles);
 	void Draw() const;
 
 	void Reset();
@@ -28,6 +29,6 @@ public:
 private:
 	std::vector<RisingHand*> m_pItems;
 
-	void PlayerOverlapCheck(const Rectf& actorShape, Health& actorHealth) const;
+	void PlayerOverlapCheck(Avatar& playerAvatar) const;
 	void ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles) const;
 };

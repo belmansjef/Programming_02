@@ -2,17 +2,18 @@
 #include "utils.h"
 #include "pch.h"
 #include "Health.h"
+#include "Avatar.h"
 
 Lava::Lava(const Point2f& bottomLeft, float width, float height)
 	: m_BoxCollider { Rectf(bottomLeft.x, bottomLeft.y, width, height)}
 {
 }
 
-void Lava::Update(const Rectf& actorShape, Health& actorHealth)
+void Lava::Update(Avatar& playerAvatar)
 {
-	if(PlayerOverlapCheck(actorShape))
+	if(PlayerOverlapCheck(playerAvatar.GetShape()))
 	{
-		actorHealth.TakeDamage(100);
+		playerAvatar.TakeDamage(100);
 	}
 }
 
