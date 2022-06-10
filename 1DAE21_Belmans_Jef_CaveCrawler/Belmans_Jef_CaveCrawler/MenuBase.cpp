@@ -70,7 +70,7 @@ void MenuBase::Enter(Game& game)
 {
 	if (m_IsActive)
 	{
-		//SoundManager::GetInstance()->PlaySound(SoundType::enterUI);
+		SoundManager::GetInstance()->PlaySound(SoundType::enterUI);
 	}
 }
 
@@ -78,7 +78,7 @@ void MenuBase::CycleSelection(bool up)
 {
 	if (m_IsActive)
 	{
-		//SoundManager::GetInstance()->PlaySound(SoundType::selectUI);
+		SoundManager::GetInstance()->PlaySound(SoundType::selectUI);
 		m_pHighlightedButton->SetHighlighted(false);
 
 		up ? --m_ActiveButtonIdx : ++m_ActiveButtonIdx;

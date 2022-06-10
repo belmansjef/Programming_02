@@ -69,10 +69,10 @@ void CannonEnemy::Update(const Rectf& actorShape, Health& actorHealth, const std
 			}
 		}
 
-		/*if (Time::GetInstance()->m_Time > m_LastShotTime + m_ShotCooldown && m_IsPlayerInRange)
+		if (Time::GetInstance()->m_Time > m_LastShotTime + m_ShotCooldown && m_IsPlayerInRange)
 		{
 			Shoot(freeVec);
-		}*/
+		}
 		
 
 		m_SpriteBase.Update();
@@ -121,8 +121,8 @@ bool CannonEnemy::IsDead() const
 void CannonEnemy::Shoot(const Vector2f& freeVec)
 {
 	m_ProjectileManager.InstanciateProjectile(freeVec.Normalized() * 100.0f, m_BaseCenter + (freeVec.Normalized() * 12.0f));
-	// m_LastShotTime = Time::GetInstance()->m_Time;
-	//SoundManager::GetInstance()->PlaySound(SoundType::cannonShoot);
+	m_LastShotTime = Time::GetInstance()->m_Time;
+	SoundManager::GetInstance()->PlaySound(SoundType::cannonShoot);
 }
 
 void CannonEnemy::DrawBarrel() const
@@ -156,14 +156,14 @@ void CannonEnemy::DrawBase() const
 
 void CannonEnemy::SetAnimation()
 {
-	/*if ((Time::GetInstance()->m_Time < m_LastShotTime + m_ShotCooldown / 3.0f) && m_IsPlayerInRange)
+	if ((Time::GetInstance()->m_Time < m_LastShotTime + m_ShotCooldown / 3.0f) && m_IsPlayerInRange)
 	{
 		m_SpriteBarrel.SetAnimation("shot");
 	}
 	else
 	{
 		m_SpriteBarrel.SetAnimation("idle");
-	}*/
+	}
 }
 
 void CannonEnemy::UpdateProjectiles(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts)
@@ -171,7 +171,7 @@ void CannonEnemy::UpdateProjectiles(const Rectf& actorShape, Health& actorHealth
 	m_ProjectileManager.Update(levelVerts, actorShape);
 	if (m_ProjectileManager.HasHitPlayer(actorShape))
 	{
-		//SoundManager::GetInstance()->PlaySound(SoundType::hitHurt);
+		SoundManager::GetInstance()->PlaySound(SoundType::hitHurt);
 		actorHealth.TakeDamage(1);
 	}
 }

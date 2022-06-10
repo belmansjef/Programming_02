@@ -144,7 +144,7 @@ void Avatar::ProcessInput(const Level& level)
 	{
 		if (!m_PhysicsBody.GetIsMoving())
 		{
-			// m_TimeSinceLastMoved += Time::GetInstance()->m_DeltaTime;
+			m_TimeSinceLastMoved += Time::GetInstance()->m_DeltaTime;
 		}
 		else
 		{

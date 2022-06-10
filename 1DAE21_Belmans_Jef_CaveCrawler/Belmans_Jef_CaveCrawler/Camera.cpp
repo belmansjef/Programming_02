@@ -27,10 +27,10 @@ void Camera::SetCameraBounds(const Rectf& cameraBounds)
 
 void Camera::UpdatePosition(const Rectf& target, bool shouldTrack)
 {
-	//if (m_SmoothDisableTime + m_SmoothCooldown <= Time::GetInstance()->m_Time && !m_DoSmoothing) // Re-enable smoothing after cooldown
-	//{
-	//	m_DoSmoothing = true;
-	//}
+	if (m_SmoothDisableTime + m_SmoothCooldown <= Time::GetInstance()->m_Time && !m_DoSmoothing) // Re-enable smoothing after cooldown
+	{
+		m_DoSmoothing = true;
+	}
 
 	if (shouldTrack || m_DoScreenShake)
 	{
@@ -40,7 +40,7 @@ void Camera::UpdatePosition(const Rectf& target, bool shouldTrack)
 	
 	if (m_DoScreenShake && m_DoSmoothing)
 	{
-		// m_Angle += 1.0f * Time::GetInstance()->m_DeltaTime;
+		m_Angle += 1.0f * Time::GetInstance()->m_DeltaTime;
 		if (m_Angle > 360.0f)
 		{
 			m_Angle = 0.0f;
@@ -48,13 +48,13 @@ void Camera::UpdatePosition(const Rectf& target, bool shouldTrack)
 		m_RawCameraPos.x = m_RawCameraPos.x + sin(m_Frequency * m_Angle) * m_Amplitude;
 		m_RawCameraPos.y = m_RawCameraPos.y + sin(m_Frequency * (m_Angle + m_HorizontalShift)) * m_Amplitude;
 
-		// m_ScreenShakeTimer -= Time::GetInstance()->m_DeltaTime;
+		m_ScreenShakeTimer -= Time::GetInstance()->m_DeltaTime;
 	}
 
 	if (m_DoSmoothing)
 	{
-		// m_SmoothCameraPos.x = std::lerp(m_SmoothCameraPos.x, m_RawCameraPos.x, m_Smoothing * Time::GetInstance()->m_DeltaTime);
-		// m_SmoothCameraPos.y = std::lerp(m_SmoothCameraPos.y, m_RawCameraPos.y, m_Smoothing * Time::GetInstance()->m_DeltaTime);
+		m_SmoothCameraPos.x = std::lerp(m_SmoothCameraPos.x, m_RawCameraPos.x, m_Smoothing * Time::GetInstance()->m_DeltaTime);
+		m_SmoothCameraPos.y = std::lerp(m_SmoothCameraPos.y, m_RawCameraPos.y, m_Smoothing * Time::GetInstance()->m_DeltaTime);
 	}
 	else
 	{
@@ -80,7 +80,7 @@ void Camera::Reset()
 
 void Camera::TempDisableSmoothing()
 {
-	// m_SmoothDisableTime = Time::GetInstance()->m_Time;
+	m_SmoothDisableTime = Time::GetInstance()->m_Time;
 	m_DoSmoothing = false;
 }
 

@@ -12,4 +12,5 @@ Time::Time()
 	, m_DeltaTime { 0.0f }
 	, m_Time { 0.0f }
 {
+
 }

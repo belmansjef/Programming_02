@@ -46,6 +46,7 @@ private:
 	// DATA MEMBERS
 	const Window m_Window;
 	const float m_ScaleFactor{ 4.0f };
+	Texture* pTexture;
 	bool m_DoQuit;
 
 	GameState m_CurrentGameState;

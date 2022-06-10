@@ -62,8 +62,6 @@ SoundManager::~SoundManager()
 		delete key_val.second;
 		key_val.second = nullptr;
 	}
-
-	std::cout << "SoundManager singleton deleted!" << std::endl;
 }
 
 void SoundManager::ApplyVolume()
