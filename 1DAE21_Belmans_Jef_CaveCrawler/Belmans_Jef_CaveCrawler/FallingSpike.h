@@ -3,6 +3,7 @@
 #include "structs.h"
 
 class Texture;
+class ParticleSystem;
 
 class FallingSpike final
 {
@@ -27,9 +28,14 @@ public:
 	void Reset();
 
 private:
+	bool m_HasPlayedTriggerPS;
+
 	Rectf m_BoxCollider;
 	Texture* m_pTexture;
 	Point2f m_StartPos;
+
+	ParticleSystem* m_pTriggerPS;
+	ParticleSystem* m_pHitPS;
 
 	const Point2f m_TriggerDistance{ 24.0f, 128.0f };
 	bool m_IsFalling{ false };

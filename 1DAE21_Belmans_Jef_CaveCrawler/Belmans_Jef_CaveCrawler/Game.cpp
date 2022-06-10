@@ -12,7 +12,6 @@ Game::Game( const Window& window )
 	, m_MenuManager { window.width, window.height }
 	, m_DoQuit{ false }
 	, m_CurrentGameState { GameState::MainMenu }
-	, m_PS { ParticleSystem(20) }
 {
 	Initialize( );
 }
@@ -32,7 +31,6 @@ void Game::Initialize( )
 	m_CrabEnemyManager.Initialize("Resources/Initializers/Crabs.txt");
 	m_CannonEnemyManager.Initialize("Resources/Initializers/Cannons.txt");
 	m_FallingSpikeManager.Initialize("Resources/Initializers/FallingSpikes.txt");
-	m_PS.Initialize(Point2f(-20.0f, -20.0f), Point2f{ 20.0f, 20.0f }, Point2f(4.0f, 8.0f), Point2f(1.0f, 2.0f), Point2f(2.0f, 4.0f));
 }
 
 void Game::Cleanup( )
@@ -49,23 +47,21 @@ void Game::Update( float elapsedSec )
 	SDL_Delay(m_FrameDelay);
 
 	// Updates
+	m_PlayerAvatar.Update(m_Level, m_CurrentGameState);
 	if (m_CurrentGameState != GameState::Dead)
 	{
-		m_PlayerAvatar.Update(m_Level, m_CurrentGameState);
 		m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
 		m_Camera.SetCameraBounds(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
 	}
 
 	// Managers
-	m_DamageBlockManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-	m_RisingHandManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetProjectileManager().GetProjectiles(), m_PlayerAvatar.GetHealth());
-	m_CrabEnemyManager.Update(m_PlayerAvatar.GetShape(), m_Level, m_PlayerAvatar.GetProjectileManager().GetProjectiles(), m_PlayerAvatar.GetHealth());
-	m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
-	m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetHealth());
-	m_CannonEnemyManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-
-	m_PS.Update();
+	m_DamageBlockManager.Update(m_PlayerAvatar);
+	m_RisingHandManager.Update(m_PlayerAvatar, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+	m_CrabEnemyManager.Update(m_PlayerAvatar, m_Level, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+	m_CollectibleManager.Update(m_PlayerAvatar);
+	m_Lava.Update(m_PlayerAvatar);
+	m_FallingSpikeManager.Update(m_PlayerAvatar, m_Level.GetLevelVerts());
+	m_CannonEnemyManager.Update(m_PlayerAvatar, m_Level.GetLevelVerts(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
 
 	if (m_PlayerAvatar.GetIsDead() && m_CurrentGameState != GameState::Dead)
 	{
@@ -98,7 +94,6 @@ void Game::Draw() const
 		m_CollectibleManager.Draw();
 		m_Lava.Draw();
 		m_FallingSpikeManager.Draw();
-		m_PS.Draw();
 	glPopMatrix();
 
 	// Draw HUD and overlays after popping world view
@@ -159,9 +154,6 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 			Time::GetInstance()->m_TimeScale = 0.0f;
 			m_MenuManager.OpenMenu(MenuType::Pause);
 		}
-		break;
-	case SDL_SCANCODE_P:
-		m_PS.PlayAtPos(Point2f(m_PlayerAvatar.GetShape().left + 32.0f, m_PlayerAvatar.GetShape().bottom + 4.0f));
 		break;
 	}
 }

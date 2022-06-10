@@ -9,15 +9,18 @@
 
 enum class GameState;
 class Level;
+class ParticleSystem;
+
 class Avatar final
 {
 public:
 	Avatar(float left, float bottom, float width, float height);
+	~Avatar();
+
 	Avatar(const Avatar& other) = delete;
 	Avatar& operator=(const Avatar& other) = delete;
 	Avatar(Avatar&& other) = delete;
 	Avatar& operator=(Avatar&& other) = delete;
-	~Avatar() = default;
 
 	void TakeDamage(int damage = 1);
 	void Heal(int value = 1);
@@ -38,6 +41,8 @@ private:
 	Sprite m_Sprite;
 	PhysicsBody m_PhysicsBody;
 	Gun m_Gun;
+
+	ParticleSystem* m_pDeathPS;
 
 	const int m_MaxHealth{ 4 };
 	Health m_AvatarHealth;

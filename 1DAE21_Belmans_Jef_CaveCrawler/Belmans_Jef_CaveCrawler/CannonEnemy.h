@@ -6,12 +6,21 @@
 
 enum class CannonOrientation;
 class Health;
+class Avatar;
+class ParticleSystem;
+
 class CannonEnemy final
 {
 public:
 	CannonEnemy(const Point2f& bottomLeft, const CannonOrientation& orientation);
+	~CannonEnemy();
 
-	void Update(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts);
+	CannonEnemy(const CannonEnemy& other) = delete;
+	CannonEnemy& operator=(const CannonEnemy& other) = delete;
+	CannonEnemy(CannonEnemy&& other) = delete;
+	CannonEnemy& operator=(CannonEnemy&& other) = delete;
+
+	void Update(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& levelVerts);
 	void Draw() const;
 	void Reset();
 
@@ -28,6 +37,8 @@ private:
 	Health m_Health;
 	ProjectileManager m_ProjectileManager;
 
+	ParticleSystem* m_pDeathPS;
+
 	const float m_ShotCooldown;
 	float m_LastShotTime;
 
@@ -41,6 +52,6 @@ private:
 	void DrawBarrel() const;
 	void DrawBase() const;
 	void SetAnimation();
-	void UpdateProjectiles(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts);
+	void UpdateProjectiles(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& levelVerts);
 	void Shoot(const Vector2f& freeVec);
 };

@@ -6,6 +6,7 @@
 #include "Collectible.h"
 #include "Health.h"
 #include "SoundManager.h"
+#include "Avatar.h"
 #include "FileReader.h"
 #include "Enums.h"
 
@@ -45,16 +46,20 @@ Collectible* CollectibleManager::AddItem(const Point2f& bottomLeft, CollectibleT
 	return m_pItems.back();
 }
 
-void CollectibleManager::Update(const Rectf& actorShape, Health& actorHealth)
+void CollectibleManager::Update(Avatar& playerAvatar)
 {
-	HitItem(actorShape, actorHealth);
+	for (Collectible* collectible : m_pItems)
+	{
+		collectible->Update();
+	}
+
+	HitItem(playerAvatar);
 }
 
 void CollectibleManager::Draw() const
 {
 	for (Collectible* collectible : m_pItems)
 	{
-		if (collectible->GetIsPickedUp()) continue;
 		collectible->Draw();
 	}
 }
@@ -69,15 +74,15 @@ void CollectibleManager::Reset()
 	m_NrPointsCollected = 0;
 }
 
-bool CollectibleManager::HitItem(const Rectf& rect, Health& actorHealth)
+bool CollectibleManager::HitItem(Avatar& playerAvatar)
 {
 	for (Collectible* collectible : m_pItems)
 	{
 		if (collectible->GetIsPickedUp()) continue;
 
-		if (collectible->IsOverlapping(rect))
+		if (collectible->IsOverlapping(playerAvatar.GetShape()))
 		{
-			collectible->SetIsPickedUp(true);
+			collectible->PickUp();
 
 			switch (collectible->GetType())
 			{
@@ -86,7 +91,7 @@ bool CollectibleManager::HitItem(const Rectf& rect, Health& actorHealth)
 				SoundManager::GetInstance()->PlaySound(SoundType::coinPickup);
 				break;
 			case CollectibleType::health:
-				actorHealth.Heal(1);
+				playerAvatar.Heal(1);
 				break;
 			default:
 				break;

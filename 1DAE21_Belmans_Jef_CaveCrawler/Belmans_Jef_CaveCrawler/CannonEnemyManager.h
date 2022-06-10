@@ -4,9 +4,10 @@
 
 enum class CannonOrientation;
 class Camera;
-class Health;
 class Projectile;
 class Level;
+class Avatar;
+
 class CannonEnemyManager final
 {
 public:
@@ -20,7 +21,7 @@ public:
 	void Initialize(const std::string& filePath);
 	CannonEnemy* AddItem(const Point2f& bottomLeft, const CannonOrientation& orientation);
 
-	void Update(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts, std::vector<Projectile*> pProjectiles);
+	void Update(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& levelVerts, std::vector<Projectile*> pProjectiles);
 	void Draw() const;
 
 	void Reset();

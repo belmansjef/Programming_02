@@ -28,11 +28,7 @@ bool ParticleSystem::IsPlaying() const
 
 void ParticleSystem::PlayAtPos(const Point2f& pos)
 {
-	if (m_IsPlaying)
-	{
-		std::cout << this << " already playing!\r\n";
-		return;
-	};
+	if (m_IsPlaying) return;
 
 	for (Particle* pParticle : m_pParticles)
 	{

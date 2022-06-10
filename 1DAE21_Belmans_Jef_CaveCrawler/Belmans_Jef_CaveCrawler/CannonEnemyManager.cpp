@@ -3,6 +3,7 @@
 #include "CannonEnemyManager.h"
 #include "Level.h"
 #include "Projectile.h"
+#include "Avatar.h"
 #include "FileReader.h"
 #include "Enums.h"
 
@@ -40,11 +41,11 @@ CannonEnemy* CannonEnemyManager::AddItem(const Point2f& bottomLeft, const Cannon
 	return m_pItems.back();
 }
 
-void CannonEnemyManager::Update(const Rectf& actorShape, Health& actorHealth, const std::vector<std::vector<Point2f>>& levelVerts, std::vector<Projectile*> pProjectiles)
+void CannonEnemyManager::Update(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& levelVerts, std::vector<Projectile*> pProjectiles)
 {
 	for (CannonEnemy* element : m_pItems)
 	{
-		element->Update(actorShape, actorHealth, levelVerts);
+		element->Update(playerAvatar, levelVerts);
 	}
 
 	ProjectileCollisionCheck(pProjectiles);

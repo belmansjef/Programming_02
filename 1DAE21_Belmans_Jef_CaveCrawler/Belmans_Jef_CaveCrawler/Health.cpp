@@ -5,6 +5,7 @@
 #include "SoundManager.h"
 #include "Sprite.h"
 #include "Enums.h"
+#include "ParticleSystem.h"
 
 Health::Health()
 	: Health(3, nullptr)
@@ -52,7 +53,7 @@ void Health::TakeDamage(int amount)
 		m_TimeSinceLastHit = Time::GetInstance()->m_Time;
 		SoundManager::GetInstance()->PlaySound(SoundType::hitHurt);
 
-		if (m_CurrentHealth <= 0)
+		if (m_CurrentHealth <= 0 && !m_IsDead)
 		{
 			m_CurrentHealth = 0;
 			Die();

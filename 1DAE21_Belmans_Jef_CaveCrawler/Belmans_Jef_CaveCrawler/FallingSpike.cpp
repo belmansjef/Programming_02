@@ -5,10 +5,14 @@
 #include "Camera.h"
 #include "SoundManager.h"
 #include "Enums.h"
+#include "ParticleSystem.h"
 
 FallingSpike::FallingSpike(const Point2f& bottomLeft)
 	: m_pTexture { new Texture("Resources/Images/Sprite_FallingSpike.png")}
 	, m_StartPos{ bottomLeft }
+	, m_HasPlayedTriggerPS { false }
+	, m_pTriggerPS { new ParticleSystem(10) }
+	, m_pHitPS { new ParticleSystem(10) }
 {
 	m_BoxCollider = Rectf
 	{
@@ -17,12 +21,20 @@ FallingSpike::FallingSpike(const Point2f& bottomLeft)
 		m_pTexture->GetWidth(),
 		m_pTexture->GetHeight()
 	};
+
+	m_pTriggerPS->Initialize(Point2f(-30.0f, -5.0f), Point2f(30.0f, 1.0f), Point2f(1.5f, 2.0f), Point2f(0.1f, 0.2f), Point2f(0.6f, 1.0f));
+	m_pHitPS->Initialize(Point2f(-15.0f, -15.0f), Point2f(15.0f, 15.0f), Point2f(2.0f, 3.0f), Point2f(0.1f, 0.2f), Point2f(0.6f, 1.0f));
 }
 
 FallingSpike::~FallingSpike()
 {
 	delete m_pTexture;
+	delete m_pHitPS;
+	delete m_pTriggerPS;
+
 	m_pTexture = nullptr;
+	m_pHitPS = nullptr;
+	m_pTriggerPS = nullptr;
 }
 
 bool FallingSpike::IsDestroyed() const
@@ -52,32 +64,55 @@ bool FallingSpike::IsOverlapping(const std::vector<Point2f>& polygon)
 void FallingSpike::Destroy()
 {
 	m_IsDestroyed = true;
+	m_pHitPS->PlayAtPos(Point2f(m_BoxCollider.left + m_BoxCollider.width / 2.0f, m_BoxCollider.bottom + m_BoxCollider.height / 2.0f));
 	Camera::DoScreenShake();
 	SoundManager::GetInstance()->PlaySound(SoundType::explosion);
 }
 
 void FallingSpike::Update(const Rectf& actorShape)
 {
-	if (utils::GetDistance(Point2f(actorShape.left, actorShape.bottom), Point2f(m_BoxCollider.left, actorShape.bottom)) <= m_TriggerDistance.x
-		&& actorShape.bottom >= m_BoxCollider.bottom - m_TriggerDistance.y
-		&& actorShape.bottom <= m_BoxCollider.bottom && !m_IsFalling)
+	if (!m_IsDestroyed)
 	{
-		m_IsFalling = true;
-		SoundManager::GetInstance()->PlaySound(SoundType::spikeFall);
+		if (utils::GetDistance(Point2f(actorShape.left, actorShape.bottom), Point2f(m_BoxCollider.left, actorShape.bottom)) <= m_TriggerDistance.x + 16.0f
+			&& actorShape.bottom >= m_BoxCollider.bottom - m_TriggerDistance.y
+			&& actorShape.bottom <= m_BoxCollider.bottom && !m_HasPlayedTriggerPS)
+		{
+			m_pTriggerPS->PlayAtPos(Point2f(m_BoxCollider.left + m_BoxCollider.width / 2.0f, m_BoxCollider.bottom + m_BoxCollider.height));
+			m_HasPlayedTriggerPS = true;
+		}
+
+		if (utils::GetDistance(Point2f(actorShape.left, actorShape.bottom), Point2f(m_BoxCollider.left, actorShape.bottom)) <= m_TriggerDistance.x
+			&& actorShape.bottom >= m_BoxCollider.bottom - m_TriggerDistance.y
+			&& actorShape.bottom <= m_BoxCollider.bottom && !m_IsFalling)
+		{
+			m_IsFalling = true;
+			m_pTriggerPS->PlayAtPos(Point2f(m_BoxCollider.left + m_BoxCollider.width / 2.0f, m_BoxCollider.bottom + m_BoxCollider.height));
+
+			SoundManager::GetInstance()->PlaySound(SoundType::spikeFall);
+		}
+		else if (m_IsFalling)
+		{
+			m_VelocityY += m_Gravity * Time::GetInstance()->m_DeltaTime;
+			m_BoxCollider.bottom += m_VelocityY * Time::GetInstance()->m_DeltaTime;
+		}
 	}
-	else if(m_IsFalling)
-	{
-		m_VelocityY += m_Gravity * Time::GetInstance()->m_DeltaTime;
-		m_BoxCollider.bottom += m_VelocityY * Time::GetInstance()->m_DeltaTime;
-	}
+	
+	m_pHitPS->Update();
+	m_pTriggerPS->Update();
 }
 
 void FallingSpike::Draw() const
 {
-	glPushMatrix();
+	if (!m_IsDestroyed)
+	{
+		glPushMatrix();
 		glTranslatef(m_BoxCollider.left, m_BoxCollider.bottom, 0);
 		m_pTexture->Draw();
-	glPopMatrix();
+		glPopMatrix();
+	}
+	
+	m_pHitPS->Draw();
+	m_pTriggerPS->Draw();
 }
 
 void FallingSpike::Reset()
@@ -87,4 +122,5 @@ void FallingSpike::Reset()
 	m_VelocityY = 0.0f;
 	m_IsDestroyed = false;
 	m_IsFalling = false;
+	m_HasPlayedTriggerPS = false;
 }

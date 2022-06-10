@@ -12,7 +12,7 @@ Projectile::Projectile(ProjectileType type)
 	, m_AngleDeg{ 0.0f }
 	, m_pTexture { type == ProjectileType::small ? new Texture("Resources/Images/Sprite_ProjectileSmall.png")
 												 : new Texture("Resources/Images/Sprite_ProjectileLarge.png") }
-	, m_pHitPS { new ParticleSystem(20) }
+	, m_pHitPS { new ParticleSystem(10) }
 {
 	m_pHitPS->Initialize(Point2f(-15.0f, -15.0f), Point2f(15.0f, 15.0f), Point2f(2.0f, 3.0f), Point2f(0.1f, 0.1f), Point2f(0.3f, 0.45f));
 }
@@ -22,7 +22,7 @@ Projectile::Projectile(const Vector2f& velocity, const Rectf& boxCollider)
 	, m_Velocity { velocity }
 	, m_BoxCollider { boxCollider }
 	, m_pTexture{ new Texture("Resources/Images/Sprite_ProjectileSmall.png") }
-	, m_pHitPS{ new ParticleSystem(20) }
+	, m_pHitPS{ new ParticleSystem(10) }
 {
 	m_AngleRad = atan2f(m_Velocity.y, m_Velocity.x) * float(180.0f / M_PI);
 	m_AngleDeg = m_AngleRad * float(180.0f / M_PI);

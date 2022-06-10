@@ -10,6 +10,11 @@ public:
 	ParticleSystem(int numParticles);
 	~ParticleSystem();
 
+	ParticleSystem(const ParticleSystem& other) = delete;
+	ParticleSystem& operator=(const ParticleSystem& other) = delete;
+	ParticleSystem(ParticleSystem&& other) = delete;
+	ParticleSystem& operator=(ParticleSystem&& other) = delete;
+
 	bool IsPlaying() const;
 
 	void PlayAtPos(const Point2f& pos);

@@ -3,7 +3,8 @@
 #include "structs.h"
 #include "Collectible.h"
 
-class Health;
+class Avatar;
+
 class CollectibleManager final
 {
 public:
@@ -18,7 +19,7 @@ public:
 	void Initliaze(const std::string& filePath);
 	Collectible* AddItem(const Point2f& bottomLeft, CollectibleType type);
 
-	void Update(const Rectf& actorShape, Health& actorHealth);
+	void Update(Avatar& playerAvatar);
 	void Draw() const;
 	void Reset();
 
@@ -26,6 +27,6 @@ private:
 	std::vector<Collectible*> m_pItems;
 	int m_NrPointsCollected{ 0 };
 
-	bool HitItem(const Rectf& rect, Health& actorHealth);
+	bool HitItem(Avatar& playerAvatar);
 	void DeleteCollectible(const Collectible* collectible) const;
 };

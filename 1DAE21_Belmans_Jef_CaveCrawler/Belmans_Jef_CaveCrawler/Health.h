@@ -1,6 +1,7 @@
 #pragma once
 
 class Sprite;
+
 class Health final
 {
 public:

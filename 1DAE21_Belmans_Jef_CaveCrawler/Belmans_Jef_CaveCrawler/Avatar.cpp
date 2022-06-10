@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Level.h"
 #include "Game.h"
+#include "ParticleSystem.h"
 #include "Enums.h"
 
 Avatar::Avatar(float left, float bottom, float width, float height)
@@ -12,7 +13,15 @@ Avatar::Avatar(float left, float bottom, float width, float height)
 	, m_Gun { Gun() }
 	, m_Sprite{ Sprite(SpriteType::player) }	
 	, m_AvatarHealth{ Health(m_MaxHealth, &m_Sprite, 1.0f, true) }
-{ 
+	, m_pDeathPS{ new ParticleSystem(15) }
+{
+	m_pDeathPS->Initialize(Point2f(-20.0f, -20.0f), Point2f{ 20.0f, 20.0f }, Point2f(2.0f, 3.0f), Point2f(0.1f, 0.1f), Point2f(1.5f, 2.5f));
+}
+
+Avatar::~Avatar()
+{
+	delete m_pDeathPS;
+	m_pDeathPS = nullptr;
 }
 
 ProjectileManager& Avatar::GetProjectileManager()
@@ -28,6 +37,10 @@ bool Avatar::GetIsDead() const
 void Avatar::TakeDamage(int damage)
 {
 	m_AvatarHealth.TakeDamage(damage);
+	if (m_AvatarHealth.GetIsDead() && !m_pDeathPS->IsPlaying())
+	{
+		m_pDeathPS->PlayAtPos(m_PhysicsBody.GetCenter());
+	}
 }
 
 void Avatar::Heal(int value)
@@ -73,11 +86,12 @@ void Avatar::Update(const Level& level, const GameState& state)
 	{
 		GetInput();
 	}
-	
+
 	ProcessInput(level);
 	m_PhysicsBody.Update(level);
 	m_Sprite.Update();
 	m_Gun.Update(level.GetLevelVerts());
+	m_pDeathPS->Update();
 }
 
 void Avatar::Draw() const
@@ -93,7 +107,9 @@ void Avatar::Draw() const
 		glPopMatrix();
 
 		m_Gun.Draw();
-	}	
+	}
+
+	m_pDeathPS->Draw();
 }
 
 void Avatar::Reset()

@@ -2,6 +2,8 @@
 
 enum class CollectibleType;
 class Texture;
+class ParticleSystem;
+
 class Collectible final
 {
 public:
@@ -15,8 +17,10 @@ public:
 
 	CollectibleType GetType() const;
 	bool GetIsPickedUp() const;
-	void SetIsPickedUp(bool isPickedUp);
+	void SetIsPickedUp(bool value);
+	void PickUp();
 
+	void Update();
 	void Draw() const;
 	bool IsOverlapping(const Rectf& actorShape) const;
 
@@ -24,6 +28,7 @@ private:
 	const CollectibleType m_Type;
 	const Texture* m_pTexture;
 	Rectf m_Shape;
+	ParticleSystem* m_pPickUpPS;
 
 	bool m_IsPickedUp;
 };

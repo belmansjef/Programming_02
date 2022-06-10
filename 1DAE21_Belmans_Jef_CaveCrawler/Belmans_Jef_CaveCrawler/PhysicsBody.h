@@ -17,6 +17,7 @@ public:
 
 	Rectf GetShape() const;
 	Point2f GetPosition() const;
+	Point2f GetCenter() const;
 	float GetTimeSinceGrounded() const;
 	bool GetIsGrounded() const;
 	bool GetIsMoving() const;

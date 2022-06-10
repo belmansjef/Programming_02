@@ -31,6 +31,11 @@ Point2f PhysicsBody::GetPosition() const
 	return Point2f(m_Shape.left, m_Shape.bottom);
 }
 
+Point2f PhysicsBody::GetCenter() const
+{
+	return Point2f(m_Shape.left + m_Shape.width / 2.0f, m_Shape.bottom + m_Shape.height / 2.0f);
+}
+
 float PhysicsBody::GetTimeSinceGrounded() const
 {
 	return m_TimeSinceGrounded;
