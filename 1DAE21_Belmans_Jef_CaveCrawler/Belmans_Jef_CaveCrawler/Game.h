@@ -12,6 +12,7 @@
 #include "Lava.h"
 #include "MenuManager.h"
 #include "HUD.h"
+#include "ParticleSystem.h"
 
 enum class GameState;
 class Game final
@@ -46,7 +47,6 @@ private:
 	// DATA MEMBERS
 	const Window m_Window;
 	const float m_ScaleFactor{ 4.0f };
-	Texture* pTexture;
 	bool m_DoQuit;
 
 	GameState m_CurrentGameState;
@@ -71,6 +71,8 @@ private:
 	CannonEnemyManager m_CannonEnemyManager;
 	FallingSpikeManager m_FallingSpikeManager;
 	Lava m_Lava{Point2f(432.0f, 0.0f), 32.0f, 16.0f};
+
+	ParticleSystem m_PS;
 
 	// Menus
 	HUD m_HUD;

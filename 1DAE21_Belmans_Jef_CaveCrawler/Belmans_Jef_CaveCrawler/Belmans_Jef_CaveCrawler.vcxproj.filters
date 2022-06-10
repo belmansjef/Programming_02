@@ -64,6 +64,9 @@
     <Filter Include="Game Files\Charachters\Enemies\Cannon">
       <UniqueIdentifier>{7379e9fc-710e-43df-a17d-2a43adc483f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Game\ParticleSystem">
+      <UniqueIdentifier>{3db76f90-b093-47b1-8a07-a311e0c44a46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp">
@@ -210,6 +213,12 @@
     <ClCompile Include="FileReader.cpp">
       <Filter>Framework Files</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Game Files\Game\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Game Files\Game\ParticleSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -355,6 +364,12 @@
     </ClInclude>
     <ClInclude Include="Enums.h">
       <Filter>Framework Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Game Files\Game\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Game Files\Game\ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

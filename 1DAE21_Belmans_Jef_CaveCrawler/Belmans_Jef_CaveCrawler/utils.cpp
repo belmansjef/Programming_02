@@ -688,4 +688,9 @@ bool utils::IntersectRectLine(const Rectf& r, const Point2f& p1, const Point2f& 
 	return true;
 }
 
+float utils::GetRandomNumber(float min, float max)
+{
+	return min + static_cast<float>(rand()) * static_cast<float>(max - min) / RAND_MAX;
+}
+
 #pragma endregion CollisionFunctionality

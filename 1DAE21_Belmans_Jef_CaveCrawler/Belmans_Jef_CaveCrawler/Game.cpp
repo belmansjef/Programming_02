@@ -12,8 +12,8 @@ Game::Game( const Window& window )
 	, m_MenuManager { window.width, window.height }
 	, m_DoQuit{ false }
 	, m_CurrentGameState { GameState::MainMenu }
+	, m_PS { ParticleSystem(20) }
 {
-	pTexture = new Texture("Resources/Images/Sprite_BossBase.png");
 	Initialize( );
 }
 
@@ -32,6 +32,7 @@ void Game::Initialize( )
 	m_CrabEnemyManager.Initialize("Resources/Initializers/Crabs.txt");
 	m_CannonEnemyManager.Initialize("Resources/Initializers/Cannons.txt");
 	m_FallingSpikeManager.Initialize("Resources/Initializers/FallingSpikes.txt");
+	m_PS.Initialize(Point2f(-20.0f, -20.0f), Point2f{ 20.0f, 20.0f }, Point2f(4.0f, 8.0f), Point2f(1.0f, 2.0f), Point2f(2.0f, 4.0f));
 }
 
 void Game::Cleanup( )
@@ -62,8 +63,9 @@ void Game::Update( float elapsedSec )
 	m_CollectibleManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 	m_Lava.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth());
 	m_FallingSpikeManager.Update(m_PlayerAvatar.GetShape(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetHealth());
-
 	m_CannonEnemyManager.Update(m_PlayerAvatar.GetShape(), m_PlayerAvatar.GetHealth(), m_Level.GetLevelVerts(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+
+	m_PS.Update();
 
 	if (m_PlayerAvatar.GetIsDead() && m_CurrentGameState != GameState::Dead)
 	{
@@ -75,7 +77,7 @@ void Game::Update( float elapsedSec )
 		PlayerFinished();
 	};
 	
-	UpdateFrameStats();
+	// UpdateFrameStats();
 }
 
 void Game::Draw() const
@@ -96,8 +98,9 @@ void Game::Draw() const
 		m_CollectibleManager.Draw();
 		m_Lava.Draw();
 		m_FallingSpikeManager.Draw();
+		m_PS.Draw();
 	glPopMatrix();
-	
+
 	// Draw HUD and overlays after popping world view
 	switch (m_CurrentGameState)
 	{
@@ -156,6 +159,9 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 			Time::GetInstance()->m_TimeScale = 0.0f;
 			m_MenuManager.OpenMenu(MenuType::Pause);
 		}
+		break;
+	case SDL_SCANCODE_P:
+		m_PS.PlayAtPos(Point2f(m_PlayerAvatar.GetShape().left + 32.0f, m_PlayerAvatar.GetShape().bottom + 4.0f));
 		break;
 	}
 }

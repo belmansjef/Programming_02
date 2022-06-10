@@ -4,6 +4,7 @@
 
 enum class ProjectileType;
 class Texture;
+class ParticleSystem;
 
 class Projectile final
 {
@@ -18,6 +19,7 @@ public:
 
 	void Instanciate(const Vector2f& velocity, const Point2f& bottomLeft);
 	bool IsInstanciated() const;
+	bool IsEmittingParticles() const;
 
 	void Update();
 	void Draw() const;
@@ -28,9 +30,12 @@ public:
 	bool HitCheck(const Rectf& rect);
 private:
 	bool m_IsInstanciated;
+
 	Texture* m_pTexture;
 	Rectf m_BoxCollider;
 	Rayf m_Ray;
+
+	ParticleSystem* m_pHitPS;
 
 	Vector2f m_Velocity;
 	float m_AngleRad;
