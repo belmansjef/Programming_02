@@ -150,7 +150,7 @@ void Avatar::ProcessInput(const Level& level)
 		m_HorizontalScale = 1;
 	}
 
-	m_PhysicsBody.Velocity().x = m_MovementDirection* m_MovementSpeed;;
+	m_PhysicsBody.Velocity().x = m_MovementDirection * m_MovementSpeed;;
 	if (m_IsPressingJump)
 	{
 		m_PhysicsBody.Jump();

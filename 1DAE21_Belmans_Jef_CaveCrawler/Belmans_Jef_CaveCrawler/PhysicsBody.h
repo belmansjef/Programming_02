@@ -7,6 +7,7 @@ class PhysicsBody final
 public:
 	PhysicsBody(float left, float bottom, float width, float height, float initialJumpVelocity = 150.0f);
 	~PhysicsBody() = default;
+
 	PhysicsBody(const PhysicsBody& other) = delete;
 	PhysicsBody& operator=(const PhysicsBody& other) = delete;
 	PhysicsBody(PhysicsBody&& other) = delete;

@@ -22,6 +22,12 @@ RisingHand::RisingHand(const Point2f& bottomLeft, int maxHealth)
 	m_pDeathPS->Initialize(Point2f(-20.0f, -20.0f), Point2f{ 20.0f, 20.0f }, Point2f(2.0f, 3.0f), Point2f(0.1f, 0.1f), Point2f(1.5f, 2.5f));
 }
 
+RisingHand::~RisingHand()
+{
+	delete m_pDeathPS;
+	m_pDeathPS = nullptr;
+}
+
 Rectf RisingHand::GetBoxCollider() const
 {
 	return m_BoxCollider;

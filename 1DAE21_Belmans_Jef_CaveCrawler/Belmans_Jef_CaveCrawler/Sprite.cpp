@@ -179,6 +179,19 @@ void Sprite::SetSprite()
 		m_pAnimations.push_back(new Animation("extended", 1, 60, 1, 1, 0, 1));
 		m_pAnimations.push_back(new Animation("grabbing", 1, 60, 1, 1, 0, 2));
 		break;
+
+	case SpriteType::boss:
+		m_pTexture = new Texture{ "Resources/Images/Sprite_BossBase.png" };
+		m_SheetWidth = m_pTexture->GetWidth();
+		m_SheetHeight = m_pTexture->GetHeight();
+		m_FrameWidth = m_SheetWidth / 4.0f;
+		m_FrameHeight = m_SheetHeight / 2.0f;
+
+		m_pAnimations.push_back(new Animation("landed", 1, 60, 1, 1, 0, 3));
+		m_pAnimations.push_back(new Animation("pre_charge", 1, 60, 1, 1, 0, 0));
+		m_pAnimations.push_back(new Animation("charge", 1, 60, 1, 1, 0, 1));
+		m_pAnimations.push_back(new Animation("in_air", 1, 60, 1, 1, 0, 2));
+		break;
 	default:
 		break;
 	}

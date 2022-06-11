@@ -42,7 +42,8 @@ enum class SpriteType
 	cannonEnemyBase,
 	cannonEnemyBarrel,
 	damageBlock,
-	risingHand
+	risingHand,
+	boss
 };
 
 enum class CannonOrientation
@@ -61,4 +62,12 @@ enum class CollectibleType
 {
 	points = 1,
 	health = 2
+};
+
+enum class BossState
+{
+	landed,
+	pre_charge,
+	charge,
+	in_air
 };

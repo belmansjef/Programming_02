@@ -18,6 +18,9 @@ Collectible::Collectible(const Point2f& bottomLeft, CollectibleType type)
 Collectible::~Collectible()
 {
 	delete m_pTexture;
+	delete m_pPickUpPS;
+
+	m_pPickUpPS = nullptr;
 	m_pTexture = nullptr;
 }
 

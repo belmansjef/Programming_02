@@ -4,8 +4,8 @@
 #include "utils.h"
 #include "Sprite.h"
 #include "Health.h"
-#include "Gun.h"
 #include "PhysicsBody.h"
+#include "Gun.h"
 
 enum class GameState;
 class Level;

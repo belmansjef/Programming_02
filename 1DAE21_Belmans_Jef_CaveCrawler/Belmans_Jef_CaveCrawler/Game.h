@@ -12,6 +12,7 @@
 #include "Lava.h"
 #include "MenuManager.h"
 #include "HUD.h"
+#include "BossEnemy.h"
 
 enum class GameState;
 class Game final
@@ -49,6 +50,8 @@ private:
 	bool m_DoQuit;
 
 	GameState m_CurrentGameState;
+
+	BossEnemy m_Boss;
 
 	bool m_ShouldPrintStats{ true };
 	float m_FrameTime{ 0.0f };

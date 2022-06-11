@@ -12,6 +12,7 @@ Game::Game( const Window& window )
 	, m_MenuManager { window.width, window.height }
 	, m_DoQuit{ false }
 	, m_CurrentGameState { GameState::MainMenu }
+	, m_Boss { 128.0f, 24.0f }
 {
 	Initialize( );
 }
@@ -62,6 +63,7 @@ void Game::Update( float elapsedSec )
 	m_Lava.Update(m_PlayerAvatar);
 	m_FallingSpikeManager.Update(m_PlayerAvatar, m_Level.GetLevelVerts());
 	m_CannonEnemyManager.Update(m_PlayerAvatar, m_Level.GetLevelVerts(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+	m_Boss.Update(m_Level, m_PlayerAvatar);
 
 	if (m_PlayerAvatar.GetIsDead() && m_CurrentGameState != GameState::Dead)
 	{
@@ -94,6 +96,7 @@ void Game::Draw() const
 		m_CollectibleManager.Draw();
 		m_Lava.Draw();
 		m_FallingSpikeManager.Draw();
+		m_Boss.Draw();
 	glPopMatrix();
 
 	// Draw HUD and overlays after popping world view

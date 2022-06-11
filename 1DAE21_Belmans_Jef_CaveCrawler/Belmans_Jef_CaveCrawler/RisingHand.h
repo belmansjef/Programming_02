@@ -8,7 +8,8 @@ class RisingHand final
 {
 public:
 	RisingHand(const Point2f& bottomLeft, int maxHealth = 3);
-	~RisingHand() = default;
+	~RisingHand();
+
 	RisingHand(const RisingHand& other) = delete;
 	RisingHand& operator=(const RisingHand& other) = delete;
 	RisingHand(RisingHand&& other) = delete;

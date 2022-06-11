@@ -67,6 +67,9 @@
     <Filter Include="Game Files\Game\ParticleSystem">
       <UniqueIdentifier>{3db76f90-b093-47b1-8a07-a311e0c44a46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Charachters\Enemies\Boss">
+      <UniqueIdentifier>{a1add402-3dec-440b-b884-a1dba95bc9ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp">
@@ -219,6 +222,9 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Game Files\Game\ParticleSystem</Filter>
     </ClCompile>
+    <ClCompile Include="BossEnemy.cpp">
+      <Filter>Game Files\Charachters\Enemies\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -370,6 +376,9 @@
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
       <Filter>Game Files\Game\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="BossEnemy.h">
+      <Filter>Game Files\Charachters\Enemies\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
