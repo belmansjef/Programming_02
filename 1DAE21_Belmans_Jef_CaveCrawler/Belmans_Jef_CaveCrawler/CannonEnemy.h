@@ -36,7 +36,6 @@ private:
 	Rectf m_BoxCollider;
 	Health m_Health;
 	ProjectileManager m_ProjectileManager;
-
 	ParticleSystem* m_pDeathPS;
 
 	const float m_ShotCooldown;

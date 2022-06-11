@@ -1,6 +1,7 @@
 #include "BossManager.h"
 #include "Projectile.h"
 #include "Avatar.h"
+#include "Enums.h"
 
 BossManager::BossManager(float left, float bottom)
 	: m_Boss { left, bottom }
@@ -12,11 +13,14 @@ void BossManager::Reset()
 	m_Boss.Reset();
 }
 
-void BossManager::Update(Avatar& playerAvatar, const Level& level)
+void BossManager::Update(Avatar& playerAvatar, const Level& level, GameState gameState)
 {
-	m_Boss.Update(playerAvatar, level);
-	PlayerOverlapCheck(playerAvatar);
-	ProjectileCollisionCheck(playerAvatar);
+	if (gameState != GameState::MainMenu)
+	{
+		m_Boss.Update(playerAvatar, level);
+		PlayerOverlapCheck(playerAvatar);
+		ProjectileCollisionCheck(playerAvatar);
+	}
 }
 
 void BossManager::Draw() const

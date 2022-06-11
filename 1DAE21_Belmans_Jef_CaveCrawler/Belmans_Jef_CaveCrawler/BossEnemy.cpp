@@ -3,18 +3,25 @@
 #include "Time.h"
 #include "Enums.h"
 #include "Avatar.h"
+#include "Level.h"
 #include "ParticleSystem.h"
+#include "SoundManager.h"
 
 BossEnemy::BossEnemy(float left, float bottom)
 	: m_StartPos{ left, bottom }
-	, m_Sprite { SpriteType::boss }
-	, m_PhysicsBody{ left, bottom, m_Sprite.GetFrameWidth(), m_Sprite.GetFrameHeight(), 175.0f}
-	, m_Health { m_MaxHealth, &m_Sprite, 0.0f }
+	, m_SpriteBody { SpriteType::boss }
+	, m_SpriteBarrel { SpriteType::cannonEnemyBarrel }
+	, m_PhysicsBody{ left, bottom, m_SpriteBody.GetFrameWidth(), m_SpriteBody.GetFrameHeight(), 175.0f}
+	, m_Health { m_MaxHealth, &m_SpriteBody, 0.0f }
 	, m_MovementDirection { 1 }
 	, m_TimeSinceGrounded{ 0.0f }
 	, m_CurrentState { BossState::landed }
 	, m_pDeathPS{ new ParticleSystem(15) }
+	, m_ShotCooldown{ 1.5f }
+	, m_LastShotTime { 0.0f }
+	, m_BarrelAngle { 0.0f }
 {
+	m_ProjectileManager.PoolProjectiles(10, ProjectileType::big);
 	m_pDeathPS->Initialize(Point2f(-20.0f, -20.0f), Point2f{ 20.0f, 20.0f }, Point2f(2.0f, 3.0f), Point2f(0.1f, 0.1f), Point2f(1.5f, 2.5f));
 }
 
@@ -56,16 +63,25 @@ void BossEnemy::Reset()
 	m_PhysicsBody.Velocity() = Vector2f();
 	m_PhysicsBody.SetHasJumped(false);
 
-	m_Sprite.SetAnimation("landed");
+	m_SpriteBody.SetAnimation("landed");
 	m_CurrentState = BossState::landed;
 	m_MovementDirection = 1;
 	m_TimeSinceGrounded = Time::GetInstance()->m_Time;
 }
 
-void BossEnemy::Update(const Avatar& playerAvatar, const Level& level)
+void BossEnemy::Update(Avatar& playerAvatar, const Level& level)
 {
 	if (!IsDead())
 	{
+		const Rectf actorShape = playerAvatar.GetShape();
+		const Vector2f freeVec((actorShape.left + actorShape.width / 2.0f) - m_PhysicsBody.GetCenter().x, (actorShape.bottom + actorShape.height / 2.0f) - m_PhysicsBody.GetCenter().y);
+		m_BarrelAngle = float(int(atan2f(freeVec.y, freeVec.x) * float(180.0f / M_PI) + 360) % 360);
+
+		if (Time::GetInstance()->m_Time > m_LastShotTime + m_ShotCooldown)
+		{
+			Shoot(freeVec);
+		}
+
 		if (playerAvatar.GetShape().left < m_PhysicsBody.GetPosition().x)
 		{
 			m_MovementDirection = -1;
@@ -77,9 +93,11 @@ void BossEnemy::Update(const Avatar& playerAvatar, const Level& level)
 
 		SetState();
 		m_PhysicsBody.Update(level);
-		m_Sprite.Update();
+		m_SpriteBody.Update();
+		m_SpriteBarrel.Update();
 	}
 	
+	UpdateProjectiles(playerAvatar, level.GetLevelVerts());
 	m_pDeathPS->Update();
 }
 
@@ -89,10 +107,12 @@ void BossEnemy::Draw() const
 	{
 		glPushMatrix();
 			glTranslatef(m_PhysicsBody.GetPosition().x, m_PhysicsBody.GetPosition().y, 0);
-			m_Sprite.Draw();
+			m_SpriteBody.Draw();
 		glPopMatrix();
+		DrawBarrel();
 	}
 	
+	m_ProjectileManager.Draw();
 	m_pDeathPS->Draw();
 }
 
@@ -101,18 +121,18 @@ void BossEnemy::SetState()
 	if (Time::GetInstance()->m_Time >= m_TimeSinceGrounded + m_StandTime && m_CurrentState == BossState::landed)
 	{
 		m_CurrentState = BossState::pre_charge;
-		m_Sprite.SetAnimation("pre_charge");
+		m_SpriteBody.SetAnimation("pre_charge");
 	}
 	else if (Time::GetInstance()->m_Time >= m_TimeSinceGrounded + m_StandTime + m_PreChargeTime && m_CurrentState == BossState::pre_charge)
 	{
 		m_CurrentState = BossState::charge;
-		m_Sprite.SetAnimation("charge");
+		m_SpriteBody.SetAnimation("charge");
 	}
 	else if (Time::GetInstance()->m_Time >= m_TimeSinceGrounded + m_StandTime + m_PreChargeTime + m_ChargeTime && m_CurrentState == BossState::charge)
 	{
 		m_PhysicsBody.Jump();
 		m_CurrentState = BossState::in_air;
-		m_Sprite.SetAnimation("in_air");
+		m_SpriteBody.SetAnimation("in_air");
 		m_PhysicsBody.Velocity().x = m_HorizontalMovementSpeed * m_MovementDirection;
 	}
 
@@ -120,8 +140,41 @@ void BossEnemy::SetState()
 	{
 		m_TimeSinceGrounded = Time::GetInstance()->m_Time;
 		m_CurrentState = BossState::landed;
-		m_Sprite.SetAnimation("landed");
+		m_SpriteBody.SetAnimation("landed");
 		m_PhysicsBody.SetHasJumped(false);
 		m_PhysicsBody.Velocity().x = 0.0f;
+	}
+}
+
+void BossEnemy::DrawBarrel() const
+{
+	glPushMatrix();
+	glTranslatef
+	(
+		m_PhysicsBody.GetShape().left + (m_SpriteBody.GetFrameWidth() / 2.0f)
+		, m_PhysicsBody.GetShape().bottom + (m_SpriteBody.GetFrameHeight() / 5.0f) * 3.0f
+		, 0
+	);
+	glRotatef(m_BarrelAngle, 0, 0, 1);
+	glTranslatef(8.0f, -m_SpriteBarrel.GetFrameHeight() / 2.0f, 0);
+	m_SpriteBarrel.Draw();
+	glPopMatrix();
+}
+
+void BossEnemy::Shoot(const Vector2f& freeVec)
+{
+	m_ProjectileManager.InstanciateProjectile(freeVec.Normalized() * 100.0f, Point2f(m_PhysicsBody.GetCenter().x, (m_PhysicsBody.GetShape().bottom) + (m_SpriteBody.GetFrameHeight() / 5.0f) * 3.0f) + (freeVec.Normalized() * 12.0f));
+	m_LastShotTime = Time::GetInstance()->m_Time;
+	SoundManager::GetInstance()->PlaySound(SoundType::cannonShoot);
+}
+
+void BossEnemy::UpdateProjectiles(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& levelVerts)
+{
+	const Rectf actorShape{ playerAvatar.GetShape() };
+	m_ProjectileManager.Update(levelVerts, actorShape);
+	if (m_ProjectileManager.HasHitPlayer(actorShape))
+	{
+		SoundManager::GetInstance()->PlaySound(SoundType::hitHurt);
+		playerAvatar.TakeDamage(1);
 	}
 }

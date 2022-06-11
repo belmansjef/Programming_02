@@ -1,6 +1,8 @@
 #pragma once
 #include "BossEnemy.h" 
 
+enum class GameState;
+
 class BossManager final
 {
 public:
@@ -8,7 +10,7 @@ public:
 	~BossManager() = default;
 
 	void Reset();
-	void Update(Avatar& playerAvatar, const Level& level);
+	void Update(Avatar& playerAvatar, const Level& level, GameState gameState);
 	void Draw() const;
 	
 private:
