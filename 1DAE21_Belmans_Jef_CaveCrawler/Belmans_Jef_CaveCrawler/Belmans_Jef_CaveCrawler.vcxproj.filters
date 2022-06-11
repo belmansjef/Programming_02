@@ -225,6 +225,9 @@
     <ClCompile Include="BossEnemy.cpp">
       <Filter>Game Files\Charachters\Enemies\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="BossManager.cpp">
+      <Filter>Game Files\Charachters\Enemies\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -378,6 +381,9 @@
       <Filter>Game Files\Game\ParticleSystem</Filter>
     </ClInclude>
     <ClInclude Include="BossEnemy.h">
+      <Filter>Game Files\Charachters\Enemies\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossManager.h">
       <Filter>Game Files\Charachters\Enemies\Boss</Filter>
     </ClInclude>
   </ItemGroup>

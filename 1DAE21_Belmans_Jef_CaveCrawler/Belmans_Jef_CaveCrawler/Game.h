@@ -12,7 +12,7 @@
 #include "Lava.h"
 #include "MenuManager.h"
 #include "HUD.h"
-#include "BossEnemy.h"
+#include "BossManager.h"
 
 enum class GameState;
 class Game final
@@ -51,8 +51,6 @@ private:
 
 	GameState m_CurrentGameState;
 
-	BossEnemy m_Boss;
-
 	bool m_ShouldPrintStats{ true };
 	float m_FrameTime{ 0.0f };
 	float m_AvgFrameTime{ 0.0f };
@@ -72,6 +70,7 @@ private:
 	CrabEnemyManager m_CrabEnemyManager;
 	CannonEnemyManager m_CannonEnemyManager;
 	FallingSpikeManager m_FallingSpikeManager;
+	BossManager m_BossManager;
 	Lava m_Lava{Point2f(432.0f, 0.0f), 32.0f, 16.0f};
 
 	// Menus

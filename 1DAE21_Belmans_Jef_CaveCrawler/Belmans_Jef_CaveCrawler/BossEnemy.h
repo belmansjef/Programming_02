@@ -6,20 +6,34 @@
 enum class BossState;
 class Level;
 class Avatar;
+class ParticleSystem;
 
 class BossEnemy final
 {
 public:
 	BossEnemy(float left, float bottom);
-	~BossEnemy() = default;
+	~BossEnemy();
 
-	void Update(const Level& level, const Avatar& playerAvatar);
+	BossEnemy(const BossEnemy& other) = delete;
+	BossEnemy& operator=(const BossEnemy& other) = delete;
+	BossEnemy(BossEnemy&& other) = delete;
+	BossEnemy& operator=(BossEnemy&& other) = delete;
+
+	bool IsOverlapping(const Rectf& otherShape) const;
+	bool IsDead() const;
+	Rectf GetBoxCollider() const;
+
+	void TakeDamage(int damage);
+
+	void Reset();
+	void Update(const Avatar& playerAvatar, const Level& level);
 	void Draw() const;
 
 private:
 	Point2f m_StartPos;
 	Sprite m_Sprite;
 	PhysicsBody m_PhysicsBody;
+	ParticleSystem* m_pDeathPS;
 
 	BossState m_CurrentState;
 
