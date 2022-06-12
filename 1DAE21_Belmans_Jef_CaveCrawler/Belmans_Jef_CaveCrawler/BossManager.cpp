@@ -1,12 +1,13 @@
 #include "BossManager.h"
 #include "Projectile.h"
 #include "Avatar.h"
+#include "SoundManager.h"
 #include "Enums.h"
 
 BossManager::BossManager(float left, float bottom, const Window& window)
 	: m_IsPlayerInBossRoom { false }
 	, m_Boss { left, bottom }
-	, m_BossRoom { 290.0f, 16.0f, 258.0f, 216.0f }
+	, m_BossRoom { 290.0f, 16.0f, 242.0f, 216.0f }
 	, m_HealthBarFill { window.width / 2.0f - 128.0f, window.height - 128.0f, m_HealthBarBaseWidth, 56.0f }
 	, m_HealthBarBorder { window.width / 2.0f - 130.0f, window.height - 130.0f, m_HealthBarBaseWidth + 4.0f, 60.0f }
 {
@@ -30,10 +31,14 @@ void BossManager::Update(Avatar& playerAvatar, const LevelBase& level, GameState
 
 	if (utils::IsOverlapping(playerAvatar.GetShape(), m_BossRoom) && !m_IsPlayerInBossRoom)
 	{
+		SoundManager::GetInstance()->StopMainSoundtrack();
+		SoundManager::GetInstance()->PlayBossSoundtrack();
 		m_IsPlayerInBossRoom = true;
 	}
 	else if (!utils::IsOverlapping(playerAvatar.GetShape(), m_BossRoom) && m_IsPlayerInBossRoom)
 	{
+		SoundManager::GetInstance()->StopBossSoundtrack();
+		SoundManager::GetInstance()->PlayMainSoundtrack();
 		m_IsPlayerInBossRoom = false;
 	}
 }

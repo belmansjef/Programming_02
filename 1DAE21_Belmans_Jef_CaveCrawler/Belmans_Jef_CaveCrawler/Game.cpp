@@ -23,6 +23,7 @@ Game::~Game( )
 void Game::Initialize( )
 {
 	SoundManager::GetInstance()->Initialize("Resources/Initializers/Sounds.txt");
+	SoundManager::GetInstance()->PlayMainSoundtrack();
 }
 
 void Game::Cleanup( )
@@ -61,7 +62,8 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 	switch (e.keysym.scancode)
 	{
 	case SDL_SCANCODE_I:
-		std::cout << "Move using the [WASD] Keys, jump with [SPACE] and shoot with [RCTRL]." <<
+		std::cout << "Navigate the menu using the [UP] and [DOWN] key, press [ENTER] to select" <<
+			"\r\nMove using the [WASD] Keys, jump with [SPACE] and shoot with [RCTRL]." <<
 			"\r\nPress [PgUp] and [PgDn] to control the volume\r\nPress [R] to reset the level\r\nPress [ESC] to pause the game" << std::endl;
 		break;
 	case SDL_SCANCODE_R:

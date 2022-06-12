@@ -64,10 +64,33 @@ SoundManager::~SoundManager()
 	}
 }
 
+void SoundManager::PlayMainSoundtrack()
+{
+	m_MainSoundtrack.Play(true);
+}
+
+void SoundManager::StopMainSoundtrack()
+{
+	m_MainSoundtrack.Stop();
+}
+
+void SoundManager::PlayBossSoundtrack()
+{
+	m_BossSoundtrack.Play(true);
+}
+
+void SoundManager::StopBossSoundtrack()
+{
+	m_BossSoundtrack.Stop();
+}
+
 void SoundManager::ApplyVolume()
 {
 	for (std::pair<SoundType, SoundEffect*> key_val : m_pSoundEffects)
 	{
 		key_val.second->SetVolume(int(m_CurrentVolume));
 	}
+
+	m_MainSoundtrack.SetVolume(int(m_CurrentVolume));
+	m_BossSoundtrack.SetVolume(int(m_CurrentVolume));
 }
