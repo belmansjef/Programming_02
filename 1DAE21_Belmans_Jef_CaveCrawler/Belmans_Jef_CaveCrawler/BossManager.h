@@ -6,11 +6,11 @@ enum class GameState;
 class BossManager final
 {
 public:
-	BossManager(float left, float bottom, Window window);
+	BossManager(float left, float bottom, const Window& window);
 	~BossManager() = default;
 
 	void Reset();
-	void Update(Avatar& playerAvatar, const Level& level, GameState gameState);
+	void Update(Avatar& playerAvatar, const LevelBase& level, GameState gameState);
 	void Draw() const;
 	void DrawHUD() const;
 	

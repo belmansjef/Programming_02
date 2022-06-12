@@ -5,7 +5,7 @@
 
 LevelFinishedMenu::LevelFinishedMenu(const Point2f& bottomLeft, float windowWidth, float windowHeight)
 	: MenuBase("LEVEL FINISHED", 52, windowWidth, windowHeight, bottomLeft)
-	, m_pRestartButton{ new Button(Point2f(), "RESTART")}
+	, m_pRestartButton{ new Button(Point2f(), "NEXT LVL")}
 	, m_pMenuButton { new Button(Point2f(), "MENU")}
 {
 	AddButton(m_pRestartButton);
@@ -30,13 +30,14 @@ void LevelFinishedMenu::Enter(Game& game)
 		if (pHighlightedButton == m_pRestartButton)
 		{
 			game.SetGameState(GameState::InGame);
-			game.ResetLevel();
+			game.LoadNextLevel();
 			Close();
 		}
 		else if (pHighlightedButton == m_pMenuButton)
 		{
 			game.ResetLevel();
 			game.BackToMainMenu();
+			game.LoadLevelByName("Level_1");
 		}
 
 		Time::GetInstance()->m_TimeScale = 1.0f;

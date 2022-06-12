@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CrabEnemy.h"
-#include "Level.h"
+#include "LevelBase.h"
 #include "Sprite.h"
 #include "SoundManager.h"
 #include "ParticleSystem.h"
@@ -48,7 +48,7 @@ void CrabEnemy::TakeDamage(int damage)
 	}
 }
 
-void CrabEnemy::Update(const Level& level)
+void CrabEnemy::Update(const LevelBase& level)
 {
 	if (!m_Health.GetIsDead())
 	{

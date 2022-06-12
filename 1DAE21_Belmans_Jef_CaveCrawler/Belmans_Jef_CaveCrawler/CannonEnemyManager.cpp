@@ -1,7 +1,7 @@
 #include <fstream>
 #include <sstream>
 #include "CannonEnemyManager.h"
-#include "Level.h"
+#include "LevelBase.h"
 #include "Projectile.h"
 #include "Avatar.h"
 #include "FileReader.h"

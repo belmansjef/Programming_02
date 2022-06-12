@@ -37,6 +37,7 @@ void GameOverMenu::Enter(Game& game)
 		{
 			game.ResetLevel();
 			game.BackToMainMenu();
+			game.LoadLevelByName("Level_1");
 		}
 
 		Time::GetInstance()->m_TimeScale = 1.0f;

@@ -4,7 +4,7 @@
 #include "PhysicsBody.h"
 #include "Sprite.h"
 
-class Level;
+class LevelBase;
 class ParticleSystem;
 
 class CrabEnemy final
@@ -24,7 +24,7 @@ public:
 
 	void TakeDamage(int damage);
 
-	void Update(const Level& level);
+	void Update(const LevelBase& level);
 	void Draw() const;
 
 	void Reset();

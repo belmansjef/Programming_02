@@ -8,7 +8,7 @@
 #include "Gun.h"
 
 enum class GameState;
-class Level;
+class LevelBase;
 class ParticleSystem;
 
 class Avatar final
@@ -32,7 +32,7 @@ public:
 	ProjectileManager& GetProjectileManager();
 
 	void OnMouseDownEvent(const SDL_MouseButtonEvent& e);
-	void Update(const Level& level, const GameState& state);
+	void Update(const LevelBase& level, const GameState& state);
 	void Draw() const;
 	void Reset();
 
@@ -63,7 +63,7 @@ private:
 	bool m_IsPressingShoot{ false };
 
 	void GetInput();
-	void ProcessInput(const Level& level);
+	void ProcessInput(const LevelBase& level);
 
 	void SetAnimation();
 	void SetGravityScale();

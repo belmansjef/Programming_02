@@ -6,13 +6,11 @@
 
 Game::Game( const Window& window ) 
 	: m_Window{ window }
-	, m_Camera{ window.width / m_ScaleFactor, window.height / m_ScaleFactor }
-	, m_EndScreenOverlay{ Rectf(0.0f, 0.0f, window.width, window.height) }
-	, m_HUD { window, m_PlayerAvatar.GetHealth().GetCurrentHealth() }
+	, m_HUD { window, 4 }
 	, m_MenuManager { window.width, window.height }
 	, m_DoQuit{ false }
 	, m_CurrentGameState { GameState::MainMenu }
-	, m_BossManager { 128.0f, 40.0f, window }
+	, m_LevelManager { window }
 {
 	Initialize( );
 }
@@ -25,13 +23,6 @@ Game::~Game( )
 void Game::Initialize( )
 {
 	SoundManager::GetInstance()->Initialize("Resources/Initializers/Sounds.txt");
-	m_DamageBlockManager.Initialize("Resources/Images/Level_1_Spikes.svg");
-	m_CollectibleManager.Initliaze("Resources/Initializers/Collectibles.txt");
-	m_CameraZoneManager.Initialize("Resources/Initializers/CameraZones.txt");
-	m_RisingHandManager.Initialize("Resources/Initializers/RisingHands.txt");
-	m_CrabEnemyManager.Initialize("Resources/Initializers/Crabs.txt");
-	m_CannonEnemyManager.Initialize("Resources/Initializers/Cannons.txt");
-	m_FallingSpikeManager.Initialize("Resources/Initializers/FallingSpikes.txt");
 }
 
 void Game::Cleanup( )
@@ -42,75 +33,15 @@ void Game::Cleanup( )
 
 void Game::Update( float elapsedSec )
 {
-	// Lock framerate
-	m_FrameDelay = UINT32(m_MaxFrameTime - (Time::GetInstance()->m_DeltaTime));
-	SDL_Delay(m_FrameDelay);
-
-	// Updates
-	m_PlayerAvatar.Update(m_Level, m_CurrentGameState);
-	if (m_CurrentGameState != GameState::Dead)
-	{
-		m_Camera.UpdatePosition(m_PlayerAvatar.GetShape(), m_PlayerAvatar.ShouldTrack());
-		m_Camera.SetCameraBounds(m_CameraZoneManager.GetCurrentZone(m_PlayerAvatar.GetShape()));
-	}
-
-	// Managers
-	m_DamageBlockManager.Update(m_PlayerAvatar);
-	m_RisingHandManager.Update(m_PlayerAvatar, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-	m_CrabEnemyManager.Update(m_PlayerAvatar, m_Level, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-	m_CollectibleManager.Update(m_PlayerAvatar);
-	m_Lava.Update(m_PlayerAvatar);
-	m_FallingSpikeManager.Update(m_PlayerAvatar, m_Level.GetLevelVerts());
-	m_CannonEnemyManager.Update(m_PlayerAvatar, m_Level.GetLevelVerts(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-	// m_BossManager.Update(m_PlayerAvatar, m_Level, m_CurrentGameState);
-
-	if (m_PlayerAvatar.GetIsDead() && m_CurrentGameState != GameState::Dead)
-	{
-		PlayerDied();
-	}
-
-	if (m_Level.HasReachedEnd(m_PlayerAvatar.GetShape()) && m_CurrentGameState != GameState::Finished)
-	{
-		PlayerFinished();
-	};
-	
-	// UpdateFrameStats();
+	m_LevelManager.Update(m_MenuManager, m_CurrentGameState);
 }
 
 void Game::Draw() const
 {
 	ClearBackground();
 
-	glPushMatrix();
-		glScalef(m_ScaleFactor, m_ScaleFactor, 1);
-		m_Camera.Transform();
-		m_Level.DrawLevel();
-		m_PlayerAvatar.Draw();
-
-		// Managers
-		m_CannonEnemyManager.Draw();
-		m_DamageBlockManager.Draw();
-		m_RisingHandManager.Draw();
-		m_CrabEnemyManager.Draw();
-		m_CollectibleManager.Draw();
-		m_Lava.Draw();
-		m_FallingSpikeManager.Draw();
-		// m_BossManager.Draw();
-	glPopMatrix();
-
-	// Draw HUD and overlays after popping world view
-	switch (m_CurrentGameState)
-	{
-	case GameState::InGame:
-		m_HUD.Draw();
-		m_BossManager.DrawHUD();
-		break;
-	case GameState::Finished:
-		utils::SetColor(Color4f(0.0f, 0.0f, 0.0f, 0.75f));
-		utils::FillRect(m_EndScreenOverlay);
-		break;
-	}
-
+	m_LevelManager.Draw(m_CurrentGameState);
+	m_HUD.Draw();
 	m_MenuManager.DrawActiveMenu();
 }
 
@@ -155,6 +86,7 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 		if (m_CurrentGameState == GameState::InGame)
 		{
 			Time::GetInstance()->m_TimeScale = 0.0f;
+			m_CurrentGameState = GameState::Paused;
 			m_MenuManager.OpenMenu(MenuType::Pause);
 		}
 		break;
@@ -186,53 +118,11 @@ void Game::ClearBackground( ) const
 	glClear( GL_COLOR_BUFFER_BIT );
 }
 
-void Game::PlayerDied()
-{
-	SetGameState(GameState::Dead);
-	m_MenuManager.OpenMenu(MenuType::GameOver);
-}
-
-void Game::PlayerFinished()
-{
-	Time::GetInstance()->m_TimeScale = 0.0f;
-	SetGameState(GameState::Finished);
-	m_MenuManager.OpenMenu(MenuType::Finished); 
-
-	SoundManager::GetInstance()->PlaySound(SoundType::levelFinish);
-}
-
 void Game::ResetLevel()
 {
-	m_RisingHandManager.Reset();
-	m_CrabEnemyManager.Reset();
-	m_PlayerAvatar.Reset();
-	m_CollectibleManager.Reset();
-	m_Camera.Reset();
-	m_FallingSpikeManager.Reset();
-	m_CannonEnemyManager.Reset();
-	m_BossManager.Reset();
-
+	m_LevelManager.Reset();
 	Time::GetInstance()->m_TimeScale = 1.0f;
 	SetGameState(GameState::InGame);
-}
-
-void Game::UpdateFrameStats()
-{
-	m_FrameRate++;
-	m_FrameTime += Time::GetInstance()->m_DeltaTime;
-
-	if (m_FrameTime >= 1.0f) // Every second
-	{
-		m_AvgFrameTime = 1000 / m_FrameRate;
-
-		if (m_ShouldPrintStats)
-		{
-			std::cout << std::setprecision(2) << "[Frametime]\t\t[FPS]\r\n\t" << m_AvgFrameTime << " ms\t\t" << std::setprecision(3) << m_FrameRate << std::endl;
-		}
-
-		m_FrameTime = 0.0f;
-		m_FrameRate = 0.0f;
-	}
 }
 
 void Game::SetGameState(const GameState& state)
@@ -250,4 +140,16 @@ void Game::OpenOptionsMenu()
 {
 	m_MenuManager.OpenMenu(MenuType::Options);
 	SetGameState(GameState::MainMenu);
+}
+
+void Game::LoadLevelByName(const std::string& levelName)
+{
+	ResetLevel();
+	m_LevelManager.LoadLevelByName(levelName);
+	ResetLevel();
+}
+
+void Game::LoadNextLevel()
+{
+	m_LevelManager.LoadNextLevel();
 }

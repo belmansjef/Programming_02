@@ -5,7 +5,7 @@
 #include "ProjectileManager.h"
 
 enum class BossState;
-class Level;
+class LevelBase;
 class Avatar;
 class ParticleSystem;
 
@@ -29,7 +29,7 @@ public:
 	void TakeDamage(int damage);
 
 	void Reset();
-	void Update(Avatar& playerAvatar, const Level& level);
+	void Update(Avatar& playerAvatar, const LevelBase& level);
 	void Draw() const;
 
 private:

@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector2f.h"
 
-class Level;
+class LevelBase;
 class PhysicsBody final
 {
 public:
@@ -26,7 +26,7 @@ public:
 	void SetGravityScale(float gravityScale);
 	void SetHasJumped(bool hasJumped);
 
-	void Update(const Level& level);
+	void Update(const LevelBase& level);
 	void Jump();
 
 private:
@@ -40,7 +40,7 @@ private:
 	const float m_InitialJumpVelocity{ 150.0f };
 
 	bool m_HasJumped;
-	const float m_CoyoteTime{ 0.1f };
+	const float m_CoyoteTime{ 0.2f };
 	float m_TimeSinceGrounded { 0.0f };
 
 	bool m_IsMoving{ false };

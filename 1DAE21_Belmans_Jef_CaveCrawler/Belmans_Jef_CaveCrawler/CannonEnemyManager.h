@@ -5,7 +5,7 @@
 enum class CannonOrientation;
 class Camera;
 class Projectile;
-class Level;
+class LevelBase;
 class Avatar;
 
 class CannonEnemyManager final

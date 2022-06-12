@@ -1,20 +1,35 @@
 #pragma once
-#include "Level.h"
+#include "LevelBase.h"
+#include "CollectibleManager.h"
+#include "DamageBlockManager.h"
+#include "RisingHandManager.h"
+#include "CrabEnemyManager.h"
+#include "CannonEnemyManager.h"
+#include "FallingSpikeManager.h"
+#include "Lava.h"
 
-class Level_1 final : public Level
+class Level_1 final : public LevelBase
 {
 public:
-	Level_1();
-	~Level_1();
+	Level_1(const Window& window);
+	~Level_1() = default;
 
 	Level_1(const Level_1& other) = delete;
 	Level_1& operator=(const Level_1& other) = delete;
 	Level_1(Level_1&& other) = delete;
 	Level_1& operator=(Level_1&& other) = delete;
+	
+	virtual void Reset() override;
+	virtual void Draw(const GameState& currentGameState) const override;
+	virtual void Update(GameState& currentGameState, MenuManager& menuManager) override;
 
-	virtual void DrawLevel() const override;
-	virtual void Update() override;
 private:
-
+	CollectibleManager m_CollectibleManager;
+	DamageBlockManager m_DamageBlockManager;
+	RisingHandManager m_RisingHandManager;
+	CrabEnemyManager m_CrabEnemyManager;
+	CannonEnemyManager m_CannonEnemyManager;
+	FallingSpikeManager m_FallingSpikeManager;
+	Lava m_Lava{ Point2f(448.0f, 16.0f), 32.0f, 16.0f };
 };
 

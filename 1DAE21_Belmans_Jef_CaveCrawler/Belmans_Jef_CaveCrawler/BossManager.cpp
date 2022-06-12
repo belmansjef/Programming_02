@@ -3,10 +3,10 @@
 #include "Avatar.h"
 #include "Enums.h"
 
-BossManager::BossManager(float left, float bottom, Window window)
+BossManager::BossManager(float left, float bottom, const Window& window)
 	: m_IsPlayerInBossRoom { false }
 	, m_Boss { left, bottom }
-	, m_BossRoom { 96.0f, 24.0f, 256.0f, 96.0f }
+	, m_BossRoom { 290.0f, 16.0f, 258.0f, 216.0f }
 	, m_HealthBarFill { window.width / 2.0f - 128.0f, window.height - 128.0f, m_HealthBarBaseWidth, 56.0f }
 	, m_HealthBarBorder { window.width / 2.0f - 130.0f, window.height - 130.0f, m_HealthBarBaseWidth + 4.0f, 60.0f }
 {
@@ -19,7 +19,7 @@ void BossManager::Reset()
 	m_HealthBarFill.width = m_HealthBarBaseWidth;
 }
 
-void BossManager::Update(Avatar& playerAvatar, const Level& level, GameState gameState)
+void BossManager::Update(Avatar& playerAvatar, const LevelBase& level, GameState gameState)
 {
 	if (gameState != GameState::MainMenu && m_IsPlayerInBossRoom)
 	{
@@ -45,7 +45,7 @@ void BossManager::Draw() const
 
 void BossManager::DrawHUD() const
 {
-	if (m_IsPlayerInBossRoom)
+	if (m_IsPlayerInBossRoom && !m_Boss.IsDead())
 	{
 		utils::SetColor(Color4f(1.0f, 1.0f, 1.0f, 1.0f));
 		utils::DrawRect(m_HealthBarBorder, 4.0f);

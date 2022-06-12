@@ -2,7 +2,7 @@
 #include "pch.h"
 #include "Avatar.h"
 #include "Texture.h"
-#include "Level.h"
+#include "LevelBase.h"
 #include "Game.h"
 #include "ParticleSystem.h"
 #include "Enums.h"
@@ -82,14 +82,14 @@ void Avatar::OnMouseDownEvent(const SDL_MouseButtonEvent& e)
 	}
 }
 
-void Avatar::Update(const Level& level, const GameState& state)
+void Avatar::Update(const LevelBase& level, const GameState& state)
 {
 	if (state == GameState::InGame)
 	{
 		GetInput();
+		ProcessInput(level);
 	}
 
-	ProcessInput(level);
 	m_PhysicsBody.Update(level);
 	m_Sprite.Update();
 	m_Gun.Update(level.GetLevelVerts());
@@ -141,7 +141,7 @@ void Avatar::GetInput()
 	m_IsPressingShoot = bool(state[SDL_SCANCODE_RCTRL]);
 }
 
-void Avatar::ProcessInput(const Level& level)
+void Avatar::ProcessInput(const LevelBase& level)
 {
 	if (m_MovementDirection < 0)
 	{
@@ -183,7 +183,7 @@ void Avatar::ProcessInput(const Level& level)
 		m_PhysicsBody.SetHasJumped(m_IsPressingJump);
 	}
 
-	if (m_IsPressingShoot)
+	if (m_IsPressingShoot )
 	{
 		m_Gun.Shoot(m_PhysicsBody.GetPosition(), int(m_HorizontalScale));
 	}

@@ -47,6 +47,7 @@ void PauseMenu::Enter(Game& game)
 			game.SetGameState(GameState::MainMenu);
 			game.ResetLevel();
 			game.BackToMainMenu();
+			game.LoadLevelByName("Level_1");
 		}
 
 		Time::GetInstance()->m_TimeScale = 1.0f;

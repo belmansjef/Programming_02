@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "PhysicsBody.h"
-#include "Level.h"
+#include "LevelBase.h"
 #include "SoundManager.h"
 #include "Enums.h"
 
@@ -61,7 +61,7 @@ void PhysicsBody::SetHasJumped(bool hasJumped)
 	m_HasJumped = hasJumped;
 }
 
-void PhysicsBody::Update(const Level& level)
+void PhysicsBody::Update(const LevelBase& level)
 {
 	m_IsGrounded = level.IsOnGround(m_Shape);
 	m_IsMoving = !(m_Velocity.x == 0.0f && m_Velocity.y == 0.0f);

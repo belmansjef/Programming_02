@@ -45,7 +45,7 @@ CrabEnemy* CrabEnemyManager::AddItem(const Point2f& bottomLeft, int movementDire
 	return m_pItems.back();
 }
 
-void CrabEnemyManager::Update(Avatar& playerAvatar, const Level& level, std::vector<Projectile*> pProjectiles)
+void CrabEnemyManager::Update(Avatar& playerAvatar, const LevelBase& level, std::vector<Projectile*> pProjectiles)
 {
 	for (CrabEnemy* crab : m_pItems)
 	{

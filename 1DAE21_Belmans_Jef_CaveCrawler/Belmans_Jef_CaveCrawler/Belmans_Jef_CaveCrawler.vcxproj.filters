@@ -70,6 +70,9 @@
     <Filter Include="Game Files\Charachters\Enemies\Boss">
       <UniqueIdentifier>{a1add402-3dec-440b-b884-a1dba95bc9ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Level\Levels">
+      <UniqueIdentifier>{2196bbbf-fc82-43be-8ff2-aaecb8e89dff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp">
@@ -104,9 +107,6 @@
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Framework Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Game Files\Level</Filter>
     </ClCompile>
     <ClCompile Include="CollectibleManager.cpp">
       <Filter>Game Files\Level</Filter>
@@ -229,7 +229,16 @@
       <Filter>Game Files\Charachters\Enemies\Boss</Filter>
     </ClCompile>
     <ClCompile Include="LevelManager.cpp">
-      <Filter>Game Files\Level</Filter>
+      <Filter>Game Files\Level\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_1.cpp">
+      <Filter>Game Files\Level\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelBase.cpp">
+      <Filter>Game Files\Level\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_Boss.cpp">
+      <Filter>Game Files\Level\Levels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,9 +274,6 @@
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Framework Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Game Files\Level</Filter>
     </ClInclude>
     <ClInclude Include="CollectibleManager.h">
       <Filter>Game Files\Level</Filter>
@@ -390,7 +396,16 @@
       <Filter>Game Files\Charachters\Enemies\Boss</Filter>
     </ClInclude>
     <ClInclude Include="LevelManager.h">
-      <Filter>Game Files\Level</Filter>
+      <Filter>Game Files\Level\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelBase.h">
+      <Filter>Game Files\Level\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_1.h">
+      <Filter>Game Files\Level\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_Boss.h">
+      <Filter>Game Files\Level\Levels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

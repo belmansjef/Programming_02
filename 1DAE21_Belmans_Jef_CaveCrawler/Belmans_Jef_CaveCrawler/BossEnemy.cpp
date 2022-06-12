@@ -3,7 +3,7 @@
 #include "Time.h"
 #include "Enums.h"
 #include "Avatar.h"
-#include "Level.h"
+#include "LevelBase.h"
 #include "ParticleSystem.h"
 #include "SoundManager.h"
 
@@ -81,7 +81,7 @@ void BossEnemy::Reset()
 	m_ProjectileManager.Reset();
 }
 
-void BossEnemy::Update(Avatar& playerAvatar, const Level& level)
+void BossEnemy::Update(Avatar& playerAvatar, const LevelBase& level)
 {
 	if (!IsDead())
 	{

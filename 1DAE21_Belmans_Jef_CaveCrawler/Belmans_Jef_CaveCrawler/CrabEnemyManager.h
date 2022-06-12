@@ -4,7 +4,7 @@
 
 class Camera;
 class Projectile;
-class Level;
+class LevelBase;
 class Avatar;
 
 class CrabEnemyManager final
@@ -20,7 +20,7 @@ public:
 	void Initialize(const std::string& filePath);
 	CrabEnemy* AddItem(const Point2f& bottomLeft, int movementDirection = 1, int maxHealth = 3);
 
-	void Update(Avatar& playerAvatar, const Level& level, std::vector<Projectile*> pProjectiles);
+	void Update(Avatar& playerAvatar, const LevelBase& level, std::vector<Projectile*> pProjectiles);
 	void Draw() const;
 
 	void Reset();
