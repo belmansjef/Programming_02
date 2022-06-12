@@ -22,6 +22,8 @@ public:
 
 	bool IsOverlapping(const Rectf& otherShape) const;
 	bool IsDead() const;
+	int GetHealth() const;
+	int GetMaxHealth() const;
 	Rectf GetBoxCollider() const;
 
 	void TakeDamage(int damage);

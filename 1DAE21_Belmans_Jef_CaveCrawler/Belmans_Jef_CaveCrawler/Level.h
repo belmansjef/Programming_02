@@ -15,7 +15,7 @@ struct LevelEnd final
 class Level final
 {
 public:
-	Level(const Point2f& endBottomLeft);
+	Level(const Point2f& endBottomLeft, const std::string& texturePath, const std::string& collisionPath);
 	~Level();
 	Level(const Level& other) = delete;
 	Level& operator=(const Level& other) = delete;

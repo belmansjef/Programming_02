@@ -40,6 +40,8 @@ void Avatar::TakeDamage(int damage)
 	if (m_AvatarHealth.GetIsDead() && !m_pDeathPS->IsPlaying())
 	{
 		m_pDeathPS->PlayAtPos(m_PhysicsBody.GetCenter());
+		m_IsPressingJump = false;
+		m_IsPressingShoot = false;
 	}
 }
 

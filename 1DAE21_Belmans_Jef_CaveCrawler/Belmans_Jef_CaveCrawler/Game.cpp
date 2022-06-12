@@ -12,7 +12,7 @@ Game::Game( const Window& window )
 	, m_MenuManager { window.width, window.height }
 	, m_DoQuit{ false }
 	, m_CurrentGameState { GameState::MainMenu }
-	, m_BossManager { 128.0f, 24.0f }
+	, m_BossManager { 128.0f, 24.0f, window }
 {
 	Initialize( );
 }
@@ -104,6 +104,7 @@ void Game::Draw() const
 	{
 	case GameState::InGame:
 		m_HUD.Draw();
+		m_BossManager.DrawHUD();
 		break;
 	case GameState::Finished:
 		utils::SetColor(Color4f(0.0f, 0.0f, 0.0f, 0.75f));

@@ -168,6 +168,7 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Lava.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Matrix2x3.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Lava.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Matrix2x3.h" />
     <ClInclude Include="MenuBase.h" />

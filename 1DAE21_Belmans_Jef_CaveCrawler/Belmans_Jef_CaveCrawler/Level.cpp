@@ -14,12 +14,12 @@ LevelEnd::LevelEnd(const Point2f& bottomLeft)
 {
 }
 
-Level::Level(const Point2f& endBottomLeft)
-	: m_pBackgroundTexture{ new Texture("Resources/Images/Level_1.png") }
+Level::Level(const Point2f& endBottomLeft, const std::string& texturePath, const std::string& collisionPath)
+	: m_pBackgroundTexture{ new Texture(texturePath) }
 	, m_LevelEnd { LevelEnd(endBottomLeft) }
 {
 	m_Boundaries = Rectf{ 0.0f, 0.0f, m_pBackgroundTexture->GetWidth(), m_pBackgroundTexture->GetHeight()};
-	SVGParser::GetVerticesFromSvgFile("Resources/Images/Level_1.svg", m_Verticies);
+	SVGParser::GetVerticesFromSvgFile(collisionPath, m_Verticies);
 }
 
 Level::~Level()

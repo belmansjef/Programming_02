@@ -41,6 +41,16 @@ bool BossEnemy::IsDead() const
 	return m_Health.GetIsDead();
 }
 
+int BossEnemy::GetHealth() const
+{
+	return m_Health.GetCurrentHealth();
+}
+
+int BossEnemy::GetMaxHealth() const
+{
+	return m_MaxHealth;
+}
+
 Rectf BossEnemy::GetBoxCollider() const
 {
 	return m_PhysicsBody.GetShape();
@@ -67,6 +77,8 @@ void BossEnemy::Reset()
 	m_CurrentState = BossState::landed;
 	m_MovementDirection = 1;
 	m_TimeSinceGrounded = Time::GetInstance()->m_Time;
+
+	m_ProjectileManager.Reset();
 }
 
 void BossEnemy::Update(Avatar& playerAvatar, const Level& level)

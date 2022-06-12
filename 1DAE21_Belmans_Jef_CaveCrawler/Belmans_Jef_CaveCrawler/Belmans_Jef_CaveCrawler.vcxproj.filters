@@ -228,6 +228,9 @@
     <ClCompile Include="BossManager.cpp">
       <Filter>Game Files\Charachters\Enemies\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Game Files\Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -385,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="BossManager.h">
       <Filter>Game Files\Charachters\Enemies\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Game Files\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

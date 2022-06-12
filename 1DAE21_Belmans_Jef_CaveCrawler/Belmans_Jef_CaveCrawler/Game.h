@@ -60,7 +60,7 @@ private:
 
 	Uint32 m_FrameDelay{ 0 };
 
-	Level m_Level{Point2f(32.0f, 232.0f)};
+	Level m_Level{ Point2f(32.0f, 232.0f), "Resources/Images/Level_1.png", "Resources/Images/Level_1.svg" };
 	Avatar m_PlayerAvatar{ 72.0f, 24.0f, 13.0f, 14.0f };
 	Camera m_Camera;
 	CollectibleManager m_CollectibleManager;
