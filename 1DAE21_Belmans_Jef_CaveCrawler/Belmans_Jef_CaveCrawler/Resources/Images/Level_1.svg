@@ -3,55 +3,67 @@
 
 <svg
    version="1.1"
-   id="svg399"
-   width="581.33331"
-   height="213.33333"
-   viewBox="0 0 581.33331 213.33333"
+   id="svg396"
+   width="872"
+   height="320"
+   viewBox="0 0 872 320"
    sodipodi:docname="Level_1.svg"
    inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs403" />
+     id="defs400" />
   <sodipodi:namedview
-     id="namedview401"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
+     id="namedview398"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
      inkscape:pagecheckerboard="0"
      showgrid="false"
-     inkscape:zoom="4.0372708"
-     inkscape:cx="291.16204"
-     inkscape:cy="126.57065"
+     inkscape:zoom="2.4495413"
+     inkscape:cx="484.58052"
+     inkscape:cy="201.26217"
      inkscape:window-width="2560"
-     inkscape:window-height="1334"
-     inkscape:window-x="-11"
-     inkscape:window-y="-11"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g405" />
+     inkscape:current-layer="g402" />
   <g
      inkscape:groupmode="layer"
      inkscape:label="Image"
-     id="g405">
+     id="g402">
+    <image
+       width="872"
+       height="320"
+       preserveAspectRatio="none"
+       style="image-rendering:optimizeSpeed"
+       xlink:href="../../../Tiled/Level_1_Col.png"
+       id="image404" />
     <path
-       style="fill:#000000;stroke-width:0.666667"
-       d="m 74.666664,63.999999 h 74.666666 v 5.333333 H 74.666664 Z"
-       id="path2151" />
+       style="fill:#000000"
+       d="m 112,96 h 112 v 8 H 112 Z"
+       id="path2013" />
     <path
-       style="fill:#000000;stroke-width:0.666667"
-       d="m 165.33333,74.666665 h 74.66666 v 5.333334 h -74.66666 z"
-       id="path2149" />
+       style="fill:#000000"
+       d="m 248,112 h 112 v 8 H 248 Z"
+       id="path2011" />
     <path
-       style="fill:#000000;stroke-width:0.666667"
-       d="m 463.99998,160 h 16 v -48 h -48 v -5.33334 h 58.66667 V 128 h 16 v 10.66666 h -16 V 160 h 16 v 5.33333 h -42.66667 z"
-       id="path2147" />
+       style="fill:#000000"
+       d="m 696,240 h 24 v -72 h -72 v -8 h 88 v 32 h 24 v 16 h -24 v 32 h 24 v 8 h -64 z"
+       id="path2009" />
     <path
-       style="fill:#000000;stroke-width:0.666667"
-       d="M 319.99999,186.66666 H 426.66665 V 176 h 21.33333 v 10.66666 h 74.66667 V 176 h 21.33333 v 10.66666 h 16 V 144 h -37.33333 v -5.33334 h 37.33333 V 112 h -48 v -5.33334 h 48 V 69.333332 H 389.33332 V 21.333333 H 21.333332 v 26.666666 h 37.333332 v 5.333333 H 21.333332 V 90.666665 H 298.66665 V 79.999999 h 5.33334 v 10.666666 h 21.33333 V 79.999999 h 5.33333 v 10.666666 h 80 V 128 h 10.66667 v 16 h 26.66666 v 10.66666 h -21.33333 v -5.33333 h -16 v 16 h -21.33333 v -48 h -160 v 48 h -21.33333 v -48 H 21.333332 v 69.33333 H 298.66665 v 16 h 21.33334 z"
-       id="path2145" />
+       style="fill:#000000"
+       d="m 480,280 h 160 v -16 h 32 v 16 h 112 v -16 h 32 v 16 h 24 v -64 h -56 v -8 h 56 v -40 h -72 v -8 h 72 V 104 H 584 V 32 H 32 v 40 h 56 v 8 H 32 v 56 h 416 v -16 h 8 v 16 h 32 v -16 h 8 v 16 h 120 v 56 h 16 v 24 h 40 v 16 h -32 v -8 h -24 v 24 H 584 V 176 H 344 v 72 H 312 V 176 H 32 v 104 h 416 v 24 h 32 z"
+       id="path2007" />
+    <path
+       style="fill:#000000"
+       d="M 0,0 H 872 V 320 H 0 Z"
+       id="path406" />
   </g>
 </svg>

@@ -1,8 +1,8 @@
 <RisingHand
   Health="3"
-  Position="192.0,24.0"
+  Position="208.0,40.0"
 />
 <RisingHand
   Health="3"
-  Position="128.0,208.0"
+  Position="144.0,224.0"
 />

@@ -30,8 +30,8 @@ bool DamageBlockManager::Initialize(const std::string& filePath)
 	const int blockSize{ 8 };
 	for (std::vector<Point2f> polygon : vertices)
 	{
-		const float width = utils::GetDistance(polygon[1], polygon[2]);
-		const float height = utils::GetDistance(polygon[2], polygon[3]);
+		const float width = utils::GetDistance(polygon[2], polygon[3]);
+		const float height = utils::GetDistance(polygon[1], polygon[2]);
 
 		for (size_t i = 0; i < height / blockSize; i++)
 		{
@@ -39,8 +39,8 @@ bool DamageBlockManager::Initialize(const std::string& filePath)
 			{
 				const Point2f bottomLeft
 				{
-					polygon[0].x + (blockSize * j),
-					polygon[0].y + (blockSize * i)
+					polygon[3].x + (blockSize * j),
+					polygon[3].y + (blockSize * i)
 				};
 
 				AddItem(bottomLeft);

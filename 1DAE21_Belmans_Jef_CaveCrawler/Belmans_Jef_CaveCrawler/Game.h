@@ -60,8 +60,8 @@ private:
 
 	Uint32 m_FrameDelay{ 0 };
 
-	Level m_Level{ Point2f(32.0f, 232.0f), "Resources/Images/Level_1.png", "Resources/Images/Level_1.svg" };
-	Avatar m_PlayerAvatar{ 72.0f, 24.0f, 13.0f, 14.0f };
+	Level m_Level{ Point2f(48.0f, 248.0f), "Resources/Images/Level_1.png", "Resources/Images/Level_1.svg" };
+	Avatar m_PlayerAvatar{ 88.0f, 48.0f, 13.0f, 14.0f };
 	Camera m_Camera;
 	CollectibleManager m_CollectibleManager;
 	DamageBlockManager m_DamageBlockManager;
@@ -71,7 +71,7 @@ private:
 	CannonEnemyManager m_CannonEnemyManager;
 	FallingSpikeManager m_FallingSpikeManager;
 	BossManager m_BossManager;
-	Lava m_Lava{Point2f(432.0f, 0.0f), 32.0f, 16.0f};
+	Lava m_Lava{Point2f(448.0f, 16.0f), 32.0f, 16.0f};
 
 	// Menus
 	HUD m_HUD;

@@ -1,60 +1,60 @@
 <Collectible
   Type="1"
-  Position="192.0,42.0"
+  Position="208.0,58.0"
 />
 <Collectible
   Type="1"
-  Position="192.0,50.0"
+  Position="208.0,66.0"
 />
 <Collectible
   Type="1"
-  Position="444.0,42.0"
+  Position="460.0,58.0"
 />
 <Collectible
   Type="1"
-  Position="444.0,50.0"
+  Position="460.0,66.0"
 />
 <Collectible
   Type="1"
-  Position="672.0,88.0"
+  Position="688.0,104.0"
 />
 <Collectible
   Type="1"
-  Position="672.0,96.0"
+  Position="688.0,112.0"
 />
 <Collectible
   Type="1"
-  Position="752.0,80.0"
+  Position="768.0,96.0"
 />
 <Collectible
   Type="1"
-  Position="752.0,88.0"
+  Position="768.0,104.0"
 />
 <Collectible
   Type="1"
-  Position="256.0,200.0"
+  Position="272.0,216.0"
 />
 <Collectible
   Type="1"
-  Position="272.0,200.0"
+  Position="288.0,216.0"
 />
 <Collectible
   Type="1"
-  Position="288.0,200.0"
+  Position="304.0,216.0"
 />
 <Collectible
   Type="1"
-  Position="304.0,200.0"
+  Position="320.0,216.0"
 />
 <Collectible
   Type="1"
-  Position="452.0,172.0"
+  Position="468.0,188.0"
 />
 <Collectible
   Type="1"
-  Position="452.0,180.0"
+  Position="468.0,196.0"
 />
 <Collectible
   Type="2"
-  Position="148.0,216.0"
+  Position="164.0,232.0"
 />

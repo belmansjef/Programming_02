@@ -14,8 +14,9 @@ LevelEnd::LevelEnd(const Point2f& bottomLeft)
 {
 }
 
-Level::Level(const Point2f& endBottomLeft, const std::string& texturePath, const std::string& collisionPath)
+Level::Level(const std::string& levelName, const Point2f& endBottomLeft, const std::string& texturePath, const std::string& collisionPath)
 	: m_pBackgroundTexture{ new Texture(texturePath) }
+	, m_LevelName { levelName }
 	, m_LevelEnd { LevelEnd(endBottomLeft) }
 {
 	m_Boundaries = Rectf{ 0.0f, 0.0f, m_pBackgroundTexture->GetWidth(), m_pBackgroundTexture->GetHeight()};
@@ -31,10 +32,14 @@ Level::~Level()
 	m_LevelEnd.pTexture = nullptr;
 }
 
+std::string Level::GetLevelName() const
+{
+	return m_LevelName;
+}
+
 void Level::DrawLevel() const
 {
 	glPushMatrix();
-		glTranslatef(-16, -16, 0); // offset to background
 		m_pBackgroundTexture->Draw();
 	glPopMatrix();
 

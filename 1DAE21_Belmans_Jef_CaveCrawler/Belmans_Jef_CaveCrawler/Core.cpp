@@ -221,6 +221,4 @@ void Core::Cleanup( )
 	HWND hwnd = GetConsoleWindow();
 	HMENU hmenu = GetSystemMenu(hwnd, FALSE);
 	EnableMenuItem(hmenu, SC_CLOSE, MF_ENABLED);
-	std::cout << "Core destructor" << std::endl;
-
 }

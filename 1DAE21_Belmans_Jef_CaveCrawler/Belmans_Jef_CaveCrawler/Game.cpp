@@ -12,7 +12,7 @@ Game::Game( const Window& window )
 	, m_MenuManager { window.width, window.height }
 	, m_DoQuit{ false }
 	, m_CurrentGameState { GameState::MainMenu }
-	, m_BossManager { 128.0f, 24.0f, window }
+	, m_BossManager { 128.0f, 40.0f, window }
 {
 	Initialize( );
 }
@@ -38,7 +38,6 @@ void Game::Cleanup( )
 {
 	delete Time::GetInstance();
 	delete SoundManager::GetInstance();
-	std::cout << "Game destuctor" << std::endl;
 }
 
 void Game::Update( float elapsedSec )
@@ -63,7 +62,7 @@ void Game::Update( float elapsedSec )
 	m_Lava.Update(m_PlayerAvatar);
 	m_FallingSpikeManager.Update(m_PlayerAvatar, m_Level.GetLevelVerts());
 	m_CannonEnemyManager.Update(m_PlayerAvatar, m_Level.GetLevelVerts(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-	m_BossManager.Update(m_PlayerAvatar, m_Level, m_CurrentGameState);
+	// m_BossManager.Update(m_PlayerAvatar, m_Level, m_CurrentGameState);
 
 	if (m_PlayerAvatar.GetIsDead() && m_CurrentGameState != GameState::Dead)
 	{
@@ -96,7 +95,7 @@ void Game::Draw() const
 		m_CollectibleManager.Draw();
 		m_Lava.Draw();
 		m_FallingSpikeManager.Draw();
-		m_BossManager.Draw();
+		// m_BossManager.Draw();
 	glPopMatrix();
 
 	// Draw HUD and overlays after popping world view
