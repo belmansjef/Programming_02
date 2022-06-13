@@ -7,6 +7,7 @@ class Camera;
 class Projectile;
 class LevelBase;
 class Avatar;
+class ScoreManager;
 
 class CannonEnemyManager final
 {
@@ -21,7 +22,7 @@ public:
 	void Initialize(const std::string& filePath);
 	CannonEnemy* AddItem(const Point2f& bottomLeft, const CannonOrientation& orientation);
 
-	void Update(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& levelVerts, std::vector<Projectile*> pProjectiles);
+	void Update(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& levelVerts, std::vector<Projectile*> pProjectiles, ScoreManager& scoreManager);
 	void Draw() const;
 
 	void Reset();
@@ -29,6 +30,6 @@ public:
 private:
 	std::vector<CannonEnemy*> m_pItems;
 
-	void ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles);
+	void ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles, ScoreManager& scoreManager);
 };
 

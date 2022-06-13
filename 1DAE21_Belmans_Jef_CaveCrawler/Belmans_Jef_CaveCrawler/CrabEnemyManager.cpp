@@ -6,6 +6,7 @@
 #include "Avatar.h"
 #include "Health.h"
 #include "FileReader.h"
+#include "ScoreManager.h"
 
 CrabEnemyManager::~CrabEnemyManager()
 {
@@ -45,7 +46,7 @@ CrabEnemy* CrabEnemyManager::AddItem(const Point2f& bottomLeft, int movementDire
 	return m_pItems.back();
 }
 
-void CrabEnemyManager::Update(Avatar& playerAvatar, const LevelBase& level, std::vector<Projectile*> pProjectiles)
+void CrabEnemyManager::Update(Avatar& playerAvatar, const LevelBase& level, std::vector<Projectile*> pProjectiles, ScoreManager& scoreManager)
 {
 	for (CrabEnemy* crab : m_pItems)
 	{
@@ -53,7 +54,7 @@ void CrabEnemyManager::Update(Avatar& playerAvatar, const LevelBase& level, std:
 	}
 
 	PlayerOverlapCheck(playerAvatar);
-	ProjectileCollisionCheck(pProjectiles);
+	ProjectileCollisionCheck(pProjectiles, scoreManager);
 }
 
 void CrabEnemyManager::Draw() const
@@ -83,7 +84,7 @@ void CrabEnemyManager::PlayerOverlapCheck(Avatar& playerAvatar)
 	}
 }
 
-void CrabEnemyManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles)
+void CrabEnemyManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles, ScoreManager& scoreManager)
 {
 	for (Projectile* projectile : pProjectiles)
 	{
@@ -94,7 +95,14 @@ void CrabEnemyManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjec
 			if (!projectile->IsInstanciated()) break;
 			if (crab->IsDead()) continue;
 
-			if (projectile->HitCheck(crab->GetBoxCollider())) crab->TakeDamage(1);
+			if (projectile->HitCheck(crab->GetBoxCollider())) 
+			{
+				crab->TakeDamage(1);
+				if (crab->IsDead())
+				{
+					scoreManager.AddScore(150);
+				}
+			}
 		}
 	}
 }

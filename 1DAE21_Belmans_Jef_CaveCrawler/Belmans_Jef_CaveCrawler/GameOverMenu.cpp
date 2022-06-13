@@ -35,9 +35,8 @@ void GameOverMenu::Enter(Game& game)
 		}
 		else if (pHighlightedButton == m_pMenuButton)
 		{
-			game.ResetLevel();
-			game.BackToMainMenu();
 			game.LoadLevelByName("Level_1");
+			game.BackToMainMenu();
 		}
 
 		Time::GetInstance()->m_TimeScale = 1.0f;

@@ -44,10 +44,8 @@ void PauseMenu::Enter(Game& game)
 		}
 		else if (pHighlightedButton == m_pBackToMenuButton)
 		{
-			game.SetGameState(GameState::MainMenu);
-			game.ResetLevel();
-			game.BackToMainMenu();
 			game.LoadLevelByName("Level_1");
+			game.BackToMainMenu();
 		}
 
 		Time::GetInstance()->m_TimeScale = 1.0f;

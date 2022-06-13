@@ -65,6 +65,11 @@ Rectf Avatar::GetShape() const
 	return m_PhysicsBody.GetShape();
 }
 
+Rectf& Avatar::Shape()
+{
+	return m_PhysicsBody.Shape();
+}
+
 Health& Avatar::GetHealth()
 {
 	return m_AvatarHealth;

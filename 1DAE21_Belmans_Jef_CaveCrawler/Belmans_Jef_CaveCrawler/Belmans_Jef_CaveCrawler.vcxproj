@@ -160,6 +160,7 @@
     <ClCompile Include="FallingSpike.cpp" />
     <ClCompile Include="FallingSpikeManager.cpp" />
     <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="GameFinishedMenu.cpp" />
     <ClCompile Include="GameOverMenu.cpp" />
     <ClCompile Include="Level_1.cpp" />
     <ClCompile Include="LevelFinishedMenu.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="RisingHand.cpp" />
     <ClCompile Include="RisingHandManager.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="SoundEffect.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SoundStream.cpp" />
@@ -218,6 +220,7 @@
     <ClInclude Include="FallingSpike.h" />
     <ClInclude Include="FallingSpikeManager.h" />
     <ClInclude Include="FileReader.h" />
+    <ClInclude Include="GameFinishedMenu.h" />
     <ClInclude Include="GameOverMenu.h" />
     <ClInclude Include="Level_1.h" />
     <ClInclude Include="LevelFinishedMenu.h" />
@@ -245,6 +248,7 @@
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="RisingHand.h" />
     <ClInclude Include="RisingHandManager.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SoundStream.h" />

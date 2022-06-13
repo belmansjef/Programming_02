@@ -8,6 +8,7 @@
 #include "Avatar.h"
 #include "Projectile.h"
 #include "FileReader.h"
+#include "ScoreManager.h"
 
 RisingHandManager::~RisingHandManager()
 {
@@ -46,7 +47,7 @@ RisingHand* RisingHandManager::AddItem(const Point2f& bottomLeft, int maxHealth)
 	return m_pItems.back();
 }
 
-void RisingHandManager::Update(Avatar& playerAvatar,std::vector<Projectile*> pProjectiles)
+void RisingHandManager::Update(Avatar& playerAvatar,std::vector<Projectile*> pProjectiles, ScoreManager& scoreManager)
 {
 	for (RisingHand* element : m_pItems)
 	{
@@ -54,7 +55,7 @@ void RisingHandManager::Update(Avatar& playerAvatar,std::vector<Projectile*> pPr
 	}
 
 	PlayerOverlapCheck(playerAvatar);
-	ProjectileCollisionCheck(pProjectiles);
+	ProjectileCollisionCheck(pProjectiles, scoreManager);
 }
 
 void RisingHandManager::Draw() const
@@ -84,7 +85,7 @@ void RisingHandManager::PlayerOverlapCheck(Avatar& playerAvatar) const
 	}
 }
 
-void RisingHandManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles) const
+void RisingHandManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles, ScoreManager& scoreManager) const
 {
 	for (Projectile* proj : pProjectiles)
 	{
@@ -95,7 +96,14 @@ void RisingHandManager::ProjectileCollisionCheck(std::vector<Projectile*> pProje
 			if (!proj->IsInstanciated()) break;
 			if (element->IsDead()) continue;
 
-			if (proj->HitCheck(element->GetBoxCollider())) element->TakeDamage(1);
+			if (proj->HitCheck(element->GetBoxCollider()))
+			{
+				element->TakeDamage(1);
+				if (element->IsDead())
+				{
+					scoreManager.AddScore(75);
+				}
+			}
 		}
 	}
 }

@@ -1,5 +1,6 @@
 #include "Level_1.h"
 #include "MenuManager.h"
+#include "Enums.h"
 
 Level_1::Level_1(const Window& window)
 	: LevelBase::LevelBase("Level_1", window, Point2f( 88.0f, 40.0f), Point2f(48.0f, 248.0f), "Resources/Images/Level_1.png", "Resources/Images/Level_1.svg")
@@ -29,8 +30,6 @@ void Level_1::Reset()
 
 void Level_1::Draw(const GameState& currentGameState) const
 {
-	LevelBase::Draw(currentGameState);
-
 	glPushMatrix();
 		glScalef(m_ScaleFactor, m_ScaleFactor, 1);
 		m_Camera.Transform();
@@ -42,18 +41,30 @@ void Level_1::Draw(const GameState& currentGameState) const
 		m_CollectibleManager.Draw();
 		m_FallingSpikeManager.Draw();
 	glPopMatrix();
-	
+
+	LevelBase::Draw(currentGameState);
 }
 
-void Level_1::Update(GameState& currentGameState, MenuManager& menuManager)
+void Level_1::Update(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager)
 {
-	LevelBase::Update(currentGameState, menuManager);
+	LevelBase::Update(currentGameState, menuManager, scoreManager);
 
-	m_CollectibleManager.Update(m_PlayerAvatar);
+	m_CollectibleManager.Update(m_PlayerAvatar, scoreManager);
 	m_DamageBlockManager.Update(m_PlayerAvatar);
-	m_RisingHandManager.Update(m_PlayerAvatar, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-	m_CrabEnemyManager.Update(m_PlayerAvatar, *this, m_PlayerAvatar.GetProjectileManager().GetProjectiles());
-	m_CannonEnemyManager.Update(m_PlayerAvatar, GetLevelVerts(), m_PlayerAvatar.GetProjectileManager().GetProjectiles());
+	m_RisingHandManager.Update(m_PlayerAvatar, m_PlayerAvatar.GetProjectileManager().GetProjectiles(), scoreManager);
+	m_CrabEnemyManager.Update(m_PlayerAvatar, *this, m_PlayerAvatar.GetProjectileManager().GetProjectiles(), scoreManager);
+	m_CannonEnemyManager.Update(m_PlayerAvatar, GetLevelVerts(), m_PlayerAvatar.GetProjectileManager().GetProjectiles(), scoreManager);
 	m_FallingSpikeManager.Update(m_PlayerAvatar, GetLevelVerts());
 	m_Lava.Update(m_PlayerAvatar);
+
+	if (HasReachedEnd(m_PlayerAvatar.GetShape()) && currentGameState != GameState::Finished)
+	{
+		PlayerFinished(currentGameState, menuManager, scoreManager);
+	};
+}
+
+void Level_1::PlayerFinished(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager)
+{
+	LevelBase::PlayerFinished(currentGameState, menuManager, scoreManager);
+	menuManager.OpenMenu(MenuType::Finished);
 }

@@ -11,6 +11,7 @@ Game::Game( const Window& window )
 	, m_DoQuit{ false }
 	, m_CurrentGameState { GameState::MainMenu }
 	, m_LevelManager { window }
+	, m_ScoreManager { m_HUD }
 {
 	Initialize( );
 }
@@ -34,7 +35,7 @@ void Game::Cleanup( )
 
 void Game::Update( float elapsedSec )
 {
-	m_LevelManager.Update(m_MenuManager, m_CurrentGameState);
+	m_LevelManager.Update(m_MenuManager, m_CurrentGameState, m_ScoreManager);
 }
 
 void Game::Draw() const
@@ -125,6 +126,8 @@ void Game::ResetLevel()
 	m_LevelManager.Reset();
 	Time::GetInstance()->m_TimeScale = 1.0f;
 	SetGameState(GameState::InGame);
+	SoundManager::GetInstance()->StopBossSoundtrack();
+	SoundManager::GetInstance()->PlayMainSoundtrack();
 }
 
 void Game::SetGameState(const GameState& state)
@@ -134,7 +137,10 @@ void Game::SetGameState(const GameState& state)
 
 void Game::BackToMainMenu()
 {
+	SoundManager::GetInstance()->StopBossSoundtrack();
+	SoundManager::GetInstance()->PlayMainSoundtrack();
 	m_MenuManager.OpenMenu(MenuType::Main);
+	m_ScoreManager.ResetScore();
 	SetGameState(GameState::MainMenu);
 }
 
@@ -146,12 +152,14 @@ void Game::OpenOptionsMenu()
 
 void Game::LoadLevelByName(const std::string& levelName)
 {
-	ResetLevel();
 	m_LevelManager.LoadLevelByName(levelName);
 	ResetLevel();
+	HUD::UpdateHealth(4);
 }
 
 void Game::LoadNextLevel()
 {
 	m_LevelManager.LoadNextLevel();
+	ResetLevel();
+	HUD::UpdateHealth(4);
 }

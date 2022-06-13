@@ -83,7 +83,7 @@ void LevelBase::Draw(const GameState& currentGameState) const
 	}
 }
 
-void LevelBase::Update(GameState& currentGameState, MenuManager& menuManager)
+void LevelBase::Update(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager)
 {
 	// Updates
 	m_PlayerAvatar.Update(*this, currentGameState);
@@ -97,11 +97,6 @@ void LevelBase::Update(GameState& currentGameState, MenuManager& menuManager)
 	{
 		PlayerDied(currentGameState, menuManager);
 	}
-
-	if (HasReachedEnd(m_PlayerAvatar.GetShape()) && currentGameState != GameState::Finished)
-	{
-		PlayerFinished(currentGameState, menuManager);
-	};
 }
 
 void LevelBase::HandleCollision(Rectf& actorShape, Vector2f& actorVelocity) const
@@ -156,12 +151,10 @@ void LevelBase::PlayerDied(GameState& currentGameState, MenuManager& menuManager
 	menuManager.OpenMenu(MenuType::GameOver);
 }
 
-void LevelBase::PlayerFinished(GameState& currentGameState, MenuManager& menuManager)
+void LevelBase::PlayerFinished(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager)
 {
 	Time::GetInstance()->m_TimeScale = 0.0f;
 	currentGameState = GameState::Finished;
-	menuManager.OpenMenu(MenuType::Finished);
-
 	SoundManager::GetInstance()->PlaySound(SoundType::levelFinish);
 }
 

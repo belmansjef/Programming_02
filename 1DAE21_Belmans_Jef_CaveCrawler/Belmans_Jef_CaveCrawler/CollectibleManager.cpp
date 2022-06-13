@@ -6,6 +6,7 @@
 #include "Collectible.h"
 #include "Health.h"
 #include "SoundManager.h"
+#include "ScoreManager.h"
 #include "Avatar.h"
 #include "FileReader.h"
 #include "Enums.h"
@@ -46,14 +47,14 @@ Collectible* CollectibleManager::AddItem(const Point2f& bottomLeft, CollectibleT
 	return m_pItems.back();
 }
 
-void CollectibleManager::Update(Avatar& playerAvatar)
+void CollectibleManager::Update(Avatar& playerAvatar, ScoreManager& scoreManager)
 {
 	for (Collectible* collectible : m_pItems)
 	{
 		collectible->Update();
 	}
 
-	HitItem(playerAvatar);
+	HitItem(playerAvatar, scoreManager);
 }
 
 void CollectibleManager::Draw() const
@@ -74,7 +75,7 @@ void CollectibleManager::Reset()
 	m_NrPointsCollected = 0;
 }
 
-bool CollectibleManager::HitItem(Avatar& playerAvatar)
+bool CollectibleManager::HitItem(Avatar& playerAvatar, ScoreManager& scoreManager)
 {
 	for (Collectible* collectible : m_pItems)
 	{
@@ -87,7 +88,7 @@ bool CollectibleManager::HitItem(Avatar& playerAvatar)
 			switch (collectible->GetType())
 			{
 			case CollectibleType::points:
-				m_NrPointsCollected++;
+				scoreManager.AddScore(100);
 				SoundManager::GetInstance()->PlaySound(SoundType::coinPickup);
 				break;
 			case CollectibleType::health:

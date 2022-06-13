@@ -16,6 +16,7 @@ enum class MenuType
 	Pause,
 	GameOver,
 	Finished,
+	GameFinished
 };
 
 enum class SoundType

@@ -26,6 +26,7 @@ public:
 	int GetMaxHealth() const;
 	Rectf GetBoxCollider() const;
 
+	void PlayerEnteredRoom();
 	void TakeDamage(int damage);
 
 	void Reset();
@@ -54,10 +55,10 @@ private:
 	float m_BarrelAngle;
 
 	// Animation
-	const float m_StandTime{ 1.5f };
-	const float m_PreChargeTime{ 0.5f };
+	const float m_StandTime{ 1.0f };
+	const float m_PreChargeTime{ 0.3f };
 	const float m_ChargeTime{ 0.25f };
-	float m_TimeSinceGrounded;
+	float m_LastGroundedTime;
 
 	void SetState();
 	void DrawBarrel() const;

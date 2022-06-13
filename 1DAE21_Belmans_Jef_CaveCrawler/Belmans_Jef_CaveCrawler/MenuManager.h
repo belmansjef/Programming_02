@@ -7,7 +7,9 @@ class OptionsMenu;
 class PauseMenu;
 class GameOverMenu;
 class LevelFinishedMenu;
+class GameFinishedMenu;
 class Game;
+class ScoreManager;
 
 class MenuManager final
 {
@@ -19,6 +21,7 @@ public:
 	void Enter(Game& game);
 	void OpenMenu(const MenuType& menu);
 	void DrawActiveMenu() const;
+	void SetScoreText(const ScoreManager& scoreManager);
 
 private:
 	MenuBase* m_pActiveMenu;
@@ -28,5 +31,6 @@ private:
 	PauseMenu* m_pPauseMenu;
 	GameOverMenu* m_pGameOverMenu;
 	LevelFinishedMenu* m_pLevelFinishedMenu;
+	GameFinishedMenu* m_pGameFinishedMenu;
 };
 

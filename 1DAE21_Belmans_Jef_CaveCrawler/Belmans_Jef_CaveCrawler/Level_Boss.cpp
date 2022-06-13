@@ -1,4 +1,7 @@
 #include "Level_Boss.h"
+#include "MenuManager.h"
+#include "ScoreManager.h"
+#include "Enums.h"
 
 Level_Boss::Level_Boss(const Window& window)
 	: LevelBase::LevelBase("Level_Boss", window, Point2f(88.0f, 32.0f), Point2f(740.0f, 32.0f), "Resources/Images/Level_Boss.png", "Resources/Images/Level_Boss.svg")
@@ -25,8 +28,21 @@ void Level_Boss::Draw(const GameState& currentGameState) const
 	m_BossManager.DrawHUD();
 }
 
-void Level_Boss::Update(GameState& currentGameState, MenuManager& menuManager)
+void Level_Boss::Update(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager)
 {
-	LevelBase::Update(currentGameState, menuManager);
-	m_BossManager.Update(m_PlayerAvatar, *this, currentGameState);
+	LevelBase::Update(currentGameState, menuManager, scoreManager);
+	m_BossManager.Update(m_PlayerAvatar, *this, currentGameState, scoreManager);
+
+	if (HasReachedEnd(m_PlayerAvatar.GetShape()) && currentGameState != GameState::Finished)
+	{
+		PlayerFinished(currentGameState, menuManager, scoreManager);
+	};
+}
+
+void Level_Boss::PlayerFinished(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager)
+{
+	LevelBase::PlayerFinished(currentGameState, menuManager, scoreManager);
+	
+	menuManager.SetScoreText(scoreManager);
+	menuManager.OpenMenu(MenuType::GameFinished);
 }

@@ -28,6 +28,7 @@ public:
 	bool ShouldTrack();
 	bool GetIsDead() const;
 	Rectf GetShape() const;
+	Rectf& Shape();
 	Health& GetHealth();
 	ProjectileManager& GetProjectileManager();
 

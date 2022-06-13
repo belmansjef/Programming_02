@@ -240,6 +240,12 @@
     <ClCompile Include="Level_Boss.cpp">
       <Filter>Game Files\Level\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="GameFinishedMenu.cpp">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>Game Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -406,6 +412,12 @@
     </ClInclude>
     <ClInclude Include="Level_Boss.h">
       <Filter>Game Files\Level\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameFinishedMenu.h">
+      <Filter>Game Files\Game\HUD\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>Game Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

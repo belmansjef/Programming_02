@@ -55,16 +55,20 @@ void Health::TakeDamage(int amount)
 
 		if (m_CurrentHealth <= 0 && !m_IsDead)
 		{
+			if (m_IsPlayer)
+			{
+				HUD::UpdateHealth(m_CurrentHealth);
+			}
 			m_CurrentHealth = 0;
 			Die();
 		}
-		else if(m_IsPlayer) // Player took damage
+		else if(m_IsPlayer)
 		{
 			HUD::UpdateHealth(m_CurrentHealth);
 			Camera::DoScreenShake();
 			m_pSprite->FlashSprite();
 		}
-		else // Any other health component took damage
+		else
 		{
 			m_pSprite->FlashSprite();
 		}

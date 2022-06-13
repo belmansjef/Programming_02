@@ -15,7 +15,7 @@ public:
 	virtual void Enter(Game& game) override;
 
 private:
-	Button* m_pRestartButton;
+	Button* m_pNextLevelButton;
 	Button* m_pMenuButton;
 };
 

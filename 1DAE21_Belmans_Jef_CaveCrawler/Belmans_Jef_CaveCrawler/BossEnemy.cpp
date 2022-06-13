@@ -14,7 +14,7 @@ BossEnemy::BossEnemy(float left, float bottom)
 	, m_PhysicsBody{ left, bottom, m_SpriteBody.GetFrameWidth(), m_SpriteBody.GetFrameHeight(), 175.0f}
 	, m_Health { m_MaxHealth, &m_SpriteBody, 0.0f }
 	, m_MovementDirection { 1 }
-	, m_TimeSinceGrounded{ 0.0f }
+	, m_LastGroundedTime{ 0.0f }
 	, m_CurrentState { BossState::landed }
 	, m_pDeathPS{ new ParticleSystem(15) }
 	, m_ShotCooldown{ 1.5f }
@@ -56,6 +56,12 @@ Rectf BossEnemy::GetBoxCollider() const
 	return m_PhysicsBody.GetShape();
 }
 
+void BossEnemy::PlayerEnteredRoom()
+{
+	m_LastGroundedTime = Time::GetInstance()->m_Time;
+	m_LastShotTime = Time::GetInstance()->m_Time;
+}
+
 void BossEnemy::TakeDamage(int damage)
 {
 	m_Health.TakeDamage(damage);
@@ -76,7 +82,7 @@ void BossEnemy::Reset()
 	m_SpriteBody.SetAnimation("landed");
 	m_CurrentState = BossState::landed;
 	m_MovementDirection = 1;
-	m_TimeSinceGrounded = Time::GetInstance()->m_Time;
+	m_LastGroundedTime = Time::GetInstance()->m_Time;
 
 	m_ProjectileManager.Reset();
 }
@@ -130,17 +136,17 @@ void BossEnemy::Draw() const
 
 void BossEnemy::SetState()
 {
-	if (Time::GetInstance()->m_Time >= m_TimeSinceGrounded + m_StandTime && m_CurrentState == BossState::landed)
+	if (Time::GetInstance()->m_Time >= m_LastGroundedTime + m_StandTime && m_CurrentState == BossState::landed)
 	{
 		m_CurrentState = BossState::pre_charge;
 		m_SpriteBody.SetAnimation("pre_charge");
 	}
-	else if (Time::GetInstance()->m_Time >= m_TimeSinceGrounded + m_StandTime + m_PreChargeTime && m_CurrentState == BossState::pre_charge)
+	else if (Time::GetInstance()->m_Time >= m_LastGroundedTime + m_StandTime + m_PreChargeTime && m_CurrentState == BossState::pre_charge)
 	{
 		m_CurrentState = BossState::charge;
 		m_SpriteBody.SetAnimation("charge");
 	}
-	else if (Time::GetInstance()->m_Time >= m_TimeSinceGrounded + m_StandTime + m_PreChargeTime + m_ChargeTime && m_CurrentState == BossState::charge)
+	else if (Time::GetInstance()->m_Time >= m_LastGroundedTime + m_StandTime + m_PreChargeTime + m_ChargeTime && m_CurrentState == BossState::charge)
 	{
 		m_PhysicsBody.Jump();
 		m_CurrentState = BossState::in_air;
@@ -148,9 +154,9 @@ void BossEnemy::SetState()
 		m_PhysicsBody.Velocity().x = m_HorizontalMovementSpeed * m_MovementDirection;
 	}
 
-	if (m_PhysicsBody.GetIsGrounded() && m_CurrentState == BossState::in_air && Time::GetInstance()->m_Time >= m_TimeSinceGrounded + m_StandTime + m_PreChargeTime + m_ChargeTime + 1.0f)
+	if (m_PhysicsBody.GetIsGrounded() && m_CurrentState == BossState::in_air && Time::GetInstance()->m_Time >= m_LastGroundedTime + m_StandTime + m_PreChargeTime + m_ChargeTime + 1.0f)
 	{
-		m_TimeSinceGrounded = Time::GetInstance()->m_Time;
+		m_LastGroundedTime = Time::GetInstance()->m_Time;
 		m_CurrentState = BossState::landed;
 		m_SpriteBody.SetAnimation("landed");
 		m_PhysicsBody.SetHasJumped(false);

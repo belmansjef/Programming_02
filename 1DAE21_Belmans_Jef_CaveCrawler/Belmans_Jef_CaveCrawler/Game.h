@@ -4,6 +4,7 @@
 #include "MenuManager.h"
 #include "LevelManager.h"
 #include "HUD.h"
+#include "ScoreManager.h"
 
 enum class GameState;
 class Game final
@@ -43,9 +44,10 @@ private:
 	const float m_ScaleFactor{ 4.0f };
 	bool m_DoQuit;
 
+	HUD m_HUD;
 	GameState m_CurrentGameState;
 	LevelManager m_LevelManager;
-	HUD m_HUD;
+	ScoreManager m_ScoreManager;
 	MenuManager m_MenuManager;
 
 	// FUNCTIONS

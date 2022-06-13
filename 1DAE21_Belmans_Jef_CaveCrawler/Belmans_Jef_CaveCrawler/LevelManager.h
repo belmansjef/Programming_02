@@ -6,6 +6,7 @@ class LevelBase;
 class string;
 class MenuManager;
 class Avatar;
+class ScoreManager;
 
 class LevelManager
 {
@@ -17,7 +18,7 @@ public:
 	void LoadNextLevel();
 	
 	void Reset();
-	void Update(MenuManager& menuManager, GameState& currentGameState);
+	void Update(MenuManager& menuManager, GameState& currentGameState, ScoreManager& scoreManager);
 	void Draw(const GameState& currentGameState) const;
 
 private:

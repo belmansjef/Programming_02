@@ -6,6 +6,8 @@
 
 class Texture;
 class MenuManager;
+class ScoreManager;
+
 struct LevelEnd final
 {
 	LevelEnd();
@@ -30,7 +32,7 @@ public:
 
 	virtual void Reset();
 	virtual void Draw(const GameState& currentGameState) const;
-	virtual void Update(GameState& currentGameState, MenuManager& menuManager);
+	virtual void Update(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager);
 	
 	void HandleCollision(Rectf& actorShape, Vector2f& actorVelocity) const;
 	bool IsOnGround(const Rectf& actorShape) const;
@@ -44,6 +46,7 @@ protected:
 	CameraZoneManager m_CameraZoneManager;
 	Avatar m_PlayerAvatar;
 	Camera m_Camera;
+	virtual void PlayerFinished(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager);
 
 private:
 	const std::string m_LevelName;
@@ -55,6 +58,5 @@ private:
 	Rectf m_EndScreenOverlay;
 	
 	void PlayerDied(GameState& currentGameState, MenuManager& menuManager);
-	void PlayerFinished(GameState& currentGameState, MenuManager& menuManager);
 	void LevelCollision(Rectf& actorShape, Vector2f& actorVelocity) const;
 };

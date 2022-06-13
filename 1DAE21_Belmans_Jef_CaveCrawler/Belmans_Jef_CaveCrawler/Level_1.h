@@ -12,7 +12,6 @@ class Level_1 final : public LevelBase
 {
 public:
 	Level_1(const Window& window);
-	~Level_1() = default;
 
 	Level_1(const Level_1& other) = delete;
 	Level_1& operator=(const Level_1& other) = delete;
@@ -21,7 +20,7 @@ public:
 	
 	virtual void Reset() override;
 	virtual void Draw(const GameState& currentGameState) const override;
-	virtual void Update(GameState& currentGameState, MenuManager& menuManager) override;
+	virtual void Update(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager) override;
 
 private:
 	CollectibleManager m_CollectibleManager;
@@ -31,5 +30,7 @@ private:
 	CannonEnemyManager m_CannonEnemyManager;
 	FallingSpikeManager m_FallingSpikeManager;
 	Lava m_Lava{ Point2f(448.0f, 16.0f), 32.0f, 16.0f };
+
+	virtual void PlayerFinished(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager) override;
 };
 

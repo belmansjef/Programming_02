@@ -6,6 +6,7 @@
 #include "Avatar.h"
 #include "FileReader.h"
 #include "Enums.h"
+#include "ScoreManager.h"
 
 CannonEnemyManager::~CannonEnemyManager()
 {
@@ -41,14 +42,14 @@ CannonEnemy* CannonEnemyManager::AddItem(const Point2f& bottomLeft, const Cannon
 	return m_pItems.back();
 }
 
-void CannonEnemyManager::Update(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& levelVerts, std::vector<Projectile*> pProjectiles)
+void CannonEnemyManager::Update(Avatar& playerAvatar, const std::vector<std::vector<Point2f>>& levelVerts, std::vector<Projectile*> pProjectiles, ScoreManager& scoreManager)
 {
 	for (CannonEnemy* element : m_pItems)
 	{
 		element->Update(playerAvatar, levelVerts);
 	}
 
-	ProjectileCollisionCheck(pProjectiles);
+	ProjectileCollisionCheck(pProjectiles, scoreManager);
 }
 
 void CannonEnemyManager::Draw() const
@@ -67,7 +68,7 @@ void CannonEnemyManager::Reset()
 	}
 }
 
-void CannonEnemyManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles)
+void CannonEnemyManager::ProjectileCollisionCheck(std::vector<Projectile*> pProjectiles, ScoreManager& scoreManager)
 {
 	for (Projectile* projectile : pProjectiles)
 	{
@@ -78,7 +79,14 @@ void CannonEnemyManager::ProjectileCollisionCheck(std::vector<Projectile*> pProj
 			if (cannon->IsDead()) continue;
 			if (!projectile->IsInstanciated()) break;
 
-			if (projectile->HitCheck(cannon->GetBoxCollider())) cannon->TakeDamage(1);
+			if (projectile->HitCheck(cannon->GetBoxCollider())) 
+			{
+				cannon->TakeDamage(1);
+				if (cannon->IsDead())
+				{
+					scoreManager.AddScore(200);
+				}
+			} 
 		}
 	}
 }

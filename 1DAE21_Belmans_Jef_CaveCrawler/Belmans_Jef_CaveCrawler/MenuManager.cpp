@@ -3,9 +3,11 @@
 #include "OptionsMenu.h"
 #include "PauseMenu.h"
 #include "LevelFinishedMenu.h"
+#include "GameFinishedMenu.h"
 #include "GameOverMenu.h"
 #include "SoundManager.h"
 #include "Enums.h"
+#include "ScoreManager.h"
 
 MenuManager::MenuManager(float windowWidth, float windowHeight)
 	: m_pActiveMenu { nullptr }
@@ -14,6 +16,7 @@ MenuManager::MenuManager(float windowWidth, float windowHeight)
 	, m_pPauseMenu{ new PauseMenu(Point2f(80.0f, 108.0f), windowWidth, windowHeight) }
 	, m_pLevelFinishedMenu { new LevelFinishedMenu(Point2f(80.0f, 108.0f), windowWidth, windowHeight)}
 	, m_pGameOverMenu{ new GameOverMenu(Point2f(80.0f, 108.0f), windowWidth, windowHeight)}
+	, m_pGameFinishedMenu { new GameFinishedMenu(Point2f(80.0f, 108.0f), windowWidth, windowHeight)}
 {
 	OpenMenu(MenuType::Main);
 }
@@ -25,6 +28,7 @@ MenuManager::~MenuManager()
 	delete m_pPauseMenu;
 	delete m_pGameOverMenu;
 	delete m_pLevelFinishedMenu;
+	delete m_pGameFinishedMenu;
 
 	m_pActiveMenu = nullptr;
 	m_pMainMenu = nullptr;
@@ -32,6 +36,7 @@ MenuManager::~MenuManager()
 	m_pPauseMenu = nullptr;
 	m_pGameOverMenu = nullptr;
 	m_pLevelFinishedMenu = nullptr;
+	m_pGameFinishedMenu = nullptr;
 }
 
 void MenuManager::CycleSelection(bool up)
@@ -68,6 +73,9 @@ void MenuManager::OpenMenu(const MenuType& menu)
 	case MenuType::Finished:
 		m_pActiveMenu = m_pLevelFinishedMenu;
 		break;
+	case MenuType::GameFinished:
+		m_pActiveMenu = m_pGameFinishedMenu;
+		break;
 	default:
 		break;
 	}
@@ -81,4 +89,9 @@ void MenuManager::DrawActiveMenu() const
 	{
 		m_pActiveMenu->Draw();
 	}
+}
+
+void MenuManager::SetScoreText(const ScoreManager& scoreManager)
+{
+	m_pGameFinishedMenu->SetScoreText(scoreManager.GetCurrentScore(), scoreManager.GetHighScore());
 }

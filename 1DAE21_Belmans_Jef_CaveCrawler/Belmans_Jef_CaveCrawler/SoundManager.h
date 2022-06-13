@@ -29,7 +29,7 @@ private:
 	SoundStream m_BossSoundtrack{ "Resources/Sounds/BossSoundtrack.wav" };
 
 	const float m_MaxVolume{ 80.0f };
-	float m_CurrentVolume{ 50.0f };
+	float m_CurrentVolume{ 20.0f };
 
 	void ApplyVolume();
 };

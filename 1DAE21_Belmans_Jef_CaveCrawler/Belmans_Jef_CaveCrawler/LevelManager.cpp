@@ -3,6 +3,7 @@
 #include "LevelBase.h"
 #include "Level_1.h"
 #include "Level_Boss.h"
+#include "ScoreManager.h"
 
 LevelManager::LevelManager(const Window& window)
 	: m_pCurrentLevel { nullptr }
@@ -59,9 +60,9 @@ void LevelManager::Reset()
 	m_pCurrentLevel->Reset();
 }
 
-void LevelManager::Update(MenuManager& menuManager, GameState& currentGameState)
+void LevelManager::Update(MenuManager& menuManager, GameState& currentGameState, ScoreManager& scoreManager)
 {
-	m_pCurrentLevel->Update(currentGameState, menuManager);
+	m_pCurrentLevel->Update(currentGameState, menuManager, scoreManager);
 }
 
 void LevelManager::Draw(const GameState& currentGameState) const
