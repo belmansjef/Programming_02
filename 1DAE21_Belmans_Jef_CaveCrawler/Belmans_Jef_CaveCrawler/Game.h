@@ -23,6 +23,8 @@ public:
 	void BackToMainMenu();
 	void OpenOptionsMenu();
 
+	void ResetScore();
+
 	void LoadLevelByName(const std::string& levelName);
 	void LoadNextLevel();
 

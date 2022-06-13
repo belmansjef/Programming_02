@@ -31,6 +31,7 @@ void GameOverMenu::Enter(Game& game)
 		{
 			game.SetGameState(GameState::InGame);
 			game.ResetLevel();
+			game.ResetScore();
 			Close();
 		}
 		else if (pHighlightedButton == m_pMenuButton)

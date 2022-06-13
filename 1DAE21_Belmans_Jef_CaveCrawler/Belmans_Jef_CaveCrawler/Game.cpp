@@ -64,11 +64,8 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 	{
 	case SDL_SCANCODE_I:
 		std::cout << "Navigate the menu using the [UP] and [DOWN] key, press [ENTER] to select" <<
-			"\r\nMove using the [WASD] Keys, jump with [SPACE] and shoot with [RCTRL]." <<
-			"\r\nPress [PgUp] and [PgDn] to control the volume\r\nPress [R] to reset the level\r\nPress [ESC] to pause the game" << std::endl;
-		break;
-	case SDL_SCANCODE_R:
-		ResetLevel();
+			"\r\nMove using the [A] and [D] Keys, jump with [SPACE] and shoot with [RCTRL]." <<
+			"\r\nPress [ESC] to pause the game" << std::endl;
 		break;
 	case SDL_SCANCODE_UP:
 		m_MenuManager.CycleSelection(true);
@@ -78,12 +75,6 @@ void Game::ProcessKeyDownEvent( const SDL_KeyboardEvent & e )
 		break;
 	case SDL_SCANCODE_RETURN:
 		m_MenuManager.Enter(*this);
-		break;
-	case SDL_SCANCODE_PAGEUP:
-		SoundManager::GetInstance()->AdjustVolume(20.0f);
-		break;
-	case SDL_SCANCODE_PAGEDOWN:
-		SoundManager::GetInstance()->AdjustVolume(-20.0f);
 		break;
 	case SDL_SCANCODE_ESCAPE:
 		if (m_CurrentGameState == GameState::InGame)
@@ -137,10 +128,11 @@ void Game::SetGameState(const GameState& state)
 
 void Game::BackToMainMenu()
 {
+	ResetScore();
+
 	SoundManager::GetInstance()->StopBossSoundtrack();
 	SoundManager::GetInstance()->PlayMainSoundtrack();
 	m_MenuManager.OpenMenu(MenuType::Main);
-	m_ScoreManager.ResetScore();
 	SetGameState(GameState::MainMenu);
 }
 
@@ -148,6 +140,11 @@ void Game::OpenOptionsMenu()
 {
 	m_MenuManager.OpenMenu(MenuType::Options);
 	SetGameState(GameState::MainMenu);
+}
+
+void Game::ResetScore()
+{
+	m_ScoreManager.ResetScore();
 }
 
 void Game::LoadLevelByName(const std::string& levelName)
