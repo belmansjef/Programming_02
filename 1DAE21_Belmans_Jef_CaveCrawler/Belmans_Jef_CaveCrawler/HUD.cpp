@@ -52,7 +52,10 @@ HUD::HUD(const Window& window, int maxHealth)
 HUD::~HUD()
 {
 	delete m_pTexHealthBar;
+	delete m_pScoreText;
+
 	m_pTexHealthBar = nullptr;
+	m_pScoreText = nullptr;
 }
 
 

@@ -43,6 +43,12 @@ void Level_1::Draw(const GameState& currentGameState) const
 	glPopMatrix();
 
 	LevelBase::Draw(currentGameState);
+
+	glPushMatrix();
+		glScalef(m_ScaleFactor, m_ScaleFactor, 1);
+		m_Camera.Transform();
+		m_DamageBlockManager.Draw();
+	glPopMatrix();
 }
 
 void Level_1::Update(GameState& currentGameState, MenuManager& menuManager, ScoreManager& scoreManager)

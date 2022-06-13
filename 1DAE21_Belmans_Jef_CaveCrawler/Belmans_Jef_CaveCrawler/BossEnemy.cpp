@@ -6,6 +6,7 @@
 #include "LevelBase.h"
 #include "ParticleSystem.h"
 #include "SoundManager.h"
+#include "Camera.h"
 
 BossEnemy::BossEnemy(float left, float bottom)
 	: m_StartPos{ left, bottom }
@@ -17,18 +18,24 @@ BossEnemy::BossEnemy(float left, float bottom)
 	, m_LastGroundedTime{ 0.0f }
 	, m_CurrentState { BossState::landed }
 	, m_pDeathPS{ new ParticleSystem(15) }
+	, m_pLandPS { new ParticleSystem(15) }
 	, m_ShotCooldown{ 1.5f }
 	, m_LastShotTime { 0.0f }
 	, m_BarrelAngle { 0.0f }
 {
 	m_ProjectileManager.PoolProjectiles(10, ProjectileType::big);
 	m_pDeathPS->Initialize(Point2f(-20.0f, -20.0f), Point2f{ 20.0f, 20.0f }, Point2f(2.0f, 3.0f), Point2f(0.1f, 0.1f), Point2f(1.5f, 2.5f));
+	m_pLandPS->Initialize(Point2f(-40.0f, -2.0f), Point2f{ 40.0f, 10.0f }, Point2f(1.5f, 2.0f), Point2f(0.1f, 0.1f), Point2f(2.5f, 3.5f));
+
 }
 
 BossEnemy::~BossEnemy()
 {
 	delete m_pDeathPS;
+	delete m_pLandPS;
+
 	m_pDeathPS = nullptr;
+	m_pLandPS = nullptr;
 }
 
 bool BossEnemy::IsOverlapping(const Rectf& otherShape) const
@@ -117,6 +124,7 @@ void BossEnemy::Update(Avatar& playerAvatar, const LevelBase& level)
 	
 	UpdateProjectiles(playerAvatar, level.GetLevelVerts());
 	m_pDeathPS->Update();
+	m_pLandPS->Update();
 }
 
 void BossEnemy::Draw() const
@@ -132,6 +140,7 @@ void BossEnemy::Draw() const
 	
 	m_ProjectileManager.Draw();
 	m_pDeathPS->Draw();
+	m_pLandPS->Draw();
 }
 
 void BossEnemy::SetState()
@@ -161,6 +170,12 @@ void BossEnemy::SetState()
 		m_SpriteBody.SetAnimation("landed");
 		m_PhysicsBody.SetHasJumped(false);
 		m_PhysicsBody.Velocity().x = 0.0f;
+		Camera::DoScreenShake();
+		if (!m_pLandPS->IsPlaying())
+		{
+			m_pLandPS->PlayAtPos(Point2f(m_PhysicsBody.GetPosition().x + m_PhysicsBody.GetShape().width / 2.0f, m_PhysicsBody.GetPosition().y));
+		}
+		SoundManager::GetInstance()->PlaySound(SoundType::explosion);
 	}
 }
 

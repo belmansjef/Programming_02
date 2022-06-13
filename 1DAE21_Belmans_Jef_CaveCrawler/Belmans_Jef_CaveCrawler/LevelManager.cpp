@@ -7,7 +7,7 @@
 
 LevelManager::LevelManager(const Window& window)
 	: m_pCurrentLevel { nullptr }
-	, m_CurrentLevelIndex { 0 }
+	, m_CurrentLevelIndex { 1 }
 {
 	m_pLevels.push_back(new Level_1(window));
 	m_pLevels.push_back(new Level_Boss(window));

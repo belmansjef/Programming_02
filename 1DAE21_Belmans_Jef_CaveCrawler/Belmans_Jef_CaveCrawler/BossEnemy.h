@@ -40,6 +40,7 @@ private:
 	PhysicsBody m_PhysicsBody;
 	ProjectileManager m_ProjectileManager;
 	ParticleSystem* m_pDeathPS;
+	ParticleSystem* m_pLandPS;
 
 	BossState m_CurrentState;
 
